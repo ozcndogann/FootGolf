@@ -5,9 +5,10 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public float Force;
-    public Transform target;
+    public Transform Target;
     private bool isGrounded;
-
+    private Vector3 startPos;
+    private Vector3 endPos;
     private Rigidbody rb;
 
     void Start()
@@ -33,7 +34,7 @@ public class Ball : MonoBehaviour
     void Update()
     {
         // Check if object is standing on the ground and speed is zero
-        if (isGrounded  && Input.GetKeyDown(KeyCode.Mouse0))
+        if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Shoot();
         }
@@ -41,7 +42,7 @@ public class Ball : MonoBehaviour
 
     void Shoot()
     {
-        Vector3 Shoot = (target.position - this.transform.position).normalized;
+        Vector3 Shoot = (Target.position - this.transform.position).normalized;
         rb.AddForce(Shoot * Force, ForceMode.Impulse);
     }
 }
