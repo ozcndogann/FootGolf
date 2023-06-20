@@ -5,16 +5,20 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public float Force;
-    public Transform Target;
+    public float MaxDragDistance; // Maximum allowed drag distance
     private bool isGrounded;
-    private Vector3 startPos;
-    private Vector3 endPos;
+    private bool isDragging;
     private Rigidbody rb;
+    private LineRenderer lineRenderer;
+    private Vector3 initialMousePosition;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.enabled = false;
     }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -33,16 +37,55 @@ public class Ball : MonoBehaviour
 
     void Update()
     {
-        // Check if object is standing on the ground and speed is zero
-        if (isGrounded && Input.GetKeyDown(KeyCode.Mouse0))
+        // Check if object is standing on the ground
+        if (isGrounded)
         {
-            Shoot();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                isDragging = true;
+                initialMousePosition = Input.mousePosition;
+                lineRenderer.positionCount = 2;
+                lineRenderer.SetPosition(0, transform.position);
+                lineRenderer.SetPosition(1, transform.position);
+                lineRenderer.enabled = true;
+            }
+            else if (isDragging && Input.GetKey(KeyCode.Mouse0))
+            {
+                UpdateDirection();
+            }
+            else if (isDragging && Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                Shoot();
+                lineRenderer.enabled = false;
+                isDragging = false;
+            }
         }
+    }
+
+    void UpdateDirection()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 direction = (initialMousePosition - mousePosition).normalized;
+        float dragMagnitude = (initialMousePosition - mousePosition).magnitude;
+
+        if (dragMagnitude > MaxDragDistance)
+        {
+            dragMagnitude = MaxDragDistance;
+        }
+
+        lineRenderer.SetPosition(1, transform.position + direction * dragMagnitude / 500);
     }
 
     void Shoot()
     {
-        Vector3 Shoot = (Target.position - this.transform.position).normalized;
-        rb.AddForce(Shoot * Force, ForceMode.Impulse);
+        Vector3 direction = (transform.position - lineRenderer.GetPosition(1)).normalized;
+        float dragMagnitude = (initialMousePosition - Input.mousePosition).magnitude;
+
+        if (dragMagnitude > MaxDragDistance)
+        {
+            dragMagnitude = MaxDragDistance;
+        }
+
+        rb.AddForce(-direction * Force * dragMagnitude, ForceMode.Impulse);
     }
 }
