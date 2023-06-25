@@ -4,88 +4,122 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public float Force;
-    public float MaxDragDistance; // Maximum allowed drag distance
-    private bool isGrounded;
-    private bool isDragging;
+    [SerializeField] private LineRenderer lineRenderer;
+    private bool isIdle;
+    private bool isAiming;
+    [SerializeField] private float stopVelocity;
+    [SerializeField] private float shotPower;
     private Rigidbody rb;
-    private LineRenderer lineRenderer;
-    private Vector3 initialMousePosition;
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        lineRenderer = GetComponent<LineRenderer>();
+        isAiming = false;
         lineRenderer.enabled = false;
     }
-
-    void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (rb.velocity.magnitude < stopVelocity)
         {
-            isGrounded = true;
+            Stop();
+        }
+        ProcessAim();
+    }
+    private void OnMouseDown()
+    {
+        if (isIdle)
+        {
+            isAiming = true;
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    //private void ProcessAim() 
+    //{
+    //    if (!isAiming || !isIdle)
+    //    {
+    //        return;
+    //    }
+
+    //    Vector3? worldPoint = CastMouseClickRay();
+    //    if (!worldPoint.HasValue)
+    //    {
+    //        return;
+    //    }
+    //    DrawLine(worldPoint.Value);
+    //    if (Input.GetMouseButtonUp(0))
+    //    {
+    //        Shoot(worldPoint.Value);
+    //    }
+    //}
+
+    private void ProcessAim()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (!isAiming || !isIdle)
         {
-            isGrounded = false;
+            return;
+        }
+
+        Vector3? worldPoint = CastMouseClickRay();
+        if (!worldPoint.HasValue)
+        {
+            return;
+        }
+        DrawLine(transform.position - (worldPoint.Value - transform.position)); // Invert the line drawing direction
+        if (Input.GetMouseButtonUp(0))
+        {
+            Shoot(worldPoint.Value);
         }
     }
 
-    void Update()
+
+    private void Shoot(Vector3 worldPoint)
     {
-        // Check if object is standing on the ground
-        if (isGrounded)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                isDragging = true;
-                initialMousePosition = Input.mousePosition;
-                lineRenderer.positionCount = 2;
-                lineRenderer.SetPosition(0, transform.position);
-                lineRenderer.SetPosition(1, transform.position);
-                lineRenderer.enabled = true;
-            }
-            else if (isDragging && Input.GetKey(KeyCode.Mouse0))
-            {
-                UpdateDirection();
-            }
-            else if (isDragging && Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                Shoot();
-                lineRenderer.enabled = false;
-                isDragging = false;
-            }
-        }
+        isAiming = false;
+        lineRenderer.enabled = false;
+        Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
+
+        Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
+        float force = Vector3.Distance(transform.position, horizontalWorldPoint);
+        rb.AddForce(-direction * force * shotPower);
+        isIdle = false;
     }
 
-    void UpdateDirection()
+
+    private void DrawLine(Vector3 worldPoint)
     {
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 direction = (initialMousePosition - mousePosition).normalized;
-        float dragMagnitude = (initialMousePosition - mousePosition).magnitude;
-
-        if (dragMagnitude > MaxDragDistance)
-        {
-            dragMagnitude = MaxDragDistance;
-        }
-
-        lineRenderer.SetPosition(1, transform.position + direction * dragMagnitude / 500);
+        Vector3[] positions = { transform.position, worldPoint};
+        lineRenderer.SetPositions(positions);
+        lineRenderer.enabled = true;
     }
 
-    void Shoot()
+    private Vector3? CastMouseClickRay()
     {
-        Vector3 direction = (transform.position - lineRenderer.GetPosition(1)).normalized;
-        float dragMagnitude = (initialMousePosition - Input.mousePosition).magnitude;
-
-        if (dragMagnitude > MaxDragDistance)
+        Vector3 screenMousePosFar = new Vector3(
+            Input.mousePosition.x,
+            Input.mousePosition.y,
+            Camera.main.farClipPlane
+            );
+        Vector3 screenMousePosNear = new Vector3(
+            Input.mousePosition.x,
+            Input.mousePosition.y,
+            Camera.main.nearClipPlane
+            );
+        Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
+        Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
+        RaycastHit hit;
+        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity))
         {
-            dragMagnitude = MaxDragDistance;
+            return hit.point;
         }
-
-        rb.AddForce(-direction * Force * dragMagnitude, ForceMode.Impulse);
+        else
+        {
+            return null;
+        }
+    }
+    private void Stop()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        isIdle = true;
     }
 }
