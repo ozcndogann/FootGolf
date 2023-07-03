@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float stopVelocity;
     [SerializeField] private float shotPower;
     private Rigidbody rb;
-
+    private Vector3 previousMousePosition;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,11 +29,14 @@ public class Ball : MonoBehaviour
     {
         if (isIdle)
         {
+            previousMousePosition = Input.mousePosition;
             isAiming = true;
         }
     }
 
-    //private void ProcessAim() 
+
+
+    //private void ProcessAim()
     //{
     //    if (!isAiming || !isIdle)
     //    {
@@ -45,7 +48,7 @@ public class Ball : MonoBehaviour
     //    {
     //        return;
     //    }
-    //    DrawLine(worldPoint.Value);
+    //    DrawLine(transform.position - (worldPoint.Value - transform.position)); // Invert the line drawing direction
     //    if (Input.GetMouseButtonUp(0))
     //    {
     //        Shoot(worldPoint.Value);
@@ -64,7 +67,20 @@ public class Ball : MonoBehaviour
         {
             return;
         }
-        DrawLine(transform.position - (worldPoint.Value - transform.position)); // Invert the line drawing direction
+
+        Vector3 mouseDelta = Input.mousePosition - previousMousePosition;
+
+        if (mouseDelta.y <= 0/* && Mathf.Abs(mouseDelta.x) <= Mathf.Abs(mouseDelta.y)*/)
+        {
+            // Dragging downwards or mostly downwards
+            DrawLine(transform.position - (worldPoint.Value - transform.position));
+        }
+        else
+        {
+            // Not dragging downwards or mostly downwards
+            lineRenderer.enabled = false;
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             Shoot(worldPoint.Value);
@@ -82,18 +98,25 @@ public class Ball : MonoBehaviour
         float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
         float force = Mathf.Min(lineLength, 1f) * shotPower; // Limit the line length to a maximum of 1 and scale it by the shotPower
 
-        rb.AddForce(-direction * force);
+        // Check if the drag direction is downwards or mostly downwards
+        Vector3 mouseDelta = Input.mousePosition - previousMousePosition;
+        if (mouseDelta.y <= 0/* && Mathf.Abs(mouseDelta.x) <= Mathf.Abs(mouseDelta.y)*/)
+        {
+            rb.AddForce(-direction * force);
+        }
+        else
+        {
+            // If the drag direction is upwards or mostly upwards, do not apply the force
+            isIdle = true;
+        }
+
         isIdle = false;
     }
 
 
 
-    //private void DrawLine(Vector3 worldPoint)
-    //{
-    //    Vector3[] positions = { transform.position, worldPoint};
-    //    lineRenderer.SetPositions(positions);
-    //    lineRenderer.enabled = true;
-    //}
+
+
 
     private void DrawLine(Vector3 worldPoint)
     {
