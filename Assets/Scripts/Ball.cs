@@ -79,15 +79,35 @@ public class Ball : MonoBehaviour
         Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
 
         Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
-        float force = Vector3.Distance(transform.position, horizontalWorldPoint);
-        rb.AddForce(-direction * force * shotPower);
+        float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
+        float force = Mathf.Min(lineLength, 1f) * shotPower; // Limit the line length to a maximum of 1 and scale it by the shotPower
+
+        rb.AddForce(-direction * force);
         isIdle = false;
     }
 
 
+
+    //private void DrawLine(Vector3 worldPoint)
+    //{
+    //    Vector3[] positions = { transform.position, worldPoint};
+    //    lineRenderer.SetPositions(positions);
+    //    lineRenderer.enabled = true;
+    //}
+
     private void DrawLine(Vector3 worldPoint)
     {
-        Vector3[] positions = { transform.position, worldPoint};
+        Vector3 direction = worldPoint - transform.position;
+        float lineLength = direction.magnitude;
+        float maxLength = 1f; // Define your desired maximum length here
+
+        if (lineLength > maxLength)
+        {
+            direction = direction.normalized * maxLength;
+            worldPoint = transform.position + direction;
+        }
+
+        Vector3[] positions = { transform.position, worldPoint };
         lineRenderer.SetPositions(positions);
         lineRenderer.enabled = true;
     }
