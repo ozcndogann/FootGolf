@@ -19,6 +19,7 @@ public class Ball1 : MonoBehaviour
         lineRenderer.enabled = false;
     }
 
+    
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -34,7 +35,7 @@ public class Ball1 : MonoBehaviour
             isGrounded = false;
         }
     }
-
+    
     void Update()
     {
         // Check if object is standing on the ground
