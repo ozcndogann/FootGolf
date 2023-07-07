@@ -33,25 +33,6 @@ public class Ball : MonoBehaviour
         }
     }
 
-    //private void ProcessAim() 
-    //{
-    //    if (!isAiming || !isIdle)
-    //    {
-    //        return;
-    //    }
-
-    //    Vector3? worldPoint = CastMouseClickRay();
-    //    if (!worldPoint.HasValue)
-    //    {
-    //        return;
-    //    }
-    //    DrawLine(worldPoint.Value);
-    //    if (Input.GetMouseButtonUp(0))
-    //    {
-    //        Shoot(worldPoint.Value);
-    //    }
-    //}
-
     private void ProcessAim()
     {
         if (!isAiming || !isIdle)
@@ -86,26 +67,6 @@ public class Ball : MonoBehaviour
         isIdle = false;
     }
 
-
-
-
-
-    //private void DrawLine(Vector3 worldPoint)
-    //{
-    //    Vector3 direction = worldPoint - transform.position;
-    //    float lineLength = direction.magnitude;
-    //    float maxLength = 1f; // Define your desired maximum length here
-
-    //    if (lineLength > maxLength)
-    //    {
-    //        direction = direction.normalized * maxLength;
-    //        worldPoint = transform.position + direction;
-    //    }
-
-    //    Vector3[] positions = { transform.position, worldPoint };
-    //    lineRenderer.SetPositions(positions);
-    //    lineRenderer.enabled = true;
-    //}
 
     private void DrawLine(Vector3 worldPoint)
     {
