@@ -88,9 +88,21 @@ public class Ball : MonoBehaviour
 
 
 
+
+
     //private void DrawLine(Vector3 worldPoint)
     //{
-    //    Vector3[] positions = { transform.position, worldPoint};
+    //    Vector3 direction = worldPoint - transform.position;
+    //    float lineLength = direction.magnitude;
+    //    float maxLength = 1f; // Define your desired maximum length here
+
+    //    if (lineLength > maxLength)
+    //    {
+    //        direction = direction.normalized * maxLength;
+    //        worldPoint = transform.position + direction;
+    //    }
+
+    //    Vector3[] positions = { transform.position, worldPoint };
     //    lineRenderer.SetPositions(positions);
     //    lineRenderer.enabled = true;
     //}
@@ -108,6 +120,14 @@ public class Ball : MonoBehaviour
         }
 
         Vector3[] positions = { transform.position, worldPoint };
+        lineRenderer.SetPositions(positions);
+
+        // Set y-values of LineRenderer positions to zero
+        for (int i = 0; i < positions.Length; i++)
+        {
+            positions[i].y = 0.28f;
+        }
+
         lineRenderer.SetPositions(positions);
         lineRenderer.enabled = true;
     }
