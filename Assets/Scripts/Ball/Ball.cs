@@ -10,20 +10,22 @@ public class Ball : MonoBehaviour
     [SerializeField] private float stopVelocity;
     [SerializeField] private float shotPower;
     private Rigidbody rb;
-
+    public Camera cam;
+    public bool isShooting;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         isAiming = false;
-        lineRenderer.enabled = false;
+        lineRenderer.enabled = false;//baþta line'ýn görünmemesi için
     }
     private void Update()
     {
         if (rb.velocity.magnitude < stopVelocity)
         {
-            Stop();
+           Stop();
+           ProcessAim();
         }
-        ProcessAim();
+        
     }
     private void OnMouseDown()
     {
@@ -32,7 +34,7 @@ public class Ball : MonoBehaviour
             isAiming = true;
         }
     }
-
+    
     private void ProcessAim()
     {
         if (!isAiming || !isIdle)
@@ -45,7 +47,7 @@ public class Ball : MonoBehaviour
         {
             return;
         }
-        DrawLine(transform.position - (worldPoint.Value - transform.position)); // Invert the line drawing direction
+        DrawLine(transform.position - (worldPoint.Value - transform.position)); 
         if (Input.GetMouseButtonUp(0))
         {
             Shoot(worldPoint.Value);
@@ -61,7 +63,7 @@ public class Ball : MonoBehaviour
 
         Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
         float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
-        float force = Mathf.Min(lineLength, 1f) * shotPower; // Limit the line length to a maximum of 1 and scale it by the shotPower
+        float force = Mathf.Min(lineLength, 1f) * shotPower; 
 
         rb.AddForce(-direction * force);
         isIdle = false;
@@ -72,7 +74,7 @@ public class Ball : MonoBehaviour
     {
         Vector3 direction = worldPoint - transform.position;
         float lineLength = direction.magnitude;
-        float maxLength = 1f; // Define your desired maximum length here
+        float maxLength = 1f; 
 
         if (lineLength > maxLength)
         {
@@ -83,7 +85,6 @@ public class Ball : MonoBehaviour
         Vector3[] positions = { transform.position, worldPoint };
         lineRenderer.SetPositions(positions);
 
-        // Set y-values of LineRenderer positions to zero
         for (int i = 0; i < positions.Length; i++)
         {
             positions[i].y = 0.28f;
@@ -123,4 +124,8 @@ public class Ball : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         isIdle = true;
     }
+    
+
+    
 }
+
