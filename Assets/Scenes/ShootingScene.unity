@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -353,6 +354,24 @@ MonoBehaviour:
   cam: {fileID: 963194227}
   target: {fileID: 4698717884598684352}
   distanceToTarget: 4
+  heightWhileShooting: 0
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c258aac6ac86d3e4ab57655b1ed9d893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialFOV: 50
+  zoomInFOV: 22.5
+  smooth: 4
+  ballObj: {fileID: 6619913494305498215, guid: 9273006c06a2fda4c87ce2acc0c7a009, type: 3}
+  cam: {fileID: 963194227}
 --- !u!1 &1319193418
 GameObject:
   m_ObjectHideFlags: 0
