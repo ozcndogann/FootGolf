@@ -7,11 +7,11 @@ public class MoveAroundObject : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
     [SerializeField] private float distanceToTarget = 4;
-    Ball ball;
     private Vector3 previousPosition;
+    public float heightWhileShooting;
     private void Start()
     {
-        ball = target.GetComponent<Ball>();
+       
     }
     private void Update()
     {
@@ -28,16 +28,9 @@ public class MoveAroundObject : MonoBehaviour
             Vector3 direction = previousPosition - newPosition;
 
             float rotationAroundYAxis = direction.x * 180;
-            if (ball.isShooting)
-            {
-                cam.transform.position = new Vector3(target.position.x, 0, target.transform.position.z);
-                Debug.Log("yakinlas");
-            }
-            else
-            {
-                cam.transform.position = new Vector3(target.position.x, 1.3f, target.transform.position.z);
-            }
-            
+
+            cam.transform.position = new Vector3(target.position.x, heightWhileShooting, target.transform.position.z);
+
 
             cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis, Space.World);
 

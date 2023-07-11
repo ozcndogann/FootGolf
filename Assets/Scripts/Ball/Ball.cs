@@ -52,6 +52,7 @@ public class Ball : MonoBehaviour
         DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
+            isShooting = true;
             Shoot(worldPoint.Value); // shoot
         }
     }
