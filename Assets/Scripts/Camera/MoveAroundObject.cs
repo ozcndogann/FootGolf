@@ -29,7 +29,7 @@ public class MoveAroundObject : MonoBehaviour
 
             float rotationAroundYAxis = direction.x * 180;
 
-            cam.transform.position = new Vector3(target.position.x, heightWhileShooting, target.transform.position.z);
+            cam.transform.position = new Vector3(target.position.x, /*heightWhileShooting*/1.3f, target.transform.position.z);
 
 
             cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis, Space.World);

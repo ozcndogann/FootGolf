@@ -29,20 +29,11 @@ public class Zoom : MonoBehaviour
         //store current field of view value in variable
         currentFOV = Camera.main.fieldOfView;
 
-        //check if roration stopped and call function to change FOV
-        if (ball.isShooting)
-        {
-            moveAroundObject.heightWhileShooting = 0;
-            ChangeFOV();
-        }
-        else
-        {
-            moveAroundObject.heightWhileShooting = 1.3f;
-        }
+        //ChangeFOV();
     }
 
     //function to zoom in the FOV
-    void ChangeFOV()
+    public void ChangeFOV()
     {
         //check that current FOV is different than Zoomed
         if (currentFOV != zoomInFOV)

@@ -10,7 +10,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float stopVelocity; // topun durmasý için min hýz
     [SerializeField] private float shotPower; 
     private Rigidbody rb; 
-    public Camera cam; 
+    public Camera cam;
+    MoveAroundObject moveAroundObject;
+    Zoom zoom;
     public bool isShooting; // shoot hali boolu
 
     private void Awake()
@@ -18,6 +20,8 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody>(); 
         isAiming = false; 
         lineRenderer.enabled = false; // baþta line görünmemesi için
+        moveAroundObject = cam.GetComponent<MoveAroundObject>();
+        zoom = cam.GetComponent<Zoom>();
     }
 
     private void Update()
@@ -36,7 +40,7 @@ public class Ball : MonoBehaviour
             isAiming = true; 
         }
     }
-
+    
     private void ProcessAim()
     {
         if (!isAiming || !isIdle)
@@ -50,9 +54,11 @@ public class Ball : MonoBehaviour
             return; // exit method
         }
         DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
+        
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
-            isShooting = true;
+            //moveAroundObject.heightWhileShooting = 0.3f;
+            
             Shoot(worldPoint.Value); // shoot
         }
     }
