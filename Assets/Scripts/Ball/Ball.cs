@@ -14,7 +14,8 @@ public class Ball : MonoBehaviour
     MoveAroundObject moveAroundObject;
     Zoom zoom;
     public bool isShooting; // shoot hali boolu
-
+    public static bool shooted;
+    public GameObject LineRenderer;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>(); 
@@ -57,50 +58,119 @@ public class Ball : MonoBehaviour
         
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
+            shooted = true;
+            Zoom.changeFovBool = true;
             //moveAroundObject.heightWhileShooting = 0.3f;
-            
-            Shoot(worldPoint.Value); // shoot
+            //cam.transform.position = new Vector3(2 * this.transform.position.x-LineRenderer.transform.position.x, 0.33f, 2 * this.transform.position.z - LineRenderer.transform.position.z);
+            //Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
         }
     }
 
-    private void Shoot(Vector3 worldPoint)
+    //private void Shoot(Vector3 worldPoint)
+    //{
+    //    isAiming = false; 
+    //    lineRenderer.enabled = false; // shoot çalýþýnca line görünmez olmalý
+    //    Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z); // topun yerden gitmesi için y axisi ignorela *********
+
+    //    Vector3 direction = (horizontalWorldPoint - transform.position).normalized; //  toptan world pointe yönü hesapla
+    //    float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint); // toptan world pointe mesafeyi hesapla
+    //    float force = Mathf.Min(lineLength, 1f) * shotPower; // topun gidiþ gücü line lengthe göre holacak
+
+    //    rb.AddForce(-direction * force); // çektiðim yönün tersine gitmesi için -direction
+    //    isIdle = false;
+    //}
+    //private void Shoot(Vector3 worldPoint)
+    //{
+    //    isAiming = false;
+    //    lineRenderer.enabled = false;
+
+    //    Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
+    //    Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
+    //    float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
+    //    float force = Mathf.Min(lineLength, 1f) * shotPower;
+
+    //    // Add curve to the direction vector
+    //    float curveAmount = 0.5f; // Adjust this value to control the curve strength
+    //    Vector3 curveDirection = Quaternion.AngleAxis(-90f, Vector3.up) * direction; // Apply a left curve
+    //    Vector3 finalDirection = direction + curveAmount * curveDirection;
+
+    //    rb.AddForce(-finalDirection * force);
+    //    isIdle = false;
+    //    shooted = false;
+    //}
+    public enum CurveDirection
     {
-        isAiming = false; 
-        lineRenderer.enabled = false; // shoot çalýþýnca line görünmez olmalý
-        Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z); // topun yerden gitmesi için y axisi ignorela *********
+        LeftUp,
+        LeftDown,
+        RightUp,
+        RightDown
+    }
 
-        Vector3 direction = (horizontalWorldPoint - transform.position).normalized; //  toptan world pointe yönü hesapla
-        float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint); // toptan world pointe mesafeyi hesapla
-        float force = Mathf.Min(lineLength, 1f) * shotPower; // topun gidiþ gücü line lengthe göre holacak
+    private void Shoot(Vector3 worldPoint, CurveDirection curveDirection)
+    {
+        isAiming = false;
+        lineRenderer.enabled = false;
 
-        rb.AddForce(-direction * force); // çektiðim yönün tersine gitmesi için -direction
-        isIdle = false; 
+        Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
+        Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
+        float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
+        float force = Mathf.Min(lineLength, 1f) * shotPower;
+        float curveAmount = 0.5f; // Adjust this value to control the curve strength
+        // Add curve to the direction vector based on the specified curve direction
+        Vector3 curveVector = Vector3.zero;
+        switch (curveDirection)
+        {
+            case CurveDirection.LeftUp:
+                curveVector = Quaternion.AngleAxis(-90f, Vector3.up) * direction;
+                break;
+            case CurveDirection.LeftDown:
+                curveVector = Quaternion.AngleAxis(-90f, Vector3.up) * direction;
+                break;
+            case CurveDirection.RightUp:
+                curveVector = Quaternion.AngleAxis(90f, Vector3.up) * direction;
+                break;
+            case CurveDirection.RightDown:
+                curveVector = Quaternion.AngleAxis(90f, Vector3.up) * direction;
+                break;
+        }
+        Vector3 upForce = new Vector3(0, 0.6f, 0);
+        Vector3 finalDirection = upForce + direction + curveAmount * curveVector;
+        
+        rb.AddForce(-finalDirection * force);
+        isIdle = false;
+        shooted = false;
     }
 
     private void DrawLine(Vector3 worldPoint)
     {
-        Vector3 direction = worldPoint - transform.position; // lineýn directioný
-        float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
-        float maxLength = 1f; // max line length
-
-        if (lineLength > maxLength) // maxla current length kýyasý
+        if (!shooted)
         {
-            direction = direction.normalized * maxLength; 
-            worldPoint = transform.position + direction; 
+            Vector3 direction = worldPoint - transform.position; // lineýn directioný
+            float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
+            float maxLength = 1f; // max line length
+
+            if (lineLength > maxLength) // maxla current length kýyasý
+            {
+                direction = direction.normalized * maxLength;
+                worldPoint = transform.position + direction;
+            }
+
+            Vector3[] positions = { transform.position, worldPoint };
+            lineRenderer.SetPositions(positions);
+
+            for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
+            {
+                positions[i].y = 0.28f; // lineýn y axisi fixleme
+            }
+
+            lineRenderer.SetPositions(positions); // update positions
+            lineRenderer.enabled = true; // line visible
         }
-
-        Vector3[] positions = { transform.position, worldPoint }; 
-        lineRenderer.SetPositions(positions); 
-
-        for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
+        else 
         {
-            positions[i].y = 0.28f; // lineýn y axisi fixleme
+            lineRenderer.enabled = false; // line visible}
         }
-
-        lineRenderer.SetPositions(positions); // update positions
-        lineRenderer.enabled = true; // line visible
     }
-
     private Vector3? CastMouseClickRay()
     {
         Vector3 screenMousePosFar = new Vector3(

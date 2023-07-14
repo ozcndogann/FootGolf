@@ -159,6 +159,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &623244600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1270098203746617634, guid: 9273006c06a2fda4c87ce2acc0c7a009,
+    type: 3}
+  m_PrefabInstance: {fileID: 1270098203577103389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,8 +374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialFOV: 50
-  zoomInFOV: 22.5
-  smooth: 20
+  zoomInFOV: 10
+  smooth: 30
   ballObj: {fileID: 6619913494305498215, guid: 9273006c06a2fda4c87ce2acc0c7a009, type: 3}
   cam: {fileID: 963194227}
 --- !u!1 &1319193418
@@ -1019,6 +1025,11 @@ PrefabInstance:
       propertyPath: shotPower
       value: 2000
       objectReference: {fileID: 0}
+    - target: {fileID: 7438436981045703034, guid: 9273006c06a2fda4c87ce2acc0c7a009,
+        type: 3}
+      propertyPath: LineRenderer
+      value: 
+      objectReference: {fileID: 623244600}
     - target: {fileID: 7438436981045703034, guid: 9273006c06a2fda4c87ce2acc0c7a009,
         type: 3}
       propertyPath: stopVelocity

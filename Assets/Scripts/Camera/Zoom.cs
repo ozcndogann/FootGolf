@@ -13,6 +13,7 @@ public class Zoom : MonoBehaviour
     [SerializeField] private GameObject ballObj;
     [SerializeField] private Camera cam;
     private float currentFOV;
+    public static bool changeFovBool;
 
     // Use this for initialization
     void Start()
@@ -21,6 +22,7 @@ public class Zoom : MonoBehaviour
         Camera.main.fieldOfView = initialFOV;
         ball = ballObj.GetComponent<Ball>();
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
+        changeFovBool = false;
     }
 
     // Update is called once per frame
@@ -28,8 +30,11 @@ public class Zoom : MonoBehaviour
     {
         //store current field of view value in variable
         currentFOV = Camera.main.fieldOfView;
-
-        //ChangeFOV();
+        if (changeFovBool == true)
+        {
+            ChangeFOV();
+        }
+        
     }
 
     //function to zoom in the FOV
