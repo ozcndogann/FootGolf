@@ -16,8 +16,12 @@ public class Ball : MonoBehaviour
     public bool isShooting; // shoot hali boolu
     public static bool shooted;
     public GameObject LineRenderer;
+    public bool shootCloser;
+    Vector3? worldPoint;
+    public Vector3 mousePos,upForce;
     private void Awake()
     {
+        shootCloser=false;
         rb = GetComponent<Rigidbody>(); 
         isAiming = false; 
         lineRenderer.enabled = false; // baþta line görünmemesi için
@@ -40,6 +44,39 @@ public class Ball : MonoBehaviour
         {
             isAiming = true; 
         }
+        if (shooted == true)
+        {
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            {
+                mousePos = Input.mousePosition;
+                if (mousePos.x > 580)
+                {
+                    if (mousePos.y > 1180)
+                    {
+                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
+                    }
+                    if (mousePos.y < 1180)
+                    {
+                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
+                    }
+                }
+                if (mousePos.x < 580)
+                {
+                    if (mousePos.y > 1180)
+                    {
+                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+                    }
+                    if (mousePos.y < 1180)
+                    {
+                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+                    }
+                }
+                
+                shootCloser = true;
+                Zoom.changeFovBool = false;
+            }
+
+        }
     }
     
     private void ProcessAim()
@@ -48,8 +85,11 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-
-        Vector3? worldPoint = CastMouseClickRay(); // world pointi belirlemek için clickten ray yolla 
+        if (!shooted)
+        {
+            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+        }
+        
         if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
         {
             return; // exit method
@@ -60,9 +100,10 @@ public class Ball : MonoBehaviour
         {
             shooted = true;
             Zoom.changeFovBool = true;
+            
             //moveAroundObject.heightWhileShooting = 0.3f;
             //cam.transform.position = new Vector3(2 * this.transform.position.x-LineRenderer.transform.position.x, 0.33f, 2 * this.transform.position.z - LineRenderer.transform.position.z);
-            //Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
+
         }
     }
 
@@ -122,23 +163,25 @@ public class Ball : MonoBehaviour
         {
             case CurveDirection.LeftUp:
                 curveVector = Quaternion.AngleAxis(-90f, Vector3.up) * direction;
+                upForce = new Vector3(0, 0.6f, 0);
                 break;
             case CurveDirection.LeftDown:
                 curveVector = Quaternion.AngleAxis(-90f, Vector3.up) * direction;
                 break;
             case CurveDirection.RightUp:
                 curveVector = Quaternion.AngleAxis(90f, Vector3.up) * direction;
+                upForce = new Vector3(0, 0.6f, 0);
                 break;
             case CurveDirection.RightDown:
                 curveVector = Quaternion.AngleAxis(90f, Vector3.up) * direction;
                 break;
         }
-        Vector3 upForce = new Vector3(0, 0.6f, 0);
         Vector3 finalDirection = upForce + direction + curveAmount * curveVector;
         
         rb.AddForce(-finalDirection * force);
         isIdle = false;
         shooted = false;
+        
     }
 
     private void DrawLine(Vector3 worldPoint)
@@ -165,11 +208,13 @@ public class Ball : MonoBehaviour
 
             lineRenderer.SetPositions(positions); // update positions
             lineRenderer.enabled = true; // line visible
+            shootCloser = false;
         }
         else 
         {
             lineRenderer.enabled = false; // line visible}
         }
+        
     }
     private Vector3? CastMouseClickRay()
     {

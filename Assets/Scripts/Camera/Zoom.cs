@@ -34,6 +34,10 @@ public class Zoom : MonoBehaviour
         {
             ChangeFOV();
         }
+        else
+        {
+            Camera.main.fieldOfView = initialFOV;
+        }
         
     }
 
@@ -59,4 +63,5 @@ public class Zoom : MonoBehaviour
             }
         }
     }
+    
 }
