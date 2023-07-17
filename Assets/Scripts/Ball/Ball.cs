@@ -19,6 +19,7 @@ public class Ball : MonoBehaviour
     public bool shootCloser;
     Vector3? worldPoint;
     public Vector3 mousePos,upForce;
+    public float curveValue,forceValue;
     private void Awake()
     {
         shootCloser=false;
@@ -27,6 +28,9 @@ public class Ball : MonoBehaviour
         lineRenderer.enabled = false; // baþta line görünmemesi için
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
+        Debug.Log(Screen.width / 2);
+        Debug.Log(Screen.height / 2);
+
     }
 
     private void Update()
@@ -49,25 +53,31 @@ public class Ball : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
                 mousePos = Input.mousePosition;
-                if (mousePos.x > 580)
+                if (mousePos.x > Screen.width / 2)
                 {
-                    if (mousePos.y > 1180)
+                    curveValue = (mousePos.x-Screen.width/2) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
                     {
+                        forceValue = (mousePos.y + 300 - Screen.height / 2)*0.0015f;
                         Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
                     }
-                    if (mousePos.y < 1180)
+                    if (mousePos.y < Screen.height / 2)
                     {
+                        forceValue = (Screen.height/2 + (300) - (mousePos.y)) * 0.00162f;
                         Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
                     }
                 }
-                if (mousePos.x < 580)
+                if (mousePos.x < Screen.width / 2)
                 {
-                    if (mousePos.y > 1180)
+                    curveValue = (Screen.width / 2 -(mousePos.x))*0.15f;
+                    if (mousePos.y > Screen.height / 2)
                     {
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
                         Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
                     }
-                    if (mousePos.y < 1180)
+                    if (mousePos.y < Screen.height / 2)
                     {
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
                         Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
                     }
                 }
@@ -162,18 +172,20 @@ public class Ball : MonoBehaviour
         switch (curveDirection)
         {
             case CurveDirection.LeftUp:
-                curveVector = Quaternion.AngleAxis(-90f, Vector3.up) * direction;
-                upForce = new Vector3(0, 0.6f, 0);
+                curveVector = Quaternion.AngleAxis(-curveValue, Vector3.up) * direction;
+                upForce = new Vector3(0, forceValue, 0);
                 break;
             case CurveDirection.LeftDown:
-                curveVector = Quaternion.AngleAxis(-90f, Vector3.up) * direction;
+                curveVector = Quaternion.AngleAxis(-curveValue, Vector3.up) * direction;
+                upForce = new Vector3(0, 0, 0);
                 break;
             case CurveDirection.RightUp:
-                curveVector = Quaternion.AngleAxis(90f, Vector3.up) * direction;
-                upForce = new Vector3(0, 0.6f, 0);
+                curveVector = Quaternion.AngleAxis(curveValue, Vector3.up) * direction;
+                upForce = new Vector3(0, forceValue, 0);
                 break;
             case CurveDirection.RightDown:
-                curveVector = Quaternion.AngleAxis(90f, Vector3.up) * direction;
+                curveVector = Quaternion.AngleAxis(curveValue, Vector3.up) * direction;
+                upForce = new Vector3(0, 0, 0);
                 break;
         }
         Vector3 finalDirection = upForce + direction + curveAmount * curveVector;

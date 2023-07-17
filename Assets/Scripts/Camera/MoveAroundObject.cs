@@ -43,7 +43,7 @@ public class MoveAroundObject : MonoBehaviour
         }
         else
         {
-            cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/.7f, cam.transform.position.z);
+            cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/.667f, cam.transform.position.z);
         }
     }
 }
