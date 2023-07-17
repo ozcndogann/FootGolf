@@ -17,7 +17,7 @@ public class MoveAroundObject : MonoBehaviour
     {
         if (Ball.shooted == false)
         {
-            cam.transform.position = new Vector3(target.position.x, 1.3f, target.transform.position.z);
+            cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
             if (Input.GetMouseButtonDown(0))
@@ -31,7 +31,7 @@ public class MoveAroundObject : MonoBehaviour
 
                 float rotationAroundYAxis = direction.x * 180;
 
-                cam.transform.position = new Vector3(target.position.x, /*heightWhileShooting*/1.3f, target.transform.position.z);
+                cam.transform.position = new Vector3(target.position.x, /*heightWhileShooting*/1+target.position.y, target.transform.position.z);
 
 
                 cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis, Space.World);
