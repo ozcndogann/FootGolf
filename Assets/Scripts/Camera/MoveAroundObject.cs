@@ -15,6 +15,7 @@ public class MoveAroundObject : MonoBehaviour
     }
     private void Update()
     {
+        #region CamFollow
         if (Ball.shooted == false)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
@@ -45,5 +46,6 @@ public class MoveAroundObject : MonoBehaviour
         {
             cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/.667f, cam.transform.position.z);
         }
+        #endregion
     }
 }
