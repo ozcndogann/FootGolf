@@ -112,7 +112,7 @@ public class Ball : MonoBehaviour
             Zoom.changeFovBool = true;
             
             //moveAroundObject.heightWhileShooting = 0.3f;
-            //cam.transform.position = new Vector3(2 * this.transform.position.x-LineRenderer.transform.position.x, 0.33f, 2 * this.transform.position.z - LineRenderer.transform.position.z);
+            //cam.transform.position = new Vector3(2 * transform.position.x-LineRenderer.transform.position.x, 0.33f, 2 * transform.position.z - LineRenderer.transform.position.z);
 
         }
     }
@@ -215,7 +215,7 @@ public class Ball : MonoBehaviour
 
             for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
             {
-                positions[i].y = 0.28f; // lineýn y axisi fixleme
+                positions[i].y = gameObject.transform.position.y+.02f; // lineýn y axisi fixleme
             }
 
             lineRenderer.SetPositions(positions); // update positions

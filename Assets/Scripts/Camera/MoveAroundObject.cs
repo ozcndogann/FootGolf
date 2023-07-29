@@ -28,15 +28,15 @@ public class MoveAroundObject : MonoBehaviour
             else if (Input.GetMouseButton(0))
             {
                 Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+                Debug.Log(newPosition+"new");
+                Debug.Log(previousPosition+"previous");
                 Vector3 direction = previousPosition - newPosition;
 
                 float rotationAroundYAxis = direction.x * 180;
 
                 cam.transform.position = new Vector3(target.position.x, /*heightWhileShooting*/1+target.position.y, target.transform.position.z);
-
-
+                //if(rotationAroundYAxis)
                 cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis, Space.World);
-
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
                 previousPosition = newPosition;
@@ -44,7 +44,7 @@ public class MoveAroundObject : MonoBehaviour
         }
         else
         {
-            cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/.667f, cam.transform.position.z);
+            cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/target.transform.position.y+.397f, cam.transform.position.z);
         }
         #endregion
     }
