@@ -9,9 +9,10 @@ public class MoveAroundObject : MonoBehaviour
     [SerializeField] private float distanceToTarget = 4;
     private Vector3 previousPosition;
     public float heightWhileShooting;
+
     private void Start()
     {
-       
+        target = GameObject.FindGameObjectWithTag("Ball").transform;
     }
     private void Update()
     {
@@ -28,13 +29,13 @@ public class MoveAroundObject : MonoBehaviour
             else if (Input.GetMouseButton(0))
             {
                 Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-                Debug.Log(newPosition+"new");
-                Debug.Log(previousPosition+"previous");
+                //Debug.Log(newPosition+"new");
+                //Debug.Log(previousPosition+"previous");
                 Vector3 direction = previousPosition - newPosition;
 
                 float rotationAroundYAxis = direction.x * 180;
 
-                cam.transform.position = new Vector3(target.position.x, /*heightWhileShooting*/1+target.position.y, target.transform.position.z);
+                cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                 //if(rotationAroundYAxis)
                 cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis, Space.World);
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));

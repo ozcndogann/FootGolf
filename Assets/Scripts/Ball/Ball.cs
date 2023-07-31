@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer; // aim için line
@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float stopVelocity; // topun durmasý için min hýz
     [SerializeField] private float shotPower; 
     private Rigidbody rb; 
-    public Camera cam;
+    public GameObject cam;
     MoveAroundObject moveAroundObject;
     Zoom zoom;
     public bool isShooting; // shoot hali boolu
@@ -20,6 +20,14 @@ public class Ball : MonoBehaviour
     Vector3? worldPoint;
     public Vector3 mousePos,upForce;
     public float curveValue,forceValue;
+
+    PhotonView view;
+
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+    }
     private void Awake()
     {
         shootCloser=false;
@@ -28,65 +36,72 @@ public class Ball : MonoBehaviour
         lineRenderer.enabled = false; // baþta line görünmemesi için
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
-        Debug.Log(Screen.width / 2);
-        Debug.Log(Screen.height / 2);
-
+        //Debug.Log(Screen.width / 2);
+        //Debug.Log(Screen.height / 2);
     }
 
     private void Update()
     {
-        if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
+        if (view.IsMine)
         {
-            Stop(); 
-            ProcessAim();
+            if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
+            {
+                Stop();
+                ProcessAim();
+            }
         }
+        
     }
 
     private void OnMouseDown()
     {
-        if (isIdle) 
+        if (view.IsMine)
         {
-            isAiming = true; 
-        }
-        if (shooted == true)
-        {
-            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            if (isIdle)
             {
-                mousePos = Input.mousePosition;
-                if (mousePos.x > Screen.width / 2)
-                {
-                    curveValue = (mousePos.x-Screen.width/2) * 0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2)*0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height/2 + (300) - (mousePos.y)) * 0.00162f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                    }
-                }
-                if (mousePos.x < Screen.width / 2)
-                {
-                    curveValue = (Screen.width / 2 -(mousePos.x))*0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
-                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                    }
-                }
-                
-                shootCloser = true;
-                Zoom.changeFovBool = false;
+                isAiming = true;
             }
+            if (shooted == true)
+            {
+                if (Input.GetMouseButtonDown(0) && shootCloser == false)
+                {
+                    mousePos = Input.mousePosition;
+                    if (mousePos.x > Screen.width / 2)
+                    {
+                        curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+                        if (mousePos.y > Screen.height / 2)
+                        {
+                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                            Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
+                        }
+                        if (mousePos.y < Screen.height / 2)
+                        {
+                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
+                            Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
+                        }
+                    }
+                    if (mousePos.x < Screen.width / 2)
+                    {
+                        curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+                        if (mousePos.y > Screen.height / 2)
+                        {
+                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                            Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+                        }
+                        if (mousePos.y < Screen.height / 2)
+                        {
+                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
+                            Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+                        }
+                    }
 
+                    shootCloser = true;
+                    Zoom.changeFovBool = false;
+                }
+
+            }
         }
+        
     }
     
     private void ProcessAim()
@@ -105,50 +120,25 @@ public class Ball : MonoBehaviour
             return; // exit method
         }
         DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
-        
+        //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
+        if ((worldPoint.Value - transform.position).y < 0)
+        {
+            Debug.Log("y kucuk");
+            //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
+        }
+        else
+        {
+            Debug.Log("y buyuk");
+        }
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
             shooted = true;
             Zoom.changeFovBool = true;
             
-            //moveAroundObject.heightWhileShooting = 0.3f;
-            //cam.transform.position = new Vector3(2 * transform.position.x-LineRenderer.transform.position.x, 0.33f, 2 * transform.position.z - LineRenderer.transform.position.z);
 
         }
     }
 
-    //private void Shoot(Vector3 worldPoint)
-    //{
-    //    isAiming = false; 
-    //    lineRenderer.enabled = false; // shoot çalýþýnca line görünmez olmalý
-    //    Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z); // topun yerden gitmesi için y axisi ignorela *********
-
-    //    Vector3 direction = (horizontalWorldPoint - transform.position).normalized; //  toptan world pointe yönü hesapla
-    //    float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint); // toptan world pointe mesafeyi hesapla
-    //    float force = Mathf.Min(lineLength, 1f) * shotPower; // topun gidiþ gücü line lengthe göre holacak
-
-    //    rb.AddForce(-direction * force); // çektiðim yönün tersine gitmesi için -direction
-    //    isIdle = false;
-    //}
-    //private void Shoot(Vector3 worldPoint)
-    //{
-    //    isAiming = false;
-    //    lineRenderer.enabled = false;
-
-    //    Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
-    //    Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
-    //    float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
-    //    float force = Mathf.Min(lineLength, 1f) * shotPower;
-
-    //    // Add curve to the direction vector
-    //    float curveAmount = 0.5f; // Adjust this value to control the curve strength
-    //    Vector3 curveDirection = Quaternion.AngleAxis(-90f, Vector3.up) * direction; // Apply a left curve
-    //    Vector3 finalDirection = direction + curveAmount * curveDirection;
-
-    //    rb.AddForce(-finalDirection * force);
-    //    isIdle = false;
-    //    shooted = false;
-    //}
     public enum CurveDirection
     {
         LeftUp,
@@ -243,6 +233,7 @@ public class Ball : MonoBehaviour
         Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar); 
         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear); 
         RaycastHit hit;
+        
         if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
             return hit.point; // eðer ray bi þeye çarparsa return hit point
@@ -251,6 +242,7 @@ public class Ball : MonoBehaviour
         {
             return null; // eðer ray bi þeye çarpmazsa return null
         }
+        
     }
 
     private void Stop()
