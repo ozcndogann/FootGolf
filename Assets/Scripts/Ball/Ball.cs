@@ -51,13 +51,13 @@ public class Ball : MonoBehaviour
             }
         }
         
+        
+        
     }
 
     private void OnMouseDown()
     {
-        if (view.IsMine)
-        {
-            if (isIdle)
+        if (isIdle)
             {
                 isAiming = true;
             }
@@ -100,7 +100,7 @@ public class Ball : MonoBehaviour
                 }
 
             }
-        }
+        
         
     }
     
@@ -137,6 +137,7 @@ public class Ball : MonoBehaviour
             
 
         }
+        OnMouseDown();
     }
 
     public enum CurveDirection

@@ -20,7 +20,9 @@ public class Zoom : MonoBehaviour
     {
         //set initial FOV at start
         Camera.main.fieldOfView = initialFOV;
+        ballObj = GameObject.FindGameObjectWithTag("Ball");
         ball = ballObj.GetComponent<Ball>();
+        ball.enabled = true;
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         changeFovBool = false;
     }
