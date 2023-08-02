@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
-  target: {fileID: 1893614027}
+  target: {fileID: 0}
   distanceToTarget: 4
   heightWhileShooting: 0
 --- !u!114 &963194230
@@ -419,87 +419,8 @@ MonoBehaviour:
   initialFOV: 50
   zoomInFOV: 10
   smooth: 60
-  ballObj: {fileID: 1893614019}
+  ballObj: {fileID: 0}
   cam: {fileID: 963194227}
---- !u!1001 &1176855538
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 678679326341240063, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 963194225}
-    - target: {fileID: 3859352307074843106, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_Name
-      value: Ball
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 38.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.097
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7399152375808374893, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-        type: 3}
-      propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9d0d1bbdbd647624f8013206583ecbdb, type: 3}
 --- !u!1 &1319193418
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,18 +809,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703222794}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1893614019 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3859352307074843106, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1176855538}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1893614027 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1176855538}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2074451984
 GameObject:
   m_ObjectHideFlags: 0
