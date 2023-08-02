@@ -49,8 +49,9 @@ public class Zoom : MonoBehaviour
         //check that current FOV is different than Zoomed
         if (currentFOV != zoomInFOV)
         {
-            //check if current FOV is grater than the Zoomed in FOV input and increment the FOV smoothly
-            if (currentFOV > zoomInFOV)
+            //burada cam pos topun arkasýna alarak deðiþtir!!!!
+            
+            if (currentFOV > zoomInFOV)//check if current FOV is grater than the Zoomed in FOV input and increment the FOV smoothly
             {
                 Camera.main.fieldOfView += (-smooth * Time.deltaTime);
             }
