@@ -10,10 +10,12 @@ public class MoveAroundObject : MonoBehaviour
     private Vector3 previousPosition;
     public float heightWhileShooting;
     GameObject passHit;
+    Ball ball;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Ball").transform;
+        ball = target.GetComponent<Ball>();
     }
     private void Update()
     {

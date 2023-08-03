@@ -51,7 +51,7 @@ public class Ball : MonoBehaviour
                 ProcessAim();
             }
         }
-        Debug.Log(lineRenderer.GetPosition(1).x);
+        Debug.Log(lineRenderer.GetPosition(1));
         lineX = lineRenderer.GetPosition(1).x;
 
 

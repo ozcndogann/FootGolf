@@ -46,7 +46,7 @@ public class Zoom : MonoBehaviour
     //function to zoom in the FOV
     public void ChangeFOV()
     {
-        
+        //gameObject.transform.position = new Vector3(ball.lineX, gameObject.transform.position.y, gameObject.transform.position.z);
         //check that current FOV is different than Zoomed
         if (currentFOV != zoomInFOV)
         {
