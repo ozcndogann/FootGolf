@@ -20,6 +20,7 @@ public class Ball : MonoBehaviour
     Vector3? worldPoint;
     public Vector3 mousePos,upForce;
     public float curveValue,forceValue;
+    public float lineX;
 
     PhotonView view;
 
@@ -50,9 +51,10 @@ public class Ball : MonoBehaviour
                 ProcessAim();
             }
         }
-        
-        
-        
+        Debug.Log(lineRenderer.GetPosition(1).x);
+        lineX = lineRenderer.GetPosition(1).x;
+
+
     }
 
     private void OnMouseDown()

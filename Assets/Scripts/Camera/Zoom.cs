@@ -46,6 +46,7 @@ public class Zoom : MonoBehaviour
     //function to zoom in the FOV
     public void ChangeFOV()
     {
+        
         //check that current FOV is different than Zoomed
         if (currentFOV != zoomInFOV)
         {
