@@ -31,11 +31,12 @@ public class HoleAnimation : MonoBehaviour
             {
                 if (!hasDropped)
                 {
-                    other.transform.position = holePos.transform.position;
+                    other.transform.position = holePos.transform.position + new Vector3(0,0.4f,0);
                     other.attachedRigidbody.velocity = Vector3.zero;
                     hasDropped = true;
                 }
             }
         }
     }
+
 }
