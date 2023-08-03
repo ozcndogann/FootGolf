@@ -738,14 +738,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952980451}
-  m_LocalRotation: {x: 0.05012677, y: 0.12755036, z: -0.00645473, w: 0.99054354}
+  m_LocalRotation: {x: 0.04892971, y: 0.25014436, z: -0.012658638, w: 0.9668885}
   m_LocalPosition: {x: 0.646, y: 5.07, z: -1.158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5.794, y: 14.675, z: 0}
+  m_LocalEulerAnglesHint: {x: 5.794, y: 29.01, z: 0}
 --- !u!114 &952980457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,17 +819,17 @@ PrefabInstance:
     - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.025962036
       objectReference: {fileID: 0}
     - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.99966294
       objectReference: {fileID: 0}
     - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
         type: 3}
@@ -844,7 +844,7 @@ PrefabInstance:
     - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 177.025
       objectReference: {fileID: 0}
     - target: {fileID: 4523017918165261144, guid: 9d0d1bbdbd647624f8013206583ecbdb,
         type: 3}
@@ -876,6 +876,8 @@ GameObject:
   - component: {fileID: 1313333564}
   - component: {fileID: 1313333563}
   - component: {fileID: 1313333567}
+  - component: {fileID: 1313333568}
+  - component: {fileID: 1313333569}
   m_Layer: 7
   m_Name: Hole
   m_TagString: Untagged
@@ -976,6 +978,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 806468407}
   rb: {fileID: 0}
+--- !u!114 &1313333568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313333562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 770eaaa02a9b0a74fa34d2afb39f0c8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VortexForce: 1.2
+--- !u!114 &1313333569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313333562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3383aebed3678294cb8b3583c2b96acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holePos: {fileID: 1313333562}
+  MaxHoleDropOffset: 0.1
+  MaxStayTime: 0.06
 --- !u!1 &1645712203
 GameObject:
   m_ObjectHideFlags: 0

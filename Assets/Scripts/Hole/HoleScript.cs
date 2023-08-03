@@ -24,9 +24,9 @@ public class HoleScript : MonoBehaviour
 
     private void Update()
     {
-        if (holeC == true)
-        {
-            rb.AddForce(0, -10, 0, ForceMode.Impulse);
-        }
+        //if (holeC == true)
+        //{
+        //    rb.AddForce(0, -10, 0, ForceMode.Impulse);
+        //}
     }
 }
