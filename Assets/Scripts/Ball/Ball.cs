@@ -123,12 +123,12 @@ public class Ball : MonoBehaviour
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
         if ((worldPoint.Value - transform.position).y < 0)
         {
-            Debug.Log("y kucuk");
+            //Debug.Log("y kucuk");
             //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
         }
         else
         {
-            Debug.Log("y buyuk");
+            //Debug.Log("y buyuk");
         }
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
@@ -251,5 +251,15 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true; 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Ground"))
+        {
+            HoleScript.holeC = false;
+            Debug.Log("girdi");
+        }
+
     }
 }

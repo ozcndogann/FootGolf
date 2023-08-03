@@ -2,16 +2,31 @@ using UnityEngine;
 
 public class HoleScript : MonoBehaviour
 {
-    // The unique tag assigned to the hole
-    private const string HoleTag = "Hole";
-    public Animator anim;
-    // Called when a GameObject with a Rigidbody enters the hole's trigger collider
+    public GameObject ball;
+    public Rigidbody rb;
+    public static bool holeC;
+    private void Start()
+    {
+        ball = GameObject.FindGameObjectWithTag("Ball");
+        rb = ball.GetComponent<Rigidbody>();
+        holeC = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(HoleTag))
+        if (other.CompareTag("Ball"))
         {
-            anim.Play("BallHole");
-            Debug.Log("Ball entered the hole!");
+            holeC = true;
+            Debug.Log("girdi");
+        }
+
+    }
+
+    private void Update()
+    {
+        if (holeC == true)
+        {
+            rb.AddForce(0, -10, 0, ForceMode.Impulse);
         }
     }
 }
