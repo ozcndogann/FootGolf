@@ -9,9 +9,10 @@ public class SpawnPlayers : MonoBehaviour
     public float minZ;
     public float maxX;
     public float maxZ;
+    public float Y;
     private void Start()
     {
-        Vector3 startPos = new Vector3(Random.Range(minX, maxX), .3f, Random.Range(minZ, maxZ));
+        Vector3 startPos = new Vector3(Random.Range(minX, maxX), Y, Random.Range(minZ, maxZ));
         PhotonNetwork.Instantiate(Ball.name, startPos, Quaternion.identity);
     }
 }
