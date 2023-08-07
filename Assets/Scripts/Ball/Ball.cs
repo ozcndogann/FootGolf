@@ -139,7 +139,7 @@ public class Ball : MonoBehaviour
             
 
         }
-        OnMouseDown();
+        //OnMouseDown();
     }
 
     public enum CurveDirection
