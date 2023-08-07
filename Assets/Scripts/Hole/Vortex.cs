@@ -18,7 +18,8 @@ public class Vortex : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             Vector3 normal = other.transform.position - vortexCollider.bounds.center;
-            other.attachedRigidbody.AddForce(normal * VortexForce);
+            normal.y = Mathf.Abs(normal.y);
+            other.attachedRigidbody.AddForce(0,-normal.y * VortexForce,0);
         }
     }
 }
