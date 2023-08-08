@@ -7,10 +7,11 @@ using Photon.Pun;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     private TMP_InputField createInput;
-    private TMP_InputField joinInput;
+    public TMP_InputField joinInput;
     private string characters = "0123456789";
     private string randomCreate;
 
+   
     public void CreateRoom()
     {
         for (int i = 0; i < 6; i++)
@@ -19,27 +20,25 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         }
         Debug.Log(randomCreate);
         PhotonNetwork.CreateRoom(randomCreate);
-        createInput.text = randomCreate;
-        if (createInput.text != "")
-        {
-            PhotonNetwork.CreateRoom(createInput.text);
-        }
-        else
-        {
-            Debug.Log("biþi yaz uyarýsý ui gelmeli");
-        }
-    }
-    public void JoinRoom()
-    {
-        PhotonNetwork.JoinRoom(joinInput.text.ToString());
-        //if (joinInput.text != "")
+        //if (createInput.text != "")
         //{
-        //    PhotonNetwork.JoinRoom(joinInput.text);
+        //    PhotonNetwork.CreateRoom(createInput.text);
         //}
         //else
         //{
-        //    Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
+        //    Debug.Log("biþi yaz uyarýsý ui gelmeli");
         //}
+    }
+    public void JoinRoom()
+    {
+        if (joinInput.text != "")
+        {
+            PhotonNetwork.JoinRoom(joinInput.text);
+        }
+        else
+        {
+            Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
+        }
     }
     public override void OnJoinedRoom()
     {
