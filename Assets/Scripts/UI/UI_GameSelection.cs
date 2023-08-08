@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
+using Photon.Realtime;
+using TMPro;
 public class UI_GameSelection : MonoBehaviour
 {
     bool practice;
     bool versus;
     bool Tournament;
-    CreateAndJoinRooms CreateAndJoinRooms;
-    [SerializeField] GameObject createJoinRoom; 
+    private TMP_InputField createInput;
+    public TMP_InputField joinInput;
+    private string characters = "0123456789";
+    private string randomCreate;
+    public static RoomOptions roomOptions = new RoomOptions();
     public void Start()
     {
-      practice = false;
+        practice = false;
         versus = false;
         Tournament = false;
-        CreateAndJoinRooms = createJoinRoom.GetComponent<CreateAndJoinRooms>();
     }
     public void IsPractice()
     {
         practice = true;
         versus = false;
         Tournament = false;
-        CreateAndJoinRooms.roomOptions.MaxPlayers = 1;
 
     }
     public void IsVersus()
@@ -30,7 +33,6 @@ public class UI_GameSelection : MonoBehaviour
         practice = false;
         versus = true;
         Tournament = false;
-        CreateAndJoinRooms.roomOptions.MaxPlayers = 2;
     }
 
     public void IsTournament()
@@ -38,7 +40,6 @@ public class UI_GameSelection : MonoBehaviour
         practice = false;
         versus = false;
         Tournament = true;
-        CreateAndJoinRooms.roomOptions.MaxPlayers = 2;
     }
     public void GameSelect()
     {
@@ -53,6 +54,38 @@ public class UI_GameSelection : MonoBehaviour
         if (Tournament)
         {
             SceneManager.LoadScene("Loading");
+        }
+    }
+    public void CreateRoom()
+    {
+        roomOptions.IsVisible = false;
+        roomOptions.MaxPlayers = 4;
+        for (int i = 0; i < 6; i++)
+        {
+            randomCreate += characters[Random.Range(0, characters.Length)];
+        }
+        Debug.Log(randomCreate);
+
+        PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+        //if (createInput.text != "")
+        //{
+        //    PhotonNetwork.CreateRoom(createInput.text);
+        //}
+        //else
+        //{
+        //    Debug.Log("biþi yaz uyarýsý ui gelmeli");
+        //}
+    }
+
+    public void JoinRoom()
+    {
+        if (joinInput.text != "")
+        {
+            PhotonNetwork.JoinRoom(joinInput.text);
+        }
+        else
+        {
+            Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
         }
     }
 }

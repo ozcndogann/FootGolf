@@ -8,7 +8,6 @@ public class UI_Start : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("UIGameSelect");
-
     }
 
 }
