@@ -8,17 +8,21 @@ public class UI_GameSelection : MonoBehaviour
     bool practice;
     bool versus;
     bool Tournament;
+    CreateAndJoinRooms CreateAndJoinRooms;
+    [SerializeField] GameObject createJoinRoom; 
     public void Start()
     {
       practice = false;
         versus = false;
         Tournament = false;
+        CreateAndJoinRooms = createJoinRoom.GetComponent<CreateAndJoinRooms>();
     }
     public void IsPractice()
     {
         practice = true;
         versus = false;
         Tournament = false;
+        CreateAndJoinRooms.roomOptions.MaxPlayers = 1;
 
     }
     public void IsVersus()
@@ -26,6 +30,7 @@ public class UI_GameSelection : MonoBehaviour
         practice = false;
         versus = true;
         Tournament = false;
+        CreateAndJoinRooms.roomOptions.MaxPlayers = 2;
     }
 
     public void IsTournament()
@@ -33,6 +38,7 @@ public class UI_GameSelection : MonoBehaviour
         practice = false;
         versus = false;
         Tournament = true;
+        CreateAndJoinRooms.roomOptions.MaxPlayers = 2;
     }
     public void GameSelect()
     {

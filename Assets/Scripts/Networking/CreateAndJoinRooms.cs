@@ -11,11 +11,11 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public TMP_InputField joinInput;
     private string characters = "0123456789";
     private string randomCreate;
+    public RoomOptions roomOptions = new RoomOptions();
 
-   
+    
     public void CreateRoom()
     {
-        RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = false;
         roomOptions.MaxPlayers = 4;
         for (int i = 0; i < 6; i++)
