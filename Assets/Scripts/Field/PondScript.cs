@@ -18,7 +18,7 @@ public class PondScript : MonoBehaviour
     IEnumerator waiter()
     {
         yield return new WaitForSeconds(1f);
-        ballTransform.position = new Vector3(teleportPoint.x, teleportPoint.y+0.1f/*gameObject.transform.position.y+1.26f*/, teleportPoint.z);
+        ballTransform.position = new Vector3(teleportPoint.x, gameObject.transform.position.y+1.26f, teleportPoint.z);
         rb.velocity = new Vector3(0, 0, 0);
     }
 
@@ -27,23 +27,21 @@ public class PondScript : MonoBehaviour
         if (other.CompareTag("Ball"))
         {
             contactPoint = other.ClosestPointOnBounds(transform.position);
-            teleportPoint = CalculateTeleportPoint(contactPoint, other.bounds);
-
+            teleportPoint = CalculateTeleportPoint(contactPoint, transform.position, transform.localScale.x / 2f);
             Debug.Log("Contact Point: " + contactPoint);
 
             StartCoroutine(waiter());
         }
     }
 
-    private Vector3 CalculateTeleportPoint(Vector3 contactPoint, Bounds colliderBounds)
+    private Vector3 CalculateTeleportPoint(Vector3 contactPoint, Vector3 sphereCenter, float sphereRadius)
     {
-        Vector3 closestPointOnBounds = colliderBounds.ClosestPoint(contactPoint);
-        Vector3 direction = (closestPointOnBounds - contactPoint).normalized;
+        Vector3 direction = contactPoint - sphereCenter;
+        direction.y = 0f; // Ignore vertical component
 
-        Vector3 horizontalDirection = new Vector3(direction.x, 0f, direction.z).normalized;
+        Vector3 normalizedDirection = direction.normalized;
 
-        float distance = 0.9f; // Distance to move outside the bounds
-        Vector3 teleportPoint = closestPointOnBounds + horizontalDirection * distance;
+        Vector3 teleportPoint = contactPoint + normalizedDirection * sphereRadius;
 
         return teleportPoint;
     }
