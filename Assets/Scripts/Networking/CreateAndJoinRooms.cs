@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
+using Photon.Realtime;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     private TMP_InputField createInput;
@@ -14,12 +15,16 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
    
     public void CreateRoom()
     {
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.IsVisible = false;
+        roomOptions.MaxPlayers = 2;
         for (int i = 0; i < 6; i++)
         {
             randomCreate += characters[Random.Range(0, characters.Length)];
         }
         Debug.Log(randomCreate);
-        PhotonNetwork.CreateRoom(randomCreate);
+
+        PhotonNetwork.CreateRoom(randomCreate, roomOptions);
         //if (createInput.text != "")
         //{
         //    PhotonNetwork.CreateRoom(createInput.text);
@@ -29,6 +34,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         //    Debug.Log("biþi yaz uyarýsý ui gelmeli");
         //}
     }
+    
     public void JoinRoom()
     {
         if (joinInput.text != "")
