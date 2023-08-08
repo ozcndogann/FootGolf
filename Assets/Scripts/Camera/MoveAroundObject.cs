@@ -67,12 +67,13 @@ public class MoveAroundObject : MonoBehaviour
             }
 
         }
+        if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        {
+            passHit.gameObject.SetActive(true);
+        }
         else
         {
-            if(Ball.shooted == true || target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
-            {
-                passHit.gameObject.SetActive(true);
-            }
+            
             //Debug.Log("Did not Hit");
             
         }

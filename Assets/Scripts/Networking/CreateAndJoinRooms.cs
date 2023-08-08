@@ -6,11 +6,20 @@ using TMPro;
 using Photon.Pun;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    public TMP_InputField createInput;
-    public TMP_InputField joinInput;
-    
+    private TMP_InputField createInput;
+    private TMP_InputField joinInput;
+    private string characters = "0123456789";
+    private string randomCreate;
+
     public void CreateRoom()
     {
+        for (int i = 0; i < 6; i++)
+        {
+            randomCreate += characters[Random.Range(0, characters.Length)];
+        }
+        Debug.Log(randomCreate);
+        PhotonNetwork.CreateRoom(randomCreate);
+        createInput.text = randomCreate;
         if (createInput.text != "")
         {
             PhotonNetwork.CreateRoom(createInput.text);
@@ -22,14 +31,15 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public void JoinRoom()
     {
-        if (joinInput.text != "")
-        {
-            PhotonNetwork.JoinRoom(joinInput.text);
-        }
-        else
-        {
-            Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
-        }
+        PhotonNetwork.JoinRoom(joinInput.text.ToString());
+        //if (joinInput.text != "")
+        //{
+        //    PhotonNetwork.JoinRoom(joinInput.text);
+        //}
+        //else
+        //{
+        //    Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
+        //}
     }
     public override void OnJoinedRoom()
     {
