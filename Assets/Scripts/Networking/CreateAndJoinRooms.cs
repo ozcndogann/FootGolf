@@ -18,7 +18,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             randomCreate += characters[Random.Range(0, characters.Length)];
         }
         Debug.Log(randomCreate);
-        PhotonNetwork.CreateRoom(randomCreate);
+        PhotonNetwork.CreateRoom(randomCreate.ToString());
         //if (createInput.text != "")
         //{
         //    PhotonNetwork.CreateRoom(createInput.text);
@@ -30,14 +30,15 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public void JoinRoom()
     {
-        if (joinInput.text != "")
-        {
-            PhotonNetwork.JoinRoom(joinInput.text);
-        }
-        else
-        {
-            Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
-        }
+        PhotonNetwork.JoinRoom(joinInput.text);
+        //if (joinInput.text != "")
+        //{
+        //    PhotonNetwork.JoinRoom(joinInput.text);
+        //}
+        //else
+        //{
+        //    Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
+        //}
     }
     public override void OnJoinedRoom()
     {
