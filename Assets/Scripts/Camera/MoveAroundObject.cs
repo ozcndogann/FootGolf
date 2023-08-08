@@ -35,15 +35,14 @@ public class MoveAroundObject : MonoBehaviour
                 //Debug.Log(newPosition+"new");
                 //Debug.Log(previousPosition+"previous");
                 Vector3 direction = previousPosition - newPosition;
-
                 float rotationAroundYAxis = direction.x * 180;
 
                 cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                 //if(rotationAroundYAxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis, Space.World);
+                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis/300, Space.World);
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
-                previousPosition = newPosition;
+                //previousPosition = newPosition;
             }
         }
         else
