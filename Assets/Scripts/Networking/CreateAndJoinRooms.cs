@@ -18,7 +18,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             randomCreate += characters[Random.Range(0, characters.Length)];
         }
         Debug.Log(randomCreate);
-        PhotonNetwork.CreateRoom(randomCreate.ToString());
+        PhotonNetwork.CreateRoom(randomCreate);
         //if (createInput.text != "")
         //{
         //    PhotonNetwork.CreateRoom(createInput.text);
@@ -30,7 +30,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public void JoinRoom()
     {
-        PhotonNetwork.JoinRoom(joinInput.text);
+        PhotonNetwork.JoinRoom(joinInput.text.ToString());
         //if (joinInput.text != "")
         //{
         //    PhotonNetwork.JoinRoom(joinInput.text);
