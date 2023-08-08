@@ -17,7 +17,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = false;
-        roomOptions.MaxPlayers = 2;
+        roomOptions.MaxPlayers = 4;
         for (int i = 0; i < 6; i++)
         {
             randomCreate += characters[Random.Range(0, characters.Length)];
