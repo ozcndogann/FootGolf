@@ -1,24 +1,38 @@
 using UnityEngine;
-
+using Photon.Pun;
 public class HoleScript : MonoBehaviour
 {
     public GameObject ball;
     public Rigidbody rb;
     public static bool holeC;
+    Camera cam1;
+    Camera cam2;
     private void Start()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball");
-        rb = ball.GetComponent<Rigidbody>();
         holeC = false;
+        cam1 = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
+        cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera; 
+        cam1.enabled = (true);
+        cam2.enabled = (false);
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
+       
+        
         if (other.CompareTag("Ball"))
         {
-            holeC = true;
-            Debug.Log("girdi");
+            if (Ball.view.IsMine)
+            {
+                holeC = true;
+                cam1.enabled = (false);
+                cam2.enabled = (true);
+                Debug.Log("girdi");
+            }
+            
         }
+        
+        
 
     }
 

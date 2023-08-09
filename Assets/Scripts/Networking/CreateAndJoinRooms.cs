@@ -69,7 +69,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             Debug.Log("kisi sayisi mac basladi:" + roomOptions.MaxPlayers);
             Debug.Log(randomCreate);
         }
-        
+        else
+        {
+            //lütfen bi mod seçin pop up'ý
+        }
         
 
     }

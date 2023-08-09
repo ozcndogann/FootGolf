@@ -22,7 +22,7 @@ public class Ball : MonoBehaviour
     public float curveValue,forceValue;
     public float lineX;
 
-    PhotonView view;
+    public static PhotonView view;
 
     private void Start()
     {
