@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PondScript : MonoBehaviour
 {
-    public GameObject ball;
-    public Rigidbody rb;
-    public Transform ballTransform;
+    private GameObject ball;
+    private Rigidbody rb;
+    //public Transform ballTransform;
     Vector3 contactPoint;
     Vector3 teleportPoint;
     private void Start()
@@ -18,7 +18,7 @@ public class PondScript : MonoBehaviour
     IEnumerator waiter()
     {
         yield return new WaitForSeconds(1f);
-        ballTransform.position = new Vector3(teleportPoint.x, gameObject.transform.position.y+1.26f, teleportPoint.z);
+        ball.transform.position = new Vector3(teleportPoint.x, gameObject.transform.position.y+1.26f, teleportPoint.z);
         rb.velocity = new Vector3(0, 0, 0);
     }
 
