@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
-
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     bool practice;
@@ -48,7 +46,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4;
         Debug.Log("kisi sayisi:" + roomOptions.MaxPlayers);
     }
-    
+
     public void CreateRoom()
     {
         Debug.Log(practice);
@@ -73,7 +71,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         {
             //lütfen bi mod seçin pop up'ý
         }
-        
+
 
     }
     private string GenerateRandomSixDigitNumber()
@@ -94,6 +92,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Hole1");
+        PhotonNetwork.LoadLevel("Lobby");
     }
 }

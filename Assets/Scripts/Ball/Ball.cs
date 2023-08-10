@@ -26,11 +26,15 @@ public class Ball : MonoBehaviour
     Camera cam2;
     public PhotonView view;
     public bool holeC;
+
+    
     private void Start()
     {
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
+        cam.GetComponent<AudioListener>().enabled = true;
+        cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
         cam2.enabled = (false);
         holeC = false;
@@ -275,11 +279,45 @@ public class Ball : MonoBehaviour
                 holeC = true;
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
+                cam.GetComponent<AudioListener>().enabled = false;
+                cam2.GetComponent<AudioListener>().enabled = true;
                 cam2.enabled = (true);
                 Debug.Log("girdi");
+                CheckAllPlayers();
             }
         }
     }
+    private void CheckAllPlayers()
+    {
+        bool allPlayersReady = true;
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        {
+            
+            if (!holeC)// holeC false mu check
+            {
+                allPlayersReady = false;
+                break;
+            }
+        }
 
+        if (allPlayersReady)
+        {
+            view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
+        }
+    }
+    
+
+    [PunRPC]
+    private void NotifyConditionMet()
+    {
+        StartCoroutine(LoadNextSceneWithDelay(1f));
+    }
+
+    private IEnumerator LoadNextSceneWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 
 }
