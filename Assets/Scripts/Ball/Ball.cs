@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float stopVelocity; // topun durmasý için min hýz
     [SerializeField] private float shotPower; 
     private Rigidbody rb; 
-    public GameObject cam;
+    public Camera cam;
     MoveAroundObject moveAroundObject;
     Zoom zoom;
     public bool isShooting; // shoot hali boolu
@@ -21,13 +21,16 @@ public class Ball : MonoBehaviour
     public Vector3 mousePos,upForce;
     public float curveValue,forceValue;
     public float lineX;
-
-    public static PhotonView view;
+    Camera cam2;
+    public PhotonView view;
 
     private void Start()
     {
         view = GetComponent<PhotonView>();
-        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
+        cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
+        cam.enabled = (true);
+        cam2.enabled = (false);
     }
     private void Awake()
     {
@@ -262,6 +265,16 @@ public class Ball : MonoBehaviour
             HoleScript.holeC = false;
             Debug.Log("girdi");
         }
+        //if (other.CompareTag("Hole"))
+        //{
+        //    if (view.IsMine)
+        //    {
+        //        HoleScript.holeC = true;
+        //        cam.enabled = (false);
+        //        cam2.enabled = (true);
+        //        Debug.Log("girdi");
+        //    }
 
+        //}
     }
 }
