@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
+
 public class Ball : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer; // aim için line
@@ -23,7 +25,7 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    public static bool holeC;
+    public bool holeC;
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -263,20 +265,21 @@ public class Ball : MonoBehaviour
     {
         if (other.CompareTag("Hole"))
         {
-            HoleScript.holeC = false;
+            holeC = false;
             Debug.Log("girdi");
         }
         if (other.CompareTag("Hole"))
         {
             if (view.IsMine)
             {
-                HoleScript.holeC = true;
+                holeC = true;
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
                 cam2.enabled = (true);
                 Debug.Log("girdi");
             }
-
         }
     }
+
+
 }
