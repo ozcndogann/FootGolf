@@ -23,7 +23,7 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-
+    public static bool holeC;
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -31,6 +31,7 @@ public class Ball : MonoBehaviour
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
         cam.enabled = (true);
         cam2.enabled = (false);
+        holeC = false;
     }
     private void Awake()
     {
@@ -260,21 +261,22 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Hole"))
         {
             HoleScript.holeC = false;
             Debug.Log("girdi");
         }
-        //if (other.CompareTag("Hole"))
-        //{
-        //    if (view.IsMine)
-        //    {
-        //        HoleScript.holeC = true;
-        //        cam.enabled = (false);
-        //        cam2.enabled = (true);
-        //        Debug.Log("girdi");
-        //    }
+        if (other.CompareTag("Hole"))
+        {
+            if (view.IsMine)
+            {
+                HoleScript.holeC = true;
+                cam.enabled = (false);
+                cam.GetComponent<Zoom>().enabled = false;
+                cam2.enabled = (true);
+                Debug.Log("girdi");
+            }
 
-        //}
+        }
     }
 }
