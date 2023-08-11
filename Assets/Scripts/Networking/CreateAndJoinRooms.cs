@@ -27,7 +27,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = false;
         roomOptions.MaxPlayers = 1;
-        Debug.Log("kisi sayisi:" + roomOptions.MaxPlayers);
     }
     public void IsVersus()
     {
@@ -35,7 +34,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = true;
         Tournament = false;
         roomOptions.MaxPlayers = 2;
-        Debug.Log("kisi sayisi:" + roomOptions.MaxPlayers);
     }
 
     public void IsTournament()
@@ -44,14 +42,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = true;
         roomOptions.MaxPlayers = 4;
-        Debug.Log("kisi sayisi:" + roomOptions.MaxPlayers);
     }
 
     public void CreateRoom()
     {
-        Debug.Log(practice);
-        Debug.Log(versus);
-        Debug.Log(Tournament);
 
         //practice = false;
         //versus = false;
@@ -64,8 +58,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         {
             randomCreate = GenerateRandomSixDigitNumber();
             PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-            Debug.Log("kisi sayisi mac basladi:" + roomOptions.MaxPlayers);
-            Debug.Log(randomCreate);
         }
         else
         {

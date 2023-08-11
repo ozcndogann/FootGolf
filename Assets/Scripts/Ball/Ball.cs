@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
 public class Ball : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    public static bool holeC;
+    //public static bool holeC;
 
     
     private void Start()
@@ -37,7 +38,8 @@ public class Ball : MonoBehaviour
         cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
         cam2.enabled = (false);
-        holeC = false;
+        //holeC = false;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
         //PhotonNetwork.AutomaticallySyncScene = true;
     }
     private void Awake()
@@ -272,7 +274,8 @@ public class Ball : MonoBehaviour
         {
             if (view.IsMine)
             {
-                holeC = true;
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+                //holeC = true;
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
@@ -286,18 +289,22 @@ public class Ball : MonoBehaviour
     private void CheckAllPlayers()
     {
         bool allPlayersReady = true;
-        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
             {
+                Debug.Log("foreach içi: " + (bool)player.CustomProperties["holeC"]);
+                Debug.Log("foreach içi: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]);
                 allPlayersReady = false;
                 break;
             }
         }
         if (allPlayersReady)
         {
+            Debug.Log("rpc");
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
+        
     }
     
 
@@ -312,6 +319,7 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(delay);
         //PhotonNetwork.Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("loadscene");
     }
 
 }
