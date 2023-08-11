@@ -38,7 +38,7 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         holeC = false;
-        PhotonNetwork.AutomaticallySyncScene = false;
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
     private void Awake()
     {
@@ -279,7 +279,6 @@ public class Ball : MonoBehaviour
                 cam2.GetComponent<AudioListener>().enabled = true;
                 cam2.enabled = (true);
                 Debug.Log("girdi");
-                PhotonNetwork.AutomaticallySyncScene = true;
                 CheckAllPlayers();
             }
         }
