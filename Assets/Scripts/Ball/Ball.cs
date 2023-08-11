@@ -311,7 +311,6 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(delay);
         PhotonNetwork.Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        
     }
 
 }
