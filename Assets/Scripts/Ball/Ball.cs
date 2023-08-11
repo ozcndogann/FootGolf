@@ -38,6 +38,7 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         holeC = false;
+        PhotonNetwork.AutomaticallySyncScene = false;
     }
     private void Awake()
     {
@@ -278,6 +279,7 @@ public class Ball : MonoBehaviour
                 cam2.GetComponent<AudioListener>().enabled = true;
                 cam2.enabled = (true);
                 Debug.Log("girdi");
+                PhotonNetwork.AutomaticallySyncScene = true;
                 CheckAllPlayers();
             }
         }
@@ -290,7 +292,6 @@ public class Ball : MonoBehaviour
             bool playerBoolValue = (bool)player.CustomProperties[holeC];
             if (!playerBoolValue)// holeC false mu check
             {
-                
                 allPlayersReady = false;
                 break;
             }
@@ -312,7 +313,10 @@ public class Ball : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         //PhotonNetwork.Destroy(gameObject);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
 }
