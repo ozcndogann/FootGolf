@@ -309,7 +309,7 @@ public class Ball : MonoBehaviour
     private IEnumerator LoadNextSceneWithDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        PhotonNetwork.Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

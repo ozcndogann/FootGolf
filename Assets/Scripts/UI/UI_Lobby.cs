@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UI_Lobby : MonoBehaviour
 {
     [SerializeField] public TMP_Text codeText;
-    [SerializeField] private Button StartButton;
+    [SerializeField] private GameObject StartButton;
 
     private void Start()
     {
@@ -16,11 +16,11 @@ public class UI_Lobby : MonoBehaviour
         codeText.text = CreateAndJoinRooms.randomCreate;
         if (PhotonNetwork.IsMasterClient)
         {
-            StartButton.enabled = true;
+            StartButton.SetActive(true);
         }
         else
         {
-            StartButton.enabled = false;
+            StartButton.SetActive(false);
         }
     }
     public void StartGame()
