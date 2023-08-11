@@ -287,7 +287,7 @@ public class Ball : MonoBehaviour
         bool allPlayersReady = true;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            if (!Ball.holeC)// holeC false mu check
+            if (!holeC)// holeC false mu check
             {
                 allPlayersReady = false;
                 break;
@@ -309,8 +309,9 @@ public class Ball : MonoBehaviour
     private IEnumerator LoadNextSceneWithDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-
+        PhotonNetwork.Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
     }
 
 }
