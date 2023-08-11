@@ -11,12 +11,13 @@ public class UI_Lobby : MonoBehaviour
 
     private void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         codeText.text = CreateAndJoinRooms.randomCreate;
     }
     public void StartGame()
     {
         //buraya sahalarýn türlerine göre if state gelcek
-        PhotonNetwork.AutomaticallySyncScene = true;
+        
         PhotonNetwork.LoadLevel("Hole1");
     }
 }

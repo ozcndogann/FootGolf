@@ -59,7 +59,7 @@ public class MoveAroundObject : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, target.transform.TransformDirection(Vector3.forward), out hit, distance))
         {
             //Debug.Log("Did Hit");
-            if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball")
+            if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole")
             {
                 passHit = hit.transform.gameObject;
                 passHit.gameObject.SetActive(false);
