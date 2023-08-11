@@ -25,7 +25,7 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    public bool holeC;
+    public static bool holeC;
 
     
     private void Start()
@@ -284,20 +284,15 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
-        bool allPlayersReady = false;
+        bool allPlayersReady = true;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            
-            if (holeC)// holeC false mu check
+            if (!Ball.holeC)// holeC false mu check
             {
-                allPlayersReady = true;
-            }
-            else
-            {
+                allPlayersReady = false;
                 break;
             }
         }
-
         if (allPlayersReady)
         {
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
