@@ -289,13 +289,16 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
-        bool allPlayersReady = true;
+        bool allPlayersReady = false;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             
-            if (!holeC)// holeC false mu check
+            if (holeC)// holeC false mu check
             {
-                allPlayersReady = false;
+                allPlayersReady = true;
+            }
+            else
+            {
                 break;
             }
         }
