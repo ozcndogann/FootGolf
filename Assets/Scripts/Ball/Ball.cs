@@ -38,7 +38,7 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         holeC = false;
-        PhotonNetwork.AutomaticallySyncScene = true;
+        //PhotonNetwork.AutomaticallySyncScene = true;
     }
     private void Awake()
     {
@@ -288,8 +288,7 @@ public class Ball : MonoBehaviour
         bool allPlayersReady = true;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            bool playerBoolValue = (bool)player.CustomProperties[holeC];
-            if (!playerBoolValue)// holeC false mu check
+            if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
             {
                 allPlayersReady = false;
                 break;
@@ -312,10 +311,7 @@ public class Ball : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         //PhotonNetwork.Destroy(gameObject);
-        if (PhotonNetwork.IsMasterClient)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
