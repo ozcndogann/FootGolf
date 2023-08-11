@@ -269,11 +269,6 @@ public class Ball : MonoBehaviour
     {
         if (other.CompareTag("Hole"))
         {
-            holeC = false;
-            Debug.Log("girdi");
-        }
-        if (other.CompareTag("Hole"))
-        {
             if (view.IsMine)
             {
                 holeC = true;
@@ -289,16 +284,13 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
-        bool allPlayersReady = false;
+        bool allPlayersReady = true;
         foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
             
-            if (holeC)// holeC false mu check
+            if (!holeC)// holeC false mu check
             {
-                allPlayersReady = true;
-            }
-            else
-            {
+                allPlayersReady = false; 
                 break;
             }
         }
