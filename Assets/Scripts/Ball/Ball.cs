@@ -26,7 +26,8 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    //public static bool holeC;
+
+    public static bool holeC;
 
     
     private void Start()
@@ -38,8 +39,8 @@ public class Ball : MonoBehaviour
         cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
         cam2.enabled = (false);
-        //holeC = false;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
+        holeC = PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+        
         //PhotonNetwork.AutomaticallySyncScene = true;
     }
     private void Awake()
@@ -208,7 +209,7 @@ public class Ball : MonoBehaviour
         {
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
-            float maxLength = 1f; // max line length
+            float maxLength = 1.25f; // max line length
 
             if (lineLength > maxLength) // maxla current length kýyasý
             {
@@ -272,10 +273,11 @@ public class Ball : MonoBehaviour
     {
         if (other.CompareTag("Hole"))
         {
+            
             if (view.IsMine)
             {
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
-                //holeC = true;
+                //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
+                holeC = true;
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
@@ -291,10 +293,11 @@ public class Ball : MonoBehaviour
         bool allPlayersReady = true;
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
+            if (!holeC)// holeC false mu check
             {
                 Debug.Log("foreach içi: " + (bool)player.CustomProperties["holeC"]);
                 Debug.Log("foreach içi: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]);
+                Debug.Log("foreach içi: " + holeC);
                 allPlayersReady = false;
                 break;
             }
