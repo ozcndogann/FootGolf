@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     bool practice;
@@ -14,6 +14,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     private string characters = "0123456789";
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
+    public Button practiceBtn;
+    public Button VersusBtn;
+    public Button TournamentBtn;
+
 
     public void Start()
     {
@@ -21,13 +25,40 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = false;
     }
+    public void Update()
+    {
+        if (practice)
+        {
+            practiceBtn.animator.SetBool("Selected", true);
+            VersusBtn.animator.SetBool("Normal", true);
+            TournamentBtn.animator.SetBool("Normal", true);
+
+        }
+        if (versus)
+        {
+            VersusBtn.animator.SetBool("Selected", true);
+            practiceBtn.animator.SetBool("Normal", true);
+            TournamentBtn.animator.SetBool("Normal", true);
+
+        }
+        if (Tournament)
+        {
+            TournamentBtn.animator.SetBool("Selected", true);
+            practiceBtn.animator.SetBool("Normal", true);
+            VersusBtn.animator.SetBool("Normal", true);
+
+        }
+    }
+
     public void IsPractice()
+
     {
         practice = true;
         versus = false;
         Tournament = false;
         roomOptions.MaxPlayers = 1;
     }
+
     public void IsVersus()
     {
         practice = false;

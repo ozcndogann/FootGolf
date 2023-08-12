@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 339524208}
   - component: {fileID: 339524207}
   - component: {fileID: 339524206}
+  - component: {fileID: 339524209}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -579,6 +580,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339524209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339524205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &359551086
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +1027,7 @@ Animator:
   m_GameObject: {fileID: 465426906}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c490356b35ad4eb49ad452e5f6001151, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9fac5a78519ae014ebc9dc2209a053d6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1086,6 +1120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joinInput: {fileID: 1337734201}
+  practiceBtn: {fileID: 465426908}
+  VersusBtn: {fileID: 2107871321}
+  TournamentBtn: {fileID: 1932508769}
 --- !u!1 &757442514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3215,7 +3252,7 @@ Animator:
   m_GameObject: {fileID: 2107871319}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c490356b35ad4eb49ad452e5f6001151, type: 2}
+  m_Controller: {fileID: 9100000, guid: 282b6e6ef9ed0d24782d19868440062a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

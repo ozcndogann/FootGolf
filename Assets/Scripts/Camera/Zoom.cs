@@ -8,6 +8,7 @@ public class Zoom : MonoBehaviour
     public float initialFOV;
     public float zoomInFOV;
     public float smooth;
+    public Vector3 BallZoom;
     Ball ball;
     MoveAroundObject moveAroundObject;
     [SerializeField] private GameObject ballObj;
@@ -46,6 +47,8 @@ public class Zoom : MonoBehaviour
     //function to zoom in the FOV
     public void ChangeFOV()
     {
+       // gameObject.transform.position = new Vector3(ball.lineX, transform.position.y,ball.lineZ);
+        //gameObject.transform.rotation = ball.CamRot.rotation;
         //gameObject.transform.position = new Vector3(ball.lineX, gameObject.transform.position.y, gameObject.transform.position.z);
         //check that current FOV is different than Zoomed
         if (currentFOV != zoomInFOV)
@@ -63,6 +66,7 @@ public class Zoom : MonoBehaviour
                 if (currentFOV <= zoomInFOV)
                 {
                     Camera.main.fieldOfView = zoomInFOV;
+
                 }
             }
         }
