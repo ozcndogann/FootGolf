@@ -26,7 +26,6 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-
     public static bool holeC;
 
     
@@ -39,8 +38,8 @@ public class Ball : MonoBehaviour
         cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
         cam2.enabled = (false);
-        holeC = PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
-        
+        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+
         //PhotonNetwork.AutomaticallySyncScene = true;
     }
     private void Awake()
@@ -276,8 +275,13 @@ public class Ball : MonoBehaviour
             
             if (view.IsMine)
             {
-                //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
+                holeC = (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"];
                 holeC = true;
+                Hashtable hash = new Hashtable();
+                hash.Add("holeC", holeC); 
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
+
+
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
@@ -293,11 +297,10 @@ public class Ball : MonoBehaviour
         bool allPlayersReady = true;
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (!holeC)// holeC false mu check
+            if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
             {
                 Debug.Log("foreach içi: " + (bool)player.CustomProperties["holeC"]);
                 Debug.Log("foreach içi: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]);
-                Debug.Log("foreach içi: " + holeC);
                 allPlayersReady = false;
                 break;
             }
