@@ -279,7 +279,7 @@ public class Ball : MonoBehaviour
                 holeC = true;
                 Hashtable hash = new Hashtable();
                 hash.Add("holeC", holeC); 
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
+                //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
 
 
                 cam.enabled = (false);
