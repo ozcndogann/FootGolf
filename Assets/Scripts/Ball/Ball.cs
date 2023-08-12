@@ -275,13 +275,7 @@ public class Ball : MonoBehaviour
             
             if (view.IsMine)
             {
-                holeC = (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"];
-                holeC = true;
-                Hashtable hash = new Hashtable();
-                hash.Add("holeC", holeC); 
-                //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
-
-
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;

@@ -7,9 +7,9 @@ using Photon.Realtime;
 using UnityEngine.UI;
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    bool practice;
-    bool versus;
-    bool Tournament;
+    public static bool practice;
+    public static bool versus;
+    public static bool Tournament;
     public TMP_InputField joinInput;
     private string characters = "0123456789";
     public static string randomCreate;

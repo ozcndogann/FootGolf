@@ -26,6 +26,17 @@ public class UI_Lobby : MonoBehaviour
     public void StartGame()
     {
         //buraya sahalarýn türlerine göre if state gelcek
-        PhotonNetwork.LoadLevel("Hole1");
+        if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRooms.practice)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
+        else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRooms.versus)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
+        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRooms.Tournament)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
     }
 }
