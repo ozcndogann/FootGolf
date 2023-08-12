@@ -274,7 +274,7 @@ public class Ball : MonoBehaviour
         {
             if (view.IsMine)
             {
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
                 //holeC = true;
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
