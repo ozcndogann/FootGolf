@@ -7,11 +7,24 @@ using UnityEngine.UI;
 using Photon.Pun;
 public class UI_InGame : MonoBehaviour
 {
-    [SerializeField] private TMP_Text codeText;
+    [SerializeField] public TMP_Text codeText;
     
-    private void Start()
+    public void Start()
     {
         codeText.text = CreateAndJoinRooms.randomCreate;
+
+        if (CreateAndJoinRooms.practice)
+        {
+            codeText.enabled = false;
+        }
+        else if (CreateAndJoinRooms.versus)
+        {
+            codeText.enabled = true;
+        }
+        else if (CreateAndJoinRooms.Tournament)
+        {
+            codeText.enabled = true;
+        }
     }
     public void MainMenu()
     {

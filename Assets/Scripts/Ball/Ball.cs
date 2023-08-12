@@ -91,7 +91,7 @@ public class Ball : MonoBehaviour
                         }
                         if (mousePos.y < Screen.height / 2)
                         {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
+                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
                             Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
                         }
                     }
@@ -105,7 +105,7 @@ public class Ball : MonoBehaviour
                         }
                         if (mousePos.y < Screen.height / 2)
                         {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
+                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
                             Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
                         }
                     }
