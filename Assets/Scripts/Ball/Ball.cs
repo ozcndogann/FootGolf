@@ -26,9 +26,9 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    public static bool holeC;
+    //public static bool holeC;
 
-    
+    Player player;
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -37,8 +37,9 @@ public class Ball : MonoBehaviour
         cam.GetComponent<AudioListener>().enabled = true;
         cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
-        cam2.enabled = (false);
+        cam2.enabled = (false); 
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+
 
         //PhotonNetwork.AutomaticallySyncScene = true;
     }
@@ -67,9 +68,7 @@ public class Ball : MonoBehaviour
         //Debug.Log(lineRenderer.GetPosition(1));
         lineX = lineRenderer.GetPosition(1).x;
 
-
     }
-
     private void OnMouseDown()
     {
         if (isIdle)
@@ -293,8 +292,8 @@ public class Ball : MonoBehaviour
         {
             if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
             {
+                Debug.Log("foreach içilocal: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]);
                 Debug.Log("foreach içi: " + (bool)player.CustomProperties["holeC"]);
-                Debug.Log("foreach içi: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]);
                 allPlayersReady = false;
                 break;
             }
