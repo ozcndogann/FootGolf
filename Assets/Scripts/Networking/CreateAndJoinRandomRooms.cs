@@ -77,17 +77,28 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     {
         if (practice)
         {
-            PhotonNetwork.JoinRandomOrCreateRoom(expectedMaxPlayers:1);
+            PhotonNetwork.JoinRandomRoom();
         }
         else if (versus)
         {
-            PhotonNetwork.JoinRandomOrCreateRoom(expectedMaxPlayers: 2);
+            PhotonNetwork.JoinRandomRoom();
         }
         else if (Tournament)
         {
-            PhotonNetwork.JoinRandomOrCreateRoom(expectedMaxPlayers: 4);
+            PhotonNetwork.JoinRandomRoom();
         }
         
+    }
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+        Debug.Log(message);
+        CreateAndJoinRoom();
+    }
+    void CreateAndJoinRoom()
+    {
+        randomCreate = GenerateRandomSixDigitNumber();
+        PhotonNetwork.CreateRoom(randomCreate, roomOptions);
     }
     //public void CreateRoom()
     //{
@@ -103,11 +114,11 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
 
 
     //}
-    //private string GenerateRandomSixDigitNumber()
-    //{
-    //    int randomNumber = Random.Range(100000, 1000000);
-    //    return randomNumber.ToString();
-    //}
+    private string GenerateRandomSixDigitNumber()
+    {
+        int randomNumber = Random.Range(100000, 1000000);
+        return randomNumber.ToString();
+    }
     public override void OnJoinedRoom()
     {
         //if (practice)
@@ -124,4 +135,8 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         //}
         PhotonNetwork.LoadLevel("Lobby");
     }
+    //public override void OnPlayerEnteredRoom(Player newPlayer)
+    //{
+    //    base.OnPlayerEnteredRoom(newPlayer);
+    //}
 }
