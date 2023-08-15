@@ -27,8 +27,6 @@ public class Ball : MonoBehaviour
     Camera cam2;
     public PhotonView view;
     //public static bool holeC;
-
-    Player player;
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -37,9 +35,8 @@ public class Ball : MonoBehaviour
         cam.GetComponent<AudioListener>().enabled = true;
         cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
-        cam2.enabled = (false); 
+        cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
-
 
         //PhotonNetwork.AutomaticallySyncScene = true;
     }
@@ -51,8 +48,6 @@ public class Ball : MonoBehaviour
         lineRenderer.enabled = false; // baþta line görünmemesi için
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
-        //Debug.Log(Screen.width / 2);
-        //Debug.Log(Screen.height / 2);
     }
 
     private void Update()
@@ -287,6 +282,26 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
+
+        StartCoroutine(DelayCheck(1f));
+    }
+    
+    [PunRPC]
+    private void NotifyConditionMet()
+    {
+        StartCoroutine(LoadNextSceneWithDelay(1f));
+    }
+
+    private IEnumerator LoadNextSceneWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        //PhotonNetwork.Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Debug.Log("loadscene");
+    }
+    private IEnumerator DelayCheck(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         bool allPlayersReady = true;
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -303,22 +318,5 @@ public class Ball : MonoBehaviour
             Debug.Log("rpc");
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
-        
     }
-    
-
-    [PunRPC]
-    private void NotifyConditionMet()
-    {
-        StartCoroutine(LoadNextSceneWithDelay(1f));
-    }
-
-    private IEnumerator LoadNextSceneWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        //PhotonNetwork.Destroy(gameObject);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Debug.Log("loadscene");
-    }
-
 }
