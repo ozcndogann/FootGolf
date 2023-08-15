@@ -37,8 +37,6 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
-
-        //PhotonNetwork.AutomaticallySyncScene = true;
     }
     private void Awake()
     {
@@ -62,7 +60,6 @@ public class Ball : MonoBehaviour
         }
         //Debug.Log(lineRenderer.GetPosition(1));
         lineX = lineRenderer.GetPosition(1).x;
-
     }
     private void OnMouseDown()
     {
@@ -297,7 +294,6 @@ public class Ball : MonoBehaviour
         yield return new WaitForSeconds(delay);
         //PhotonNetwork.Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        Debug.Log("loadscene");
     }
     private IEnumerator DelayCheck(float delay)
     {
@@ -307,15 +303,12 @@ public class Ball : MonoBehaviour
         {
             if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
             {
-                Debug.Log("foreach içilocal: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]);
-                Debug.Log("foreach içi: " + (bool)player.CustomProperties["holeC"]);
                 allPlayersReady = false;
                 break;
             }
         }
         if (allPlayersReady)
         {
-            Debug.Log("rpc");
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
     }
