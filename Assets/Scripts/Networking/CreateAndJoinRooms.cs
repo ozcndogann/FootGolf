@@ -115,17 +115,18 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        if (practice)
-        {
-            PhotonNetwork.LoadLevel("Hole1");
-        }
-        else if (versus)
-        {
-            PhotonNetwork.LoadLevel("Lobby");
-        }
-        else if (Tournament)
-        {
-            PhotonNetwork.LoadLevel("Lobby");
-        }
+        //if (practice)
+        //{
+        //    PhotonNetwork.LoadLevel("Hole1");
+        //}
+        //else if (versus)
+        //{
+        //    PhotonNetwork.LoadLevel("Lobby");
+        //}
+        //else if (Tournament)
+        //{
+        //    PhotonNetwork.LoadLevel("Lobby");
+        //}
+        PhotonNetwork.LoadLevel("Lobby");
     }
 }
