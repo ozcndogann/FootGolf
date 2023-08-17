@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
 
 public class Ball : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
+    PunTurnManager punTurnManager;
     //public static bool holeC;
     private void Start()
     {
@@ -37,6 +39,7 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+        punTurnManager = gameObject.GetComponent<PunTurnManager>();
     }
     private void Awake()
     {
@@ -257,6 +260,7 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
+        punTurnManager.BeginTurn();
     }
 
     private void OnTriggerEnter(Collider other)
