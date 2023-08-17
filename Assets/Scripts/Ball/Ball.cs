@@ -43,20 +43,14 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
-        punTurnManager.BeginTurn();
-        //foreach (Player player in PhotonNetwork.PlayerList)
-        //{
-        //    if (player.CustomProperties.ContainsKey("position"))
-        //    {
-        //        Vector3 playerPosition = (Vector3)player.CustomProperties["position"];
-        //        Debug.Log($"Player {player.NickName} is at position: {playerPosition}");
-        //        float dist = Vector3.Distance(hole.transform.position, playerPosition);
-        //        if (player.)
-        //        {
-
-        //        }
-        //    }
-        //}
+        
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.IsMasterClient)
+            {
+                punTurnManager.BeginTurn();
+            }
+        }
     }
     private void Awake()
     {
@@ -284,7 +278,6 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        punTurnManager.BeginTurn();
     }
 
     private void OnTriggerEnter(Collider other)
