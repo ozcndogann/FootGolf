@@ -28,19 +28,35 @@ public class Ball : MonoBehaviour
     Camera cam2;
     public PhotonView view;
     PunTurnManager punTurnManager;
+    private GameObject hole;
     //public static bool holeC;
-    
+    Player player;
     private void Start()
     {
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
+        hole = GameObject.FindGameObjectWithTag("Hole");
         cam.GetComponent<AudioListener>().enabled = true;
         cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
+        punTurnManager.BeginTurn();
+        //foreach (Player player in PhotonNetwork.PlayerList)
+        //{
+        //    if (player.CustomProperties.ContainsKey("position"))
+        //    {
+        //        Vector3 playerPosition = (Vector3)player.CustomProperties["position"];
+        //        Debug.Log($"Player {player.NickName} is at position: {playerPosition}");
+        //        float dist = Vector3.Distance(hole.transform.position, playerPosition);
+        //        if (player.)
+        //        {
+
+        //        }
+        //    }
+        //}
     }
     private void Awake()
     {
@@ -59,11 +75,10 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                if (punTurnManager.IsOver)
+                if (!punTurnManager.IsOver)
                 {
                     ProcessAim();
                 }
-                
             }
         }
         //Debug.Log(lineRenderer.GetPosition(1));
@@ -71,7 +86,7 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (punTurnManager.IsOver)
+        if (!punTurnManager.IsOver)
         {
             if (isIdle)
             {
@@ -269,7 +284,7 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        //punTurnManager.BeginTurn();
+        punTurnManager.BeginTurn();
     }
 
     private void OnTriggerEnter(Collider other)
