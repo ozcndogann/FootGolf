@@ -5,28 +5,30 @@ using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviourPunCallbacks, IPunObservable
 {
-    [SerializeField] private LineRenderer lineRenderer; // aim için line
-    private bool isIdle; // top duruyor mu hareketli mi boolu
-    private bool isAiming; // oyuncu aim halinde mi boolu
-    [SerializeField] private float stopVelocity; // topun durmasý için min hýz
-    [SerializeField] private float shotPower; 
-    private Rigidbody rb; 
+    [SerializeField] private LineRenderer lineRenderer;
+    private bool isIdle;
+    private bool isAiming;
+    [SerializeField] private float stopVelocity;
+    [SerializeField] private float shotPower;
+    private Rigidbody rb;
     public Camera cam;
     MoveAroundObject moveAroundObject;
     Zoom zoom;
-    public bool isShooting; // shoot hali boolu
+    public bool isShooting;
     public static bool shooted;
     public GameObject LineRenderer;
     public bool shootCloser;
     Vector3? worldPoint;
-    public Vector3 mousePos,upForce;
-    public float curveValue,forceValue;
+    public Vector3 mousePos, upForce;
+    public float curveValue, forceValue;
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    //public static bool holeC;
+    private bool isMyTurn = false;
+    private bool shotTaken = false;
+    Player player;
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -34,116 +36,129 @@ public class Ball : MonoBehaviour
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
         cam.GetComponent<AudioListener>().enabled = true;
         cam2.GetComponent<AudioListener>().enabled = false;
-        cam.enabled = (true);
-        cam2.enabled = (false);
+        cam.enabled = true;
+        cam2.enabled = false;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+
+        if (photonView.IsMine)
+        {
+            isMyTurn = true;
+            shotTaken = false;
+        }
     }
+
     private void Awake()
     {
-        shootCloser=false;
-        rb = GetComponent<Rigidbody>(); 
-        isAiming = false; 
-        lineRenderer.enabled = false; // baþta line görünmemesi için
+        shootCloser = false;
+        rb = GetComponent<Rigidbody>();
+        isAiming = false;
+        lineRenderer.enabled = false;
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
     }
 
     private void Update()
     {
-        if (view.IsMine)
+        if (!photonView.IsMine)
         {
-            if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
+            return;
+        }
+
+        if (isMyTurn && !shotTaken)
+        {
+            if (rb.velocity.magnitude < stopVelocity)
             {
                 Stop();
                 ProcessAim();
             }
         }
-        //Debug.Log(lineRenderer.GetPosition(1));
+
         lineX = lineRenderer.GetPosition(1).x;
     }
+
     private void OnMouseDown()
     {
-        if (isIdle)
-            {
-                isAiming = true;
-            }
-            if (shooted == true)
-            {
-                if (Input.GetMouseButtonDown(0) && shootCloser == false)
-                {
-                    mousePos = Input.mousePosition;
-                    if (mousePos.x > Screen.width / 2)
-                    {
-                        curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
-                        if (mousePos.y > Screen.height / 2)
-                        {
-                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                            Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                        }
-                        if (mousePos.y < Screen.height / 2)
-                        {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                            Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                        }
-                    }
-                    if (mousePos.x < Screen.width / 2)
-                    {
-                        curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
-                        if (mousePos.y > Screen.height / 2)
-                        {
-                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                            Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                        }
-                        if (mousePos.y < Screen.height / 2)
-                        {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                            Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                        }
-                    }
+        if (!photonView.IsMine)
+        {
+            return;
+        }
 
-                    shootCloser = true;
-                    Zoom.changeFovBool = false;
+        if (isIdle)
+        {
+            isAiming = true;
+        }
+
+        if (shooted == true && !shotTaken)
+        {
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            {
+                mousePos = Input.mousePosition;
+                if (mousePos.x > Screen.width / 2)
+                {
+                    curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
+                    {
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftDown);
+                    }
+                    if (mousePos.y < Screen.height / 2)
+                    {
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftUp);
+                    }
+                }
+                if (mousePos.x < Screen.width / 2)
+                {
+                    curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
+                    {
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.RightDown);
+                    }
+                    if (mousePos.y < Screen.height / 2)
+                    {
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.RightUp);
+                    }
                 }
 
+                shootCloser = true;
+                Zoom.changeFovBool = false;
             }
-        
-        
+
+        }
     }
-    
+
     private void ProcessAim()
     {
         if (!isAiming || !isIdle)
         {
-            return; // exit method
+            return;
         }
         if (!shooted)
         {
-            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+            worldPoint = CastMouseClickRay();
         }
-        
-        if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
+
+        if (!worldPoint.HasValue)
         {
-            return; // exit method
+            return;
         }
-        DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
-        //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
+        DrawLine(transform.position - (worldPoint.Value - transform.position));
+
         if ((worldPoint.Value - transform.position).y < 0)
         {
-            //Debug.Log("y kucuk");
-            //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
+            // ...
         }
         else
         {
-            //Debug.Log("y buyuk");
+            // ...
         }
-        if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
+        if (Input.GetMouseButtonUp(0))
         {
             shooted = true;
             Zoom.changeFovBool = true;
-            
-
         }
-        //OnMouseDown();
     }
 
     public enum CurveDirection
@@ -186,22 +201,21 @@ public class Ball : MonoBehaviour
                 break;
         }
         Vector3 finalDirection = upForce + direction + curveAmount * curveVector;
-        
+
         rb.AddForce(-finalDirection * force);
         isIdle = false;
         shooted = false;
-        
     }
 
     private void DrawLine(Vector3 worldPoint)
     {
         if (!shooted)
         {
-            Vector3 direction = worldPoint - transform.position; // lineýn directioný
-            float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
-            float maxLength = 1.25f; // max line length
+            Vector3 direction = worldPoint - transform.position;
+            float lineLength = direction.magnitude;
+            float maxLength = 1.25f;
 
-            if (lineLength > maxLength) // maxla current length kýyasý
+            if (lineLength > maxLength)
             {
                 direction = direction.normalized * maxLength;
                 worldPoint = transform.position + direction;
@@ -210,20 +224,19 @@ public class Ball : MonoBehaviour
             Vector3[] positions = { transform.position, worldPoint };
             lineRenderer.SetPositions(positions);
 
-            for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
+            for (int i = 0; i < positions.Length; i++)
             {
-                positions[i].y = gameObject.transform.position.y+.02f; // lineýn y axisi fixleme
+                positions[i].y = gameObject.transform.position.y + 0.02f;
             }
 
-            lineRenderer.SetPositions(positions); // update positions
-            lineRenderer.enabled = true; // line visible
+            lineRenderer.SetPositions(positions);
+            lineRenderer.enabled = true;
             shootCloser = false;
         }
-        else 
+        else
         {
-            lineRenderer.enabled = false; // line visible}
+            lineRenderer.enabled = false;
         }
-        
     }
     private Vector3? CastMouseClickRay()
     {
@@ -237,10 +250,10 @@ public class Ball : MonoBehaviour
             Input.mousePosition.y,
             Camera.main.nearClipPlane
             );
-        Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar); 
-        Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear); 
+        Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
+        Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         RaycastHit hit;
-        
+
         if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
             return hit.point; // eðer ray bi þeye çarparsa return hit point
@@ -249,21 +262,21 @@ public class Ball : MonoBehaviour
         {
             return null; // eðer ray bi þeye çarpmazsa return null
         }
-        
+
     }
 
     private void Stop()
     {
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
-        isIdle = true; 
+        isIdle = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Hole"))
         {
-            
+
             if (view.IsMine)
             {
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
@@ -282,7 +295,7 @@ public class Ball : MonoBehaviour
 
         StartCoroutine(DelayCheck(1f));
     }
-    
+
     [PunRPC]
     private void NotifyConditionMet()
     {
@@ -312,4 +325,46 @@ public class Ball : MonoBehaviour
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
     }
+
+    // Other methods and MonoBehaviourPunCallbacks implementations...
+
+    [PunRPC]
+    private void TakeShotRPC()
+    {
+        // Shooting logic...
+        shotTaken = true;
+        isMyTurn = false;
+        photonView.RPC("EndTurnRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void EndTurnRPC()
+    {
+        
+        // Turn ending logic...
+        if (photonView.IsMine)
+        {
+            shotTaken = false;
+            // Calculate and set next active player's photonView.ViewID...
+            photonView.RPC("StartTurnRPC", RpcTarget.All, player.GetNext());
+        }
+    }
+
+    [PunRPC]
+    private void StartTurnRPC(int nextPlayerViewID)
+    {
+        isMyTurn = photonView.ViewID == nextPlayerViewID;
+    }
+
+    public void StartTurn()
+    {
+        photonView.RPC("StartTurnRPC", RpcTarget.All, photonView.ViewID);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        // Implement synchronization of variables...
+    }
 }
+
+
