@@ -59,7 +59,11 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                ProcessAim();
+                if (punTurnManager.IsOver)
+                {
+                    ProcessAim();
+                }
+                
             }
         }
         //Debug.Log(lineRenderer.GetPosition(1));
@@ -67,49 +71,53 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (isIdle)
+        if (punTurnManager.IsOver)
         {
-            isAiming = true;
-        }
-        if (shooted == true)
-        {
-            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            if (isIdle)
             {
-                mousePos = Input.mousePosition;
-                if (mousePos.x > Screen.width / 2)
-                {
-                    curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                    }
-                }
-                if (mousePos.x < Screen.width / 2)
-                {
-                    curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                    }
-                }
-
-                shootCloser = true;
-                Zoom.changeFovBool = false;
+                isAiming = true;
             }
+            if (shooted == true)
+            {
+                if (Input.GetMouseButtonDown(0) && shootCloser == false)
+                {
+                    mousePos = Input.mousePosition;
+                    if (mousePos.x > Screen.width / 2)
+                    {
+                        curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+                        if (mousePos.y > Screen.height / 2)
+                        {
+                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                            Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
+                        }
+                        if (mousePos.y < Screen.height / 2)
+                        {
+                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                            Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
+                        }
+                    }
+                    if (mousePos.x < Screen.width / 2)
+                    {
+                        curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+                        if (mousePos.y > Screen.height / 2)
+                        {
+                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                            Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+                        }
+                        if (mousePos.y < Screen.height / 2)
+                        {
+                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                            Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+                        }
+                    }
 
+                    shootCloser = true;
+                    Zoom.changeFovBool = false;
+                }
+
+            }
         }
+        
 
 
     }
