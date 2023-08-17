@@ -5,20 +5,17 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
-public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
+using PhotonHashTable = ExitGames.Client.Photon.Hashtable;
+public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
 {
     public static bool practice;
     public static bool versus;
     public static bool Tournament;
-    public TMP_InputField joinInput;
-    private string characters = "0123456789";
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
     public Button practiceBtn;
     public Button VersusBtn;
     public Button TournamentBtn;
-
-
     public void Start()
     {
         practice = false;
@@ -75,58 +72,40 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4;
     }
 
-    public void CreateRoom()
+    public void JoinRandomRoom()
     {
-
-        //practice = false;
-        //versus = false;
-        //Tournament = false;
-        //for (int i = 0; i < 6; i++)
-        //{
-        //    randomCreate += characters[Random.Range(0, characters.Length)];
-        //}
-        if (practice || versus || Tournament)
+        if (practice)
         {
-            randomCreate = GenerateRandomSixDigitNumber();
-            PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+            PhotonNetwork.JoinRandomRoom();
         }
-        else
+        else if (versus)
         {
-            //lütfen bi mod seçin pop up'ý
+            PhotonNetwork.JoinRandomRoom();
         }
-
-
+        else if (Tournament)
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
+        
+    }
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+        Debug.Log(message);
+        CreateAndJoinRoom();
+    }
+    void CreateAndJoinRoom()
+    {
+        randomCreate = GenerateRandomSixDigitNumber();
+        PhotonNetwork.CreateRoom(randomCreate, roomOptions);
     }
     private string GenerateRandomSixDigitNumber()
     {
         int randomNumber = Random.Range(100000, 1000000);
         return randomNumber.ToString();
     }
-    public void JoinRoom()
-    {
-        if (joinInput.text != "")
-        {
-            PhotonNetwork.JoinRoom(joinInput.text);
-        }
-        else
-        {
-            Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
-        }
-    }
     public override void OnJoinedRoom()
     {
-        //if (practice)
-        //{
-        //    PhotonNetwork.LoadLevel("Hole1");
-        //}
-        //else if (versus)
-        //{
-        //    PhotonNetwork.LoadLevel("Lobby");
-        //}
-        //else if (Tournament)
-        //{
-        //    PhotonNetwork.LoadLevel("Lobby");
-        //}
         PhotonNetwork.LoadLevel("Lobby");
     }
 }

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
 
-public class Ball : MonoBehaviour
+public class Ball : MonoBehaviour, IPunTurnManagerCallbacks
 {
     [SerializeField] private LineRenderer lineRenderer; // aim için line
     private bool isIdle; // top duruyor mu hareketli mi boolu
     private bool isAiming; // oyuncu aim halinde mi boolu
     [SerializeField] private float stopVelocity; // topun durmasý için min hýz
-    [SerializeField] private float shotPower; 
-    private Rigidbody rb; 
+    [SerializeField] private float shotPower;
+    private Rigidbody rb;
     public Camera cam;
     MoveAroundObject moveAroundObject;
     Zoom zoom;
@@ -20,14 +22,42 @@ public class Ball : MonoBehaviour
     public GameObject LineRenderer;
     public bool shootCloser;
     Vector3? worldPoint;
-    public Vector3 mousePos,upForce;
-    public float curveValue,forceValue;
+    public Vector3 mousePos, upForce;
+    public float curveValue, forceValue;
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    public static bool holeC;
+    PunTurnManager punTurnManager;
+    //public static bool holeC;
+    private bool _turn;
+    Player player;
+    public void OnTurnBegins(int turn)
+    {
+        _turn = true;
+    }
 
-    
+    public void OnTurnCompleted(int turn)
+    {
+        if (!_turn)
+        {
+            player.GetNext();
+        }
+    }
+
+    public void OnPlayerMove(Player player, int turn, object move)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPlayerFinished(Player player, int turn, object move)
+    {
+        player.GetNext();
+    }
+
+    public void OnTurnTimeEnds(int turn)
+    {
+        player.GetNext();
+    }
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -37,19 +67,17 @@ public class Ball : MonoBehaviour
         cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
         cam2.enabled = (false);
-        holeC = false;
-        //PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+        punTurnManager = gameObject.GetComponent<PunTurnManager>();
     }
     private void Awake()
     {
-        shootCloser=false;
-        rb = GetComponent<Rigidbody>(); 
-        isAiming = false; 
+        shootCloser = false;
+        rb = GetComponent<Rigidbody>();
+        isAiming = false;
         lineRenderer.enabled = false; // baþta line görünmemesi için
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
-        //Debug.Log(Screen.width / 2);
-        //Debug.Log(Screen.height / 2);
     }
 
     private void Update()
@@ -64,59 +92,56 @@ public class Ball : MonoBehaviour
         }
         //Debug.Log(lineRenderer.GetPosition(1));
         lineX = lineRenderer.GetPosition(1).x;
-
-
     }
-
     private void OnMouseDown()
     {
         if (isIdle)
+        {
+            isAiming = true;
+        }
+        if (shooted == true)
+        {
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
-                isAiming = true;
-            }
-            if (shooted == true)
-            {
-                if (Input.GetMouseButtonDown(0) && shootCloser == false)
+                mousePos = Input.mousePosition;
+                if (mousePos.x > Screen.width / 2)
                 {
-                    mousePos = Input.mousePosition;
-                    if (mousePos.x > Screen.width / 2)
+                    curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
                     {
-                        curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
-                        if (mousePos.y > Screen.height / 2)
-                        {
-                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                            Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                        }
-                        if (mousePos.y < Screen.height / 2)
-                        {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
-                            Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                        }
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
                     }
-                    if (mousePos.x < Screen.width / 2)
+                    if (mousePos.y < Screen.height / 2)
                     {
-                        curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
-                        if (mousePos.y > Screen.height / 2)
-                        {
-                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                            Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                        }
-                        if (mousePos.y < Screen.height / 2)
-                        {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.00162f;
-                            Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                        }
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
                     }
-
-                    shootCloser = true;
-                    Zoom.changeFovBool = false;
+                }
+                if (mousePos.x < Screen.width / 2)
+                {
+                    curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
+                    {
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+                    }
+                    if (mousePos.y < Screen.height / 2)
+                    {
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+                    }
                 }
 
+                shootCloser = true;
+                Zoom.changeFovBool = false;
             }
-        
-        
+
+        }
+
+
     }
-    
+
     private void ProcessAim()
     {
         if (!isAiming || !isIdle)
@@ -127,7 +152,7 @@ public class Ball : MonoBehaviour
         {
             worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
         }
-        
+
         if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
         {
             return; // exit method
@@ -147,7 +172,7 @@ public class Ball : MonoBehaviour
         {
             shooted = true;
             Zoom.changeFovBool = true;
-            
+
 
         }
         //OnMouseDown();
@@ -193,11 +218,11 @@ public class Ball : MonoBehaviour
                 break;
         }
         Vector3 finalDirection = upForce + direction + curveAmount * curveVector;
-        
+
         rb.AddForce(-finalDirection * force);
         isIdle = false;
         shooted = false;
-        
+
     }
 
     private void DrawLine(Vector3 worldPoint)
@@ -206,7 +231,7 @@ public class Ball : MonoBehaviour
         {
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
-            float maxLength = 1f; // max line length
+            float maxLength = 1.25f; // max line length
 
             if (lineLength > maxLength) // maxla current length kýyasý
             {
@@ -219,18 +244,18 @@ public class Ball : MonoBehaviour
 
             for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
             {
-                positions[i].y = gameObject.transform.position.y+.02f; // lineýn y axisi fixleme
+                positions[i].y = gameObject.transform.position.y + .02f; // lineýn y axisi fixleme
             }
 
             lineRenderer.SetPositions(positions); // update positions
             lineRenderer.enabled = true; // line visible
             shootCloser = false;
         }
-        else 
+        else
         {
             lineRenderer.enabled = false; // line visible}
         }
-        
+
     }
     private Vector3? CastMouseClickRay()
     {
@@ -244,10 +269,10 @@ public class Ball : MonoBehaviour
             Input.mousePosition.y,
             Camera.main.nearClipPlane
             );
-        Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar); 
-        Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear); 
+        Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
+        Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         RaycastHit hit;
-        
+
         if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
             return hit.point; // eðer ray bi þeye çarparsa return hit point
@@ -256,23 +281,26 @@ public class Ball : MonoBehaviour
         {
             return null; // eðer ray bi þeye çarpmazsa return null
         }
-        
+
     }
 
     private void Stop()
     {
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
-        isIdle = true; 
+        isIdle = true;
+        _turn = false;
+        //punTurnManager.BeginTurn();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Hole"))
         {
+
             if (view.IsMine)
             {
-                holeC = true;
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
@@ -285,21 +313,9 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
-        bool allPlayersReady = true;
-        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
-        {
-            if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
-            {
-                allPlayersReady = false;
-                break;
-            }
-        }
-        if (allPlayersReady)
-        {
-            view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
-        }
+
+        StartCoroutine(DelayCheck(1f));
     }
-    
 
     [PunRPC]
     private void NotifyConditionMet()
@@ -313,5 +329,23 @@ public class Ball : MonoBehaviour
         //PhotonNetwork.Destroy(gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    private IEnumerator DelayCheck(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        bool allPlayersReady = true;
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
+            {
+                allPlayersReady = false;
+                break;
+            }
+        }
+        if (allPlayersReady)
+        {
+            view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
+        }
+    }
 
+    
 }

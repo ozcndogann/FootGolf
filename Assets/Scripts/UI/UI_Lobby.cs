@@ -23,9 +23,34 @@ public class UI_Lobby : MonoBehaviour
             StartButton.SetActive(false);
         }
     }
+    private void Update()
+    {
+        
+        if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRooms.versus)
+        {
+            //eksik kisi ui
+            Debug.Log("eksik kisi");
+        }
+        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRooms.Tournament)
+        {
+            //eksik kisi
+            Debug.Log("eksik kisi");
+        }
+    }
     public void StartGame()
     {
         //buraya sahalarýn türlerine göre if state gelcek
-        PhotonNetwork.LoadLevel("Hole1");
+        if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRooms.practice)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
+        else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRooms.versus)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
+        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRooms.Tournament)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
     }
 }

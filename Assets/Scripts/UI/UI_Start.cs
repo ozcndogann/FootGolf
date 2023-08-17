@@ -9,5 +9,8 @@ public class UI_Start : MonoBehaviour
     {
         SceneManager.LoadScene("UIGameSelect");
     }
-
+    public void QuickMatch()
+    {
+        SceneManager.LoadScene("UIRandomGameSelect");
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.UI;
 public class UI_GameSelection : MonoBehaviour
 {
     bool practice;
@@ -15,17 +16,47 @@ public class UI_GameSelection : MonoBehaviour
     private string characters = "0123456789";
     private string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
+    public Button practiceBtn;
+    public Button VersusBtn;
+    public Button TournamentBtn;
     public void Start()
     {
         practice = false;
         versus = false;
         Tournament = false;
     }
+    public void Update()
+    {
+        if (practice)
+        {
+            practiceBtn.animator.SetBool("Selected",true);
+            VersusBtn.animator.SetBool("Selected", false);
+            TournamentBtn.animator.SetBool("Selected", false);
+        }
+        else if (versus)
+        {
+            VersusBtn.animator.SetBool("Selected", true);
+            practiceBtn.animator.SetBool("Selected", false);
+            TournamentBtn.animator.SetBool("Selected", false);
+        }
+        else if (Tournament)
+        {
+            TournamentBtn.animator.SetBool("Selected", true);
+            practiceBtn.animator.SetBool("Selected", false);
+            VersusBtn.animator.SetBool("Selected", false);
+        }
+    }
     public void IsPractice()
     {
         practice = true;
-        versus = false;
-        Tournament = false;
+        if (practice == true)
+        {
+            versus = false;
+            Tournament = false;
+        }
+
+        
+        
 
     }
     public void IsVersus()
@@ -88,4 +119,5 @@ public class UI_GameSelection : MonoBehaviour
             Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
         }
     }
+   
 }
