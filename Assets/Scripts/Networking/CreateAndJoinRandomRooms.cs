@@ -5,6 +5,7 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using PhotonHashTable = ExitGames.Client.Photon.Hashtable;
 public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
 {
     public static bool practice;
@@ -15,8 +16,6 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public Button practiceBtn;
     public Button VersusBtn;
     public Button TournamentBtn;
-
-
     public void Start()
     {
         practice = false;
@@ -100,20 +99,6 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         randomCreate = GenerateRandomSixDigitNumber();
         PhotonNetwork.CreateRoom(randomCreate, roomOptions);
     }
-    //public void CreateRoom()
-    //{
-    //    if (practice || versus || Tournament)
-    //    {
-    //        randomCreate = GenerateRandomSixDigitNumber();
-    //        PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-    //    }
-    //    else
-    //    {
-    //        //lütfen bi mod seçin pop up'ý
-    //    }
-
-
-    //}
     private string GenerateRandomSixDigitNumber()
     {
         int randomNumber = Random.Range(100000, 1000000);
@@ -121,22 +106,6 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        //if (practice)
-        //{
-        //    PhotonNetwork.LoadLevel("Hole1");
-        //}
-        //else if (versus)
-        //{
-        //    PhotonNetwork.LoadLevel("Lobby");
-        //}
-        //else if (Tournament)
-        //{
-        //    PhotonNetwork.LoadLevel("Lobby");
-        //}
         PhotonNetwork.LoadLevel("Lobby");
     }
-    //public override void OnPlayerEnteredRoom(Player newPlayer)
-    //{
-    //    base.OnPlayerEnteredRoom(newPlayer);
-    //}
 }
