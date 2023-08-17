@@ -260,7 +260,7 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        punTurnManager.BeginTurn();
+        //punTurnManager.BeginTurn();
     }
 
     private void OnTriggerEnter(Collider other)
