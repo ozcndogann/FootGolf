@@ -46,7 +46,7 @@ public class Ball : MonoBehaviour
         
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.IsMasterClient)
+            if (player.ActorNumber == 0)
             {
                 punTurnManager.BeginTurn();
             }
