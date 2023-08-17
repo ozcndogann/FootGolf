@@ -5,8 +5,9 @@ using UnityEngine;
 public class TeleportTrigger : MonoBehaviour
 {
     private Rigidbody ballRigidbody;
-    public float teleportDistance = 2.0f; // Distance from the wall where the ball will be teleported
-    public LayerMask teleportLayerMask; // Layer mask to specify where the ball can be teleported
+    public float teleportDistance = 2.0f; // teleport noktasýnýn duvardan uzaklýðýný belirliyoruz (hala iþe yaramasýný saðlayamadým) 
+    public LayerMask teleportLayerMask; // teleport noktasý için zemin layerini seçmek
+    public GameObject teleportDestination; // teleport destination diye bir empty gameobjectimiz var
 
     private void Start()
     {
@@ -17,24 +18,31 @@ public class TeleportTrigger : MonoBehaviour
     {
         if (other.CompareTag("Ball"))
         {
-            // Calculate the teleportation position (from the wall towards the trigger point)
-            Vector3 wallPosition = transform.position;
-            Vector3 triggerPoint = other.ClosestPoint(wallPosition);
-            Vector3 teleportDirection = wallPosition - triggerPoint; // Reverse the direction
-            Vector3 newPosition = triggerPoint + teleportDirection.normalized * teleportDistance;
+            // teleport destinasyon objesinin collider boundlarý
+            Bounds destinationBounds = teleportDestination.GetComponent<Collider>().bounds;
 
-            // Cast a ray downwards to find the ground position
-            Ray ray = new Ray(newPosition + Vector3.up * 10, Vector3.down); // Start slightly above to avoid hitting itself
+            // destinasyon objesi ile duvar trigger noktasý arasý en yakýn nokta
+            Vector3 closestPoint = destinationBounds.ClosestPoint(other.gameObject.transform.position);
+
+            // teleport yönünü duvar'dan closestpoint'e doðru çevirme
+            Vector3 teleportDirection = transform.position - closestPoint;
+            teleportDirection.y = 0; // dikey yönü almýyoruz, y sini sonra ayarlýcaz zemine göre
+            teleportDirection.Normalize();
+
+            // destinasyon objesinde sectigimiz closest noktaya göre teleport noktasý belirleme
+            Vector3 newPosition = closestPoint + teleportDirection * teleportDistance;
+
+            // toptan aþaðý ray atýyoruz zemini bulmak için
+            Ray ray = new Ray(newPosition + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, teleportLayerMask))
             {
-                newPosition.y = hit.point.y+ 0.2f; // Set the teleport position to the ground height
+                newPosition.y = hit.point.y + 0.2f; // teleport noktasýnýn y'sini zemin y'sine göre ayarlýyoruz (+0.2f zeminin içine ýþýnlanmasýn diye)
             }
 
-            // Teleport the ball to the new position
-            ballRigidbody.velocity = Vector3.zero; // Stop the ball's velocity
-            other.transform.position = newPosition;
+            ballRigidbody.velocity = Vector3.zero; // harekete devam etmesin diye hýzý sýfýrlýyoruz
+            other.transform.position = newPosition; // topu teleport ediyoruz o noktaya
         }
     }
 }
