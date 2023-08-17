@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
 
-public class Ball : MonoBehaviour, IPunTurnManagerCallbacks
+public class Ball : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer; // aim için line
     private bool isIdle; // top duruyor mu hareketli mi boolu
@@ -29,35 +29,7 @@ public class Ball : MonoBehaviour, IPunTurnManagerCallbacks
     public PhotonView view;
     PunTurnManager punTurnManager;
     //public static bool holeC;
-    private bool _turn;
-    Player player;
-    public void OnTurnBegins(int turn)
-    {
-        _turn = true;
-    }
-
-    public void OnTurnCompleted(int turn)
-    {
-        if (!_turn)
-        {
-            player.GetNext();
-        }
-    }
-
-    public void OnPlayerMove(Player player, int turn, object move)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnPlayerFinished(Player player, int turn, object move)
-    {
-        player.GetNext();
-    }
-
-    public void OnTurnTimeEnds(int turn)
-    {
-        player.GetNext();
-    }
+    
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -289,7 +261,6 @@ public class Ball : MonoBehaviour, IPunTurnManagerCallbacks
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        _turn = false;
         //punTurnManager.BeginTurn();
     }
 

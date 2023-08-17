@@ -76,17 +76,20 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     {
         if (practice)
         {
-            PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.JoinRandomRoom(null ,1);
         }
         else if (versus)
         {
-            PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.JoinRandomRoom(null, 2);
         }
         else if (Tournament)
         {
-            PhotonNetwork.JoinRandomRoom();
+            PhotonNetwork.JoinRandomRoom(null, 4);
         }
-        
+        else
+        {
+            Debug.Log("bi mod seç");
+        }
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
