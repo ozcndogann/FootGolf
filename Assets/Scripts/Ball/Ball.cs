@@ -43,13 +43,17 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
-        
-        foreach (Player player in PhotonNetwork.PlayerList)
+
+        //foreach (Player player in PhotonNetwork.PlayerList)
+        //{
+        //    if (player.ActorNumber == 0)
+        //    {
+        //        punTurnManager.BeginTurn();
+        //    }
+        //}
+        if (player.IsMasterClient)
         {
-            if (player.ActorNumber == 0)
-            {
-                punTurnManager.BeginTurn();
-            }
+            punTurnManager.BeginTurn();
         }
     }
     private void Awake()
