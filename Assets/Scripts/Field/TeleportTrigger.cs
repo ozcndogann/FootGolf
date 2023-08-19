@@ -14,6 +14,7 @@ public class TeleportTrigger : MonoBehaviour
         ballRigidbody = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ball"))
@@ -43,6 +44,7 @@ public class TeleportTrigger : MonoBehaviour
 
             ballRigidbody.velocity = Vector3.zero; // harekete devam etmesin diye hýzý sýfýrlýyoruz
             other.transform.position = newPosition; // topu teleport ediyoruz o noktaya
+
         }
     }
 }
