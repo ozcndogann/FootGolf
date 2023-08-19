@@ -44,16 +44,12 @@ public class Ball : MonoBehaviour
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
 
-        //foreach (Player player in PhotonNetwork.PlayerList)
-        //{
-        //    if (player.ActorNumber == 0)
-        //    {
-        //        punTurnManager.BeginTurn();
-        //    }
-        //}
-        if (player.IsMasterClient)
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
-            punTurnManager.BeginTurn();
+            if (player.IsMasterClient)
+            {
+                punTurnManager.BeginTurn();
+            }
         }
     }
     private void Awake()
@@ -81,6 +77,7 @@ public class Ball : MonoBehaviour
         }
         //Debug.Log(lineRenderer.GetPosition(1));
         lineX = lineRenderer.GetPosition(1).x;
+        Debug.Log(PhotonNetwork.CurrentRoom.GetTurn());
     }
     private void OnMouseDown()
     {
@@ -130,7 +127,7 @@ public class Ball : MonoBehaviour
 
             }
         }
-        
+        punTurnManager.BeginTurn();
 
 
     }
@@ -169,6 +166,7 @@ public class Ball : MonoBehaviour
 
         }
         //OnMouseDown();
+       
     }
 
     public enum CurveDirection
