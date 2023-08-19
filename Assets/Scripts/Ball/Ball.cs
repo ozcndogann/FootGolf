@@ -123,11 +123,12 @@ public class Ball : MonoBehaviour
 
                     shootCloser = true;
                     Zoom.changeFovBool = false;
+                    punTurnManager.BeginTurn();
                 }
 
             }
         }
-        punTurnManager.BeginTurn();
+        
 
 
     }
