@@ -74,10 +74,11 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-                {
-                    ProcessAim();
-                }
+                ProcessAim();
+                //if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                //{
+                //    ProcessAim();
+                //}
                 //foreach (Player player in PhotonNetwork.PlayerList)
                 //{
                 //    if ((bool)player.CustomProperties["turn"])
@@ -130,8 +131,8 @@ public class Ball : MonoBehaviour
                         Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
                     }
                 }
-                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                //player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                //player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 shootCloser = true;
                 Zoom.changeFovBool = false;
                 
