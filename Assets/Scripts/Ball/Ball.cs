@@ -43,7 +43,7 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
-
+        player = PhotonNetwork.LocalPlayer;
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (player.IsMasterClient)
@@ -71,17 +71,19 @@ public class Ball : MonoBehaviour
             {
                 Stop();
                 //ProcessAim();
-                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+
+                foreach (Player player in PhotonNetwork.PlayerList)
                 {
-                    ProcessAim();
+                    if (player.CustomProperties["turn"] != null)
+                    {
+                        if ((bool)player.CustomProperties["turn"])
+                        {
+                            Debug.Log("ananýnamý");
+                            ProcessAim();
+                        }
+                    }
+                    
                 }
-                //foreach (Player player in PhotonNetwork.PlayerList)
-                //{
-                //    if ((bool)player.CustomProperties["turn"])
-                //    {
-                //        ProcessAim();
-                //    }
-                //}
             }
         }
         //Debug.Log(lineRenderer.GetPosition(1));
@@ -130,13 +132,14 @@ public class Ball : MonoBehaviour
                 
                 shootCloser = true;
                 Zoom.changeFovBool = false;
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
 
         }
     }
-
+    
     private void ProcessAim()
     {
         if (!isAiming || !isIdle)

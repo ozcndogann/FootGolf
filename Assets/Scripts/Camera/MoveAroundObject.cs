@@ -62,14 +62,14 @@ public class MoveAroundObject : MonoBehaviour
             if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole")
             {
                 passHit = hit.transform.gameObject;
-                passHit.gameObject.SetActive(false);
+                passHit.SetActive(false);
             }
 
         }
-        if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
-        {
-            passHit.gameObject.SetActive(true);
-        }
+        //if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        //{
+        //    passHit.SetActive(true);
+        //}
         else
         {
             
