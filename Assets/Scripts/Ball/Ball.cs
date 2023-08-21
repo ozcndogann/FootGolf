@@ -50,10 +50,6 @@ public class Ball : MonoBehaviour
             {
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
-            else
-            {
-                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-            }
         }
     }
     private void Awake()
@@ -74,11 +70,11 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                ProcessAim();
-                //if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-                //{
-                //    ProcessAim();
-                //}
+                //ProcessAim();
+                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                {
+                    ProcessAim();
+                }
                 //foreach (Player player in PhotonNetwork.PlayerList)
                 //{
                 //    if ((bool)player.CustomProperties["turn"])
@@ -89,8 +85,8 @@ public class Ball : MonoBehaviour
             }
         }
         //Debug.Log(lineRenderer.GetPosition(1));
-        lineX = lineRenderer.GetPosition(1).x;
-        Debug.Log(PhotonNetwork.CurrentRoom.GetTurn());
+        //lineX = lineRenderer.GetPosition(1).x;
+        //Debug.Log(PhotonNetwork.CurrentRoom.GetTurn());
     }
     private void OnMouseDown()
     {
@@ -131,11 +127,11 @@ public class Ball : MonoBehaviour
                         Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
                     }
                 }
-                //player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                //player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                
                 shootCloser = true;
                 Zoom.changeFovBool = false;
-                
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
 
         }
