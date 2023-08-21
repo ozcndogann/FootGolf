@@ -126,6 +126,8 @@ public class Ball : MonoBehaviour
 
                 shootCloser = true;
                 Zoom.changeFovBool = false;
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
 
         }
@@ -161,10 +163,8 @@ public class Ball : MonoBehaviour
         {
             shooted = true;
             Zoom.changeFovBool = true;
-
-
         }
-        player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        
     }
 
     public enum CurveDirection
@@ -278,7 +278,6 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
     }
 
     private void OnTriggerEnter(Collider other)
