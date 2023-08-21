@@ -43,12 +43,13 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
-        player = PhotonNetwork.LocalPlayer;
         foreach (Player player in PhotonNetwork.PlayerList)
         {
+            
             if (player.IsMasterClient)
             {
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+
             }
         }
     }
@@ -78,7 +79,7 @@ public class Ball : MonoBehaviour
                     {
                         if ((bool)player.CustomProperties["turn"])
                         {
-                            Debug.Log("ananýnamý");
+                            Debug.Log("ananýnamý" + (bool)player.CustomProperties["turn"]);
                             ProcessAim();
                         }
                     }
