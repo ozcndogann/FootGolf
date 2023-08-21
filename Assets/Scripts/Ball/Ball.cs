@@ -48,7 +48,11 @@ public class Ball : MonoBehaviour
         {
             if (player.IsMasterClient)
             {
-                punTurnManager.BeginTurn();
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            }
+            else
+            {
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
     }
@@ -64,12 +68,13 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        
         if (view.IsMine)
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                if (!punTurnManager.IsOver)
+                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                 {
                     ProcessAim();
                 }
@@ -81,56 +86,49 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (!punTurnManager.IsOver)
+        if (isIdle)
         {
-            if (isIdle)
+            isAiming = true;
+        }
+        if (shooted == true)
+        {
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
-                isAiming = true;
-            }
-            if (shooted == true)
-            {
-                if (Input.GetMouseButtonDown(0) && shootCloser == false)
+                mousePos = Input.mousePosition;
+                if (mousePos.x > Screen.width / 2)
                 {
-                    mousePos = Input.mousePosition;
-                    if (mousePos.x > Screen.width / 2)
+                    curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
                     {
-                        curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
-                        if (mousePos.y > Screen.height / 2)
-                        {
-                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                            Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                        }
-                        if (mousePos.y < Screen.height / 2)
-                        {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                            Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                        }
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
                     }
-                    if (mousePos.x < Screen.width / 2)
+                    if (mousePos.y < Screen.height / 2)
                     {
-                        curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
-                        if (mousePos.y > Screen.height / 2)
-                        {
-                            forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                            Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                        }
-                        if (mousePos.y < Screen.height / 2)
-                        {
-                            forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                            Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                        }
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
                     }
-
-                    shootCloser = true;
-                    Zoom.changeFovBool = false;
-                    punTurnManager.BeginTurn();
+                }
+                if (mousePos.x < Screen.width / 2)
+                {
+                    curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
+                    {
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+                    }
+                    if (mousePos.y < Screen.height / 2)
+                    {
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+                    }
                 }
 
+                shootCloser = true;
+                Zoom.changeFovBool = false;
             }
+
         }
-        
-
-
     }
 
     private void ProcessAim()
@@ -166,8 +164,7 @@ public class Ball : MonoBehaviour
 
 
         }
-        //OnMouseDown();
-       
+        player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
     }
 
     public enum CurveDirection
@@ -281,6 +278,7 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
+        player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
     }
 
     private void OnTriggerEnter(Collider other)
