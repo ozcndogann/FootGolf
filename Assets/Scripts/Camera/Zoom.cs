@@ -58,6 +58,7 @@ public class Zoom : MonoBehaviour
             if (currentFOV > zoomInFOV)//check if current FOV is grater than the Zoomed in FOV input and increment the FOV smoothly
             {
                 Camera.main.fieldOfView += (-smooth * Time.deltaTime);
+                ballObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
             else
             {
