@@ -5,9 +5,11 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+
 using PhotonHashTable = ExitGames.Client.Photon.Hashtable;
 public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
 {
+   
     public static bool practice;
     public static bool versus;
     public static bool Tournament;
@@ -16,6 +18,8 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public Button practiceBtn;
     public Button VersusBtn;
     public Button TournamentBtn;
+    
+
     public void Start()
     {
         practice = false;
@@ -111,4 +115,5 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LoadLevel("Lobby");
     }
+    
 }

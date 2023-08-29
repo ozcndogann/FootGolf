@@ -20,6 +20,7 @@ public class Vortex : MonoBehaviour
             Vector3 normal = other.transform.position - vortexCollider.bounds.center;
             normal.y = Mathf.Abs(normal.y);
             other.attachedRigidbody.AddForce(0,-normal.y * VortexForce,0);
+            other.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
     }
 }
