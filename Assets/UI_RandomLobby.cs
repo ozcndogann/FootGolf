@@ -12,6 +12,8 @@ public class UI_RandomLobby : MonoBehaviour
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+
+        StartRandomGame();
         //if (PhotonNetwork.IsMasterClient)
         //{
         //    StartButton.SetActive(true);
@@ -33,7 +35,6 @@ public class UI_RandomLobby : MonoBehaviour
             //eksik kisi
             Debug.Log("eksik kisi");
         }
-        StartRandomGame();
     }
 
     public void StartRandomGame()
