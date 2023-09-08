@@ -34,28 +34,13 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else
         {
-            StartRandomGame();
+            StartCoroutine(MyCoroutine());
         }
     }
 
     public void StartRandomGame()
     {
-        //buraya sahalarýn türlerine göre if state gelcek
-        if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRandomRooms.practice)
-        {
-            StartCoroutine(MyCoroutine());
-            PhotonNetwork.LoadLevel("Hole1");
-        }
-        else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRandomRooms.versus)
-        {
-            StartCoroutine(MyCoroutine());
-            PhotonNetwork.LoadLevel("Hole1");
-        }
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
-        {
-            StartCoroutine(MyCoroutine());
-            PhotonNetwork.LoadLevel("Hole1");
-        }
+        
     }
 
     IEnumerator MyCoroutine()
@@ -63,5 +48,22 @@ public class UI_RandomLobby : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
 
         Debug.Log("Two seconds have passed.");
+
+        //buraya sahalarýn türlerine göre if state gelcek
+        if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRandomRooms.practice)
+        {
+            //StartCoroutine(MyCoroutine());
+            PhotonNetwork.LoadLevel("Hole1");
+        }
+        else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRandomRooms.versus)
+        {
+            //StartCoroutine(MyCoroutine());
+            PhotonNetwork.LoadLevel("Hole1");
+        }
+        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        {
+            //StartCoroutine(MyCoroutine());
+            PhotonNetwork.LoadLevel("Hole1");
+        }
     }
 }
