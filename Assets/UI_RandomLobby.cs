@@ -7,19 +7,19 @@ using UnityEngine.UI;
 
 public class UI_RandomLobby : MonoBehaviour
 {
-    [SerializeField] private GameObject StartButton;
+    //[SerializeField] private GameObject StartButton;
 
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        if (PhotonNetwork.IsMasterClient)
-        {
-            StartButton.SetActive(true);
-        }
-        else
-        {
-            StartButton.SetActive(false);
-        }
+        //if (PhotonNetwork.IsMasterClient)
+        //{
+        //    StartButton.SetActive(true);
+        //}
+        //else
+        //{
+        //    StartButton.SetActive(false);
+        //}
     }
     private void Update()
     {
@@ -33,6 +33,7 @@ public class UI_RandomLobby : MonoBehaviour
             //eksik kisi
             Debug.Log("eksik kisi");
         }
+        StartRandomGame();
     }
 
     public void StartRandomGame()
@@ -40,17 +41,25 @@ public class UI_RandomLobby : MonoBehaviour
         //buraya sahalarýn türlerine göre if state gelcek
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRandomRooms.practice)
         {
-            Debug.Log("önce");
+            StartCoroutine(MyCoroutine());
             PhotonNetwork.LoadLevel("Hole1");
-            Debug.Log("sonra");
         }
         else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRandomRooms.versus)
         {
+            StartCoroutine(MyCoroutine());
             PhotonNetwork.LoadLevel("Hole1");
         }
         else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
         {
+            StartCoroutine(MyCoroutine());
             PhotonNetwork.LoadLevel("Hole1");
         }
+    }
+
+    IEnumerator MyCoroutine()
+    {
+        yield return new WaitForSeconds(2.0f);
+
+        Debug.Log("Two seconds have passed.");
     }
 }
