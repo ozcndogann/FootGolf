@@ -79,7 +79,7 @@ public class Ball : MonoBehaviour
                 //    {
                 //        if ((bool)player.CustomProperties["turn"])
                 //        {
-                //            Debug.Log("ananýnamý" + (bool)player.CustomProperties["turn"]);
+                            
                 //            ProcessAim();
                 //        }
                 //    }
