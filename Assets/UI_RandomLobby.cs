@@ -8,12 +8,9 @@ using UnityEngine.UI;
 public class UI_RandomLobby : MonoBehaviour
 {
     //[SerializeField] private GameObject StartButton;
-
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-
-        StartRandomGame();
         //if (PhotonNetwork.IsMasterClient)
         //{
         //    StartButton.SetActive(true);
@@ -34,6 +31,10 @@ public class UI_RandomLobby : MonoBehaviour
         {
             //eksik kisi
             Debug.Log("eksik kisi");
+        }
+        else
+        {
+            StartRandomGame();
         }
     }
 
