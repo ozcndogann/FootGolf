@@ -4,13 +4,16 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine.UI;
+using Photon.Realtime;
 
 public class UI_RandomLobby : MonoBehaviour
 {
-    //[SerializeField] private GameObject StartButton;
+    private GameObject ball;
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        ball = GameObject.FindGameObjectWithTag("Ball");
+        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "isReady", false } });
         //if (PhotonNetwork.IsMasterClient)
         //{
         //    StartButton.SetActive(true);
@@ -34,21 +37,27 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else
         {
-            StartCoroutine(MyCoroutine());
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "isReady", true } });
         }
     }
 
-    public void StartRandomGame()
+   
+    private void CheckAllPlayers()
     {
-        
+
+        StartCoroutine(DelayCheck(1f));
     }
 
-    IEnumerator MyCoroutine()
+    [PunRPC]
+    private void NotifyConditionMet()
     {
-        yield return new WaitForSeconds(2.0f);
+        StartCoroutine(LoadNextSceneWithDelay(1f));
+    }
 
-        Debug.Log("Two seconds have passed.");
-
+    private IEnumerator LoadNextSceneWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        //PhotonNetwork.Destroy(gameObject);
         //buraya sahalarýn türlerine göre if state gelcek
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRandomRooms.practice)
         {
@@ -64,6 +73,23 @@ public class UI_RandomLobby : MonoBehaviour
         {
             //StartCoroutine(MyCoroutine());
             PhotonNetwork.LoadLevel("Hole1");
+        }
+    }
+    private IEnumerator DelayCheck(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        bool allPlayersReady = true;
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (!(bool)player.CustomProperties["isReady"])// holeC false mu check
+            {
+                allPlayersReady = false;
+                break;
+            }
+        }
+        if (allPlayersReady)
+        {
+            ball.GetComponent<PhotonView>().RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
     }
 }
