@@ -53,14 +53,14 @@ public class UI_RandomLobby : MonoBehaviour
             if (!canStart && PhotonNetwork.IsMasterClient)
             {
                 canStart = true;
-                StartCoroutine(MyCoroutine());
+                StartCoroutine(WaitForStart());
             }
         }
         
     }
-    IEnumerator MyCoroutine()
+    IEnumerator WaitForStart()
     {
-        yield return new WaitForSeconds(2.0f); // Pause for 2 seconds
+        yield return new WaitForSeconds(3.0f); 
         StartRandomGame();
     }
     public void StartRandomGame()
