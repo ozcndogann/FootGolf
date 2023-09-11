@@ -11,8 +11,21 @@ public class UI_RandomLobby : MonoBehaviour
 
     private void Start()
     {
-        PhotonNetwork.SetMasterClient(PhotonNetwork.CurrentRoom.GetPlayer(1));
         PhotonNetwork.AutomaticallySyncScene = true;
+        if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
+        {
+            //eksik kisi ui
+            Debug.Log("eksik kisi");
+        }
+        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        {
+            //eksik kisi
+            Debug.Log("eksik kisi");
+        }
+        else
+        {
+            StartRandomGame();
+        }
         //if (PhotonNetwork.IsMasterClient)
         //{
         //    StartButton.SetActive(true);
@@ -37,14 +50,6 @@ public class UI_RandomLobby : MonoBehaviour
         else
         {
             //
-        }
-        if (PhotonNetwork.IsMasterClient)
-        {
-            StartButton.SetActive(true);
-        }
-        else
-        {
-            StartButton.SetActive(false);
         }
     }
 
