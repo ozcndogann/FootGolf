@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UI_RandomLobby : MonoBehaviour
 {
     [SerializeField] private GameObject StartButton;
+    private bool canStart;
 
     private void Start()
     {
@@ -24,7 +25,7 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else
         {
-            StartRandomGame();
+            canStart = true;
         }
         //if (PhotonNetwork.IsMasterClient)
         //{
@@ -50,6 +51,11 @@ public class UI_RandomLobby : MonoBehaviour
         else
         {
             //
+        }
+        if (canStart)
+        {
+            StartRandomGame();
+            canStart = false;
         }
     }
 
