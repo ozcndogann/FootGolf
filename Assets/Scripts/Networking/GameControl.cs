@@ -33,7 +33,7 @@ public class GameControl : MonoBehaviour
     public void ReturnToManu()
     {
         PhotonNetwork.LeaveRoom();
-        //PhotonNetwork.LoadLevel("MainMenu");
+        PhotonNetwork.LoadLevel("MainMenu");
         SceneManager.LoadScene("MainMenu");
     }
 }

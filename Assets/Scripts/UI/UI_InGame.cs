@@ -8,6 +8,7 @@ using Photon.Pun;
 public class UI_InGame : MonoBehaviour
 {
     [SerializeField] public TMP_Text codeText;
+    public GameObject ReturnPanel;
     
     public void Start()
     {
@@ -24,6 +25,25 @@ public class UI_InGame : MonoBehaviour
         else if (CreateAndJoinRooms.Tournament)
         {
             codeText.enabled = true;
+        }
+    }
+    private void Update()
+    {
+        if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
+        {
+            //eksik kisi ui
+            Debug.Log("eksik kisi");
+            ReturnPanel.SetActive(true);
+        }
+        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        {
+            //eksik kisi
+            Debug.Log("eksik kisi");
+            ReturnPanel.SetActive(true);
+        }
+        else
+        {
+            ReturnPanel.SetActive(false);
         }
     }
     public void MainMenu()
