@@ -52,10 +52,10 @@ public class UI_RandomLobby : MonoBehaviour
         {
             //
         }
-        if (canStart)
+        if (canStart && PhotonNetwork.IsMasterClient)
         {
+            canStart = true;
             StartRandomGame();
-            canStart = false;
         }
     }
 
