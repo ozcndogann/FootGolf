@@ -53,12 +53,16 @@ public class UI_RandomLobby : MonoBehaviour
             if (!canStart && PhotonNetwork.IsMasterClient)
             {
                 canStart = true;
-                StartRandomGame();
+                StartCoroutine(MyCoroutine());
             }
         }
         
     }
-
+    IEnumerator MyCoroutine()
+    {
+        yield return new WaitForSeconds(2.0f); // Pause for 2 seconds
+        StartRandomGame();
+    }
     public void StartRandomGame()
     {
         //buraya sahalarýn türlerine göre if state gelcek
@@ -75,6 +79,7 @@ public class UI_RandomLobby : MonoBehaviour
             PhotonNetwork.LoadLevel("Hole1");
         }
     }
+    
 }
 
 
