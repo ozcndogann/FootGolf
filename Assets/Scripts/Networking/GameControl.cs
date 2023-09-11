@@ -16,11 +16,13 @@ public class GameControl : MonoBehaviour
         {
             //eksik kisi ui
             Debug.Log("eksik kisi");
+            WaitForStart();
         }
         else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
         {
             //eksik kisi
             Debug.Log("eksik kisi");
+            WaitForStart();
         }
     }
     IEnumerator WaitForStart()
@@ -31,6 +33,7 @@ public class GameControl : MonoBehaviour
     public void ReturnToManu()
     {
         PhotonNetwork.LeaveRoom();
-        SceneManager.LoadScene("MainMenu");
+        PhotonNetwork.LoadLevel("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
     }
 }
