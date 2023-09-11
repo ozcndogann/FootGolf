@@ -13,14 +13,14 @@ public class UI_RandomLobby : MonoBehaviour
     {
         PhotonNetwork.SetMasterClient(PhotonNetwork.CurrentRoom.GetPlayer(1));
         PhotonNetwork.AutomaticallySyncScene = true;
-        if (PhotonNetwork.IsMasterClient)
-        {
-            StartButton.SetActive(true);
-        }
-        else
-        {
-            StartButton.SetActive(false);
-        }
+        //if (PhotonNetwork.IsMasterClient)
+        //{
+        //    StartButton.SetActive(true);
+        //}
+        //else
+        //{
+        //    StartButton.SetActive(false);
+        //}
     }
     private void Update()
     {
@@ -37,6 +37,14 @@ public class UI_RandomLobby : MonoBehaviour
         else
         {
             //
+        }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartButton.SetActive(true);
+        }
+        else
+        {
+            StartButton.SetActive(false);
         }
     }
 
