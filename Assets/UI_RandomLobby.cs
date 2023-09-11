@@ -25,7 +25,7 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else
         {
-            canStart = true;
+            canStart = false;
         }
         //if (PhotonNetwork.IsMasterClient)
         //{
@@ -50,13 +50,13 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else
         {
-            //
+            if (!canStart && PhotonNetwork.IsMasterClient)
+            {
+                canStart = true;
+                StartRandomGame();
+            }
         }
-        if (canStart && PhotonNetwork.IsMasterClient)
-        {
-            canStart = true;
-            StartRandomGame();
-        }
+        
     }
 
     public void StartRandomGame()
