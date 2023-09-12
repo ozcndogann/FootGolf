@@ -90,6 +90,7 @@ public class Ball : MonoBehaviour
         //Debug.Log(lineRenderer.GetPosition(1));
         //lineX = lineRenderer.GetPosition(1).x;
         //Debug.Log(PhotonNetwork.CurrentRoom.GetTurn());
+        Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
     }
     private void OnMouseDown()
     {
@@ -134,8 +135,8 @@ public class Ball : MonoBehaviour
                 shootCloser = true;
                 Zoom.changeFovBool = false;
 
-                //player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                //player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
 
         }
