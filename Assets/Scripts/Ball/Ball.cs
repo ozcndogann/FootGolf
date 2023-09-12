@@ -86,9 +86,12 @@ public class Ball : MonoBehaviour
                 }
             }
         }
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
-            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+            {
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            }
         }
         Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
     }
