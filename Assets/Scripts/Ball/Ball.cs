@@ -111,46 +111,54 @@ public class Ball : MonoBehaviour
         }
         if (shooted == true)
         {
-            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
             {
-                mousePos = Input.mousePosition;
-                if (mousePos.x > Screen.width / 2)
+                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                 {
-                    curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                    }
-                }
-                if (mousePos.x < Screen.width / 2)
-                {
-                    curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                    }
-                }
-                
-                shootCloser = true;
-                Zoom.changeFovBool = false;
 
-                
+                    if (Input.GetMouseButtonDown(0) && shootCloser == false)
+                    {
+                        mousePos = Input.mousePosition;
+                        if (mousePos.x > Screen.width / 2)
+                        {
+                            curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+                            if (mousePos.y > Screen.height / 2)
+                            {
+                                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                                Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
+                            }
+                            if (mousePos.y < Screen.height / 2)
+                            {
+                                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                                Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
+                            }
+                        }
+                        if (mousePos.x < Screen.width / 2)
+                        {
+                            curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+                            if (mousePos.y > Screen.height / 2)
+                            {
+                                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                                Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+                            }
+                            if (mousePos.y < Screen.height / 2)
+                            {
+                                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                                Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+                            }
+                        }
+
+                        shootCloser = true;
+                        Zoom.changeFovBool = false;
+
+
+                    }
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                }
             }
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        }
+            }
+            
     }
     
     private void ProcessAim()
