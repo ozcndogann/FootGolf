@@ -299,6 +299,7 @@ public class Ball : MonoBehaviour
                 cam.GetComponent<AudioListener>().enabled = false;
                 cam2.GetComponent<AudioListener>().enabled = true;
                 cam2.enabled = (true);
+                PhotonNetwork.Destroy(gameObject);
                 Debug.Log("girdi");
                 CheckAllPlayers();
             }
