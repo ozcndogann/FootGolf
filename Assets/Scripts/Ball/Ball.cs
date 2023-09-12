@@ -84,23 +84,8 @@ public class Ball : MonoBehaviour
                         ProcessAim();
                     }
                 }
-                //foreach (Player player in PhotonNetwork.PlayerList)
-                //{
-                //    if (player.CustomProperties["turn"] != null)
-                //    {
-                //        if ((bool)player.CustomProperties["turn"])
-                //        {
-
-                //            ProcessAim();
-                //        }
-                //    }
-
-                //}
             }
         }
-        //Debug.Log(lineRenderer.GetPosition(1));
-        //lineX = lineRenderer.GetPosition(1).x;
-        //Debug.Log(PhotonNetwork.CurrentRoom.GetTurn());
         Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
     }
     private void OnMouseDown()
