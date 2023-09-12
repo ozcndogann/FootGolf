@@ -75,7 +75,7 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                ProcessAim();
+                //ProcessAim();
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
