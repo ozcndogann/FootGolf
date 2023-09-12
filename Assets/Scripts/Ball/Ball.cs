@@ -72,22 +72,29 @@ public class Ball : MonoBehaviour
         
         if (view.IsMine)
         {
-            if (rb.velocity.magnitude < stopVelocity && (bool)player.CustomProperties["turn"]) // topun durmasý için hýz kontrolü
+            if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
                 ProcessAim();
+                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+                {
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                    {
 
+                        ProcessAim();
+                    }
+                }
                 //foreach (Player player in PhotonNetwork.PlayerList)
                 //{
                 //    if (player.CustomProperties["turn"] != null)
                 //    {
                 //        if ((bool)player.CustomProperties["turn"])
                 //        {
-                            
+
                 //            ProcessAim();
                 //        }
                 //    }
-                    
+
                 //}
             }
         }
