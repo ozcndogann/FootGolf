@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
         
         if (view.IsMine)
         {
-            if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
+            if (rb.velocity.magnitude < stopVelocity && (bool)player.CustomProperties["turn"]) // topun durmasý için hýz kontrolü
             {
                 Stop();
                 ProcessAim();
