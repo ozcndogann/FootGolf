@@ -111,12 +111,7 @@ public class Ball : MonoBehaviour
         }
         if (shooted == true)
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-            {
-                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-                {
-
-                    if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
                     {
                         mousePos = Input.mousePosition;
                         if (mousePos.x > Screen.width / 2)
@@ -154,10 +149,9 @@ public class Ball : MonoBehaviour
 
                     }
                     PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                    
                 }
-            }
-            }
+            
             
     }
     
@@ -306,6 +300,7 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
+        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
     }
 
     private void OnTriggerEnter(Collider other)
