@@ -112,46 +112,45 @@ public class Ball : MonoBehaviour
         if (shooted == true)
         {
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            {
+                mousePos = Input.mousePosition;
+                if (mousePos.x > Screen.width / 2)
+                {
+                    curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
                     {
-                        mousePos = Input.mousePosition;
-                        if (mousePos.x > Screen.width / 2)
-                        {
-                            curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
-                            if (mousePos.y > Screen.height / 2)
-                            {
-                                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                                Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                            }
-                            if (mousePos.y < Screen.height / 2)
-                            {
-                                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                                Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                            }
-                        }
-                        if (mousePos.x < Screen.width / 2)
-                        {
-                            curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
-                            if (mousePos.y > Screen.height / 2)
-                            {
-                                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                                Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                            }
-                            if (mousePos.y < Screen.height / 2)
-                            {
-                                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                                Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                            }
-                        }
-
-                        shootCloser = true;
-                        Zoom.changeFovBool = false;
-
-
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
                     }
-                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                    
+                    if (mousePos.y < Screen.height / 2)
+                    {
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
+                    }
                 }
+                if (mousePos.x < Screen.width / 2)
+                {
+                    curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+                    if (mousePos.y > Screen.height / 2)
+                    {
+                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+                    }
+                    if (mousePos.y < Screen.height / 2)
+                    {
+                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+                    }
+                }
+
+                shootCloser = true;
+                Zoom.changeFovBool = false;
+
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            }
             
+        }
             
     }
     
@@ -300,7 +299,6 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
     }
 
     private void OnTriggerEnter(Collider other)
