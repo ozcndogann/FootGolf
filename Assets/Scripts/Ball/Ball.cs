@@ -133,6 +133,10 @@ public class Ball : MonoBehaviour
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                if ((bool)player.CustomProperties["holeC"])
+                {
+                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                }
             }
             
         }
@@ -299,7 +303,6 @@ public class Ball : MonoBehaviour
                 cam.GetComponent<AudioListener>().enabled = false;
                 cam2.GetComponent<AudioListener>().enabled = true;
                 cam2.enabled = (true);
-                PhotonNetwork.Destroy(gameObject);
                 Debug.Log("girdi");
                 CheckAllPlayers();
             }
