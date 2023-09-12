@@ -141,8 +141,8 @@ public class Ball : MonoBehaviour
 
                 
             }
-            player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-            player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+            //player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
     }
     
