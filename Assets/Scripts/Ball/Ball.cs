@@ -139,9 +139,9 @@ public class Ball : MonoBehaviour
                 Zoom.changeFovBool = false;
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                
             }
-            
+            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
             
     }
@@ -161,11 +161,7 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        {
-            DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
-        }
-        
+        DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
         if ((worldPoint.Value - transform.position).y < 0)
         {
