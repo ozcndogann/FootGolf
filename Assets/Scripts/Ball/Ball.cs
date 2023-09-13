@@ -93,7 +93,7 @@ public class Ball : MonoBehaviour
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
         }
-        Debug.Log(/*PhotonNetwork.LocalPlayer.CustomProperties["turn"]*/isIdle);
+        Debug.Log(/*PhotonNetwork.LocalPlayer.CustomProperties["turn"]*/shootCloser);
     }
     private void OnMouseDown()
     {
