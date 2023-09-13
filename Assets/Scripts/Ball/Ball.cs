@@ -90,7 +90,11 @@ public class Ball : MonoBehaviour
                         else
                         {
                             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                            timer = 10f;
+                            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                            {
+                                timer = 10f;
+                            }
+                            
                         }
                     }
                 }
@@ -103,7 +107,8 @@ public class Ball : MonoBehaviour
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
         }
-        Debug.Log(/*PhotonNetwork.LocalPlayer.CustomProperties["turn"]*/timer);
+        //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+        Debug.Log(timer);
     }
     private void OnMouseDown()
     {
