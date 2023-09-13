@@ -161,7 +161,11 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
+        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        {
+            DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
+        }
+        
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
         if ((worldPoint.Value - transform.position).y < 0)
         {
