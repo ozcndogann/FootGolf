@@ -86,6 +86,11 @@ public class Ball : MonoBehaviour
                 }
             }
         }
+        if (isIdle)
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        }
         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
             if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
@@ -100,8 +105,6 @@ public class Ball : MonoBehaviour
         if (isIdle)
         {
             isAiming = true;
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
         if (shooted == true)
         {
@@ -139,10 +142,6 @@ public class Ball : MonoBehaviour
 
                 shootCloser = true;
                 Zoom.changeFovBool = false;
-
-                
-
-                
             }
             
         }
