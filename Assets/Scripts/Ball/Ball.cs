@@ -100,7 +100,6 @@ public class Ball : MonoBehaviour
         if (isIdle)
         {
             isAiming = true;
-            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
         if (shooted == true)
         {
@@ -140,7 +139,7 @@ public class Ball : MonoBehaviour
                 Zoom.changeFovBool = false;
 
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 
             }
             
