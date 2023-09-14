@@ -83,17 +83,16 @@ public class Ball : MonoBehaviour
                     {
                         //Stop();
                         ProcessAim();
-                        //timer -= Time.deltaTime;
-                        //if (timer > 0)
-                        //{
-                        //    ProcessAim();
-                        //}
-                        //else
-                        //{
-                        //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                        //    timer = 10f;
-
-                        //}
+                        timer -= Time.deltaTime;
+                        if (timer > 0)
+                        {
+                            ProcessAim();
+                        }
+                        else
+                        {
+                            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            timer = 10f;
+                        }
                     }
                 }
             }
