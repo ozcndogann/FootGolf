@@ -113,7 +113,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Lobby");
+        PhotonNetwork.LoadLevel("RandomLobby");
     }
     
 }

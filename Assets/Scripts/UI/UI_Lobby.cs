@@ -53,4 +53,5 @@ public class UI_Lobby : MonoBehaviour
             PhotonNetwork.LoadLevel("Hole1");
         }
     }
+
 }

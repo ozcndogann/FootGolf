@@ -29,6 +29,7 @@ public class Ball : MonoBehaviour
     public PhotonView view;
     PunTurnManager punTurnManager;
     private GameObject hole;
+    [SerializeField] private float timer;
     //public static bool holeC;
     Player player;
     private void Start()
@@ -45,11 +46,15 @@ public class Ball : MonoBehaviour
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            
+
             if (player.IsMasterClient)
             {
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
 
+            }
+            else
+            {
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
     }
@@ -71,25 +76,37 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                ProcessAim();
+                //ProcessAim();
+                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+                {
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                    {
+                        //Stop();
+                        ProcessAim();
+                        //timer -= Time.deltaTime;
+                        //if (timer > 0)
+                        //{
+                        //    ProcessAim();
+                        //}
+                        //else
+                        //{
+                        //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                        //    timer = 10f;
 
-                //foreach (Player player in PhotonNetwork.PlayerList)
-                //{
-                //    if (player.CustomProperties["turn"] != null)
-                //    {
-                //        if ((bool)player.CustomProperties["turn"])
-                //        {
-                            
-                //            ProcessAim();
-                //        }
-                //    }
-                    
-                //}
+                        //}
+                    }
+                }
             }
         }
-        //Debug.Log(lineRenderer.GetPosition(1));
-        //lineX = lineRenderer.GetPosition(1).x;
-        //Debug.Log(PhotonNetwork.CurrentRoom.GetTurn());
+        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+            {
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            }
+        }
+        //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+        Debug.Log(timer);
     }
     private void OnMouseDown()
     {
@@ -130,15 +147,15 @@ public class Ball : MonoBehaviour
                         Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
                     }
                 }
-                
+
                 shootCloser = true;
                 Zoom.changeFovBool = false;
-
-                //player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                //player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
-
+            
         }
+            
     }
     
     private void ProcessAim()
