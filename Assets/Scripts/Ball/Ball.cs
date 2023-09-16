@@ -91,7 +91,7 @@ public class Ball : MonoBehaviour
                         else
                         {
                             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                            timer = 10f;
+                            timer = 20f;
                         }
                     }
                 }
