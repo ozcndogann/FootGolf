@@ -90,6 +90,7 @@ public class Ball : MonoBehaviour
                         }
                         else
                         {
+                            shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
                             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
