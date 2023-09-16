@@ -8,12 +8,14 @@ using Photon.Pun;
 public class UI_InGame : MonoBehaviour
 {
     [SerializeField] public TMP_Text codeText;
+    [SerializeField] public TMP_Text timeText;
+    Ball ball;
     public GameObject ReturnPanel;
     
     public void Start()
     {
         codeText.text = CreateAndJoinRooms.randomCreate;
-
+        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         if (CreateAndJoinRooms.practice)
         {
             codeText.enabled = false;
@@ -45,6 +47,7 @@ public class UI_InGame : MonoBehaviour
         {
             ReturnPanel.SetActive(false);
         }
+        timeText.text = ball.timer.ToString();
     }
     public void MainMenu()
     {
