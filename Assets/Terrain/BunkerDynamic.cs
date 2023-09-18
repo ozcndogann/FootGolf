@@ -8,10 +8,13 @@ public class BunkerDynamic : MonoBehaviour
     public GameObject particles;
     public static bool particleEnd = false;
     public GameObject Bunker;
+    public BoxCollider box;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
+        box = gameObject.GetComponent<BoxCollider>();
     }
 
     private void Update()
@@ -34,6 +37,8 @@ public class BunkerDynamic : MonoBehaviour
             rb.angularDrag = 0.0725f;
             rb.drag = 0.10875f;
 
+            //box.enabled = false;
+
             if(particleEnd == false)
             {
                 GameObject Particle = particles;
@@ -41,6 +46,10 @@ public class BunkerDynamic : MonoBehaviour
             }
 
             //Destroy(Particle, 0.37f);
+        }
+        else
+        {
+            //box.enabled = true;
         }
     }
 }
