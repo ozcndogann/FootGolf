@@ -10,6 +10,7 @@ public class Zoom : MonoBehaviour
     public float smooth;
     public Vector3 BallZoom;
     Ball ball;
+    Ball1 ball1;
     MoveAroundObject moveAroundObject;
     [SerializeField] private GameObject ballObj;
     [SerializeField] private Camera cam;
@@ -26,6 +27,8 @@ public class Zoom : MonoBehaviour
         ball.enabled = true;
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         changeFovBool = false;
+        //ball1 = ballObj.GetComponent<Ball1>();
+        //ball1.enabled = true;
     }
 
     // Update is called once per frame

@@ -11,45 +11,79 @@ public class MoveAroundObject : MonoBehaviour
     public float heightWhileShooting;
     GameObject passHit;
     Ball ball;
+    Ball1 ball1;
 
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Ball").transform;
         ball = target.GetComponent<Ball>();
+        ball1 = target.GetComponent<Ball1>();
     }
     private void Update()
     {
-        #region CamFollow
-        if (Ball.shooted == false)
+        #region camfollow
+        if (ball.shooted == false)
         {
-            cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
-            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+            cam.transform.position = new vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+            cam.transform.translate(new vector3(0, 0, -distancetotarget));
 
-            if (Input.GetMouseButtonDown(0))
+            if (ýnput.getmousebuttondown(0))
             {
-                previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+                previousposition = cam.screentoviewportpoint(ýnput.mouseposition);
             }
-            else if (Input.GetMouseButton(0))
+            else if (ýnput.getmousebutton(0))
             {
-                Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-                //Debug.Log(newPosition+"new");
-                //Debug.Log(previousPosition+"previous");
-                Vector3 direction = previousPosition - newPosition;
-                float rotationAroundYAxis = direction.x * 180;
+                vector3 newposition = cam.screentoviewportpoint(ýnput.mouseposition);
+                //debug.log(newposition+"new");
+                //debug.log(previousposition+"previous");
+                vector3 direction = previousposition - newposition;
+                float rotationaroundyaxis = direction.x * 180;
 
-                cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
-                //if(rotationAroundYAxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis/300, Space.World);
-                cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+                cam.transform.position = new vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+                //if(rotationaroundyaxis)
+                cam.transform.rotate(new vector3(0, .65f, 0), rotationaroundyaxis / 300, space.world);
+                cam.transform.translate(new vector3(0, 0, -distancetotarget));
 
-                //previousPosition = newPosition;
+                //previousposition = newposition;
             }
         }
         else
         {
-            cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/target.transform.position.y+.397f, cam.transform.position.z);
+            cam.transform.position = new vector3(cam.transform.position.x, /*heightwhileshooting*/target.transform.position.y + .397f, cam.transform.position.z);
         }
         #endregion
+
+        //#region CamFollow1
+        //if (Ball1.shooted == false)
+        //{
+        //    cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+        //    cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        //    }
+        //    else if (Input.GetMouseButton(0))
+        //    {
+        //        Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        //        //Debug.Log(newPosition+"new");
+        //        //Debug.Log(previousPosition+"previous");
+        //        Vector3 direction = previousPosition - newPosition;
+        //        float rotationAroundYAxis = direction.x * 180;
+
+        //        cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+        //        //if(rotationAroundYAxis)
+        //        cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis / 300, Space.World);
+        //        cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+
+        //        //previousPosition = newPosition;
+        //    }
+        //}
+        //else
+        //{
+        //    cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/target.transform.position.y + .397f, cam.transform.position.z);
+        //}
+        //#endregion
     }
     void FixedUpdate()
     {

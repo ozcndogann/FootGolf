@@ -25,11 +25,9 @@ public class Ball1 : MonoBehaviour
     public float curveValue,forceValue;
     public float lineX;
     Camera cam2;
-    public PhotonView view;
     //public static bool holeC;
     private void Start()
     {
-        view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
         cam.GetComponent<AudioListener>().enabled = true;
@@ -50,16 +48,11 @@ public class Ball1 : MonoBehaviour
 
     private void Update()
     {
-        if (view.IsMine)
-        {
-            if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
+        if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
                 ProcessAim();
             }
-        }
-        //Debug.Log(lineRenderer.GetPosition(1));
-        lineX = lineRenderer.GetPosition(1).x;
     }
     private void OnMouseDown()
     {
@@ -263,9 +256,7 @@ public class Ball1 : MonoBehaviour
     {
         if (other.CompareTag("Hole"))
         {
-            
-            if (view.IsMine)
-            {
+           
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
                 cam.enabled = (false);
                 cam.GetComponent<Zoom>().enabled = false;
@@ -273,43 +264,7 @@ public class Ball1 : MonoBehaviour
                 cam2.GetComponent<AudioListener>().enabled = true;
                 cam2.enabled = (true);
                 Debug.Log("girdi");
-                CheckAllPlayers();
-            }
-        }
-    }
-    private void CheckAllPlayers()
-    {
-
-        StartCoroutine(DelayCheck(1f));
-    }
-    
-    [PunRPC]
-    private void NotifyConditionMet()
-    {
-        StartCoroutine(LoadNextSceneWithDelay(1f));
-    }
-
-    private IEnumerator LoadNextSceneWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        //PhotonNetwork.Destroy(gameObject);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-    private IEnumerator DelayCheck(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        bool allPlayersReady = true;
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
-            {
-                allPlayersReady = false;
-                break;
-            }
-        }
-        if (allPlayersReady)
-        {
-            view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
+                
         }
     }
 }
