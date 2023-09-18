@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class BunkerDynamic : MonoBehaviour
 {
     private Rigidbody rb;
     public GameObject particles;
     public static bool particleEnd = false;
+    public static bool bunkerTouch = false;
     public GameObject Bunker;
     public BoxCollider box;
 
@@ -27,29 +29,29 @@ public class BunkerDynamic : MonoBehaviour
         {
             particleEnd = false;
         }
+
+
         Bunker.gameObject.SetActive(true);
     }
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.CompareTag("Ball"))
         {
-            rb.mass = 1.45f;
-            rb.angularDrag = 0.0725f;
-            rb.drag = 0.10875f;
+            bunkerTouch = true;
 
-            //box.enabled = false;
+            rb.mass = 1.8f;
+            rb.angularDrag = 0.09f;
+            rb.drag = 0.135f;
 
-            if(particleEnd == false)
+            if (!particleEnd)
             {
-                GameObject Particle = particles;
-                Instantiate(Particle, new Vector3(rb.transform.position.x, rb.transform.position.y, rb.transform.position.z), Quaternion.identity);
+                Instantiate(particles, rb.transform.position, Quaternion.identity);
             }
-
-            //Destroy(Particle, 0.37f);
         }
         else
         {
-            //box.enabled = true;
+            bunkerTouch = false;
         }
     }
 }

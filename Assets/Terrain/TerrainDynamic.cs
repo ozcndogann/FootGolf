@@ -15,9 +15,12 @@ public class TerrainDynamic : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            rb.mass = 1;
-            rb.angularDrag = 0.05f;
-            rb.drag = 0.075f;
+            if(BunkerDynamic.bunkerTouch == false)
+            {
+                rb.mass = 1;
+                rb.angularDrag = 0.05f;
+                rb.drag = 0.075f;
+            }
         }
     }
 }
