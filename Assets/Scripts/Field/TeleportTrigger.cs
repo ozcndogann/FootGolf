@@ -14,6 +14,7 @@ public class TeleportTrigger : MonoBehaviour
         ballRigidbody = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
     }
 
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -42,8 +43,15 @@ public class TeleportTrigger : MonoBehaviour
                 newPosition.y = hit.point.y + 0.2f; // teleport noktasýnýn y'sini zemin y'sine göre ayarlýyoruz (+0.2f zeminin içine ýþýnlanmasýn diye)
             }
 
-            ballRigidbody.velocity = Vector3.zero; // harekete devam etmesin diye hýzý sýfýrlýyoruz
-            other.transform.position = newPosition; // topu teleport ediyoruz o noktaya
+            IEnumerator WFSOOB()
+            {
+                yield return new WaitForSeconds(1.95f);
+
+                ballRigidbody.velocity = Vector3.zero; // harekete devam etmesin diye hýzý sýfýrlýyoruz
+                other.transform.position = newPosition; // topu teleport ediyoruz o noktaya
+            }
+
+            StartCoroutine(WFSOOB());
 
         }
     }
