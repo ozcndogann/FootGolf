@@ -25,6 +25,8 @@ public class Ball1 : MonoBehaviour
     public float curveValue,forceValue;
     public float lineX;
     Camera cam2;
+    public GameObject footballer;
+    GameObject OurFootballer;
     //public static bool holeC;
     private void Start()
     {
@@ -35,6 +37,8 @@ public class Ball1 : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+        OurFootballer = Instantiate(footballer, new Vector3(transform.position.x + 2.6f, transform.position.y, transform.position.z + 1.6f), Quaternion.identity);
+        OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 90, 0);
     }
     private void Awake()
     {

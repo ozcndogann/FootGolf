@@ -47,6 +47,10 @@ public class MoveAroundObject : MonoBehaviour
                 //previousposition = newposition;
             }
         }
+        //else if (Ball.waitForShoot == true)
+        //{
+        //    cam.transform.position = new Vector3(cam.transform.position.x, /*heightwhileshooting*/target.transform.position.y + 4, cam.transform.position.z);
+        //}
         else
         {
             cam.transform.position = new Vector3(cam.transform.position.x, /*heightwhileshooting*/target.transform.position.y + .397f, cam.transform.position.z);
@@ -100,10 +104,10 @@ public class MoveAroundObject : MonoBehaviour
             }
 
         }
-        //if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
-        //{
-        //    passHit.SetActive(true);
-        //}
+        if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        {
+            passHit.SetActive(true);
+        }
         else
         {
             
