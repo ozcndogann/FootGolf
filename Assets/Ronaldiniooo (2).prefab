@@ -1637,6 +1637,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5466464993978206437}
   - component: {fileID: 4612359819714906341}
+  - component: {fileID: 7511683941511203875}
+  - component: {fileID: 5075906919254342712}
   m_Layer: 0
   m_Name: Wolf3D_Outfit_Footwear
   m_TagString: Untagged
@@ -1652,7 +1654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5155977868866582739}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.114, y: 0, z: 0}
   m_LocalScale: {x: 39.37008, y: 39.37008, z: 39.37008}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1718,6 +1720,34 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.086768135, y: 0.47926533, z: 0.052814707}
     m_Extent: {x: 0.18212925, y: 0.16731583, z: 0.19282384}
   m_DirtyAABB: 0
+--- !u!136 &7511683941511203875
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155977868866582739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.001911777
+  m_Height: 0.010430574
+  m_Direction: 1
+  m_Center: {x: -0.00032116234, y: -0.0006662551, z: 0.0017062731}
+--- !u!136 &5075906919254342712
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5155977868866582739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0018042503
+  m_Height: 0.0102222515
+  m_Direction: 1
+  m_Center: {x: -0.00534667, y: -0.0005620989, z: 0.0017710447}
 --- !u!1 &5189743046807523461
 GameObject:
   m_ObjectHideFlags: 0
@@ -2614,7 +2644,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8821871409597041757}
-  - component: {fileID: 9072268575442137436}
   - component: {fileID: 9072268575442137439}
   m_Layer: 0
   m_Name: Ronaldiniooo (2)
@@ -2647,21 +2676,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &9072268575442137436
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8153281012861015783}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!95 &9072268575442137439
 Animator:
   serializedVersion: 5

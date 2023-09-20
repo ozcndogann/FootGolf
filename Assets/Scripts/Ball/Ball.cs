@@ -30,6 +30,10 @@ public class Ball : MonoBehaviour
     PunTurnManager punTurnManager;
     private GameObject hole;
     [SerializeField] public float timer;
+    public GameObject footballer;
+    Animator footballerAnimator;
+    GameObject OurFootballer;
+    public static bool waitForShoot;
     //public static bool holeC;
     Player player;
     private void Start()
@@ -44,6 +48,9 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
+        OurFootballer=Instantiate(footballer, new Vector3(transform.position.x + 2.6f, transform.position.y-0.15f, transform.position.z + 1.6f),Quaternion.identity);
+        OurFootballer.transform.rotation = Quaternion.Euler(0,transform.rotation.y-140, 0);
+        footballerAnimator = OurFootballer.GetComponent<Animator>();
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -93,8 +100,11 @@ public class Ball : MonoBehaviour
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
-                            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                            {
+                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            }
                             timer = 20f;
                         }
                     }
@@ -126,6 +136,9 @@ public class Ball : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
                 mousePos = Input.mousePosition;
+                footballerAnimator.SetBool("penaltyKick", true);
+                waitForShoot = true;
+                cam.transform.position = new Vector3(cam.transform.position.x - 5, cam.transform.position.y - 5, cam.transform.position.z - 5);
                 if (mousePos.x > Screen.width / 2)
                 {
                     curveValue = (mousePos.x - Screen.width / 2) * 0.15f;

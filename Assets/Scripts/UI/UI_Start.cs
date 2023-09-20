@@ -7,10 +7,17 @@ public class UI_Start : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("UIGameSelect");
+        //SceneManager.LoadScene("LobbyOrQuick");
+        StartCoroutine(DelayCheck(.5f));
     }
-    public void QuickMatch()
+    public void Practice()
     {
-        SceneManager.LoadScene("UIRandomGameSelect");
+        SceneManager.LoadScene("Hole1");
     }
+    private IEnumerator DelayCheck(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("LobbyOrQuick");
+    }
+
 }
