@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
 
@@ -30,6 +31,18 @@ public class BunkerDynamic : MonoBehaviour
             particleEnd = false;
         }
 
+        if (bunkerTouch == true)
+        {
+            rb.mass = 1.65f;
+            rb.angularDrag = 0.05f;
+            rb.drag = 0.075f;
+        }
+        else
+        {
+            rb.mass = 1;
+            rb.angularDrag = 0.05f;
+            rb.drag = 0.075f;
+        }
 
         Bunker.gameObject.SetActive(true);
     }
@@ -40,16 +53,20 @@ public class BunkerDynamic : MonoBehaviour
         {
             bunkerTouch = true;
 
-            rb.mass = 1.8f;
-            rb.angularDrag = 0.09f;
-            rb.drag = 0.135f;
-
             if (!particleEnd)
             {
                 Instantiate(particles, rb.transform.position, Quaternion.identity);
             }
         }
         else
+        {
+            bunkerTouch = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Ball"))
         {
             bunkerTouch = false;
         }
