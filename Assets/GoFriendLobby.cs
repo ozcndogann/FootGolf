@@ -17,6 +17,6 @@ public class GoFriendLobby : MonoBehaviour
     }
     public void GoLobby()
     {
-        SceneManager.LoadScene("LobbyOrQuick");
+        SceneManager.LoadScene("UIGameSelect");
     }
 }
