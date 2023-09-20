@@ -40,6 +40,10 @@ public class Zoom : MonoBehaviour
         {
             ChangeFOV();
         }
+        else if (Ball.waitForShoot == true)
+        {
+            Camera.main.fieldOfView = 65;
+        }
         else
         {
             Camera.main.fieldOfView = initialFOV;
@@ -75,5 +79,5 @@ public class Zoom : MonoBehaviour
             }
         }
     }
-    
+
 }

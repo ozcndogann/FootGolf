@@ -34,10 +34,13 @@ public class Ball : MonoBehaviour
     Animator footballerAnimator;
     GameObject OurFootballer;
     public static bool waitForShoot;
+    public float waitForShootTimer;
     //public static bool holeC;
     Player player;
     private void Start()
     {
+        waitForShoot = false;
+        waitForShootTimer = 0;
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
@@ -110,6 +113,18 @@ public class Ball : MonoBehaviour
                     }
                 }
             }
+            if (waitForShoot == true)
+            {
+                waitForShootTimer += Time.deltaTime;
+                Zoom.changeFovBool = false;
+            }
+            if (waitForShootTimer >= 0.9f)
+            {
+                waitForShoot = false;
+                waitForShootTimer = 0;
+                footballerAnimator.SetBool("penaltyKick", false);
+                OnMouseShootPart();
+            }
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
@@ -138,45 +153,47 @@ public class Ball : MonoBehaviour
                 mousePos = Input.mousePosition;
                 footballerAnimator.SetBool("penaltyKick", true);
                 waitForShoot = true;
-                cam.transform.position = new Vector3(cam.transform.position.x - 5, cam.transform.position.y - 5, cam.transform.position.z - 5);
-                if (mousePos.x > Screen.width / 2)
-                {
-                    curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                        Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
-                    }
-                }
-                if (mousePos.x < Screen.width / 2)
-                {
-                    curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
-                    if (mousePos.y > Screen.height / 2)
-                    {
-                        forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
-                        Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
-                    }
-                    if (mousePos.y < Screen.height / 2)
-                    {
-                        forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
-                        Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
-                    }
-                }
-
-                shootCloser = true;
-                Zoom.changeFovBool = false;
-                timer = 20f;
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
             
         }
             
+    }
+    public void OnMouseShootPart()
+    {
+        if (mousePos.x > Screen.width / 2)
+        {
+            curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+            if (mousePos.y > Screen.height / 2)
+            {
+                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
+            }
+            if (mousePos.y < Screen.height / 2)
+            {
+                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
+            }
+        }
+        if (mousePos.x < Screen.width / 2)
+        {
+            curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+            if (mousePos.y > Screen.height / 2)
+            {
+                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
+            }
+            if (mousePos.y < Screen.height / 2)
+            {
+                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
+            }
+        }
+
+        shootCloser = true;
+        Zoom.changeFovBool = false;
+        timer = 20f;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
     }
     
     private void ProcessAim()
@@ -324,6 +341,8 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
+        OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 0.15f, transform.position.z + 1.6f);
+        OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
     }
 
     private void OnTriggerEnter(Collider other)
