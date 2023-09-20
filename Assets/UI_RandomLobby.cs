@@ -9,7 +9,6 @@ public class UI_RandomLobby : MonoBehaviour
 {
     [SerializeField] private GameObject StartButton;
     private bool canStart;
-
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;

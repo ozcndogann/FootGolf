@@ -1055,6 +1055,8 @@ GameObject:
   - component: {fileID: 505859954}
   - component: {fileID: 505859957}
   - component: {fileID: 505859958}
+  - component: {fileID: 505859959}
+  - component: {fileID: 505859960}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1139,6 +1141,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e21694405a5a04a8f8735ae0323948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &505859959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505859953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc23a86cf55678a48b59563d790c339d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  practiceBtn: {fileID: 0}
+  VersusBtn: {fileID: 0}
+  TournamentBtn: {fileID: 0}
+--- !u!114 &505859960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505859953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8da1e530e6838246b52d78b56bd1305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joinInput: {fileID: 0}
+  practiceBtn: {fileID: 0}
+  VersusBtn: {fileID: 0}
+  TournamentBtn: {fileID: 0}
 --- !u!1 &571716804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,7 +2413,7 @@ GameObject:
   - component: {fileID: 1259330722}
   - component: {fileID: 1259330721}
   m_Layer: 5
-  m_Name: Btn_Play
+  m_Name: Tournement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2450,6 +2483,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 505859959}
+        m_TargetAssemblyTypeName: CreateAndJoinRandomRooms, Assembly-CSharp
+        m_MethodName: IsTournament
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 505859960}
+        m_TargetAssemblyTypeName: CreateAndJoinRooms, Assembly-CSharp
+        m_MethodName: IsTournament
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 505859958}
         m_TargetAssemblyTypeName: UI_Start, Assembly-CSharp
         m_MethodName: PlayGame
@@ -2891,7 +2948,7 @@ GameObject:
   - component: {fileID: 1386664182}
   - component: {fileID: 1386664181}
   m_Layer: 5
-  m_Name: Btn_Play_Quick
+  m_Name: Practice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2961,9 +3018,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 505859959}
+        m_TargetAssemblyTypeName: CreateAndJoinRandomRooms, Assembly-CSharp
+        m_MethodName: IsPractice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 505859960}
+        m_TargetAssemblyTypeName: CreateAndJoinRooms, Assembly-CSharp
+        m_MethodName: IsPractice
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 505859958}
         m_TargetAssemblyTypeName: UI_Start, Assembly-CSharp
-        m_MethodName: QuickMatch
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4042,7 +4123,7 @@ GameObject:
   - component: {fileID: 1855659746}
   - component: {fileID: 1855659745}
   m_Layer: 5
-  m_Name: Btn_Lucky
+  m_Name: Versus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4111,7 +4192,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1855659746}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 505859959}
+        m_TargetAssemblyTypeName: CreateAndJoinRandomRooms, Assembly-CSharp
+        m_MethodName: IsVersus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 505859959}
+        m_TargetAssemblyTypeName: CreateAndJoinRandomRooms, Assembly-CSharp
+        m_MethodName: IsVersus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 505859958}
+        m_TargetAssemblyTypeName: UI_Start, Assembly-CSharp
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1855659746
 MonoBehaviour:
   m_ObjectHideFlags: 0

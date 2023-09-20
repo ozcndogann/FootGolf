@@ -21,33 +21,35 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void Start()
     {
-        practice = false;
-        versus = false;
-        Tournament = false;
+        //practice = false;
+        //versus = false;
+        //Tournament = false;
     }
     public void Update()
     {
-        if (practice)
-        {
-            practiceBtn.animator.SetBool("Selected", true);
-            VersusBtn.animator.SetBool("Normal", true);
-            TournamentBtn.animator.SetBool("Normal", true);
+        //if (practice)
+        //{
+        //    practiceBtn.animator.SetBool("Selected", true);
+        //    VersusBtn.animator.SetBool("Normal", true);
+        //    TournamentBtn.animator.SetBool("Normal", true);
 
-        }
-        if (versus)
-        {
-            VersusBtn.animator.SetBool("Selected", true);
-            practiceBtn.animator.SetBool("Normal", true);
-            TournamentBtn.animator.SetBool("Normal", true);
+        //}
+        //if (versus)
+        //{
+        //    VersusBtn.animator.SetBool("Selected", true);
+        //    practiceBtn.animator.SetBool("Normal", true);
+        //    TournamentBtn.animator.SetBool("Normal", true);
 
-        }
-        if (Tournament)
-        {
-            TournamentBtn.animator.SetBool("Selected", true);
-            practiceBtn.animator.SetBool("Normal", true);
-            VersusBtn.animator.SetBool("Normal", true);
+        //}
+        //if (Tournament)
+        //{
+        //    TournamentBtn.animator.SetBool("Selected", true);
+        //    practiceBtn.animator.SetBool("Normal", true);
+        //    VersusBtn.animator.SetBool("Normal", true);
 
-        }
+        //}
+        Debug.Log(practice);
+
     }
 
     public void IsPractice()
