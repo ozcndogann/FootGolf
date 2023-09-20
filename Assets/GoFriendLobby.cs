@@ -19,4 +19,8 @@ public class GoFriendLobby : MonoBehaviour
     {
         SceneManager.LoadScene("UIGameSelect");
     }
+    public void GoRandomLobby()
+    {
+        SceneManager.LoadScene("UIRandomGameSelect");
+    }
 }

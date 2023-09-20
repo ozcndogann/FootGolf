@@ -48,7 +48,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         //    VersusBtn.animator.SetBool("Normal", true);
 
         //}
-        Debug.Log(practice);
+        Debug.Log(versus);
 
     }
 
