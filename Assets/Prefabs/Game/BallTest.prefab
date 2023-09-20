@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 5649227977558919726}
   - component: {fileID: 678679326341240062}
   - component: {fileID: 678679326341240063}
-  - component: {fileID: 7399152375808374893}
-  - component: {fileID: -8625552110504344645}
+  - component: {fileID: 1994057305443480842}
   m_Layer: 6
-  m_Name: Ball
+  m_Name: BallTest
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3859352307074843106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46cb9012494d979469e76aac9826a242, type: 3}
   m_Name: 
@@ -144,7 +143,7 @@ MonoBehaviour:
   lineX: 0
   view: {fileID: 0}
   timer: 20
---- !u!114 &7399152375808374893
+--- !u!114 &1994057305443480842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,53 +152,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3859352307074843106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 77fb61196302c954ab9df0fc9fee1353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: -8625552110504344645}
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
---- !u!114 &-8625552110504344645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3859352307074843106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PositionModel:
-    SynchronizeEnabled: 1
-    TeleportEnabled: 1
-    TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 4
-    InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 10
-    ExtrapolateOption: 2
-    ExtrapolateSpeed: 1
-    ExtrapolateIncludingRoundTripTime: 1
-    ExtrapolateNumberOfStoredPositions: 1
-  m_RotationModel:
-    SynchronizeEnabled: 1
-    InterpolateOption: 2
-    InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 10
-  m_ScaleModel:
-    SynchronizeEnabled: 1
-    InterpolateOption: 2
-    InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 10
+  lineRenderer: {fileID: 9219378405429931225}
+  stopVelocity: 0.75
+  shotPower: 1250
+  cam: {fileID: 0}
+  isShooting: 0
+  LineRenderer: {fileID: 9219378405429931175}
+  shootCloser: 0
+  mousePos: {x: 0, y: 0, z: 0}
+  upForce: {x: 0, y: 0, z: 0}
+  curveValue: 0
+  forceValue: 0
+  lineX: 0
 --- !u!1 &9219378405429931175
 GameObject:
   m_ObjectHideFlags: 0

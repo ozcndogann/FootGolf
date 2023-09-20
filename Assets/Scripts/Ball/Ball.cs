@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour
     public PhotonView view;
     PunTurnManager punTurnManager;
     private GameObject hole;
-    [SerializeField] private float timer;
+    [SerializeField] public float timer;
     //public static bool holeC;
     Player player;
     private void Start()
@@ -82,18 +82,21 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         //Stop();
-                        ProcessAim();
-                        //timer -= Time.deltaTime;
-                        //if (timer > 0)
-                        //{
-                        //    ProcessAim();
-                        //}
-                        //else
-                        //{
-                        //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                        //    timer = 10f;
-
-                        //}
+                        //ProcessAim();
+                        timer -= Time.deltaTime;
+                        if (timer > 0)
+                        {
+                            ProcessAim();
+                        }
+                        else
+                        {
+                            shooted = false;
+                            shootCloser = true;
+                            Zoom.changeFovBool = false;
+                            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            timer = 20f;
+                        }
                     }
                 }
             }
@@ -104,6 +107,10 @@ public class Ball : MonoBehaviour
             {
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
+        }
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
         //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
         Debug.Log(timer);
@@ -150,6 +157,7 @@ public class Ball : MonoBehaviour
 
                 shootCloser = true;
                 Zoom.changeFovBool = false;
+                timer = 20f;
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
