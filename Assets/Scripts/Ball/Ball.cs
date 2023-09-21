@@ -35,11 +35,13 @@ public class Ball : MonoBehaviour
     GameObject OurFootballer;
     public static bool waitForShoot;
     public float waitForShootTimer;
+    public bool footballerTeleport;
     //public static bool holeC;
     Player player;
     private void Start()
     {
         waitForShoot = false;
+        footballerTeleport = false;
         waitForShootTimer = 0;
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
@@ -125,9 +127,19 @@ public class Ball : MonoBehaviour
                 footballerAnimator.SetBool("penaltyKick", false);
                 OnMouseShootPart();
             }
-            if (shooted == false)
+            if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
             {
-                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis);
+                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis/300);
+            }
+            if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
+            {
+                OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 0.15f, transform.position.z + 1.6f);
+                OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
+                footballerTeleport = true;
+            }
+            else if(rb.velocity.magnitude > stopVelocity)
+            {
+                footballerTeleport = false;
             }
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
@@ -345,8 +357,6 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 0.15f, transform.position.z + 1.6f);
-        OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
     }
 
     private void OnTriggerEnter(Collider other)
