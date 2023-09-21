@@ -32,6 +32,7 @@ public class UI_InGame : MonoBehaviour
     }
     private void Update()
     {
+        timeText.text = ((int)Ball.timer).ToString();
         if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         {
             if (PhotonNetwork.PlayerList.Length < 2)
@@ -80,7 +81,7 @@ public class UI_InGame : MonoBehaviour
         //    ReturnPanel.SetActive(false);
         //    Time.timeScale = 1;
         //}
-        //timeText.text = ball.timer.ToString();
+       
     }
     public void OpenPanel()
     {

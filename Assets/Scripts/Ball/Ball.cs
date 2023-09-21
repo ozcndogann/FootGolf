@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour
     public PhotonView view;
     PunTurnManager punTurnManager;
     private GameObject hole;
-    [SerializeField] public float timer;
+    [SerializeField] public static float timer;
     public GameObject footballer;
     Animator footballerAnimator;
     GameObject OurFootballer;
