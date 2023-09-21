@@ -37,12 +37,12 @@ public class BunkerDynamic : MonoBehaviour
             rb.angularDrag = 0.05f;
             rb.drag = 0.075f;
         }
-        else
-        {
-            rb.mass = 1;
-            rb.angularDrag = 0.05f;
-            rb.drag = 0.075f;
-        }
+        //else
+        //{
+        //    rb.mass = 1;
+        //    rb.angularDrag = 0.05f;
+        //    rb.drag = 0.075f;
+        //}
 
         Bunker.gameObject.SetActive(true);
     }
