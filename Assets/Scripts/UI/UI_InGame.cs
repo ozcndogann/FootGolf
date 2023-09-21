@@ -9,14 +9,14 @@ public class UI_InGame : MonoBehaviour
 {
     [SerializeField] public TMP_Text codeText;
     [SerializeField] public TMP_Text timeText;
-    //Ball ball;
+    Ball ball;
     public GameObject ReturnPanel;
     public GameObject MainMenuPanel;
 
     public void Start()
     {
         codeText.text = CreateAndJoinRooms.randomCreate;
-        //ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
+        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         if (CreateAndJoinRooms.practice)
         {
             codeText.enabled = false;
@@ -38,10 +38,12 @@ public class UI_InGame : MonoBehaviour
             {
                 //eksik kisi ui
                 Debug.Log("eksik kisi");
+                ball.enabled = false;
                 ReturnPanel.SetActive(true);
             }
             else
             {
+                ball.enabled = true;
                 ReturnPanel.SetActive(false);
             }
         }
@@ -52,11 +54,13 @@ public class UI_InGame : MonoBehaviour
             if (PhotonNetwork.PlayerList.Length < 3)
             {
                 //eksik kisi
+                ball.enabled = false;
                 Debug.Log("eksik kisi");
                 ReturnPanel.SetActive(true);
             }
             else
             {
+                ball.enabled = true; 
                 ReturnPanel.SetActive(false);
             }
         }
@@ -84,14 +88,17 @@ public class UI_InGame : MonoBehaviour
     }
     public void OpenPanel()
     {
+        ball.enabled = false;
         MainMenuPanel.SetActive(true);
     }
     public void ClosePanel()
     {
+        ball.enabled = true;
         MainMenuPanel.SetActive(false);
     }
     public void MainMenu()
     {
+        ball.enabled = true;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
