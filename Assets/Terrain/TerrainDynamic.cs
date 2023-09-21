@@ -19,5 +19,7 @@ public class TerrainDynamic : MonoBehaviour
             rb.angularDrag = 0.05f;
             rb.drag = 0.075f;
         }
+
+        
     }
 }
