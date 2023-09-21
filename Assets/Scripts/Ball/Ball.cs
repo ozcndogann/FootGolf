@@ -125,6 +125,7 @@ public class Ball : MonoBehaviour
                 waitForShoot = false;
                 waitForShootTimer = 0;
                 footballerAnimator.SetBool("penaltyKick", false);
+                //footballerAnimator.SetBool("trivela", false);
                 OnMouseShootPart();
             }
             if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
@@ -167,6 +168,14 @@ public class Ball : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
                 mousePos = Input.mousePosition;
+                //if (mousePos.x > Screen.width / 2)
+                //{
+                //    footballerAnimator.SetBool("penaltyKick", true);
+                //}
+                //else
+                //{
+                //    footballerAnimator.SetBool("trivela", true);
+                //}
                 footballerAnimator.SetBool("penaltyKick", true);
                 waitForShoot = true;
             }
