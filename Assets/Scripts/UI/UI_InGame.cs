@@ -37,7 +37,7 @@ public class UI_InGame : MonoBehaviour
             Debug.Log("eksik kisi");
             ReturnPanel.SetActive(true);
         }
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length <= 3 && CreateAndJoinRandomRooms.Tournament)
         {
             //eksik kisi
             Debug.Log("eksik kisi");
