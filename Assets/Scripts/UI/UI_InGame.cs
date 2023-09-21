@@ -38,7 +38,12 @@ public class UI_InGame : MonoBehaviour
             ReturnPanel.SetActive(true);
             Time.timeScale = 0;
         }
-        else if (PhotonNetwork.PlayerList.Length <= 3 && CreateAndJoinRandomRooms.Tournament)
+        else
+        {
+            ReturnPanel.SetActive(false);
+            Time.timeScale = 1;
+        }
+        if (PhotonNetwork.PlayerList.Length <= 3 && CreateAndJoinRandomRooms.Tournament)
         {
             //eksik kisi
             Debug.Log("eksik kisi");
