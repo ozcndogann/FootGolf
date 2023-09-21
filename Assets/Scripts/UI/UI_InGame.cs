@@ -36,22 +36,27 @@ public class UI_InGame : MonoBehaviour
             //eksik kisi ui
             Debug.Log("eksik kisi");
             ReturnPanel.SetActive(true);
+            Time.timeScale = 0;
         }
         else if (PhotonNetwork.PlayerList.Length <= 3 && CreateAndJoinRandomRooms.Tournament)
         {
             //eksik kisi
             Debug.Log("eksik kisi");
             ReturnPanel.SetActive(true);
+            Time.timeScale = 0;
         }
         else
         {
             ReturnPanel.SetActive(false);
+            Time.timeScale = 1;
         }
         //timeText.text = ball.timer.ToString();
     }
     public void MainMenu()
     {
+        Time.timeScale = 1;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
+        
     }
 }
