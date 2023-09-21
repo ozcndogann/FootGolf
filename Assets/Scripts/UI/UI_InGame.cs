@@ -36,7 +36,6 @@ public class UI_InGame : MonoBehaviour
         {
             if (PhotonNetwork.PlayerList.Length < 2)
             {
-                Time.timeScale = 0f;
                 //eksik kisi ui
                 Debug.Log("eksik kisi");
                 ReturnPanel.SetActive(true);
@@ -52,7 +51,6 @@ public class UI_InGame : MonoBehaviour
         {
             if (PhotonNetwork.PlayerList.Length < 3)
             {
-                Time.timeScale = 0f;
                 //eksik kisi
                 Debug.Log("eksik kisi");
                 ReturnPanel.SetActive(true);
@@ -87,16 +85,13 @@ public class UI_InGame : MonoBehaviour
     public void OpenPanel()
     {
         MainMenuPanel.SetActive(true);
-        Time.timeScale = 0f;
     }
     public void ClosePanel()
     {
         MainMenuPanel.SetActive(false);
-        Time.timeScale = 1f;
     }
     public void MainMenu()
     {
-        Time.timeScale = 1f;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
