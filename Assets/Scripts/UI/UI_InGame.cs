@@ -11,7 +11,8 @@ public class UI_InGame : MonoBehaviour
     [SerializeField] public TMP_Text timeText;
     //Ball ball;
     public GameObject ReturnPanel;
-    
+    public GameObject MainMenuPanel;
+
     public void Start()
     {
         codeText.text = CreateAndJoinRooms.randomCreate;
@@ -81,9 +82,16 @@ public class UI_InGame : MonoBehaviour
         //}
         //timeText.text = ball.timer.ToString();
     }
+    public void OpenPanel()
+    {
+        MainMenuPanel.SetActive(true);
+    }
+    public void ClosePanel()
+    {
+        MainMenuPanel.SetActive(false);
+    }
     public void MainMenu()
     {
-        Time.timeScale = 1;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
