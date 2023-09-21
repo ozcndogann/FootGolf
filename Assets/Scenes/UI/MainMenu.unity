@@ -689,7 +689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0002746582, y: 0}
+  m_AnchoredPosition: {x: -0.00024414062, y: 0}
   m_SizeDelta: {x: -0.0007, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &354895095
@@ -1001,7 +1001,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.046379216, y: 0.7085882}
   m_AnchorMax: {x: 0.48125002, y: 0.84453446}
-  m_AnchoredPosition: {x: -0.5469055, y: 0.5}
+  m_AnchoredPosition: {x: -0.546875, y: 0.5}
   m_SizeDelta: {x: 73.113, y: 50.2878}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &502828468
@@ -1057,6 +1057,7 @@ GameObject:
   - component: {fileID: 505859958}
   - component: {fileID: 505859959}
   - component: {fileID: 505859960}
+  - component: {fileID: 505859961}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1172,6 +1173,23 @@ MonoBehaviour:
   practiceBtn: {fileID: 0}
   VersusBtn: {fileID: 0}
   TournamentBtn: {fileID: 0}
+--- !u!114 &505859961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505859953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3dcd8cdc0b19d4ba2857f3bb4e4d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Home: {fileID: 938857087}
+  Raiting: {fileID: 0}
+  Settings: {fileID: 0}
+  Shop: {fileID: 0}
+  Player: {fileID: 0}
 --- !u!1 &571716804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,7 +1546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000091552734, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: -0.0002, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &603773877
@@ -2124,7 +2142,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 938857088}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 505859961}
+        m_TargetAssemblyTypeName: UI_MiniButton, Assembly-CSharp
+        m_MethodName: PushHome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &938857088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3403,7 +3433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.103267185}
-  m_AnchoredPosition: {x: 0.000091552734, y: 0}
+  m_AnchoredPosition: {x: 0.00012207031, y: 0}
   m_SizeDelta: {x: 0.00018310547, y: 2.6130981}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1479937062

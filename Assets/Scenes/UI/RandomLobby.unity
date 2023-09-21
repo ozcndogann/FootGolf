@@ -503,6 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 546210481}
   - component: {fileID: 546210482}
+  - component: {fileID: 546210483}
   m_Layer: 5
   m_Name: Players
   m_TagString: Untagged
@@ -528,8 +529,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.029376809, y: 0.40167412}
   m_AnchorMax: {x: 0.95500004, y: 0.7913259}
-  m_AnchoredPosition: {x: -2.2900085, y: -14.613998}
-  m_SizeDelta: {x: 4.580002, y: 0.6654968}
+  m_AnchoredPosition: {x: 0, y: -14.614014}
+  m_SizeDelta: {x: -0.00012207, y: 0.6655}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &546210482
 MonoBehaviour:
@@ -555,6 +556,20 @@ MonoBehaviour:
   m_Spacing: {x: 450, y: 350}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &546210483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546210480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4bd41a1aa6f5c446a0b3b6b7848c769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playersSpace: {fileID: 546210481}
+  _listingPlayer: {fileID: 1637215575860070882}
 --- !u!1 &1198054627
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,3 +861,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0efe9ef8e96475146a1407dd08b15bbb, type: 3}
+--- !u!114 &1637215575860070882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4069463732638487453, guid: 0efe9ef8e96475146a1407dd08b15bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1637215575860070881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d975a0bc6aeb4840b3778125d132f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
