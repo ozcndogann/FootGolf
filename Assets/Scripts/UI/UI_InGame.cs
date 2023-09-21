@@ -62,6 +62,5 @@ public class UI_InGame : MonoBehaviour
         Time.timeScale = 1;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
-        
     }
 }
