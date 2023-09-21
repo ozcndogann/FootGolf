@@ -31,25 +31,58 @@ public class UI_InGame : MonoBehaviour
     }
     private void Update()
     {
-        if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
+        if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         {
-            //eksik kisi ui
-            Debug.Log("eksik kisi");
-            ReturnPanel.SetActive(true);
-            Time.timeScale = 0;
+            if (PhotonNetwork.PlayerList.Length < 2)
+            {
+                //eksik kisi ui
+                Debug.Log("eksik kisi");
+                ReturnPanel.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                ReturnPanel.SetActive(false);
+                Time.timeScale = 1;
+            }
         }
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        
+
+        if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
         {
-            //eksik kisi
-            Debug.Log("eksik kisi");
-            ReturnPanel.SetActive(true);
-            Time.timeScale = 0;
+            if (PhotonNetwork.PlayerList.Length <= 3)
+            {
+                //eksik kisi
+                Debug.Log("eksik kisi");
+                ReturnPanel.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                ReturnPanel.SetActive(false);
+                Time.timeScale = 1;
+            }
         }
-        else
-        {
-            ReturnPanel.SetActive(false);
-            Time.timeScale = 1;
-        }
+        //if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
+        //{
+        //    //eksik kisi ui
+        //    Debug.Log("eksik kisi");
+        //    ReturnPanel.SetActive(true);
+        //    Time.timeScale = 0;
+        //}
+
+        //else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        //{
+        //    //eksik kisi
+        //    Debug.Log("eksik kisi");
+        //    ReturnPanel.SetActive(true);
+        //    Time.timeScale = 0;
+        //}
+        //else
+        //{
+        //    ReturnPanel.SetActive(false);
+        //    Time.timeScale = 1;
+        //}
         //timeText.text = ball.timer.ToString();
     }
     public void MainMenu()
