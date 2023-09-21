@@ -12,6 +12,8 @@ public class BunkerDynamic : MonoBehaviour
     public static bool bunkerTouch = false;
     public GameObject Bunker;
     public BoxCollider box;
+    private bool inBunker = false;
+    public float sandHeightThreshold;
 
     // Start is called before the first frame update
     void Start()
@@ -22,21 +24,31 @@ public class BunkerDynamic : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity.magnitude == 0)
+        if (rb.transform.position.y < sandHeightThreshold)
         {
-            particleEnd = true;
+            inBunker = true;
+            ApplyBunkerPhysics();
         }
         else
         {
-            particleEnd = false;
+            inBunker = false;
         }
 
-        if (bunkerTouch == true)
-        {
-            rb.mass = 1.65f;
-            rb.angularDrag = 0.05f;
-            rb.drag = 0.075f;
-        }
+        //if (rb.velocity.magnitude == 0)
+        //{
+        //    particleEnd = true;
+        //}
+        //else
+        //{
+        //    particleEnd = false;
+        //}
+
+        //if (bunkerTouch == true)
+        //{
+        //    rb.mass = 1.65f;
+        //    rb.angularDrag = 0.05f;
+        //    rb.drag = 0.075f;
+        //}
         //else
         //{
         //    rb.mass = 1;
@@ -44,31 +56,42 @@ public class BunkerDynamic : MonoBehaviour
         //    rb.drag = 0.075f;
         //}
 
-        Bunker.gameObject.SetActive(true);
     }
-    private void OnTriggerEnter(Collider other)
+
+    void ApplyBunkerPhysics()
     {
-
-        if (other.CompareTag("Ball"))
-        {
-            bunkerTouch = true;
-
-            if (!particleEnd)
-            {
-                Instantiate(particles, rb.transform.position, Quaternion.identity);
-            }
-        }
-        else
-        {
-            bunkerTouch = false;
-        }
+        rb.mass = 1.65f;
+        rb.angularDrag = 0.05f;
+        rb.drag = 0.075f;
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Ball"))
-        {
-            bunkerTouch = false;
-        }
-    }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+
+    //    if (other.CompareTag("Ball"))
+    //    {
+    //        bunkerTouch = true;
+
+    //        if (!particleEnd)
+    //        {
+    //            Instantiate(particles, rb.transform.position, Quaternion.identity);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        bunkerTouch = false;
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("Ball"))
+    //    {
+    //        bunkerTouch = false;
+
+    //        //box.enabled = true;
+    //    }
+    //}
+
 }
