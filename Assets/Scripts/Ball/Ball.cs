@@ -125,6 +125,10 @@ public class Ball : MonoBehaviour
                 footballerAnimator.SetBool("penaltyKick", false);
                 OnMouseShootPart();
             }
+            if (shooted == false)
+            {
+                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis);
+            }
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
