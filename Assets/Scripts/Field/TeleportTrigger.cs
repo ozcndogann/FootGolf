@@ -11,10 +11,13 @@ public class TeleportTrigger : MonoBehaviour
 
     private void Start()
     {
-        ballRigidbody = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
+        //ballRigidbody = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
     }
 
-    
+    private void Awake()
+    {
+        ballRigidbody = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
