@@ -16,7 +16,6 @@ public class UI_InGame : MonoBehaviour
     public void Start()
     {
         codeText.text = CreateAndJoinRooms.randomCreate;
-        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
         if (CreateAndJoinRooms.practice)
         {
             codeText.enabled = false;
