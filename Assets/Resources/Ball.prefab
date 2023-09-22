@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 678679326341240063}
   - component: {fileID: 7399152375808374893}
   - component: {fileID: -8625552110504344645}
+  - component: {fileID: -6232458962884876787}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Ball
@@ -143,7 +144,6 @@ MonoBehaviour:
   forceValue: 0
   lineX: 0
   view: {fileID: 0}
-  timer: 20
   footballer: {fileID: 8153281012861015783, guid: 939ec29964000134dac73ef60bf3445d,
     type: 3}
   waitForShootTimer: 0
@@ -204,6 +204,19 @@ MonoBehaviour:
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 10
+--- !u!114 &-6232458962884876787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859352307074843106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35144820bcc25444bb8f0fd767d9423e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SmoothingDelay: 5
 --- !u!1 &9219378405429931175
 GameObject:
   m_ObjectHideFlags: 0
