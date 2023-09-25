@@ -37,6 +37,6 @@ public class StartCutscene : MonoBehaviour
             yield return null; // Wait for the next frame
         }
 
-        //cam.transform.position = target.position;
+        cam.transform.position = target.position;
     }
 }
