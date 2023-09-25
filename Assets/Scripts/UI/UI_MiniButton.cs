@@ -24,6 +24,6 @@ public class UI_MiniButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+    
     }
 }
