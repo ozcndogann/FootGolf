@@ -32,7 +32,7 @@ RenderSettings:
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
@@ -304,7 +304,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &106680425
 GameObject:
@@ -353,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a494cfbb8208e428db020b2aaf9d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
   teleportDistance: 2
   teleportLayerMask:
     serializedVersion: 2
@@ -828,7 +829,6 @@ GameObject:
   - component: {fileID: 595551603}
   - component: {fileID: 595551602}
   - component: {fileID: 595551601}
-  - component: {fileID: 595551604}
   m_Layer: 8
   m_Name: Terrain
   m_TagString: Ground
@@ -877,7 +877,7 @@ TerrainCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595551600}
-  m_Material: {fileID: 13400000, guid: 6637b959162cad44c9cf45bd83a4f77c, type: 2}
+  m_Material: {fileID: 13400000, guid: 11447aec016cbe644b5b1c4429ddf403, type: 2}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: ad9635410d7be2543b5a0e6354ca0194, type: 2}
   m_EnableTreeColliders: 1
@@ -896,18 +896,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &595551604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 595551600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40eaa8d3523eaf246bf37e7e5fcdf975, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &692987835
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,6 +1387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a494cfbb8208e428db020b2aaf9d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
   teleportDistance: 2
   teleportLayerMask:
     serializedVersion: 2
@@ -6723,6 +6712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a494cfbb8208e428db020b2aaf9d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
   teleportDistance: 2
   teleportLayerMask:
     serializedVersion: 2
@@ -6838,6 +6828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1a494cfbb8208e428db020b2aaf9d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
   teleportDistance: 2
   teleportLayerMask:
     serializedVersion: 2
@@ -7695,7 +7686,7 @@ PrefabInstance:
     - target: {fileID: 4007660289463144368, guid: 472c8764284f549488e1b19cc8b68f7b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4007660289463144368, guid: 472c8764284f549488e1b19cc8b68f7b,
         type: 3}
