@@ -43,7 +43,7 @@ public class Ball : MonoBehaviour
     {
         gameEnder = false;
 
-
+        timer = 20;
         waitForShoot = false;
         footballerTeleport = false;
         waitForShootTimer = 0;
