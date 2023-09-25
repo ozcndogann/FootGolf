@@ -68,7 +68,7 @@ public class UI_RandomLobby : MonoBehaviour
         {
             if (Switch.index == 0)
             {
-                PhotonNetwork.LoadLevel("Hole3");
+                PhotonNetwork.LoadLevel("Hole1");
             }
             else if (Switch.index == 1)
             {

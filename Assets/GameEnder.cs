@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
 public class GameEnder : MonoBehaviour
 {
     
@@ -11,7 +11,9 @@ public class GameEnder : MonoBehaviour
     {
         if (Ball.gameEnder)
         {
+            PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("MainMenu");
+            
         }
     }
 }
