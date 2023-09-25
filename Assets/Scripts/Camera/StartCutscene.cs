@@ -24,6 +24,7 @@ public class StartCutscene : MonoBehaviour
 
     private IEnumerator MoveCameraCoroutine()
     {
+        yield return new WaitForSeconds(0.5f);
 
         float journeyLength = Vector3.Distance(hole.position, target.position);
         float startTime = Time.time;
@@ -34,7 +35,7 @@ public class StartCutscene : MonoBehaviour
             float journeyFraction = distanceCovered / journeyLength;
 
             cam.transform.position = Vector3.Lerp(hole.position + new Vector3(0, 5, 0), target.position + new Vector3(0, 1, 0), journeyFraction);
-            yield return null; // Wait for the next frame
+            
         }
 
         cam.transform.position = target.position;
