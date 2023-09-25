@@ -9,7 +9,7 @@ public class Switch : MonoBehaviour
     public GameObject[] maps;
     public Button NextButton;
     public Button PrevButton;
-    int index;
+    public static int index;
 
     // Start is called before the first frame update
     void Start()
