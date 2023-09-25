@@ -12,7 +12,7 @@ public class UI_Start : MonoBehaviour
     }
     public void Practice()
     {
-        SceneManager.LoadScene("UIRandomGameSelect");
+        SceneManager.LoadScene("Hole1");
     }
     private IEnumerator DelayCheck(float delay)
     {

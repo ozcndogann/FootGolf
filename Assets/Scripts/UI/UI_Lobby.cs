@@ -42,48 +42,36 @@ public class UI_Lobby : MonoBehaviour
         //buraya sahalarýn türlerine göre if state gelcek
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRooms.practice)
         {
-            if (Switch.index == 0)
+            if (true)
             {
                 PhotonNetwork.LoadLevel("Hole1");
             }
-            else if (Switch.index == 1)
-            {
-                PhotonNetwork.LoadLevel("Hole3Rainy");
-            }
-            else if (Switch.index == 2)
-            {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
-            }
+            //if (true)
+            //{
+            //    PhotonNetwork.LoadLevel("Hole3Rainy");
+            //}
         }
         else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRooms.versus)
         {
-            if (Switch.index == 0)
-            {
-                PhotonNetwork.LoadLevel("Hole1");
-            }
-            else if (Switch.index == 1)
+            //if (true)
+            //{
+            //    PhotonNetwork.LoadLevel("Hole1");
+            //}
+            if (true)
             {
                 PhotonNetwork.LoadLevel("Hole3Rainy");
-            }
-            else if (Switch.index == 2)
-            {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
             }
         }
         else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRooms.Tournament)
         {
-            if (Switch.index == 0)
+            if (true)
             {
                 PhotonNetwork.LoadLevel("Hole1");
             }
-            else if (Switch.index == 1)
-            {
-                PhotonNetwork.LoadLevel("Hole3Rainy");
-            }
-            else if (Switch.index == 2)
-            {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
-            }
+            //if (true)
+            //{
+            //    PhotonNetwork.LoadLevel("Hole3Rainy");
+            //}
         }
     }
 

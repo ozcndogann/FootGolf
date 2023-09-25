@@ -64,75 +64,19 @@ public class UI_RandomLobby : MonoBehaviour
     }
     public void StartRandomGame()
     {
+        //buraya sahalarýn türlerine göre if state gelcek
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRandomRooms.practice)
         {
-            if (Switch.index == 0)
-            {
-                PhotonNetwork.LoadLevel("Hole1");
-            }
-            else if (Switch.index == 1)
-            {
-                PhotonNetwork.LoadLevel("Hole2");
-            }
-            else if (Switch.index == 2)
-            {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
-            }
+            PhotonNetwork.LoadLevel("Hole1");
         }
         else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRandomRooms.versus)
         {
-            if (Switch.index == 0)
-            {
-                PhotonNetwork.LoadLevel("Hole1");
-            }
-            else if (Switch.index == 1)
-            {
-                PhotonNetwork.LoadLevel("Hole3Rainy");
-            }
-            else if (Switch.index == 2)
-            {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
-            }
+            PhotonNetwork.LoadLevel("Hole1");
         }
         else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
         {
-            if (Switch.index == 0)
-            {
-                PhotonNetwork.LoadLevel("Hole1");
-            }
-            else if (Switch.index == 1)
-            {
-                PhotonNetwork.LoadLevel("Hole3Rainy");
-            }
-            else if (Switch.index == 2)
-            {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
-            }
+            PhotonNetwork.LoadLevel("Hole1");
         }
-
-
-
-
-
-
-
-
-
-
-
-        //buraya sahalarýn türlerine göre if state gelcek
-        //if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRandomRooms.practice)
-        //{
-        //    PhotonNetwork.LoadLevel("Hole1");
-        //}
-        //else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRandomRooms.versus)
-        //{
-        //    PhotonNetwork.LoadLevel("Hole1");
-        //}
-        //else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
-        //{
-        //    PhotonNetwork.LoadLevel("Hole1");
-        //}
     }
     
 }

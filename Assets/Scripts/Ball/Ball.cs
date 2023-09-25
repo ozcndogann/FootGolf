@@ -50,8 +50,6 @@ public class Ball : MonoBehaviour
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
-        moveAroundObject = cam.GetComponent<MoveAroundObject>();
-        zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
         cam.GetComponent<AudioListener>().enabled = true;
         cam2.GetComponent<AudioListener>().enabled = false;
@@ -82,7 +80,8 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         isAiming = false;
         lineRenderer.enabled = false; // baþta line görünmemesi için
-        
+        moveAroundObject = cam.GetComponent<MoveAroundObject>();
+        zoom = cam.GetComponent<Zoom>();
     }
 
     private void Update()
