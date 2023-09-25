@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TeleportTrigger : MonoBehaviour
 {
-    private Rigidbody ballRigidbody;
+    public Rigidbody ballRigidbody;
     public float teleportDistance = 2.0f; // teleport noktasýnýn duvardan uzaklýðýný belirliyoruz (hala iþe yaramasýný saðlayamadým) 
     public LayerMask teleportLayerMask; // teleport noktasý için zemin layerini seçmek
     public GameObject teleportDestination; // teleport destination diye bir empty gameobjectimiz var
