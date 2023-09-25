@@ -42,15 +42,36 @@ public class UI_Lobby : MonoBehaviour
         //buraya sahalarýn türlerine göre if state gelcek
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRooms.practice)
         {
-            PhotonNetwork.LoadLevel("Hole1");
+            if (true)
+            {
+                PhotonNetwork.LoadLevel("Hole1");
+            }
+            //if (true)
+            //{
+            //    PhotonNetwork.LoadLevel("Hole3Rainy");
+            //}
         }
         else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRooms.versus)
         {
-            PhotonNetwork.LoadLevel("Hole1");
+            //if (true)
+            //{
+            //    PhotonNetwork.LoadLevel("Hole1");
+            //}
+            if (true)
+            {
+                PhotonNetwork.LoadLevel("Hole3Rainy");
+            }
         }
         else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRooms.Tournament)
         {
-            PhotonNetwork.LoadLevel("Hole1");
+            if (true)
+            {
+                PhotonNetwork.LoadLevel("Hole1");
+            }
+            //if (true)
+            //{
+            //    PhotonNetwork.LoadLevel("Hole3Rainy");
+            //}
         }
     }
 

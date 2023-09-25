@@ -38,8 +38,12 @@ public class Ball : MonoBehaviour
     public bool footballerTeleport;
     //public static bool holeC;
     Player player;
+    public static bool gameEnder;
     private void Start()
     {
+        gameEnder = false;
+
+
         waitForShoot = false;
         footballerTeleport = false;
         waitForShootTimer = 0;
@@ -145,7 +149,7 @@ public class Ball : MonoBehaviour
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
@@ -155,7 +159,6 @@ public class Ball : MonoBehaviour
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
         //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
-        Debug.Log(timer);
     }
     private void OnMouseDown()
     {
@@ -218,7 +221,11 @@ public class Ball : MonoBehaviour
         Zoom.changeFovBool = false;
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        {
+
+            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        }
     }
     
     private void ProcessAim()
@@ -395,6 +402,7 @@ public class Ball : MonoBehaviour
     [PunRPC]
     private void NotifyConditionMet()
     {
+        gameEnder = true;
         StartCoroutine(LoadNextSceneWithDelay(1f));
     }
 
@@ -402,7 +410,9 @@ public class Ball : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         //PhotonNetwork.Destroy(gameObject);
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
     private IEnumerator DelayCheck(float delay)
     {
