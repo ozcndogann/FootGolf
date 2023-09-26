@@ -30,7 +30,7 @@ public class Ball : MonoBehaviour
     PunTurnManager punTurnManager;
     private GameObject hole;
     [SerializeField] public static float timer;
-    public GameObject footballer;
+    public GameObject ronaldinho,messi;
     Animator footballerAnimator;
     GameObject OurFootballer;
     public static bool waitForShoot, waitForShootTri;
@@ -41,6 +41,8 @@ public class Ball : MonoBehaviour
     public static bool gameEnder;
     private void Start()
     {
+        PlayerPrefs.GetInt("FootballerChooser", 0);
+        PlayerPrefs.SetInt("FootballerChooser", 1);
         gameEnder = false;
         whichAnim = 0;
         timer = 20;
@@ -61,7 +63,14 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
-        OurFootballer=Instantiate(footballer, new Vector3(transform.position.x + 2.6f, transform.position.y-0.3f, transform.position.z + 1.6f),Quaternion.identity);
+        if (PlayerPrefs.GetInt("FootballerChooser") == 0)
+        {
+            OurFootballer = Instantiate(ronaldinho, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+        }
+        else if (PlayerPrefs.GetInt("FootballerChooser") == 1)
+        {
+            OurFootballer = Instantiate(messi, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+        }
         OurFootballer.transform.rotation = Quaternion.Euler(0,transform.rotation.y-140, 0);
         footballerAnimator = OurFootballer.GetComponent<Animator>();
         OurFootballer.SetActive(false);
@@ -153,7 +162,7 @@ public class Ball : MonoBehaviour
             }
             if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
             {
-                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis/300);
+                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis/60);
             }
             if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
             {
