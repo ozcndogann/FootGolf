@@ -10,7 +10,7 @@ public class MoveAroundObject : MonoBehaviour
     private Vector3 previousPosition;
     public float heightWhileShooting;
     public static float rotationaroundyaxis;
-    GameObject passHit;
+    List<GameObject> passHit = new List<GameObject>();
     Ball ball;
     Ball1 ball1;
 
@@ -42,13 +42,13 @@ public class MoveAroundObject : MonoBehaviour
 
                 cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                 //if(rotationaroundyaxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 300, Space.World);
+                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis, Space.World);
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
-                //previousposition = newposition;
+                previousPosition = newposition;
             }
         }
-        else if (Ball.waitForShoot == true)
+        else if (Ball.waitForShoot == true || Ball.waitForShootTri == true)
         {
             cam.transform.position = new Vector3(cam.transform.position.x, /*heightwhileshooting*/target.transform.position.y + 2, cam.transform.position.z);
         }
@@ -100,15 +100,18 @@ public class MoveAroundObject : MonoBehaviour
             //Debug.Log("Did Hit");
             if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole")
             {
-                passHit = hit.transform.gameObject;
-                passHit.SetActive(false);
+                passHit.Add(hit.transform.gameObject);
+                hit.transform.gameObject.SetActive(false);
             }
 
         }
-        //if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
-        //{
-        //    passHit.SetActive(true);
-        //}
+        if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        {
+            for (int i = 0; i < passHit.Count; i++)
+            {
+                passHit[i].SetActive(true);
+            }
+        }
         else
         {
             
