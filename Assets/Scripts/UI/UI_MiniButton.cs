@@ -19,8 +19,14 @@ public class UI_MiniButton : MonoBehaviour
             SceneManager.LoadScene("MainMenu");
         }
     }
-
-
+    public void PushShop()
+    {
+        SceneManager.LoadScene("Shop");
+    }
+    public void PushPlayer()
+    {
+        SceneManager.LoadScene("Player");
+    }
     // Update is called once per frame
     void Update()
     {
