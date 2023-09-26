@@ -71,7 +71,7 @@ public class Ball : MonoBehaviour
         }
         else if (PlayerPrefs.GetInt("FootballerChooser") == 1)
         {
-            OurFootballer = Instantiate(messi, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+            OurFootballer = Instantiate(messi, new Vector3(transform.position.x + 2.6f, transform.position.y - 38f, transform.position.z + 1.6f), Quaternion.identity);
             OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
             footballerAnimator = OurFootballer.GetComponent<Animator>();
         }
@@ -169,7 +169,14 @@ public class Ball : MonoBehaviour
             }
             if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
             {
-                OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f);
+                if (PlayerPrefs.GetInt("FootballerChooser") == 0)
+                {
+                    OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f);
+                }
+                else if (PlayerPrefs.GetInt("FootballerChooser") == 1)
+                {
+                    OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 38f, transform.position.z + 1.6f);
+                }
                 OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
                 footballerTeleport = true;
             }
@@ -212,7 +219,14 @@ public class Ball : MonoBehaviour
                 {
                     footballerAnimator.SetBool("trivela", true);
                     waitForShootTri = true;
-                    OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 0.3f, OurFootballer.transform.position.z + 0.1f);
+                    if (PlayerPrefs.GetInt("FootballerChooser") == 0)
+                    {
+                        OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 0.3f, OurFootballer.transform.position.z + 0.1f);
+                    }
+                    else if (PlayerPrefs.GetInt("FootballerChooser") == 1)
+                    {
+                        OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 38f, OurFootballer.transform.position.z + 0.1f);
+                    }
                 }
                 //footballerAnimator.SetBool("penaltyKick", true);
             }
