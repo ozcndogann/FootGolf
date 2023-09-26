@@ -7,7 +7,7 @@ using static UnityEngine.ParticleSystem;
 public class BunkerDynamic : MonoBehaviour
 {
     private Rigidbody rb;
-    private Physics rbphy;
+    private PhysicMaterial rbphy;
     public GameObject particles;
     public static bool particleEnd = false;
     public static bool bunkerTouch = false;
@@ -20,7 +20,8 @@ public class BunkerDynamic : MonoBehaviour
     void Start()
     {
         rb = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
-        rbphy = GameObject.FindGameObjectWithTag("Ball").GetComponent<Physics>();
+        rbphy = GameObject.FindGameObjectWithTag("Ball").GetComponent<SphereCollider>().material;
+
         box = gameObject.GetComponent<BoxCollider>();
     }
 
@@ -62,10 +63,10 @@ public class BunkerDynamic : MonoBehaviour
 
     void ApplyBunkerPhysics()
     {
-        rb.mass = 1.65f;
+        rb.mass = 1f;
         rb.angularDrag = 0.05f;
         rb.drag = 0.075f;
-        
+        rbphy.bounciness = 0.15f;
     }
 
 
