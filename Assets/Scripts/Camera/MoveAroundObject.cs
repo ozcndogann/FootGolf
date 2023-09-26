@@ -42,10 +42,10 @@ public class MoveAroundObject : MonoBehaviour
 
                 cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                 //if(rotationaroundyaxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis, Space.World);
+                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis/300, Space.World);
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
-                previousPosition = newposition;
+                //previousPosition = newposition;
             }
         }
         else if (Ball.waitForShoot == true || Ball.waitForShootTri == true)

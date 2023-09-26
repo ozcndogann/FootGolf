@@ -153,7 +153,7 @@ public class Ball : MonoBehaviour
             }
             if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
             {
-                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis);
+                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis/300);
             }
             if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
             {
