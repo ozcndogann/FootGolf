@@ -7,11 +7,11 @@ using Photon.Pun;
 
 public class ListingPlayerMenu : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private Transform _playersSpace;//oyuncu iconlarýnýn gözükeceði yer
+    [SerializeField] public Transform _playersSpace;//oyuncu iconlarýnýn gözükeceði yer
 
-    [SerializeField] private ListingPlayer _listingPlayer;//listing player scriptini çekiyor
+    [SerializeField] public ListingPlayer _listingPlayer;//listing player scriptini çekiyor
 
-    private List<ListingPlayer> _listing = new List<ListingPlayer>();//yeni bir list nesnesi oluþturuyor
+    public List<ListingPlayer> _listing = new List<ListingPlayer>();//yeni bir list nesnesi oluþturuyor
 
 
     public override void OnPlayerEnteredRoom(Player newPlayer)//oyunuyu lobiye ekleyen fonksyon
