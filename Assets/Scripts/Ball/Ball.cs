@@ -42,7 +42,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
-        PlayerPrefs.SetInt("FootballerChooser", 1);
+        
         gameEnder = false;
         whichAnim = 0;
         timer = 20;
@@ -63,13 +63,13 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         punTurnManager = gameObject.GetComponent<PunTurnManager>();
-        if (PlayerPrefs.GetInt("FootballerChooser") == 0)
+        if (PlayerPrefs.GetInt("FootballerChooser") == 1)
         {
             OurFootballer = Instantiate(ronaldinho, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
             OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
             footballerAnimator = OurFootballer.GetComponent<Animator>();
         }
-        else if (PlayerPrefs.GetInt("FootballerChooser") == 1)
+        else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
         {
             OurFootballer = Instantiate(messi, new Vector3(transform.position.x + 2.6f, transform.position.y -0.3f, transform.position.z + 1.6f), Quaternion.identity);
             OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);

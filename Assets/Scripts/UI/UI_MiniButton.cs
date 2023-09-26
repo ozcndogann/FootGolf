@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class UI_MiniButton : MonoBehaviour
 {
+    
     public Button Home;
     public Button Raiting;
     public Button Settings;
@@ -16,15 +17,18 @@ public class UI_MiniButton : MonoBehaviour
     {
         if (Home == true)
         {
+            
             SceneManager.LoadScene("MainMenu");
         }
     }
     public void PushShop()
     {
+       
         SceneManager.LoadScene("Shop");
     }
     public void PushPlayer()
     {
+        
         SceneManager.LoadScene("Player");
     }
     // Update is called once per frame
