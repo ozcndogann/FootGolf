@@ -16,11 +16,12 @@ using UnityEngine.UI;
         if (Button == true)
         {
             SceneManager.LoadScene(Scene);
+            StartCoroutine(LoadScene());
         }
     }
     IEnumerator LoadScene()
     {
-        Animator.SetTrigger("end");
+        Animator.SetTrigger("End");
         yield return new WaitForSeconds(1.5f);
     }
     

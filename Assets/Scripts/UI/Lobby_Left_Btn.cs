@@ -9,14 +9,31 @@ using UnityEngine.SceneManagement;
 public class Lobby_Left_Btn : MonoBehaviour
 {
     public Button Home;
+    public Button Yes;
+    public Button No;
+    public GameObject Panel;
 
 
-    public void PushHome()
+   
+    public void OpenPopUp()
     {
         if (Home == true)
         {
+            Panel.gameObject.SetActive(true); 
+        }
+    
+    
+    }
+    public void ControlPopUp()
+    {
+        if (Yes == true)
+        {
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("MainMenu");
+        }
+        else if (No == true)
+        {
+            Panel.gameObject.SetActive(false);
         }
     }
 }

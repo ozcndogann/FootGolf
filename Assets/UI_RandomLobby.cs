@@ -24,16 +24,16 @@ public class UI_RandomLobby : MonoBehaviour
         if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
         {
             //eksik kisi ui
-            Debug.Log("eksik kisi");
+            Panel.transform.gameObject.SetActive(true);
         }
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length <= 3 && CreateAndJoinRandomRooms.Tournament)
         {
             //eksik kisi
-            Debug.Log("eksik kisi");
+            Panel.transform.gameObject.SetActive(true);
         }
         else
         {
-            Panel.transform.gameObject.SetActive(true);
+            canStart = false;
             
         }
         //if (PhotonNetwork.IsMasterClient)
@@ -50,13 +50,11 @@ public class UI_RandomLobby : MonoBehaviour
     {
         if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
         {
-            //eksik kisi ui
-            Debug.Log("eksik kisi");
+           
         }
         else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
         {
-            //eksik kisi
-            Debug.Log("eksik kisi");
+            
         }
         else
         {
