@@ -15,8 +15,16 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public static bool Tournament;
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
-    
+    public GameObject Panel;
+    public Button IGotIt;
 
+    public void ClosePopup()
+    {
+        if (IGotIt == true)
+        {
+            Panel.gameObject.SetActive(false);
+        }
+    }
     public void Start()
     {
     }
@@ -66,7 +74,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("bi mod seç");
+            Panel.transform.gameObject.SetActive(true);
         }
     }
     public override void OnJoinRandomFailed(short returnCode, string message)

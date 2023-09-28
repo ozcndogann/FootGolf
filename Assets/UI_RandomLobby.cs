@@ -9,7 +9,16 @@ public class UI_RandomLobby : MonoBehaviour
 {
     [SerializeField] private GameObject StartButton;
     private bool canStart;
-    private void Start()
+    public GameObject Panel;
+    public Button IGotIt;
+    public void ClosePopup()
+    {
+        if (IGotIt == true)
+        {
+            Panel.gameObject.SetActive(false);
+        }
+    }
+        private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
@@ -24,7 +33,8 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else
         {
-            canStart = false;
+            Panel.transform.gameObject.SetActive(true);
+            
         }
         //if (PhotonNetwork.IsMasterClient)
         //{
@@ -35,7 +45,8 @@ public class UI_RandomLobby : MonoBehaviour
         //    StartButton.SetActive(false);
         //}
     }
-    private void Update()
+   
+        private void Update()
     {
         if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
         {
@@ -57,6 +68,7 @@ public class UI_RandomLobby : MonoBehaviour
         }
         
     }
+
     IEnumerator WaitForStart()
     {
         yield return new WaitForSeconds(3.0f); 

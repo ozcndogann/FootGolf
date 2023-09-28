@@ -14,6 +14,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     private string characters = "0123456789";
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
+    public GameObject panel;
+    public Button IGotIt;
 
 
     public void Update()
@@ -45,6 +47,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         Tournament = true;
         roomOptions.MaxPlayers = 4;
     }
+    public void ClosePopup()
+    {
+        if (IGotIt == true)
+        {
+            panel.gameObject.SetActive(false);
+        }
+    }
 
     public void CreateRoom()
     {
@@ -56,7 +65,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         }
         else
         {
-            //lütfen bi mod seçin pop up'ý
+            panel.transform.gameObject.SetActive(true);
         }
 
 
