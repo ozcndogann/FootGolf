@@ -24,16 +24,21 @@ public class Lobby_Left_Btn : MonoBehaviour
     
     
     }
-    public void ControlPopUp()
+    public void YesPopUp()
     {
         if (Yes == true)
         {
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("MainMenu");
         }
-        else if (No == true)
+        
+    }
+    public void NoPopUp()
+    {
+        if (No == true)
         {
             Panel.gameObject.SetActive(false);
         }
     }
+
 }
