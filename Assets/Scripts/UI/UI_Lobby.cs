@@ -39,7 +39,6 @@ public class UI_Lobby : MonoBehaviour
     }
     public void StartGame()
     {
-        //buraya sahalarýn türlerine göre if state gelcek
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRooms.practice)
         {
             if (Switch.index == 0)

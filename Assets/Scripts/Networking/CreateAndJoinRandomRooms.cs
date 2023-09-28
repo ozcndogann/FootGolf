@@ -15,40 +15,14 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public static bool Tournament;
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
-    public Button practiceBtn;
-    public Button VersusBtn;
-    public Button TournamentBtn;
     
 
     public void Start()
     {
-        //practice = false;
-        //versus = false;
-        //Tournament = false;
     }
     public void Update()
     {
-        //if (practice)
-        //{
-        //    practiceBtn.animator.SetBool("Selected", true);
-        //    VersusBtn.animator.SetBool("Normal", true);
-        //    TournamentBtn.animator.SetBool("Normal", true);
-
-        //}
-        //if (versus)
-        //{
-        //    VersusBtn.animator.SetBool("Selected", true);
-        //    practiceBtn.animator.SetBool("Normal", true);
-        //    TournamentBtn.animator.SetBool("Normal", true);
-
-        //}
-        //if (Tournament)
-        //{
-        //    TournamentBtn.animator.SetBool("Selected", true);
-        //    practiceBtn.animator.SetBool("Normal", true);
-        //    VersusBtn.animator.SetBool("Normal", true);
-
-        //}
+        Debug.Log("randompractice: " + practice + " randomversus: " + versus + " randomtournement: " + Tournament);
     }
 
     public void IsPractice()
