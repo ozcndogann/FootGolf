@@ -9,6 +9,10 @@ public class UI_Lobby : MonoBehaviour
 {
     [SerializeField] public TMP_Text codeText;
     [SerializeField] private GameObject StartButton;
+    public TMP_Text popup_Text;
+    private GameObject window;
+    private Queue<string> popupQueue;
+
 
     private void Start()
     {
@@ -37,6 +41,10 @@ public class UI_Lobby : MonoBehaviour
             Debug.Log("eksik kisi");
         }
     }
+    public void ShowPopup()
+    {
+
+    }
     public void StartGame()
     {
         //buraya sahalarýn türlerine göre if state gelcek
@@ -53,6 +61,10 @@ public class UI_Lobby : MonoBehaviour
             else if (Switch.index == 2)
             {
                 PhotonNetwork.LoadLevel("Hole2Rainy");
+            }
+            else
+            {
+
             }
         }
         else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRooms.versus)
