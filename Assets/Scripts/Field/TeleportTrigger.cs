@@ -45,7 +45,7 @@ public class TeleportTrigger : MonoBehaviour
 
             IEnumerator WFSOOB()
             {
-                yield return new WaitForSeconds(1.95f);
+                yield return new WaitForSeconds(0.15f);
 
                 ballRigidbody.velocity = Vector3.zero; // harekete devam etmesin diye hýzý sýfýrlýyoruz
                 other.transform.position = newPosition; // topu teleport ediyoruz o noktaya
