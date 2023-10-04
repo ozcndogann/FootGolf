@@ -183,12 +183,16 @@ public class Ball : MonoBehaviour
         }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-
-            if ((bool)player.CustomProperties["turn"])
+            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
             {
-                Debug.Log("actor: " + player.ActorNumber);
+                if ((bool)player.CustomProperties["turn"])
+                {
+                    Debug.Log("actor: " + player.ActorNumber);
+                }
             }
+            
         }
+       
         //Debug.Log("shot count: " + ShotCounter.ShotCount);
         //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
     }
