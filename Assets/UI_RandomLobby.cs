@@ -52,7 +52,7 @@ public class UI_RandomLobby : MonoBehaviour
         {
            
         }
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length < 3 && CreateAndJoinRandomRooms.Tournament)
         {
             
         }
