@@ -181,6 +181,14 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+
+            if ((bool)player.CustomProperties["turn"])
+            {
+                Debug.Log("actor: " + player.ActorNumber);
+            }
+        }
         //Debug.Log("shot count: " + ShotCounter.ShotCount);
         //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
     }
@@ -260,14 +268,7 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-
-            if ((bool)player.CustomProperties["turn"])
-            {
-                Debug.Log("actor: "+player.ActorNumber);
-            }
-        }
+        
     }
     
     private void ProcessAim()
