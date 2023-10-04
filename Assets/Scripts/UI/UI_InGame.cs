@@ -92,6 +92,7 @@ public class UI_InGame : MonoBehaviour
     }
     public void MainMenu()
     {
+        ShotCounter.ShotCount = 0;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }

@@ -11,6 +11,7 @@ public class GameEnder : MonoBehaviour
     {
         if (Ball.gameEnder)
         {
+            ShotCounter.ShotCount = 0;
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("MainMenu");
             

@@ -20,7 +20,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void Update()
     {
-        Debug.Log("practice: " + practice + " versus: " + versus + " tournement: " + Tournament);
+        //Debug.Log("practice: " + practice + " versus: " + versus + " tournement: " + Tournament);
     }
 
     public void IsPractice()

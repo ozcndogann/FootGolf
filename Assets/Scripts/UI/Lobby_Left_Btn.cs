@@ -28,6 +28,7 @@ public class Lobby_Left_Btn : MonoBehaviour
     {
         if (Yes == true)
         {
+            ShotCounter.ShotCount = 0;
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("MainMenu");
         }

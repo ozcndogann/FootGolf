@@ -27,7 +27,6 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera cam2;
     public PhotonView view;
-    PunTurnManager punTurnManager;
     private GameObject hole;
     [SerializeField] public static float timer;
     public GameObject ronaldinho,messi;
@@ -36,13 +35,10 @@ public class Ball : MonoBehaviour
     public static bool waitForShoot, waitForShootTri;
     public float waitForShootTimer,waitForShootTriTimer,whichAnim;
     public bool footballerTeleport;
-    //public static bool holeC;
-    Player player;
     public static bool gameEnder;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
-        
         gameEnder = false;
         whichAnim = 0;
         timer = 20;
@@ -62,7 +58,6 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
-        punTurnManager = gameObject.GetComponent<PunTurnManager>();
         if (PlayerPrefs.GetInt("FootballerChooser") == 1)
         {
             OurFootballer = Instantiate(ronaldinho, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
@@ -102,7 +97,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        
         if (view.IsMine)
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
@@ -189,6 +183,7 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
+        Debug.Log("shot count: " + ShotCounter.ShotCount);
         //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
     }
     private void OnMouseDown()
@@ -260,11 +255,11 @@ public class Ball : MonoBehaviour
 
         shootCloser = true;
         Zoom.changeFovBool = false;
+        ShotCounter.ShotCount += 1;
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
         {
-
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
     }
@@ -429,7 +424,6 @@ public class Ball : MonoBehaviour
                 cam.GetComponent<AudioListener>().enabled = false;
                 cam2.GetComponent<AudioListener>().enabled = true;
                 cam2.enabled = (true);
-                Debug.Log("girdi");
                 CheckAllPlayers();
             }
         }
@@ -451,9 +445,7 @@ public class Ball : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         //PhotonNetwork.Destroy(gameObject);
-        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
     }
     private IEnumerator DelayCheck(float delay)
     {
