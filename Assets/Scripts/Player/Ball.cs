@@ -437,7 +437,10 @@ public class Ball : MonoBehaviour
     [PunRPC]
     private void NotifyConditionMet()
     {
-        gameEnder = true;
+        if (GameEnder.EndGame)
+        {
+            gameEnder = true;
+        }
         StartCoroutine(LoadNextSceneWithDelay(1f));
     }
 
@@ -445,7 +448,11 @@ public class Ball : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         //PhotonNetwork.Destroy(gameObject);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (!gameEnder)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        
     }
     private IEnumerator DelayCheck(float delay)
     {
