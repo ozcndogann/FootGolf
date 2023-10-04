@@ -36,6 +36,7 @@ public class Ball : MonoBehaviour
     public float waitForShootTimer,waitForShootTriTimer,whichAnim;
     public bool footballerTeleport;
     public static bool gameEnder;
+    Photon.Realtime.Player player;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -102,13 +103,10 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                //ProcessAim();
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        //Stop();
-                        //ProcessAim();
                         timer -= Time.deltaTime;
                         if (timer > 0)
                         {
@@ -183,7 +181,7 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
-        Debug.Log("shot count: " + ShotCounter.ShotCount);
+        //Debug.Log("shot count: " + ShotCounter.ShotCount);
         //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
     }
     private void OnMouseDown()
@@ -261,6 +259,14 @@ public class Ball : MonoBehaviour
         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
         {
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        }
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+
+            if ((bool)player.CustomProperties["turn"])
+            {
+                Debug.Log("actor: "+player.ActorNumber);
+            }
         }
     }
     
