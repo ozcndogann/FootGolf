@@ -442,7 +442,6 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
-
         StartCoroutine(DelayCheck(1f));
     }
 
