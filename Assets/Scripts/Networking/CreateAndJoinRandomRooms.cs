@@ -30,7 +30,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     public void Update()
     {
-        Debug.Log("randompractice: " + practice + " randomversus: " + versus + " randomtournement: " + Tournament);
+        //Debug.Log("randompractice: " + practice + " randomversus: " + versus + " randomtournement: " + Tournament);
     }
 
     public void IsPractice()
