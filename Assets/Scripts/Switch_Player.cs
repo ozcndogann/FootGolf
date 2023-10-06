@@ -9,6 +9,9 @@ public class Switch_Player : MonoBehaviour
     public GameObject[] maps;
     public Button NextButton;
     public Button PrevButton;
+    public Button PlayerSelect;
+    public GameObject Selected;
+    
 
     public static int index;
 
@@ -17,6 +20,8 @@ public class Switch_Player : MonoBehaviour
     {
 
         index = 0;
+        
+
     }
 
     // Update is called once per frame
@@ -50,26 +55,45 @@ public class Switch_Player : MonoBehaviour
     public void Next()
     {
         index += 1;
+      
         for (int i = 0; i < maps.Length; i++)
         {
 
             maps[i].gameObject.SetActive(false);
             maps[index].gameObject.SetActive(true);
 
+
+        }
+        Selected.SetActive(false);
+        if (PlayerPrefs.GetInt("FootballerChooser") == index)
+        {
+            Selected.SetActive(true);
         }
         Debug.Log(index);
     }
     public void Prev()
     {
         index -= 1;
+ 
         for (int i = 0; i < maps.Length; i++)
         {
 
             maps[i].gameObject.SetActive(false);
             maps[index].gameObject.SetActive(true);
 
+
+        }
+        Selected.SetActive(false);
+        if(PlayerPrefs.GetInt("FootballerChooser")== index)
+        {
+            Selected.SetActive(true);
         }
         Debug.Log(index);
     }
+    public void PLayerSelection()
+    {
+        Selected.SetActive(true);
 
-}
+    }
+    
+        }

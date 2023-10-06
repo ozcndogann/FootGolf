@@ -9,6 +9,7 @@ public class Switch : MonoBehaviour
     public GameObject[] maps;
     public Button NextButton;
     public Button PrevButton;
+
     
     public static int index;
 
