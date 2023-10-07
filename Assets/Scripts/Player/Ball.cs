@@ -37,6 +37,7 @@ public class Ball : MonoBehaviour
     public bool footballerTeleport;
     public static bool gameEnder;
     Photon.Realtime.Player player;
+    public bool gravityChanger;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -188,13 +189,24 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    Debug.Log("actor: " + player.ActorNumber);
+                    //Debug.Log("actor: " + player.ActorNumber);
                 }
             }
 
         }
-        //Debug.Log("shot count: " + ShotCounter.ShotCount);
-        //Debug.Log(PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+
+        
+        if (gravityChanger)
+        {
+            Physics.gravity = Vector3.zero;
+        }
+        else
+        {
+            Physics.gravity = new Vector3(0,-12,0);
+        }
+        Debug.Log(gravityChanger);
+        Debug.Log("gravity: " + Physics.gravity);
+        
     }
     private void OnMouseDown()
     {
@@ -262,7 +274,6 @@ public class Ball : MonoBehaviour
                 Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
             }
         }
-
         shootCloser = true;
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
@@ -280,6 +291,7 @@ public class Ball : MonoBehaviour
     {
         if (!isAiming || !isIdle)
         {
+            gravityChanger = false;
             return; // exit method
         }
         if (!shooted)
@@ -322,7 +334,6 @@ public class Ball : MonoBehaviour
     {
         isAiming = false;
         lineRenderer.enabled = false;
-
         Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
         Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
         float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
@@ -351,6 +362,7 @@ public class Ball : MonoBehaviour
         }
         Vector3 finalDirection = upForce + direction + curveAmount * curveVector;
 
+        
         rb.AddForce(-finalDirection * force);
         isIdle = false;
         shooted = false;
@@ -420,6 +432,7 @@ public class Ball : MonoBehaviour
     {
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
+        gravityChanger = true;
         isIdle = true;
     }
 
@@ -442,7 +455,6 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
-
         StartCoroutine(DelayCheck(1f));
     }
 
