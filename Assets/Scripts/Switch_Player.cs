@@ -27,8 +27,6 @@ public class Switch_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        PlayerPrefs.SetInt("FootballerChooser", index);
         Debug.Log(index);
         if (index == 1)
         {
@@ -93,6 +91,7 @@ public class Switch_Player : MonoBehaviour
     public void PLayerSelection()
     {
         Selected.SetActive(true);
+        PlayerPrefs.SetInt("FootballerChooser", index);
 
     }
     
