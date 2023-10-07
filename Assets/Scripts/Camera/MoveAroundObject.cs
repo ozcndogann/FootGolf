@@ -23,6 +23,11 @@ public class MoveAroundObject : MonoBehaviour
     private void Update()
     {
         #region CamFollow
+        //GameObject[] players = GameObject.FindGameObjectsWithTag("Ball");
+        //foreach (GameObject p in players)
+        //{
+        //    Debug.Log(p.transform.position);
+        //}
         if (Ball.shooted == false)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
