@@ -283,8 +283,9 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
+        gravityChanger = false;
 
-        
+
     }
     
     private void ProcessAim()
