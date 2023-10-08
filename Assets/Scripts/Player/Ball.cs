@@ -38,9 +38,11 @@ public class Ball : MonoBehaviour
     public static bool gameEnder;
     Photon.Realtime.Player player;
     public bool gravityChanger;
+    public static bool lineRendererOn;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
+        lineRendererOn = false;
         gameEnder = false;
         whichAnim = 0;
         timer = 20;
@@ -158,7 +160,15 @@ public class Ball : MonoBehaviour
             }
             if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
             {
-                OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis/60);
+                if (lineRendererOn == false)
+                {
+                    OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
+                }
+                else
+                {
+                    OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 150);
+                }
+                
             }
             if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
             {
@@ -304,7 +314,8 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        DrawLine(transform.position - (worldPoint.Value - transform.position)); // aim line çiz
+        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+        lineRendererOn = true;
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
         if ((worldPoint.Value - transform.position).y < 0)
         {
@@ -317,6 +328,7 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
+            lineRendererOn = false;
             shooted = true;
             Zoom.changeFovBool = true;
         }
