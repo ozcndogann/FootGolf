@@ -39,9 +39,11 @@ public class Ball : MonoBehaviour
     Photon.Realtime.Player player;
     public bool gravityChanger;
     public static bool lineRendererOn;
+    public static bool lineRendererController;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
+        lineRendererController = false;
         lineRendererOn = false;
         gameEnder = false;
         whichAnim = 0;
@@ -117,6 +119,7 @@ public class Ball : MonoBehaviour
                         }
                         else
                         {
+                            lineRendererController = false;
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
@@ -166,7 +169,7 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 150);
+                    OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
                 }
                 
             }
@@ -284,6 +287,7 @@ public class Ball : MonoBehaviour
                 Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
             }
         }
+        lineRendererController = false;
         shootCloser = true;
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
@@ -315,7 +319,12 @@ public class Ball : MonoBehaviour
             return; // exit method
         }
         DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
-        lineRendererOn = true;
+        if (lineRendererController == false)
+        {
+            lineRendererOn = true;
+            lineRendererController = true;
+        }
+        
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
         if ((worldPoint.Value - transform.position).y < 0)
         {
