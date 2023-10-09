@@ -38,6 +38,7 @@ public class Zoom : MonoBehaviour
         currentFOV = Camera.main.fieldOfView;
         if (changeFovBool == true)
         {
+            //Ball.lineRendererController = false;
             ChangeFOV();
         }
         else if (Ball.waitForShoot == true)

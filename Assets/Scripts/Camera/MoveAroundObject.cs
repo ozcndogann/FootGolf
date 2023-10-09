@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class MoveAroundObject : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
+    //[SerializeField] private GameObject targetObj;
     [SerializeField] private float distanceToTarget = 4;
     private Vector3 previousPosition;
     public float heightWhileShooting;
@@ -13,22 +15,42 @@ public class MoveAroundObject : MonoBehaviour
     List<GameObject> passHit = new List<GameObject>();
     Ball ball;
     Ball1 ball1;
-
+    //PhotonView vievv;
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Ball").transform;
+        //targetObj = GameObject.FindGameObjectWithTag("Ball");
         ball = target.GetComponent<Ball>();
         ball1 = target.GetComponent<Ball1>();
+        //vievv = targetObj.GetComponent<PhotonView>();
     }
     private void Update()
     {
-        #region CamFollow
+        //foreach (Player player in PhotonNetwork.PlayerList)
+        //{
+        //    if (player.CustomProperties["turn"] != null)
+        //    {
+        //        if ((bool)player.CustomProperties["turn"]/* && !player.IsLocal*/)
+        //        {
+        //            //PhotonView.Find(player.ActorNumber);
+        //            vievv = PhotonNetwork.GetPhotonView(player.ActorNumber);
+        //            Debug.Log(vievv);
+        //            GameObject otherPlayerObject = vievv.gameObject;
+        //            target = otherPlayerObject.transform;
+        //        }
+        //    }
+        //}
+
+
+
         //GameObject[] players = GameObject.FindGameObjectsWithTag("Ball");
         //foreach (GameObject p in players)
         //{
         //    Debug.Log(p.transform.position);
         //}
-        if (Ball.shooted == false)
+        #region CamFollow
+
+        if (Ball.shooted == false && Ball.lineRendererOn == false)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
@@ -53,7 +75,7 @@ public class MoveAroundObject : MonoBehaviour
                 //previousPosition = newposition;
             }
         }
-        if (Ball.lineRendererOn == true)
+        else if (Ball.lineRendererOn == true)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
@@ -72,7 +94,7 @@ public class MoveAroundObject : MonoBehaviour
 
                 cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                 //if(rotationaroundyaxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 150, Space.World);
+                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 300, Space.World);
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
                 //previousPosition = newposition;
