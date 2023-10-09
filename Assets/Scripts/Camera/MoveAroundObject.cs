@@ -23,6 +23,11 @@ public class MoveAroundObject : MonoBehaviour
     private void Update()
     {
         #region CamFollow
+        //GameObject[] players = GameObject.FindGameObjectsWithTag("Ball");
+        //foreach (GameObject p in players)
+        //{
+        //    Debug.Log(p.transform.position);
+        //}
         if (Ball.shooted == false)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
@@ -43,6 +48,31 @@ public class MoveAroundObject : MonoBehaviour
                 cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                 //if(rotationaroundyaxis)
                 cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis/60, Space.World);
+                cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+
+                //previousPosition = newposition;
+            }
+        }
+        if (Ball.lineRendererOn == true)
+        {
+            cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                Vector3 newposition = cam.ScreenToViewportPoint(Input.mousePosition);
+                //debug.log(newposition+"new");
+                //debug.log(previousposition+"previous");
+                Vector3 direction = previousPosition - newposition;
+                rotationaroundyaxis = direction.x * 180;
+
+                cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+                //if(rotationaroundyaxis)
+                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 150, Space.World);
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
                 //previousPosition = newposition;
