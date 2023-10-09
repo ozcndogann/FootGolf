@@ -207,8 +207,13 @@ public class Ball : MonoBehaviour
             }
 
         }
+        if (!view.IsMine && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        {
+            // Spectator mode: Do not process input for spectator
+            return;
+        }
 
-        
+
         if (gravityChanger)
         {
             Physics.gravity = Vector3.zero;
@@ -217,8 +222,8 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        Debug.Log(gravityChanger);
-        Debug.Log("gravity: " + Physics.gravity);
+        //Debug.Log(gravityChanger);
+        //Debug.Log("gravity: " + Physics.gravity);
         
     }
     private void OnMouseDown()
