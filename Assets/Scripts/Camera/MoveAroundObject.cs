@@ -28,7 +28,7 @@ public class MoveAroundObject : MonoBehaviour
         //{
         //    Debug.Log(p.transform.position);
         //}
-        if (Ball.shooted == false)
+        if (Ball.shooted == false/* && Ball.lineRendererOn==false*/)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
@@ -53,31 +53,31 @@ public class MoveAroundObject : MonoBehaviour
                 //previousPosition = newposition;
             }
         }
-        if (Ball.lineRendererOn == true)
-        {
-            cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
-            cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+        //else if (Ball.lineRendererOn == true)
+        //{
+        //    cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+        //    cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                Vector3 newposition = cam.ScreenToViewportPoint(Input.mousePosition);
-                //debug.log(newposition+"new");
-                //debug.log(previousposition+"previous");
-                Vector3 direction = previousPosition - newposition;
-                rotationaroundyaxis = direction.x * 180;
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+        //    }
+        //    else if (Input.GetMouseButton(0))
+        //    {
+        //        Vector3 newposition = cam.ScreenToViewportPoint(Input.mousePosition);
+        //        //debug.log(newposition+"new");
+        //        //debug.log(previousposition+"previous");
+        //        Vector3 direction = previousPosition - newposition;
+        //        rotationaroundyaxis = direction.x * 180;
 
-                cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
-                //if(rotationaroundyaxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 150, Space.World);
-                cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+        //        cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+        //        //if(rotationaroundyaxis)
+        //        cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 150, Space.World);
+        //        cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
-                //previousPosition = newposition;
-            }
-        }
+        //        //previousPosition = newposition;
+        //    }
+        //}
         else if (Ball.waitForShoot == true || Ball.waitForShootTri == true)
         {
             cam.transform.position = new Vector3(cam.transform.position.x, /*heightwhileshooting*/target.transform.position.y + 2, cam.transform.position.z);
