@@ -48,7 +48,7 @@ public class MoveAroundObject : MonoBehaviour
         foreach (GameObject p in players)
         {
 
-            if (p.GetComponent<Ball>().camlock)
+            if (!p.GetComponent<Ball>().camlock)
             {
                 target = p.transform;
                 //Debug.Log("lala");
