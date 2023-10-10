@@ -52,6 +52,10 @@ public class MoveAroundObject : MonoBehaviour
                 target = p.transform;
                 //Debug.Log("lala");
             }
+            else
+            {
+                target = GameObject.FindGameObjectWithTag("Ball").transform;
+            }
         }
         #region CamFollow
 
