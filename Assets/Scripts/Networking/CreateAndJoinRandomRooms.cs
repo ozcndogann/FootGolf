@@ -27,6 +27,9 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     public void Start()
     {
+        PlayerPrefs.GetInt("MatchType");
+
+
     }
     public void Update()
     {
@@ -40,6 +43,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = false;
         roomOptions.MaxPlayers = 1;
+        PlayerPrefs.SetInt("MatchType", 0);
     }
 
     public void IsVersus()
@@ -48,6 +52,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         versus = true;
         Tournament = false;
         roomOptions.MaxPlayers = 2;
+        PlayerPrefs.SetInt("MatchType", 1);
     }
 
     public void IsTournament()
@@ -56,6 +61,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = true;
         roomOptions.MaxPlayers = 4;
+        PlayerPrefs.SetInt("MatchType", 2);
     }
 
     public void JoinRandomRoom()

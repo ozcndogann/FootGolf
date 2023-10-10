@@ -8,7 +8,6 @@ using Photon.Pun.UtilityScripts;
 
 public class Ball : MonoBehaviour
 {
-    Vector3 direction;
     [SerializeField] private LineRenderer lineRenderer; // aim için line
     private bool isIdle; // top duruyor mu hareketli mi boolu
     private bool isAiming; // oyuncu aim halinde mi boolu
@@ -41,7 +40,6 @@ public class Ball : MonoBehaviour
     public bool gravityChanger;
     public static bool lineRendererOn;
     public static bool lineRendererController;
-    public bool camlock;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -68,18 +66,18 @@ public class Ball : MonoBehaviour
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         if (PlayerPrefs.GetInt("FootballerChooser") == 1)
         {
-            OurFootballer = Instantiate(ronaldinho, new Vector3(transform.position.x + 2.6f * Mathf.Sign(direction.x), transform.position.y - 0.3f, transform.position.z + 1.6f * Mathf.Sign(direction.z)), Quaternion.identity);
-            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            OurFootballer = Instantiate(ronaldinho, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+            OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
             footballerAnimator = OurFootballer.GetComponent<Animator>();
         }
         else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
         {
-            OurFootballer = Instantiate(messi, new Vector3(transform.position.x + 2.6f * Mathf.Sign(direction.x), transform.position.y -0.3f, transform.position.z + 1.6f * Mathf.Sign(direction.z)), Quaternion.identity);
-            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            OurFootballer = Instantiate(messi, new Vector3(transform.position.x + 2.6f, transform.position.y -0.3f, transform.position.z + 1.6f), Quaternion.identity);
+            OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
             footballerAnimator = OurFootballer.GetComponent<Animator>();
         }
 
-        //OurFootballer.SetActive(false);
+        OurFootballer.SetActive(false);
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -105,8 +103,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y-320, 0);
-        Debug.Log("cam transform" + cam.transform.rotation.eulerAngles.y);
         if (view.IsMine)
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
@@ -149,7 +145,7 @@ public class Ball : MonoBehaviour
             }
             if (waitForShootTimer >= 0.9f)
             {
-                //OurFootballer.SetActive(false);
+                OurFootballer.SetActive(false);
                 waitForShoot = false;
                 waitForShootTimer = 0;
                 footballerAnimator.SetBool("penaltyKick", false);
@@ -158,14 +154,14 @@ public class Ball : MonoBehaviour
             }
             if (waitForShootTriTimer >= 0.65f)
             {
-                //OurFootballer.SetActive(false);
+                OurFootballer.SetActive(false);
                 waitForShootTri = false;
                 waitForShootTriTimer = 0;
                 footballerAnimator.SetBool("penaltyKick", false);
                 footballerAnimator.SetBool("trivela", false);
                 OnMouseShootPart();
             }
-            if (/*shooted == false && rb.velocity.magnitude < stopVelocity && */Input.GetMouseButton(0))
+            if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
             {
                 if (lineRendererOn == false)
                 {
@@ -179,8 +175,8 @@ public class Ball : MonoBehaviour
             }
             if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
             {
-                OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f * Mathf.Sign(direction.x), transform.position.y - 0.3f, transform.position.z + 1.6f * Mathf.Sign(direction.z));
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+                OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f);
+                OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
                 footballerTeleport = true;
             }
             else if(rb.velocity.magnitude > stopVelocity)
@@ -202,24 +198,24 @@ public class Ball : MonoBehaviour
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.CustomProperties["turn"] != null)
+            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
                     //Debug.Log("actor: " + player.ActorNumber);
-                    camlock = true;
+                    if(player.ActorNumber ==1)
+                    {
+
+
+                    }
                 }
-                else
-                {
-                    camlock = false;
-                }
+
             }
 
         }
         if (!view.IsMine && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             // Spectator mode: Do not process input for spectator
-            Debug.Log("spectator");
             return;
         }
 
@@ -259,11 +255,11 @@ public class Ball : MonoBehaviour
                     waitForShootTri = true;
                     if (PlayerPrefs.GetInt("FootballerChooser") == 0)
                     {
-                        OurFootballer.transform.position = new Vector3(transform.position.x + 1.5f * Mathf.Sign(direction.x), transform.position.y - 0.3f, transform.position.z+1.6f * Mathf.Sign(direction.z));
+                        OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 0.3f, OurFootballer.transform.position.z + 0.1f);
                     }
                     else if (PlayerPrefs.GetInt("FootballerChooser") == 1)
                     {
-                        OurFootballer.transform.position = new Vector3(transform.position.x + 1.5f * Mathf.Sign(direction.x), transform.position.y - 0.3f, transform.position.z + 1.6f * Mathf.Sign(direction.z));
+                        OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 0.3f, OurFootballer.transform.position.z + 0.1f);
                     }
                 }
                 //footballerAnimator.SetBool("penaltyKick", true);
@@ -313,6 +309,7 @@ public class Ball : MonoBehaviour
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
         gravityChanger = false;
+
 
     }
     
@@ -371,7 +368,7 @@ public class Ball : MonoBehaviour
         isAiming = false;
         lineRenderer.enabled = false;
         Vector3 horizontalWorldPoint = new Vector3(worldPoint.x, transform.position.y, worldPoint.z);
-        direction = (horizontalWorldPoint - transform.position).normalized;
+        Vector3 direction = (horizontalWorldPoint - transform.position).normalized;
         float lineLength = Vector3.Distance(transform.position, horizontalWorldPoint);
         float force = Mathf.Min(lineLength, 1f) * shotPower;
         float curveAmount = 0.5f; // Adjust this value to control the curve strength
@@ -409,7 +406,7 @@ public class Ball : MonoBehaviour
     {
         if (!shooted)
         {
-            direction = worldPoint - transform.position; // lineýn directioný
+            Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
             float maxLength = 1.25f; // max line length
 

@@ -31,6 +31,10 @@ public class UI_MiniButton : MonoBehaviour
         
         SceneManager.LoadScene("Player");
     }
+    public void PushSettings()
+    {
+        SceneManager.LoadScene("Settings");
+    }
     // Update is called once per frame
     void Update()
     {

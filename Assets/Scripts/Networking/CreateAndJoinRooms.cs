@@ -30,6 +30,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = false;
         roomOptions.MaxPlayers = 1;
+        
     }
 
     public void IsVersus()
@@ -38,6 +39,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = true;
         Tournament = false;
         roomOptions.MaxPlayers = 2;
+
     }
 
     public void IsTournament()
