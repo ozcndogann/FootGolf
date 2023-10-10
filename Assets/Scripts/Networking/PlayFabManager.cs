@@ -59,7 +59,6 @@ public class PlayFabManager : MonoBehaviour
             name = result.InfoResultPayload.PlayerProfile.DisplayName;
             PlayerPrefs.SetString("Username", name);
             userName.text = name;
-            PlayerPrefs.SetInt("NameWindowOpen", 1);
         }
         if (name == null)
         {
@@ -69,6 +68,7 @@ public class PlayFabManager : MonoBehaviour
     }
     public void SubmitNameButton()
     {
+        PlayerPrefs.SetInt("NameWindowOpen", 1);
         var request = new UpdateUserTitleDisplayNameRequest
         {
             DisplayName = nameInput.text,
