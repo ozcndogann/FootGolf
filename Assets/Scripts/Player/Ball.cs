@@ -206,10 +206,10 @@ public class Ball : MonoBehaviour
                     //Debug.Log("actor: " + player.ActorNumber);
                     camlock = true;
                 }
-                //else
-                //{
-                //    camlock = false;
-                //}
+                else
+                {
+                    camlock = false;
+                }
             }
 
         }
