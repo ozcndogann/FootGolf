@@ -30,7 +30,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = false;
         roomOptions.MaxPlayers = 1;
-        
+        PlayerPrefs.SetInt("MatchType", 0);
+
     }
 
     public void IsVersus()
@@ -39,6 +40,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = true;
         Tournament = false;
         roomOptions.MaxPlayers = 2;
+        PlayerPrefs.SetInt("MatchType", 1);
 
     }
 
@@ -48,6 +50,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         versus = false;
         Tournament = true;
         roomOptions.MaxPlayers = 4;
+        PlayerPrefs.SetInt("MatchType", 2);
     }
     public void ClosePopup()
     {
