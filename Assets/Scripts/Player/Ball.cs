@@ -199,7 +199,7 @@ public class Ball : MonoBehaviour
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+            if (player.CustomProperties["turn"] != null)
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
