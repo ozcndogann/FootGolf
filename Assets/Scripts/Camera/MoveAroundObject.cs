@@ -18,7 +18,20 @@ public class MoveAroundObject : MonoBehaviour
     //PhotonView vievv;
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Ball").transform;
+        //target = GameObject.FindGameObjectWithTag("Ball").transform;
+        foreach (GameObject p in players)
+        {
+
+            if (p.GetComponent<Ball>().camlock)
+            {
+                target = p.transform;
+                //Debug.Log("lala");
+            }
+            //else
+            //{
+            //    target = GameObject.FindGameObjectWithTag("Ball").transform;
+            //}
+        }
         //targetObj = GameObject.FindGameObjectWithTag("Ball");
         ball = target.GetComponent<Ball>();
         ball1 = target.GetComponent<Ball1>();
@@ -52,10 +65,10 @@ public class MoveAroundObject : MonoBehaviour
                 target = p.transform;
                 //Debug.Log("lala");
             }
-            else
-            {
-                target = GameObject.FindGameObjectWithTag("Ball").transform;
-            }
+            //else
+            //{
+            //    target = GameObject.FindGameObjectWithTag("Ball").transform;
+            //}
         }
         #region CamFollow
 
