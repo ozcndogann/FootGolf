@@ -95,19 +95,19 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("RandomLobby");
-        //if (Switch.index == 0)
-        //{
-        //    PhotonNetwork.LoadLevel("RandomLobbyTR");
-        //}
-        //else if (Switch.index == 1)
-        //{
-        //    PhotonNetwork.LoadLevel("RandomLobbyENG");
-        //}
-        //else if (Switch.index == 2)
-        //{
-        //    PhotonNetwork.LoadLevel("RandomLobbyNED");
-        //}
+        //PhotonNetwork.LoadLevel("RandomLobby");
+        if (Switch.index == 0)
+        {
+            PhotonNetwork.LoadLevel("RandomLobbyTR");
+        }
+        else if (Switch.index == 1)
+        {
+            PhotonNetwork.LoadLevel("RandomLobbyENG");
+        }
+        else if (Switch.index == 2)
+        {
+            PhotonNetwork.LoadLevel("RandomLobbyNED");
+        }
     }
     
 }
