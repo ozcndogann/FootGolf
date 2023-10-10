@@ -58,7 +58,7 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else
         {
-            if (!canStart && PhotonNetwork.IsMasterClient)
+            if (!canStart /*&& PhotonNetwork.IsMasterClient*/)
             {
                 canStart = true;
                 StartCoroutine(WaitForStart());
