@@ -85,23 +85,9 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     void CreateAndJoinRoom()
     {
-        //randomCreate = GenerateRandomSixDigitNumber();
-        //PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-        if (Switch.index == 0)
-        {
-            randomCreate = GenerateRandomSixDigitNumber();
-            PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-        }
-        else if (Switch.index == 1)
-        {
-            randomCreate = GenerateRandomSixDigitNumber();
-            PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-        }
-        else if (Switch.index == 2)
-        {
-            randomCreate = GenerateRandomSixDigitNumber();
-            PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-        }
+        randomCreate = GenerateRandomSixDigitNumber();
+        PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+
     }
     private string GenerateRandomSixDigitNumber()
     {
