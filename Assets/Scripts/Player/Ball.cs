@@ -40,7 +40,7 @@ public class Ball : MonoBehaviour
     public bool gravityChanger;
     public static bool lineRendererOn;
     public static bool lineRendererController;
-    public static bool camlock;
+    public bool camlock;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -205,6 +205,10 @@ public class Ball : MonoBehaviour
                 {
                     //Debug.Log("actor: " + player.ActorNumber);
                     camlock = true;
+                }
+                else
+                {
+                    camlock = false;
                 }
             }
 

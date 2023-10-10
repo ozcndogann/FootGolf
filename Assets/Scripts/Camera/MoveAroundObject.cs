@@ -47,11 +47,10 @@ public class MoveAroundObject : MonoBehaviour
         foreach (GameObject p in players)
         {
            
-            if (Ball.camlock)
+            if (p.GetComponent<Ball>().camlock)
             {
-                Debug.Log(p.transform.position);
                 target = p.transform;
-                Debug.Log("lala");
+                //Debug.Log("lala");
             }
         }
         #region CamFollow
