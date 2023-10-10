@@ -213,9 +213,10 @@ public class Ball : MonoBehaviour
             }
 
         }
-        if (!view.IsMine/* && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]*/)
+        if (!view.IsMine && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             // Spectator mode: Do not process input for spectator
+            Debug.Log("spectator");
             return;
         }
 
