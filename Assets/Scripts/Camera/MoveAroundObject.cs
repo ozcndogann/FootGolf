@@ -44,20 +44,20 @@ public class MoveAroundObject : MonoBehaviour
 
 
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Ball");
-        foreach (GameObject p in players)
-        {
+        //GameObject[] players = GameObject.FindGameObjectsWithTag("Ball");
+        //foreach (GameObject p in players)
+        //{
            
-            if (/*p.GetComponent<Ball>().camlock*/ball.camlock)
-            {
-                target = p.transform;
-                //Debug.Log("lala");
-            }
-            //else
-            //{
-            //    target = GameObject.FindGameObjectWithTag("Ball").transform;
-            //}
-        }
+        //    if (/*p.GetComponent<Ball>().camlock*/ball.camlock)
+        //    {
+        //        target = p.transform;
+        //        //Debug.Log("lala");
+        //    }
+        //    //else
+        //    //{
+        //    //    target = GameObject.FindGameObjectWithTag("Ball").transform;
+        //    //}
+        //}
         #region CamFollow
 
         if (Ball.shooted == false && Ball.lineRendererOn == false)
