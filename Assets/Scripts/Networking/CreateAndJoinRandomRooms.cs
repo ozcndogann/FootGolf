@@ -62,15 +62,24 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     {
         if (practice)
         {
-            PhotonNetwork.JoinRandomRoom(null ,1);
+            //PhotonNetwork.JoinRandomRoom(null ,1);
+            PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+            expectedCustomRoomProperties.Add("GameMode", Switch.index);
+            PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 1);
         }
         else if (versus)
         {
-            PhotonNetwork.JoinRandomRoom(null, 2);
+            //PhotonNetwork.JoinRandomRoom(null, 2);
+            PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+            expectedCustomRoomProperties.Add("GameMode", Switch.index);
+            PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
         }
         else if (Tournament)
         {
-            PhotonNetwork.JoinRandomRoom(null, 4);
+            //PhotonNetwork.JoinRandomRoom(null, 4);
+            PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+            expectedCustomRoomProperties.Add("GameMode", Switch.index);
+            PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
         }
         else
         {
@@ -83,12 +92,20 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         Debug.Log(message);
         CreateAndJoinRoom();
     }
+    //void CreateAndJoinRoom()
+    //{
+    //    randomCreate = GenerateRandomSixDigitNumber();
+    //    PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+    //}
     void CreateAndJoinRoom()
     {
         randomCreate = GenerateRandomSixDigitNumber();
+        roomOptions.CustomRoomProperties = new PhotonHashTable();
+        roomOptions.CustomRoomProperties.Add("GameMode", Switch.index);
+        roomOptions.CustomRoomPropertiesForLobby = new string[] { "GameMode" };
         PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-
     }
+
     private string GenerateRandomSixDigitNumber()
     {
         int randomNumber = Random.Range(100000, 1000000);
