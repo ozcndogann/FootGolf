@@ -19,6 +19,7 @@ public class MoveAroundObject : MonoBehaviour
     private void Start()
     {
         //target = GameObject.FindGameObjectWithTag("Ball").transform;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Ball");
         foreach (GameObject p in players)
         {
 
