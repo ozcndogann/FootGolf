@@ -19,6 +19,7 @@ public class PlayFabManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.GetString("Username");
         PlayerPrefs.GetInt("NameWindowOpen", 0);
         playerFound = false;
         nameAccepter = false;
@@ -56,6 +57,7 @@ public class PlayFabManager : MonoBehaviour
         if (result.InfoResultPayload.PlayerProfile != null)
         {
             name = result.InfoResultPayload.PlayerProfile.DisplayName;
+            PlayerPrefs.SetString("Username", name);
             userName.text = name;
             PlayerPrefs.SetInt("NameWindowOpen", 1);
         }

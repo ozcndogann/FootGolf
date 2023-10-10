@@ -165,7 +165,7 @@ public class Ball : MonoBehaviour
                 footballerAnimator.SetBool("trivela", false);
                 OnMouseShootPart();
             }
-            if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
+            if (/*shooted == false && rb.velocity.magnitude < stopVelocity && */Input.GetMouseButton(0))
             {
                 if (lineRendererOn == false)
                 {
