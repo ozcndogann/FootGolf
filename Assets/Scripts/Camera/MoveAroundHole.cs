@@ -14,13 +14,14 @@ public class MoveAroundHole : MonoBehaviour
     private void Start()
     {
         distanceToTarget = 10f;
+        height = 3.25f;
     }
     private void Update()
     {
         #region CamFollow
         //if (Ball.shooted == false)
         {
-            cam.transform.position = new Vector3(target.position.x, 2.5f + target.position.y, target.transform.position.z);
+            cam.transform.position = new Vector3(target.position.x, /*2.5f*/height + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
             if (Input.GetMouseButtonDown(0))
