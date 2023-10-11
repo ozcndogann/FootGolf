@@ -1641,6 +1641,7 @@ GameObject:
   - component: {fileID: 1392684713}
   - component: {fileID: 1392684717}
   - component: {fileID: 1392684718}
+  - component: {fileID: 1392684719}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1729,6 +1730,20 @@ MonoBehaviour:
   Yes: {fileID: 268886610}
   No: {fileID: 676758336}
   Panel: {fileID: 506485110}
+--- !u!114 &1392684719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392684712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d975a0bc6aeb4840b3778125d132f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 0}
+  NickName: {fileID: 1637215575860070883}
 --- !u!1 &1441422182
 GameObject:
   m_ObjectHideFlags: 0
@@ -2695,5 +2710,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d975a0bc6aeb4840b3778125d132f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1637215575860070883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1637215575082698588, guid: 0efe9ef8e96475146a1407dd08b15bbb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1637215575860070881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
