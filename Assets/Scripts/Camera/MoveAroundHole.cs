@@ -6,12 +6,14 @@ public class MoveAroundHole : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private Transform target;
-    [SerializeField] private float distanceToTarget = 4;
+    [SerializeField] private float distanceToTarget = 10;
+    [SerializeField] private float height;
     private Vector3 previousPosition;
     public float heightWhileShooting;
 
     private void Start()
     {
+        distanceToTarget = 10f;
     }
     private void Update()
     {
