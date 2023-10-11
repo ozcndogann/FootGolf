@@ -12,8 +12,10 @@ public class UI_InGame : MonoBehaviour
     Ball ball;
     public GameObject ReturnPanel;
     public GameObject MainMenuPanel;
-    public Sprite OldImage1,OldImage2,OldImage3,OldImage4;
+    public Image OldImage1,OldImage2,OldImage3,OldImage4;
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
+   
+    public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
 
     public void Start()
     {
@@ -30,6 +32,24 @@ public class UI_InGame : MonoBehaviour
         {
             codeText.enabled = true;
         }
+       
+        //if (OldImage1 == null)
+        //{
+        //    OldImage1.gameObject.SetActive(false);
+        //}
+        //else if (OldImage2 == null)
+        //{
+        //    OldImage2.gameObject.SetActive(false);
+        //}
+        //else if (OldImage3 == null)
+        //{
+        //    OldImage3.gameObject.SetActive(false);
+        //}
+        //else if (OldImage4 == null)
+        //{
+        //    OldImage4.gameObject.SetActive(false);
+        //}
+
     }
     private void Update()
     {
@@ -84,46 +104,41 @@ public class UI_InGame : MonoBehaviour
         //}
        if(Ball.Player1 == true)
         {
-            GetComponent<SpriteRenderer>().sprite = NewImage1;
+            OldImage1.sprite = NewImage1;
+            OldImage2.sprite = OldSprite2;
+            OldImage3.sprite = oldsprite3;
+            OldImage4.sprite = oldsprite4;
+          
 
-            if(Ball.Player1 == false)
-            {
-                GetComponent<SpriteRenderer>().sprite = OldImage1;
-
-            }
-            
         }
         else if (Ball.Player2 == true)
         {
-            GetComponent<SpriteRenderer>().sprite = NewImage2;
+            OldImage2.sprite = NewImage2;
+            OldImage1.sprite = OldSprite1;
+            OldImage3.sprite = oldsprite3;
+            OldImage4.sprite = oldsprite4;
 
-            if (Ball.Player2 == false)
-            {
-                GetComponent<SpriteRenderer>().sprite = OldImage2;
 
-            }
 
         }
         else if (Ball.Player3 == true)
         {
-            GetComponent<SpriteRenderer>().sprite = NewImage3;
+            OldImage3.sprite = NewImage3;
+            OldImage4.sprite = oldsprite4;
+            OldImage2.sprite = OldSprite2;
+            OldImage1.sprite = OldSprite1;
 
-            if (Ball.Player3 == false)
-            {
-                GetComponent<SpriteRenderer>().sprite = OldImage3;
 
-            }
+
 
         }
         else if (Ball.Player4 == true)
         {
-            GetComponent<SpriteRenderer>().sprite = NewImage4;
+            OldImage4.sprite = NewImage4;
+            OldImage1.sprite = OldSprite1;
+            OldImage2.sprite = OldSprite2;
+            OldImage3.sprite = oldsprite3;
 
-            if (Ball.Player4 == false)
-            {
-                GetComponent<SpriteRenderer>().sprite = OldImage4;
-
-            }
         }
         
 
