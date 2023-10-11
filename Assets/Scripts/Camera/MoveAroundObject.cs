@@ -65,49 +65,60 @@ public class MoveAroundObject : MonoBehaviour
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
-            if (Input.GetMouseButtonDown(0))
+            if (Ball.footballerTeleport == true)
             {
-                previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                Vector3 newposition = cam.ScreenToViewportPoint(Input.mousePosition);
-                //debug.log(newposition+"new");
-                //debug.log(previousposition+"previous");
-                Vector3 direction = previousPosition - newposition;
-                rotationaroundyaxis = direction.x * 180;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+                }
+                else if (Input.GetMouseButton(0))
+                {
+                    Vector3 newposition = cam.ScreenToViewportPoint(Input.mousePosition);
+                    //debug.log(newposition+"new");
+                    //debug.log(previousposition+"previous");
+                    Vector3 direction = previousPosition - newposition;
+                    rotationaroundyaxis = direction.x * 180;
 
-                cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
-                //if(rotationaroundyaxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis/60, Space.World);
-                cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+                    cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+                    //if(rotationaroundyaxis)
+                    if (Ball.footballerTeleport == true)
+                    {
+                        cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 60, Space.World);
+                        cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+                    }
 
-                //previousPosition = newposition;
+                    //previousPosition = newposition;
+                }
             }
         }
         else if (Ball.lineRendererOn == true)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
-
-            if (Input.GetMouseButtonDown(0))
+            if (Ball.footballerTeleport == true)
             {
-                previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                Vector3 newposition = cam.ScreenToViewportPoint(Input.mousePosition);
-                //debug.log(newposition+"new");
-                //debug.log(previousposition+"previous");
-                Vector3 direction = previousPosition - newposition;
-                rotationaroundyaxis = direction.x * 180;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+                }
+                else if (Input.GetMouseButton(0))
+                {
+                    Vector3 newposition = cam.ScreenToViewportPoint(Input.mousePosition);
+                    //debug.log(newposition+"new");
+                    //debug.log(previousposition+"previous");
+                    Vector3 direction = previousPosition - newposition;
+                    rotationaroundyaxis = direction.x * 180;
 
-                cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
-                //if(rotationaroundyaxis)
-                cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 300, Space.World);
-                cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+                    cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
+                    //if(rotationaroundyaxis)
+                    if (Ball.footballerTeleport == true)
+                    {
+                        cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 300, Space.World);
+                        cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
+                    }
 
-                //previousPosition = newposition;
+                    //previousPosition = newposition;
+                }
             }
         }
         else if (Ball.waitForShoot == true || Ball.waitForShootTri == true)

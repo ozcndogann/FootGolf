@@ -8,6 +8,7 @@ using Photon.Pun.UtilityScripts;
 
 public class Ball : MonoBehaviour
 {
+    Vector3 distanceP,distanceT;
     [SerializeField] private LineRenderer lineRenderer; // aim için line
     private bool isIdle; // top duruyor mu hareketli mi boolu
     private bool isAiming; // oyuncu aim halinde mi boolu
@@ -34,7 +35,7 @@ public class Ball : MonoBehaviour
     GameObject OurFootballer;
     public static bool waitForShoot, waitForShootTri;
     public float waitForShootTimer,waitForShootTriTimer,whichAnim;
-    public bool footballerTeleport;
+    public static bool footballerTeleport;
     public static bool gameEnder;
     Photon.Realtime.Player player;
     public bool gravityChanger;
@@ -67,17 +68,19 @@ public class Ball : MonoBehaviour
         if (PlayerPrefs.GetInt("FootballerChooser") == 1)
         {
             OurFootballer = Instantiate(ronaldinho, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-            OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
+            distanceP = transform.position - OurFootballer.transform.position;
+            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
             footballerAnimator = OurFootballer.GetComponent<Animator>();
         }
         else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
         {
             OurFootballer = Instantiate(messi, new Vector3(transform.position.x + 2.6f, transform.position.y -0.3f, transform.position.z + 1.6f), Quaternion.identity);
-            OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
+            distanceP = transform.position - OurFootballer.transform.position;
+            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
             footballerAnimator = OurFootballer.GetComponent<Animator>();
         }
 
-        OurFootballer.SetActive(false);
+        //OurFootballer.SetActive(false);
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -103,6 +106,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
         if (view.IsMine)
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
@@ -145,7 +149,7 @@ public class Ball : MonoBehaviour
             }
             if (waitForShootTimer >= 0.9f)
             {
-                OurFootballer.SetActive(false);
+                //OurFootballer.SetActive(false);
                 waitForShoot = false;
                 waitForShootTimer = 0;
                 footballerAnimator.SetBool("penaltyKick", false);
@@ -154,7 +158,7 @@ public class Ball : MonoBehaviour
             }
             if (waitForShootTriTimer >= 0.65f)
             {
-                OurFootballer.SetActive(false);
+                //OurFootballer.SetActive(false);
                 waitForShootTri = false;
                 waitForShootTriTimer = 0;
                 footballerAnimator.SetBool("penaltyKick", false);
@@ -175,8 +179,9 @@ public class Ball : MonoBehaviour
             }
             if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
             {
-                OurFootballer.transform.position = new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f);
-                OurFootballer.transform.rotation = Quaternion.Euler(0, transform.rotation.y - 140, 0);
+                distanceP.y = 0.3f;
+                OurFootballer.transform.position = transform.position - distanceP;
+                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
                 footballerTeleport = true;
             }
             else if(rb.velocity.magnitude > stopVelocity)
@@ -244,24 +249,19 @@ public class Ball : MonoBehaviour
             {
                 mousePos = Input.mousePosition;
                 OurFootballer.SetActive(true);
-                if (mousePos.x > Screen.width / 2)
-                {
-                    footballerAnimator.SetBool("penaltyKick", true);
-                    waitForShoot = true;
-                }
-                else
-                {
-                    footballerAnimator.SetBool("trivela", true);
-                    waitForShootTri = true;
-                    if (PlayerPrefs.GetInt("FootballerChooser") == 0)
-                    {
-                        OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 0.3f, OurFootballer.transform.position.z + 0.1f);
-                    }
-                    else if (PlayerPrefs.GetInt("FootballerChooser") == 1)
-                    {
-                        OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 0.3f, OurFootballer.transform.position.z + 0.1f);
-                    }
-                }
+                //if (mousePos.x > Screen.width / 2)
+                //{
+                footballerAnimator.SetBool("penaltyKick", true);
+                distanceP = transform.position - OurFootballer.transform.position;
+                waitForShoot = true;
+                //}
+                //else
+                //{
+                //    footballerAnimator.SetBool("trivela", true);
+                //    waitForShootTri = true;
+                //    OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x - 1.1f, transform.position.y - 0.3f, OurFootballer.transform.position.z + 0.1f);
+                //    distanceT = transform.position - OurFootballer.transform.position;
+                //}
                 //footballerAnimator.SetBool("penaltyKick", true);
             }
             
