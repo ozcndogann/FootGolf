@@ -12,6 +12,8 @@ public class UI_InGame : MonoBehaviour
     Ball ball;
     public GameObject ReturnPanel;
     public GameObject MainMenuPanel;
+    public Sprite OldImage1,OldImage2,OldImage3,OldImage4;
+    public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
 
     public void Start()
     {
@@ -80,7 +82,52 @@ public class UI_InGame : MonoBehaviour
         //    ReturnPanel.SetActive(false);
         //    Time.timeScale = 1;
         //}
-       
+       if(Ball.Player1 == true)
+        {
+            GetComponent<SpriteRenderer>().sprite = NewImage1;
+
+            if(Ball.Player1 == false)
+            {
+                GetComponent<SpriteRenderer>().sprite = OldImage1;
+
+            }
+            
+        }
+        else if (Ball.Player2 == true)
+        {
+            GetComponent<SpriteRenderer>().sprite = NewImage2;
+
+            if (Ball.Player2 == false)
+            {
+                GetComponent<SpriteRenderer>().sprite = OldImage2;
+
+            }
+
+        }
+        else if (Ball.Player3 == true)
+        {
+            GetComponent<SpriteRenderer>().sprite = NewImage3;
+
+            if (Ball.Player3 == false)
+            {
+                GetComponent<SpriteRenderer>().sprite = OldImage3;
+
+            }
+
+        }
+        else if (Ball.Player4 == true)
+        {
+            GetComponent<SpriteRenderer>().sprite = NewImage4;
+
+            if (Ball.Player4 == false)
+            {
+                GetComponent<SpriteRenderer>().sprite = OldImage4;
+
+            }
+        }
+        
+
+
     }
     public void OpenPanel()
     {

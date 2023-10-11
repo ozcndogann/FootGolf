@@ -41,6 +41,9 @@ public class Ball : MonoBehaviour
     public bool gravityChanger;
     public static bool lineRendererOn;
     public static bool lineRendererController;
+    public static bool Player1,Player2,Player3,Player4;
+
+
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -207,11 +210,38 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    //Debug.Log("actor: " + player.ActorNumber);
+                    
                     if(player.ActorNumber ==1)
                     {
+                        Debug.Log("actor: " + player.ActorNumber);
+                        Player1 = true;
+                        Player2 = false;
+                        Player3 = false;
+                        Player4 = false;
 
-
+                    }
+                    else if (player.ActorNumber == 2)
+                    {
+                        Player1 = false;
+                        Player2 = true;
+                        Player3 = false;
+                        Player4 = false;
+                    }
+                    else if(player.ActorNumber == 3)
+                    {
+                        Debug.Log("actor: " + player.ActorNumber);
+                        Player1 = false;
+                        Player2 = false;
+                        Player3 = true;
+                        Player4 = false;
+                    }
+                    else if (player.ActorNumber == 4)
+                    {
+                        Debug.Log("actor: " + player.ActorNumber);
+                        Player1 = false;
+                        Player2 = false;
+                        Player3 = false;
+                        Player4 = true;
                     }
                 }
 
