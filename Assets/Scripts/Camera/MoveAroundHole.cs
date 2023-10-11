@@ -35,7 +35,7 @@ public class MoveAroundHole : MonoBehaviour
                 Vector3 direction = previousPosition - newPosition;
                 float rotationAroundYAxis = direction.x * 180;
 
-                cam.transform.position = new Vector3(target.position.x, 2.5f + target.position.y, target.transform.position.z);
+                cam.transform.position = new Vector3(target.position.x, /*2.5f*/height + target.position.y, target.transform.position.z);
                 //if(rotationAroundYAxis)
                 cam.transform.Rotate(new Vector3(0, .65f, 0), rotationAroundYAxis / 60, Space.World);
                 cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
