@@ -224,10 +224,10 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    
-                    if(player.ActorNumber ==1)
+                    Debug.Log("actor: " + player.ActorNumber);
+                    if (player.ActorNumber ==1)
                     {
-                        Debug.Log("actor: " + player.ActorNumber);
+                       
                         Player1 = true;
                         Player2 = false;
                         Player3 = false;
