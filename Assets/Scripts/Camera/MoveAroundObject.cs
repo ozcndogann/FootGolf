@@ -171,7 +171,7 @@ public class MoveAroundObject : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, target.transform.TransformDirection(Vector3.forward), out hit, distance))
         {
             //Debug.Log("Did Hit");
-            if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole" && hit.transform.gameObject.tag != "Undeletable")
+            if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole" /*&& hit.transform.gameObject.tag != "Undeletable"*/)
             {
                 passHit.Add(hit.transform.gameObject);
                 hit.transform.gameObject.SetActive(false);
