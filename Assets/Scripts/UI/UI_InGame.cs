@@ -106,8 +106,12 @@ public class UI_InGame : MonoBehaviour
         {
             OldImage1.sprite = NewImage1;
             OldImage2.sprite = OldSprite2;
-            OldImage3.sprite = oldsprite3;
-            OldImage4.sprite = oldsprite4;
+            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+            {
+                OldImage3.sprite = oldsprite3;
+                OldImage4.sprite = oldsprite4;
+            }
+            
           
 
         }
@@ -115,8 +119,12 @@ public class UI_InGame : MonoBehaviour
         {
             OldImage2.sprite = NewImage2;
             OldImage1.sprite = OldSprite1;
-            OldImage3.sprite = oldsprite3;
-            OldImage4.sprite = oldsprite4;
+            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+            {
+                OldImage3.sprite = oldsprite3;
+                OldImage4.sprite = oldsprite4;
+            }
+            
 
 
 
@@ -125,8 +133,12 @@ public class UI_InGame : MonoBehaviour
         {
             OldImage3.sprite = NewImage3;
             OldImage4.sprite = oldsprite4;
-            OldImage2.sprite = OldSprite2;
-            OldImage1.sprite = OldSprite1;
+            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+            {
+                OldImage2.sprite = OldSprite2;
+                OldImage1.sprite = OldSprite1;
+            }
+            
 
 
 
@@ -136,8 +148,12 @@ public class UI_InGame : MonoBehaviour
         {
             OldImage4.sprite = NewImage4;
             OldImage1.sprite = OldSprite1;
-            OldImage2.sprite = OldSprite2;
-            OldImage3.sprite = oldsprite3;
+            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+            {
+                OldImage2.sprite = OldSprite2;
+                OldImage3.sprite = oldsprite3;
+            }
+            
 
         }
         
