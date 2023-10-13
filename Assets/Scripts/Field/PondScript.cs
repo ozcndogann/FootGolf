@@ -27,67 +27,115 @@ public class PondScript : MonoBehaviour
     //    rb.velocity = new Vector3(0, 0, 0);
     //}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if (other.CompareTag("Ball"))
+        if (other.gameObject.tag == "Ball")
         {
-            // Calculate the teleportation position on the lateral surfaces of the destination BoxCollider
-            Vector3 newPosition = CalculateClosestTeleportPosition();
+            Vector3 closestDestination = FindClosestTeleportDestination(other.transform.position);
 
-            // Teleport the ball to the new position
-            ballRigidbody.velocity = Vector3.zero; // Stop the ball's velocity
-            ball.transform.position = newPosition;
+            if (closestDestination != Vector3.zero)
+            {
+                // Calculate the teleport direction from the closest destination to the current position
+                Vector3 teleportDirection = closestDestination - other.transform.position;
+                teleportDirection.y = 0; // Remove vertical component
+                teleportDirection.Normalize();
+
+                // Calculate the new teleport position
+                Vector3 newPosition = closestDestination + teleportDirection * teleportDistance;
+
+                // Create a ray from the newPosition downward to find the ground
+                Ray ray = new Ray(newPosition + Vector3.up * 10, Vector3.down); // Start just above to avoid hitting the ball
+                RaycastHit hit;
+
+                // Check if the ray hits the ground layer using the layer mask
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, teleportLayerMask.value))
+                {
+                    Debug.Log("Hit object layer: " + hit.collider.gameObject.layer);
+                    newPosition.y = hit.point.y + 0.2f; // Adjust the height above the ground
+                }
+
+                // Teleport the ball
+                StartCoroutine(TeleportBall(other.gameObject, newPosition));
+            }
         }
     }
 
-    private Vector3 CalculateClosestTeleportPosition()
+    private Vector3 FindClosestTeleportDestination(Vector3 ballPosition)
     {
-        Vector3 closestPosition = Vector3.zero;
+        Vector3 closestDestination = Vector3.zero;
         float closestDistance = Mathf.Infinity;
 
         foreach (GameObject destination in teleportDestinations)
         {
-            // secilen destinasyon colliderýndaki en yakýn noktayla topun arasýndaki mesafe
-            Vector3 closestPoint = destination.GetComponent<Collider>().ClosestPoint(ball.transform.position);
+            Vector3 destinationPosition = destination.transform.position;
+            float distance = Vector3.Distance(ballPosition, destinationPosition);
 
-            float distance = Vector3.Distance(closestPoint, ball.transform.position);
-
-            // bi oncekinden daha mý yakýn diye test et
             if (distance < closestDistance)
             {
                 closestDistance = distance;
-                closestPosition = closestPoint;
+                closestDestination = destinationPosition;
             }
         }
 
-        return closestPosition;
+        return closestDestination;
     }
 
+    private IEnumerator TeleportBall(GameObject ballToTeleport, Vector3 newPosition)
+    {
+        yield return new WaitForSeconds(0.15f);
 
-
-
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Ball"))
-    //    {
-    //        contactPoint = other.ClosestPointOnBounds(transform.position);
-    //        teleportPoint = CalculateTeleportPoint(contactPoint, transform.position, transform.localScale.x);
-    //        Debug.Log("Contact Point: " + contactPoint);
-
-    //        StartCoroutine(waiter());
-    //    }
-    //}
-
-    //private Vector3 CalculateTeleportPoint(Vector3 contactPoint, Vector3 sphereCenter, float sphereRadius)
-    //{
-    //    Vector3 direction = contactPoint - sphereCenter;
-    //    direction.y = 0f; // Ignore vertical component
-
-    //    Vector3 normalizedDirection = direction.normalized;
-
-    //    Vector3 teleportPoint = contactPoint + normalizedDirection * sphereRadius;
-
-    //    return teleportPoint;
-    //}
+        ballRigidbody.velocity = Vector3.zero; // Stop the ball's velocity
+        ballToTeleport.transform.position = newPosition; // Teleport the ball to the new position
+    }
 }
+//private Vector3 CalculateClosestTeleportPosition()
+//{
+//    Vector3 closestPosition = Vector3.zero;
+//    float closestDistance = Mathf.Infinity;
+
+//    foreach (GameObject destination in teleportDestinations)
+//    {
+//        // secilen destinasyon colliderýndaki en yakýn noktayla topun arasýndaki mesafe
+//        Vector3 closestPoint = destination.GetComponent<Collider>().ClosestPoint(ball.transform.position);
+
+//        float distance = Vector3.Distance(closestPoint, ball.transform.position);
+
+//        // bi oncekinden daha mý yakýn diye test et
+//        if (distance < closestDistance)
+//        {
+//            closestDistance = distance;
+//            closestPosition = closestPoint;
+//        }
+//    }
+
+//    return closestPosition;
+//}
+
+
+
+
+
+//private void OnTriggerEnter(Collider other)
+//{
+//    if (other.CompareTag("Ball"))
+//    {
+//        contactPoint = other.ClosestPointOnBounds(transform.position);
+//        teleportPoint = CalculateTeleportPoint(contactPoint, transform.position, transform.localScale.x);
+//        Debug.Log("Contact Point: " + contactPoint);
+
+//        StartCoroutine(waiter());
+//    }
+//}
+
+//private Vector3 CalculateTeleportPoint(Vector3 contactPoint, Vector3 sphereCenter, float sphereRadius)
+//{
+//    Vector3 direction = contactPoint - sphereCenter;
+//    direction.y = 0f; // Ignore vertical component
+
+//    Vector3 normalizedDirection = direction.normalized;
+
+//    Vector3 teleportPoint = contactPoint + normalizedDirection * sphereRadius;
+
+//    return teleportPoint;
+//}
+

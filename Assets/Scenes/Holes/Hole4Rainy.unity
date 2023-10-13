@@ -3007,24 +3007,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 428029028}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &428029030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428029029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd2f07aca4fa2841a8b18ca5ac6c68d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleportDistance: 2
-  teleportLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  teleportDestinations:
-  - {fileID: 1462600713}
 --- !u!65 &428029031
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3033,11 +3015,29 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428029029}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 237.5581, y: 19.063862, z: 69.06852}
   m_Center: {x: -40.830723, y: -10.725847, z: 1.9068569}
+--- !u!114 &428029032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428029029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 1462600713}
 --- !u!1001 &448664913
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17450,7 +17450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1462600713}
   m_LocalRotation: {x: -0, y: 0.16979823, z: -0, w: 0.9854789}
-  m_LocalPosition: {x: 25.7, y: 91.5, z: 118.3}
+  m_LocalPosition: {x: 25.7, y: 76.83, z: 118.3}
   m_LocalScale: {x: 1, y: 1, z: 1.2937766}
   m_ConstrainProportionsScale: 0
   m_Children: []
