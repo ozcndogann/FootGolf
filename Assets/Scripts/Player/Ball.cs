@@ -224,7 +224,7 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    Debug.Log("actor: " + player.ActorNumber);
+                    Debug.Log("Player: " + player.ActorNumber + "is kicking");
                     if (player.ActorNumber ==1)
                     {
                        
