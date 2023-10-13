@@ -206,17 +206,13 @@ public class Ball : MonoBehaviour
                 footballerTeleport = false;
             }
         }
-        foreach (Player player in PhotonNetwork.PlayerList)
+        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
-            if (player.CustomProperties["holeC"] != null)
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-                if (!(bool)player.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                {
-                    player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                }
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
             }
         }
-        
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
