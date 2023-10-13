@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Photon.Realtime;
 public class GameEnder : MonoBehaviour
 {
     [SerializeField] private int firstHolePar;
     [SerializeField] private int secondHolePar;
     private int score;
     public static bool EndGame;
+    Player player;
 
     private void Start()
     {
@@ -19,7 +21,7 @@ public class GameEnder : MonoBehaviour
         if (Ball.gameEnder)
         {
             CalculateScore();
-            Debug.Log("Score: " + score);
+            Debug.Log(player.ActorNumber + " Score: " + score);
             //ShotCounter.ShotCount = 0;
             //PhotonNetwork.LeaveRoom();
             //SceneManager.LoadScene("MainMenu");
