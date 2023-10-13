@@ -102,60 +102,64 @@ public class UI_InGame : MonoBehaviour
         //    ReturnPanel.SetActive(false);
         //    Time.timeScale = 1;
         //}
-       if(Ball.Player1 == true)
+        if (!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice)
         {
-            OldImage1.sprite = NewImage1;
-            OldImage2.sprite = OldSprite2;
-            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+            if (Ball.Player1 == true)
             {
-                OldImage3.sprite = oldsprite3;
-                OldImage4.sprite = oldsprite4;
-            }
-            
-          
-
-        }
-        else if (Ball.Player2 == true)
-        {
-            OldImage2.sprite = NewImage2;
-            OldImage1.sprite = OldSprite1;
-            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
-            {
-                OldImage3.sprite = oldsprite3;
-                OldImage4.sprite = oldsprite4;
-            }
-            
-
-
-
-        }
-        else if (Ball.Player3 == true)
-        {
-            OldImage3.sprite = NewImage3;
-            OldImage4.sprite = oldsprite4;
-            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
-            {
+                OldImage1.sprite = NewImage1;
                 OldImage2.sprite = OldSprite2;
+                if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+                {
+                    OldImage3.sprite = oldsprite3;
+                    OldImage4.sprite = oldsprite4;
+                }
+
+
+
+            }
+            else if (Ball.Player2 == true)
+            {
+                OldImage2.sprite = NewImage2;
                 OldImage1.sprite = OldSprite1;
+                if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+                {
+                    OldImage3.sprite = oldsprite3;
+                    OldImage4.sprite = oldsprite4;
+                }
+
+
+
+
             }
-            
-
-
-
-
-        }
-        else if (Ball.Player4 == true)
-        {
-            OldImage4.sprite = NewImage4;
-            OldImage1.sprite = OldSprite1;
-            if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+            else if (Ball.Player3 == true)
             {
-                OldImage2.sprite = OldSprite2;
-                OldImage3.sprite = oldsprite3;
-            }
-            
+                OldImage3.sprite = NewImage3;
+                OldImage4.sprite = oldsprite4;
+                if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+                {
+                    OldImage2.sprite = OldSprite2;
+                    OldImage1.sprite = OldSprite1;
+                }
 
+
+
+
+
+            }
+            else if (Ball.Player4 == true)
+            {
+                OldImage4.sprite = NewImage4;
+                OldImage1.sprite = OldSprite1;
+                if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+                {
+                    OldImage2.sprite = OldSprite2;
+                    OldImage3.sprite = oldsprite3;
+                }
+
+
+            }
         }
+       
         
 
 
