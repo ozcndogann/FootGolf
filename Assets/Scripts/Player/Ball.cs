@@ -206,11 +206,22 @@ public class Ball : MonoBehaviour
                 footballerTeleport = false;
             }
         }
-        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+        //if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+        //{
+        //    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        //    {
+        //        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        //    }
+        //}
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            if (player.CustomProperties["holeC"] != null)
             {
-                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                if ((bool)player.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                {
+                    player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                    player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                }
             }
         }
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
@@ -224,7 +235,7 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    Debug.Log("Player: " + player.ActorNumber + "is kicking");
+                    Debug.Log("Player: " + player.ActorNumber.ToString() + "is kicking");
                     if (player.ActorNumber ==1)
                     {
                        
