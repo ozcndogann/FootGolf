@@ -18,7 +18,10 @@ public class UI_Lobby : MonoBehaviour
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-        codeText.text = CreateAndJoinRooms.randomCreate;
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("roomCode", out object roomCodeValue))
+        {
+            codeText.text = roomCodeValue.ToString();
+        }
         if (PhotonNetwork.IsMasterClient)
         {
             StartButton.SetActive(true);
