@@ -23,7 +23,6 @@ public class UI_InGame : MonoBehaviour
         {
             codeText.text = roomCodeValue.ToString();
         }
-        //codeText.text = CreateAndJoinRooms.randomCreate;
         if (CreateAndJoinRooms.practice)
         {
             codeText.enabled = false;
@@ -36,23 +35,6 @@ public class UI_InGame : MonoBehaviour
         {
             codeText.enabled = true;
         }
-       
-        //if (OldImage1 == null)
-        //{
-        //    OldImage1.gameObject.SetActive(false);
-        //}
-        //else if (OldImage2 == null)
-        //{
-        //    OldImage2.gameObject.SetActive(false);
-        //}
-        //else if (OldImage3 == null)
-        //{
-        //    OldImage3.gameObject.SetActive(false);
-        //}
-        //else if (OldImage4 == null)
-        //{
-        //    OldImage4.gameObject.SetActive(false);
-        //}
 
     }
     private void Update()
@@ -86,26 +68,7 @@ public class UI_InGame : MonoBehaviour
                 ReturnPanel.SetActive(false);
             }
         }
-        //if (PhotonNetwork.PlayerList.Length < 2 && CreateAndJoinRandomRooms.versus)
-        //{
-        //    //eksik kisi ui
-        //    Debug.Log("eksik kisi");
-        //    ReturnPanel.SetActive(true);
-        //    Time.timeScale = 0;
-        //}
 
-        //else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
-        //{
-        //    //eksik kisi
-        //    Debug.Log("eksik kisi");
-        //    ReturnPanel.SetActive(true);
-        //    Time.timeScale = 0;
-        //}
-        //else
-        //{
-        //    ReturnPanel.SetActive(false);
-        //    Time.timeScale = 1;
-        //}
         if (!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice)
         {
             if (Ball.Player1 == true)
