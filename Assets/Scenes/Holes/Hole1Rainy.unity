@@ -905,6 +905,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2764308248549235653, guid: 89e9a7d20c508c440a18fe92c5fd565d,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4007660289463144368, guid: 89e9a7d20c508c440a18fe92c5fd565d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1442,6 +1447,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7313977096178776586, guid: 16275a064f1746a449f515e5a65a46d9,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16275a064f1746a449f515e5a65a46d9, type: 3}
 --- !u!1 &415356605 stripped
@@ -1451,6 +1461,42 @@ GameObject:
   m_PrefabInstance: {fileID: 415356604}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &415356606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4220093727580829023, guid: 16275a064f1746a449f515e5a65a46d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 415356604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &415356607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6090017807858820061, guid: 16275a064f1746a449f515e5a65a46d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 415356604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &415356608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8094222822889291474, guid: 16275a064f1746a449f515e5a65a46d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 415356604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &415356609 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 126528481550726244, guid: 16275a064f1746a449f515e5a65a46d9,
     type: 3}
@@ -3007,6 +3053,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7540038571059908129, guid: d1203add2f7eed246adaa1497d0779c6,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1203add2f7eed246adaa1497d0779c6, type: 3}
 --- !u!1 &783194692 stripped
@@ -3016,6 +3067,18 @@ GameObject:
   m_PrefabInstance: {fileID: 783194691}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &783194693 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6090017807858820061, guid: d1203add2f7eed246adaa1497d0779c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 783194691}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &783194694 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 126528481550726244, guid: d1203add2f7eed246adaa1497d0779c6,
     type: 3}
@@ -11298,8 +11361,12 @@ MonoBehaviour:
   Practice: {fileID: 224713485}
   Versus: {fileID: 783194692}
   Tournament: {fileID: 415356605}
-  OurVersusText: {fileID: 783194693}
-  OurTournamentText: {fileID: 415356606}
+  tournement_player1: {fileID: 415356609}
+  tournement_player2: {fileID: 415356608}
+  tournement_player3: {fileID: 415356607}
+  tournement_player4: {fileID: 415356606}
+  vs_player1: {fileID: 783194694}
+  vs_player2: {fileID: 783194693}
 --- !u!1 &1567056928
 GameObject:
   m_ObjectHideFlags: 0

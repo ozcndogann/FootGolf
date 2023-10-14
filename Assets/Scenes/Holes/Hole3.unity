@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38867193, g: 0.728084, b: 0.7325924, a: 1}
+  m_IndirectSpecularColor: {r: 0.38866276, g: 0.7280805, b: 0.7325923, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -330,6 +330,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7540038571059908129, guid: d1203add2f7eed246adaa1497d0779c6,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1203add2f7eed246adaa1497d0779c6, type: 3}
 --- !u!1 &14495084 stripped
@@ -340,7 +345,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &14495085 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 126528481550726244, guid: d1203add2f7eed246adaa1497d0779c6,
+  m_CorrespondingSourceObject: {fileID: 6090017807858820061, guid: d1203add2f7eed246adaa1497d0779c6,
     type: 3}
   m_PrefabInstance: {fileID: 14495083}
   m_PrefabAsset: {fileID: 0}
@@ -10629,6 +10634,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2764308248549235653, guid: 89e9a7d20c508c440a18fe92c5fd565d,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4007660289463144368, guid: 89e9a7d20c508c440a18fe92c5fd565d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -14256,6 +14266,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7313977096178776586, guid: 16275a064f1746a449f515e5a65a46d9,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16275a064f1746a449f515e5a65a46d9, type: 3}
 --- !u!1 &1442698194 stripped
@@ -14265,6 +14280,42 @@ GameObject:
   m_PrefabInstance: {fileID: 1442698193}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1442698195 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4220093727580829023, guid: 16275a064f1746a449f515e5a65a46d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1442698193}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1442698196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6090017807858820061, guid: 16275a064f1746a449f515e5a65a46d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1442698193}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1442698197 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8094222822889291474, guid: 16275a064f1746a449f515e5a65a46d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1442698193}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1442698198 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 126528481550726244, guid: 16275a064f1746a449f515e5a65a46d9,
     type: 3}
@@ -14710,8 +14761,12 @@ MonoBehaviour:
   Practice: {fileID: 1078304149}
   Versus: {fileID: 14495084}
   Tournament: {fileID: 1442698194}
-  OurVersusText: {fileID: 14495085}
-  OurTournamentText: {fileID: 1442698195}
+  tournement_player1: {fileID: 1442698198}
+  tournement_player2: {fileID: 1442698197}
+  tournement_player3: {fileID: 1442698196}
+  tournement_player4: {fileID: 1442698195}
+  vs_player1: {fileID: 14495085}
+  vs_player2: {fileID: 14495085}
 --- !u!1001 &1498088415
 PrefabInstance:
   m_ObjectHideFlags: 0

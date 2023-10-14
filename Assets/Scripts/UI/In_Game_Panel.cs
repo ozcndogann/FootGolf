@@ -13,7 +13,19 @@ public class In_Game_Panel : MonoBehaviour
     private GameObject ball;
     void Start()
     {
-        ball = GameObject.FindGameObjectWithTag("Ball");
+        if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
+        {
+            Versus.SetActive(true);
+        }
+        if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
+        {
+            Practice.SetActive(true);
+        }
+        if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+        {
+            Tournament.SetActive(true);
+        }
+            ball = GameObject.FindGameObjectWithTag("Ball");
         ShotCounter = ball.GetComponent<ShotCounter>();
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -36,23 +48,23 @@ public class In_Game_Panel : MonoBehaviour
                 tournement_player4.text = player.NickName;
             }
         }
-        if (PlayerPrefs.GetInt("MatchType") == 0)
-        {
-            Practice.SetActive(true);
+        //if (PlayerPrefs.GetInt("MatchType") == 0)
+        //{
+        //    Practice.SetActive(true);
 
-        }
+        //}
 
-        else if(PlayerPrefs.GetInt("MatchType") == 1)
-        {
-            Versus.SetActive(true);
-        }
-        else if(PlayerPrefs.GetInt("MatchType") == 2)
-        {
-            Tournament.SetActive(true);
+        //else if(PlayerPrefs.GetInt("MatchType") == 1)
+        //{
+        //    Versus.SetActive(true);
+        //}
+        //else if(PlayerPrefs.GetInt("MatchType") == 2)
+        //{
+        //    Tournament.SetActive(true);
         }
         //OurVersusText.text = PlayerPrefs.GetString("Username");
         //OurTournamentText.text = PlayerPrefs.GetString("Username");
     }
 
     
-}
+

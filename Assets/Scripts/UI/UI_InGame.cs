@@ -13,6 +13,7 @@ public class UI_InGame : MonoBehaviour
     public GameObject MainMenuPanel;
     public Image OldImage1,OldImage2,OldImage3,OldImage4;
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
+    
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
 
@@ -39,9 +40,12 @@ public class UI_InGame : MonoBehaviour
     }
     private void Update()
     {
+        
+        
         timeText.text = ((int)Ball.timer).ToString();
         if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         {
+            //IsVersus.gameObject.SetActive(true);
             if (PhotonNetwork.PlayerList.Length < 2)
             {
                 //eksik kisi ui
@@ -57,6 +61,7 @@ public class UI_InGame : MonoBehaviour
 
         if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
         {
+            //IsTournament.gameObject.SetActive(true);
             if (PhotonNetwork.PlayerList.Length < 3)
             {
                 //eksik kisi
@@ -71,6 +76,7 @@ public class UI_InGame : MonoBehaviour
 
         if (!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice)
         {
+            
             if (Ball.Player1 == true)
             {
                 OldImage1.sprite = NewImage1;
