@@ -10,6 +10,7 @@ public class In_Game_Panel : MonoBehaviour
 {
     public GameObject Practice, Versus, Tournament;
     public TMP_Text tournement_player1, tournement_player2, tournement_player3, tournement_player4, vs_player1, vs_player2;
+    public TMP_Text tournement_player1_score, tournement_player2_score, tournement_player3_score, tournement_player4_score, vs_player1_score, vs_player2_score;
 
     // Start is called before the first frame update
     void Start()
