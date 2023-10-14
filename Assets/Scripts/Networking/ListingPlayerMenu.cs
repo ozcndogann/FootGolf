@@ -13,16 +13,30 @@ public class ListingPlayerMenu : MonoBehaviourPunCallbacks
 
     public List<ListingPlayer> _listing = new List<ListingPlayer>();//yeni bir list nesnesi oluþturuyor
 
-
-    public override void OnPlayerEnteredRoom(Player newPlayer)//oyunuyu lobiye ekleyen fonksyon
+    private void Start()
     {
-        ListingPlayer listing = Instantiate(_listingPlayer, _playersSpace);//burada oyuncularý iconlarýn olucaðý yerede instantiate ediyor
+        // Instantiate existing players when first joining the room
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            AddPlayerToListing(player);
+        }
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        AddPlayerToListing(newPlayer);
+    }
+
+    private void AddPlayerToListing(Player player)
+    {
+        ListingPlayer listing = Instantiate(_listingPlayer, _playersSpace);
         if (listing != null)
         {
-            listing.SetPlayerInfo(newPlayer);
+            listing.SetPlayerInfo(player);
             _listing.Add(listing);
         }
     }
+
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         int index = _listing.FindIndex(x => x.Player == otherPlayer);

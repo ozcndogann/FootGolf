@@ -5,6 +5,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class PlayFabManager : MonoBehaviour
         {
             name = result.InfoResultPayload.PlayerProfile.DisplayName;
             PlayerPrefs.SetString("Username", name);
+            PhotonNetwork.LocalPlayer.NickName = name;  // Set the Photon nickname
             userName.text = name;
         }
         if (name == null)
