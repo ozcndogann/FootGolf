@@ -16,20 +16,13 @@ public class UI_InGame : MonoBehaviour
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
-    private PhotonView photonView;
-
-    private void Awake()
-    {
-        photonView = GetComponent<PhotonView>();
-    }
-    [PunRPC]
-    public void UpdateRoomCodeForClients(string roomCode)
-    {
-        Debug.Log("RPC called with room code: " + roomCode);
-        codeText.text = roomCode;
-    }
+    
     public void Start()
     {
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("roomCode", out object roomCodeValue))
+        {
+            codeText.text = roomCodeValue.ToString();
+        }
         //codeText.text = CreateAndJoinRooms.randomCreate;
         if (CreateAndJoinRooms.practice)
         {

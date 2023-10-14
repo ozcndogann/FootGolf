@@ -66,23 +66,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         if (practice || versus || Tournament)
         {
             randomCreate = GenerateRandomSixDigitNumber();
+            // Setting the room property
+            roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
+            roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
             PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-
-            // Get UI_InGame script
-            UI_InGame uiInGameScript = FindObjectOfType<UI_InGame>();
-
-            // Check if the script was found
-            if (uiInGameScript != null)
-            {
-                // Get the PhotonView component from the same GameObject as the UI_InGame script
-                PhotonView view = uiInGameScript.GetComponent<PhotonView>();
-
-                // Check if the PhotonView component was found
-                if (view != null)
-                {
-                    view.RPC("UpdateRoomCodeForClients", RpcTarget.AllBuffered, randomCreate);
-                }
-            }
         }
         else
         {
@@ -105,20 +92,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
-        }
-    }
-    public override void OnCreatedRoom()
-    {
-        base.OnCreatedRoom();
-
-        UI_InGame uiInGameScript = FindObjectOfType<UI_InGame>();
-        if (uiInGameScript != null)
-        {
-            PhotonView view = uiInGameScript.GetComponent<PhotonView>();
-            if (view != null)
-            {
-                view.RPC("UpdateRoomCodeForClients", RpcTarget.AllBuffered, randomCreate);
-            }
         }
     }
     public override void OnJoinedRoom()
