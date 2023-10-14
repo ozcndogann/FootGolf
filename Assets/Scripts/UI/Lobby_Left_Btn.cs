@@ -12,9 +12,12 @@ public class Lobby_Left_Btn : MonoBehaviour
     public Button Yes;
     public Button No;
     public GameObject Panel;
+    private GameObject ball;
+    private void Start()
+    {
+        ball = GameObject.FindGameObjectWithTag("Ball");
+    }
 
-
-   
     public void OpenPopUp()
     {
         if (Home == true)
@@ -28,7 +31,8 @@ public class Lobby_Left_Btn : MonoBehaviour
     {
         if (Yes == true)
         {
-            ShotCounter.ShotCount = 0;
+            ShotCounter shotCounter = ball.GetComponent<ShotCounter>();
+            shotCounter.gameObject.GetPhotonView().RPC("UpdateShotCount", RpcTarget.AllBuffered, 0);
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("MainMenu");
         }

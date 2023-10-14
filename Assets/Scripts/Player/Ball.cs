@@ -362,7 +362,12 @@ public class Ball : MonoBehaviour
         lineRendererController = false;
         shootCloser = true;
         Zoom.changeFovBool = false;
-        ShotCounter.ShotCount += 1;
+        //ShotCounter.ShotCount += 1;
+        ShotCounter shotCounter = gameObject.GetComponent<ShotCounter>();
+        shotCounter.ShotCount++;
+        shotCounter.gameObject.GetPhotonView().RPC("UpdateShotCount", RpcTarget.AllBuffered, shotCounter.ShotCount);
+
+
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)

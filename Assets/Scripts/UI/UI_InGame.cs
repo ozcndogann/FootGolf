@@ -9,14 +9,14 @@ public class UI_InGame : MonoBehaviour
 {
     [SerializeField] public TMP_Text codeText;
     [SerializeField] public TMP_Text timeText;
-    Ball ball;
     public GameObject ReturnPanel;
     public GameObject MainMenuPanel;
     public Image OldImage1,OldImage2,OldImage3,OldImage4;
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
-    
+
+    private GameObject ball;
     public void Start()
     {
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("roomCode", out object roomCodeValue))
@@ -35,7 +35,7 @@ public class UI_InGame : MonoBehaviour
         {
             codeText.enabled = true;
         }
-
+        ball = GameObject.FindGameObjectWithTag("Ball");
     }
     private void Update()
     {
@@ -141,7 +141,8 @@ public class UI_InGame : MonoBehaviour
     }
     public void MainMenu()
     {
-        ShotCounter.ShotCount = 0;
+        ShotCounter shotCounter = ball.GetComponent<ShotCounter>();
+        shotCounter.gameObject.GetPhotonView().RPC("UpdateShotCount", RpcTarget.AllBuffered, 0);
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }

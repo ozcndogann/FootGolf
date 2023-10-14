@@ -11,9 +11,12 @@ public class GameEnder : MonoBehaviour
     private int score;
     public static bool EndGame;
     Player player;
-
+    private GameObject ball;
+    ShotCounter ShotCounter;
     private void Start()
     {
+        ball = GameObject.FindGameObjectWithTag("Ball");
+        ShotCounter = ball.GetComponent<ShotCounter>();
         EndGame = true;
     }
     void Update()
