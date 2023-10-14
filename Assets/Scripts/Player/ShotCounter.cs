@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShotCounter : MonoBehaviour
 {
-    public int ShotCount;
+    public static int ShotCount;
     void Start()
     {
     }
@@ -14,10 +14,10 @@ public class ShotCounter : MonoBehaviour
     {
         
     }
-    [PunRPC]
-    public void UpdateShotCount(int count)
-    {
-        ShotCount = count;
-        // Update UI or do other tasks
-    }
+    //[PunRPC]
+    //public void UpdateShotCount(int count)
+    //{
+    //    ShotCount = count;
+    //    // Update UI or do other tasks
+    //}
 }

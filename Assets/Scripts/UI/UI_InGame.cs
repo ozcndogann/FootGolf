@@ -141,8 +141,7 @@ public class UI_InGame : MonoBehaviour
     }
     public void MainMenu()
     {
-        ShotCounter shotCounter = ball.GetComponent<ShotCounter>();
-        shotCounter.gameObject.GetPhotonView().RPC("UpdateShotCount", RpcTarget.AllBuffered, 0);
+        ShotCounter.ShotCount = 0;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }

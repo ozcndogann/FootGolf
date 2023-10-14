@@ -31,8 +31,7 @@ public class Lobby_Left_Btn : MonoBehaviour
     {
         if (Yes == true)
         {
-            ShotCounter shotCounter = ball.GetComponent<ShotCounter>();
-            shotCounter.gameObject.GetPhotonView().RPC("UpdateShotCount", RpcTarget.AllBuffered, 0);
+            ShotCounter.ShotCount = 0;
             PhotonNetwork.LeaveRoom();
             SceneManager.LoadScene("MainMenu");
         }

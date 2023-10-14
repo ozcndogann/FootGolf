@@ -362,10 +362,7 @@ public class Ball : MonoBehaviour
         lineRendererController = false;
         shootCloser = true;
         Zoom.changeFovBool = false;
-        //ShotCounter.ShotCount += 1;
-        ShotCounter shotCounter = gameObject.GetComponent<ShotCounter>();
-        shotCounter.ShotCount++;
-        shotCounter.gameObject.GetPhotonView().RPC("UpdateShotCount", RpcTarget.AllBuffered, shotCounter.ShotCount);
+        ShotCounter.ShotCount += 1;
 
 
         timer = 20f;
