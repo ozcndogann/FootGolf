@@ -27,7 +27,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     public void Start()
     {
-        PlayerPrefs.GetInt("MatchType");
+        //PlayerPrefs.GetInt("MatchType");
 
 
     }
