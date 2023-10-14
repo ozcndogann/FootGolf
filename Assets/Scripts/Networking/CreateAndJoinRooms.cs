@@ -67,6 +67,22 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         {
             randomCreate = GenerateRandomSixDigitNumber();
             PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+
+            // Get UI_InGame script
+            UI_InGame uiInGameScript = FindObjectOfType<UI_InGame>();
+
+            // Check if the script was found
+            if (uiInGameScript != null)
+            {
+                // Get the PhotonView component from the same GameObject as the UI_InGame script
+                PhotonView view = uiInGameScript.GetComponent<PhotonView>();
+
+                // Check if the PhotonView component was found
+                if (view != null)
+                {
+                    view.RPC("UpdateRoomCodeForClients", RpcTarget.AllBuffered, randomCreate);
+                }
+            }
         }
         else
         {

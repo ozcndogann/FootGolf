@@ -16,7 +16,17 @@ public class UI_InGame : MonoBehaviour
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
+    private PhotonView photonView;
 
+    private void Awake()
+    {
+        photonView = GetComponent<PhotonView>();
+    }
+    [PunRPC]
+    public void UpdateRoomCodeForClients(string roomCode)
+    {
+        codeText.text = roomCode;
+    }
     public void Start()
     {
         codeText.text = CreateAndJoinRooms.randomCreate;

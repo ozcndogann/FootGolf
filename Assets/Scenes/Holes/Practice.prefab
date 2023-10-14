@@ -1491,6 +1491,7 @@ GameObject:
   - component: {fileID: 4007660289463144370}
   - component: {fileID: 4007660289463144371}
   - component: {fileID: 6212926931016060373}
+  - component: {fileID: 2764308248549235653}
   m_Layer: 5
   m_Name: Practice
   m_TagString: Untagged
@@ -1601,6 +1602,40 @@ MonoBehaviour:
   timeText: {fileID: 4007660289101419515}
   ReturnPanel: {fileID: 4007660289416888973}
   MainMenuPanel: {fileID: 4007660289110434961}
+  OldImage1: {fileID: 0}
+  OldImage2: {fileID: 0}
+  OldImage3: {fileID: 0}
+  OldImage4: {fileID: 0}
+  NewImage1: {fileID: 0}
+  NewImage2: {fileID: 0}
+  NewImage3: {fileID: 0}
+  NewImage4: {fileID: 0}
+  OldSprite1: {fileID: 0}
+  OldSprite2: {fileID: 0}
+  oldsprite3: {fileID: 0}
+  oldsprite4: {fileID: 0}
+--- !u!114 &2764308248549235653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4007660289463144369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4007660289721384897
 GameObject:
   m_ObjectHideFlags: 0
