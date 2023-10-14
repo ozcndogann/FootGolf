@@ -25,11 +25,12 @@ public class UI_InGame : MonoBehaviour
     [PunRPC]
     public void UpdateRoomCodeForClients(string roomCode)
     {
+        Debug.Log("RPC called with room code: " + roomCode);
         codeText.text = roomCode;
     }
     public void Start()
     {
-        codeText.text = CreateAndJoinRooms.randomCreate;
+        //codeText.text = CreateAndJoinRooms.randomCreate;
         if (CreateAndJoinRooms.practice)
         {
             codeText.enabled = false;

@@ -107,20 +107,22 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
         }
     }
+    public override void OnCreatedRoom()
+    {
+        base.OnCreatedRoom();
+
+        UI_InGame uiInGameScript = FindObjectOfType<UI_InGame>();
+        if (uiInGameScript != null)
+        {
+            PhotonView view = uiInGameScript.GetComponent<PhotonView>();
+            if (view != null)
+            {
+                view.RPC("UpdateRoomCodeForClients", RpcTarget.AllBuffered, randomCreate);
+            }
+        }
+    }
     public override void OnJoinedRoom()
     {
-        //if (practice)
-        //{
-        //    PhotonNetwork.LoadLevel("Hole1");
-        //}
-        //else if (versus)
-        //{
-        //    PhotonNetwork.LoadLevel("Lobby");
-        //}
-        //else if (Tournament)
-        //{
-        //    PhotonNetwork.LoadLevel("Lobby");
-        //}
         PhotonNetwork.LoadLevel("Lobby");
     }
 }
