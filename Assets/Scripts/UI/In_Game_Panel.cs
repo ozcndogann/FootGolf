@@ -11,34 +11,37 @@ public class In_Game_Panel : MonoBehaviour
     public GameObject Practice, Versus, Tournament;
     public TMP_Text tournement_player1, tournement_player2, tournement_player3, tournement_player4, vs_player1, vs_player2;
     public TMP_Text tournement_player1_score, tournement_player2_score, tournement_player3_score, tournement_player4_score, vs_player1_score, vs_player2_score;
-
-    // Start is called before the first frame update
+    ShotCounter ShotCounter;
+    private GameObject ball;
     void Start()
     {
+        ball = GameObject.FindGameObjectWithTag("Ball");
+        ShotCounter = ball.GetComponent<ShotCounter>();
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            //if (player != localPlayer)
-            //{
-            //    otherPlayer = player;
-            //    break;
-            //}
             if (player.ActorNumber == 1)
             {
                 tournement_player1.text = player.NickName;
                 vs_player1.text = player.NickName;
+                tournement_player1_score.text = ShotCounter.ShotCount.ToString();
+                vs_player1_score.text = ShotCounter.ShotCount.ToString();
             }
             else if (player.ActorNumber == 2)
             {
                 tournement_player2.text = player.NickName;
                 vs_player2.text = player.NickName;
+                tournement_player2_score.text = ShotCounter.ShotCount.ToString();
+                vs_player2_score.text = ShotCounter.ShotCount.ToString();
             }
             else if (player.ActorNumber == 3)
             {
                 tournement_player3.text = player.NickName;
+                tournement_player3_score.text = ShotCounter.ShotCount.ToString();
             }
             else if (player.ActorNumber == 4)
             {
                 tournement_player4.text = player.NickName;
+                tournement_player3_score.text = ShotCounter.ShotCount.ToString();
             }
         }
         if (PlayerPrefs.GetInt("MatchType") == 0)
