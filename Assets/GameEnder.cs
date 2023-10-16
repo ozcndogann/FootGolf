@@ -31,7 +31,6 @@ public class GameEnder : MonoBehaviour
             CalculateScore();
             UpdateScoreDisplay();
             Panel.SetActive(true);
-            Debug.Log(player.ActorNumber + " Score: " + score);
             //ShotCounter.ShotCount = 0;
             //PhotonNetwork.LeaveRoom();
             //SceneManager.LoadScene("MainMenu");
