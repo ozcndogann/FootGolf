@@ -119,6 +119,10 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Score"))
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", 0 } });
+        }
         PhotonNetwork.LoadLevel("RandomLobby");
         //if (Switch.index == 0)
         //{
