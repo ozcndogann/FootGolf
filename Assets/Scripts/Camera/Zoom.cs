@@ -16,12 +16,14 @@ public class Zoom : MonoBehaviour
     [SerializeField] private Camera cam;
     private float currentFOV;
     public static bool changeFovBool;
+    Camera MainCam;
 
     // Use this for initialization
     void Start()
     {
         //set initial FOV at start
-        Camera.main.fieldOfView = initialFOV;
+        MainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        MainCam.fieldOfView = initialFOV;
         ballObj = GameObject.FindGameObjectWithTag("Ball");
         ball = ballObj.GetComponent<Ball>();
         ball.enabled = true;
@@ -35,7 +37,7 @@ public class Zoom : MonoBehaviour
     void Update()
     {
         //store current field of view value in variable
-        currentFOV = Camera.main.fieldOfView;
+        currentFOV = MainCam.fieldOfView;
         if (changeFovBool == true)
         {
             //Ball.lineRendererController = false;
@@ -43,11 +45,11 @@ public class Zoom : MonoBehaviour
         }
         else if (Ball.waitForShoot == true)
         {
-            Camera.main.fieldOfView = 65;
+            MainCam.fieldOfView = 65;
         }
         else
         {
-            Camera.main.fieldOfView = initialFOV;
+            MainCam.fieldOfView = initialFOV;
         }
         
     }
@@ -65,7 +67,7 @@ public class Zoom : MonoBehaviour
             
             if (currentFOV > zoomInFOV)//check if current FOV is grater than the Zoomed in FOV input and increment the FOV smoothly
             {
-                Camera.main.fieldOfView += (-smooth * Time.deltaTime);
+                MainCam.fieldOfView += (-smooth * Time.deltaTime);
                 ballObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
             else
@@ -74,7 +76,7 @@ public class Zoom : MonoBehaviour
                 //set FOV as the Zoomed in input
                 if (currentFOV <= zoomInFOV)
                 {
-                    Camera.main.fieldOfView = zoomInFOV;
+                    MainCam.fieldOfView = zoomInFOV;
 
                 }
             }
