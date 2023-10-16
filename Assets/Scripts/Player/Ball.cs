@@ -362,6 +362,7 @@ public class Ball : MonoBehaviour
         lineRendererController = false;
         shootCloser = true;
         ShotCounter.ShotCount += 1;
+        Debug.Log("vurdu");
         Zoom.changeFovBool = false;
         //ShotCounter.ShotCount += 1;
 
