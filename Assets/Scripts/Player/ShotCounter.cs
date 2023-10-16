@@ -9,15 +9,15 @@ public class ShotCounter : MonoBehaviourPun
     {
         get
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(SCORE_KEY))
-            {
-                return (int)PhotonNetwork.LocalPlayer.CustomProperties[SCORE_KEY];
-            }
-            else
-            {
-                return 0;
-            }
-           
+            //if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(SCORE_KEY))
+            //{
+            //    return (int)PhotonNetwork.LocalPlayer.CustomProperties[SCORE_KEY];
+            //}
+            //else
+            //{
+            //    return 0;
+            //}
+            return (int)PhotonNetwork.LocalPlayer.CustomProperties[SCORE_KEY];
         }
         set
         {
