@@ -1,23 +1,23 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotCounter : MonoBehaviour
+public class ShotCounter : MonoBehaviourPun
 {
-    public static int ShotCount;
-    void Start()
-    {
-    }
+    private const string SCORE_KEY = "Score";
 
-    void Update()
+    public static int ShotCount
     {
-        
+        get
+        {
+            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(SCORE_KEY))
+            {
+                return (int)PhotonNetwork.LocalPlayer.CustomProperties[SCORE_KEY];
+            }
+            return 0;
+        }
+        set
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { SCORE_KEY, value } });
+        }
     }
-    //[PunRPC]
-    //public void UpdateShotCount(int count)
-    //{
-    //    ShotCount = count;
-    //    // Update UI or do other tasks
-    //}
 }
