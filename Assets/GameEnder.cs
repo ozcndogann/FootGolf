@@ -55,7 +55,7 @@ public class GameEnder : MonoBehaviour
             {
                 playerScore = (int)p.CustomProperties["FinalScore"];
             }
-            scoreText += p.ActorNumber + " Score: " + playerScore + "\n";
+            scoreText += p.NickName + ": " + playerScore + "\n";
         }
         scoreDisplayText.text = scoreText;
     }
