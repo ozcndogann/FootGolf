@@ -27,25 +27,30 @@ public class In_Game_Panel : MonoBehaviour
         {
             Tournament.SetActive(true);
         }
-            ball = GameObject.FindGameObjectWithTag("Ball");
+        ball = GameObject.FindGameObjectWithTag("Ball");
         ShotCounter = ball.GetComponent<ShotCounter>();
-        
-        //if (PlayerPrefs.GetInt("MatchType") == 0)
-        //{
-        //    Practice.SetActive(true);
-
-        //}
-
-        //else if(PlayerPrefs.GetInt("MatchType") == 1)
-        //{
-        //    Versus.SetActive(true);
-        //}
-        //else if(PlayerPrefs.GetInt("MatchType") == 2)
-        //{
-        //    Tournament.SetActive(true);
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.ActorNumber == 1)
+            {
+                tournement_player1.text = player.NickName;
+                vs_player1.text = player.NickName;
+            }
+            else if (player.ActorNumber == 2)
+            {
+                tournement_player2.text = player.NickName;
+                vs_player2.text = player.NickName;
+            }
+            else if (player.ActorNumber == 3)
+            {
+                tournement_player3.text = player.NickName;
+            }
+            else if (player.ActorNumber == 4)
+            {
+                tournement_player4.text = player.NickName;
+            }
         }
-    //OurVersusText.text = PlayerPrefs.GetString("Username");
-    //OurTournamentText.text = PlayerPrefs.GetString("Username");
+    }   
     private void Update()
     {
         foreach (Player player in PhotonNetwork.PlayerList)
@@ -57,26 +62,20 @@ public class In_Game_Panel : MonoBehaviour
             }
             if (player.ActorNumber == 1)
             {
-                tournement_player1.text = player.NickName;
-                vs_player1.text = player.NickName;
                 tournement_player1_score.text = playerScore.ToString();
                 vs_player1_score.text = playerScore.ToString();
             }
             else if (player.ActorNumber == 2)
             {
-                tournement_player2.text = player.NickName;
-                vs_player2.text = player.NickName;
                 tournement_player2_score.text = playerScore.ToString();
                 vs_player2_score.text = playerScore.ToString();
             }
             else if (player.ActorNumber == 3)
             {
-                tournement_player3.text = player.NickName;
                 tournement_player3_score.text = playerScore.ToString();
             }
             else if (player.ActorNumber == 4)
             {
-                tournement_player4.text = player.NickName;
                 tournement_player4_score.text = playerScore.ToString();
             }
         }
