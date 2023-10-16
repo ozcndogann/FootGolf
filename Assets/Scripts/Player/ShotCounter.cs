@@ -9,23 +9,22 @@ public class ShotCounter : MonoBehaviourPun
     {
         get
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Score"))
+            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(SCORE_KEY))
             {
-                int currentScore = (int)PhotonNetwork.LocalPlayer.CustomProperties["Score"];
-                currentScore++;
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", currentScore } });
-                Debug.Log("Directly Updated Score: " + currentScore);
-            }
-            else
-            {
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", 1 } });
-                Debug.Log("Directly Set Initial Score to 1");
+                return (int)PhotonNetwork.LocalPlayer.CustomProperties[SCORE_KEY];
             }
             return 0;
         }
         set
         {
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { SCORE_KEY, val } });
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { SCORE_KEY, value } });
+            Debug.Log("Score Set to: " + value);
         }
+    }
+
+    // Use this method to increment the score by 1
+    public static void IncrementScore()
+    {
+        ShotCount += 1;
     }
 }

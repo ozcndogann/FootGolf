@@ -358,7 +358,7 @@ public class Ball : MonoBehaviour
         }
         lineRendererController = false;
         shootCloser = true;
-        ShotCounter.ShotCount += 1;
+        ShotCounter.IncrementScore();
         Debug.Log("Updated ShotCount: " + ShotCounter.ShotCount);
         Zoom.changeFovBool = false;
         //ShotCounter.ShotCount += 1;
