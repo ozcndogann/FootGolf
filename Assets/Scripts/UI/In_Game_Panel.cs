@@ -12,6 +12,7 @@ public class In_Game_Panel : MonoBehaviour
     public TMP_Text tournement_player1_score, tournement_player2_score, tournement_player3_score, tournement_player4_score, vs_player1_score, vs_player2_score;
     ShotCounter ShotCounter;
     private GameObject ball;
+     int playerScore;
     void Start()
     {
         if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
@@ -30,7 +31,6 @@ public class In_Game_Panel : MonoBehaviour
         ShotCounter = ball.GetComponent<ShotCounter>();
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            int playerScore = 0;
 
             if (player.CustomProperties.ContainsKey("Score"))
             {
