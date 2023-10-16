@@ -11,6 +11,7 @@ public class GameEnder : MonoBehaviour
     [SerializeField] private int secondHolePar;
     private int score;
     public static bool EndGame;
+    public static bool EndGamePanelOpen;
     Player player;
     private GameObject ball;
     ShotCounter ShotCounter;
@@ -58,5 +59,6 @@ public class GameEnder : MonoBehaviour
             scoreText += p.NickName + ": " + playerScore + "\n";
         }
         scoreDisplayText.text = scoreText;
+        EndGamePanelOpen = true;
     }
 }
