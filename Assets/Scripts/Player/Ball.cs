@@ -235,7 +235,6 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    Debug.Log("Player: " + player.ActorNumber.ToString() + "is kicking");
                     if (player.ActorNumber ==1)
                     {
                        
@@ -254,7 +253,6 @@ public class Ball : MonoBehaviour
                     }
                     else if(player.ActorNumber == 3)
                     {
-                        Debug.Log("actor: " + player.ActorNumber);
                         Player1 = false;
                         Player2 = false;
                         Player3 = true;
@@ -262,7 +260,6 @@ public class Ball : MonoBehaviour
                     }
                     else if (player.ActorNumber == 4)
                     {
-                        Debug.Log("actor: " + player.ActorNumber);
                         Player1 = false;
                         Player2 = false;
                         Player3 = false;
@@ -362,7 +359,7 @@ public class Ball : MonoBehaviour
         lineRendererController = false;
         shootCloser = true;
         ShotCounter.ShotCount += 1;
-        Debug.Log("vurdu");
+        Debug.Log("Updated ShotCount: " + ShotCounter.ShotCount);
         Zoom.changeFovBool = false;
         //ShotCounter.ShotCount += 1;
 
