@@ -361,8 +361,9 @@ public class Ball : MonoBehaviour
         }
         lineRendererController = false;
         shootCloser = true;
-        Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
+        Zoom.changeFovBool = false;
+        //ShotCounter.ShotCount += 1;
 
 
         timer = 20f;
