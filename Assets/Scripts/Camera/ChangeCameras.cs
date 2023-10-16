@@ -38,6 +38,7 @@ public class ChangeCameras : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(MainCam.transform.rotation.eulerAngles.y);
         //cam1.transform.position = new Vector3(transform.position.x - 4, transform.position.y + 1.4f, transform.position.z);// -90 main cameradan
         cam1.transform.rotation = Quaternion.Euler(0, MainCam.transform.rotation.eulerAngles.y - 90, 0);
         //cam2.transform.position = new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z);// -270 main cameradan
@@ -48,7 +49,7 @@ public class ChangeCameras : MonoBehaviour
         cam4.transform.rotation = Quaternion.Euler(0, MainCam.transform.rotation.eulerAngles.y, 0);
         //cam5.transform.position = new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z - 4); // -225 main cameradan
         cam5.transform.rotation = Quaternion.Euler(0, MainCam.transform.rotation.eulerAngles.y - 225, 0);
-        if (Ball.lineRendererOn == false && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f)
+        if (Ball.lineRendererOn == false && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f && Ball.shooted==false)
         {
             cam1.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
             cam2.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
@@ -56,7 +57,7 @@ public class ChangeCameras : MonoBehaviour
             cam4.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
             cam5.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
         }
-        else if(Ball.lineRendererOn == true && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f)
+        else if(Ball.lineRendererOn == true && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f && Ball.shooted==false)
         {
             cam1.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
             cam2.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
