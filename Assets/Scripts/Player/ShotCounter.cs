@@ -13,7 +13,7 @@ public class ShotCounter : MonoBehaviourPun
             {
                 return (int)PhotonNetwork.LocalPlayer.CustomProperties[SCORE_KEY];
             }
-            //return 0;
+            return 0;
         }
         set
         {
