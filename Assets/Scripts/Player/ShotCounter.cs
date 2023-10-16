@@ -23,8 +23,8 @@ public class ShotCounter : MonoBehaviourPun
     }
 
     // Use this method to increment the score by 1
-    public static void IncrementScore()
-    {
-        ShotCount += 1;
-    }
+    //public static void IncrementScore()
+    //{
+    //    ShotCount += 1;
+    //}
 }
