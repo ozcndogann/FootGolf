@@ -2614,6 +2614,7 @@ GameObject:
   - component: {fileID: 7050218026696639509}
   - component: {fileID: -5028747507336710356}
   - component: {fileID: -6324898149365628810}
+  - component: {fileID: 3389436989087097542}
   m_Layer: 0
   m_Name: Messi
   m_TagString: Untagged
@@ -2686,7 +2687,9 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -6324898149365628810}
+  - {fileID: 3389436989087097542}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2723,6 +2726,32 @@ MonoBehaviour:
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 10
+--- !u!114 &3389436989087097542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6639123544252919850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: penaltyKick
+  - Type: 4
+    SynchronizeType: 1
+    Name: trivela
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+  - SynchronizeType: 0
+    LayerIndex: 1
 --- !u!1 &6800821201919638797
 GameObject:
   m_ObjectHideFlags: 0

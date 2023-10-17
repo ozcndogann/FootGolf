@@ -2647,6 +2647,7 @@ GameObject:
   - component: {fileID: 9072268575442137439}
   - component: {fileID: -8498143574995891276}
   - component: {fileID: 4899112754146770994}
+  - component: {fileID: 2885326272135951973}
   m_Layer: 0
   m_Name: Ronaldinho
   m_TagString: Undeletable
@@ -2717,7 +2718,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 4899112754146770994}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -2754,6 +2756,22 @@ MonoBehaviour:
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 10
+--- !u!114 &2885326272135951973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8153281012861015783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!1 &8278228196296848828
 GameObject:
   m_ObjectHideFlags: 0
