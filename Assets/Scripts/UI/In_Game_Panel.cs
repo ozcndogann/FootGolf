@@ -8,8 +8,8 @@ using Photon.Pun;
 public class In_Game_Panel : MonoBehaviour
 {
     public GameObject Practice, Versus, Tournament;
-    public TMP_Text tournement_player1, tournement_player2, tournement_player3, tournement_player4, vs_player1, vs_player2;
-    public TMP_Text tournement_player1_score, tournement_player2_score, tournement_player3_score, tournement_player4_score, vs_player1_score, vs_player2_score;
+    public TMP_Text tournement_player1, tournement_player2, tournement_player3, tournement_player4, vs_player1, vs_player2, practice_p1;
+    public TMP_Text tournement_player1_score, tournement_player2_score, tournement_player3_score, tournement_player4_score, vs_player1_score, vs_player2_score, practice_p1_score;
     ShotCounter ShotCounter;
     private GameObject ball;
      int playerScore;
@@ -35,6 +35,7 @@ public class In_Game_Panel : MonoBehaviour
             {
                 tournement_player1.text = player.NickName;
                 vs_player1.text = player.NickName;
+                practice_p1.text = player.NickName;
             }
             else if (player.ActorNumber == 2)
             {
@@ -64,6 +65,7 @@ public class In_Game_Panel : MonoBehaviour
             {
                 tournement_player1_score.text = playerScore.ToString();
                 vs_player1_score.text = playerScore.ToString();
+                practice_p1_score.text = playerScore.ToString();
             }
             else if (player.ActorNumber == 2)
             {
