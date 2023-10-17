@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Switch : MonoBehaviour
 {
     public GameObject[] maps;
+    public GameObject[] Names;
     public Button NextButton;
     public Button PrevButton;
 
@@ -39,6 +40,7 @@ public class Switch : MonoBehaviour
         if (index == 0)
         {
             maps[0].gameObject.SetActive(true);
+            Names[0].gameObject.SetActive(true);
             PrevButton.gameObject.SetActive(false);
         }
         else
@@ -53,8 +55,10 @@ public class Switch : MonoBehaviour
         {
             
             maps[i].gameObject.SetActive(false);
+            Names[i].gameObject.SetActive(false);
             maps[index].gameObject.SetActive(true);
-            
+            Names[index].gameObject.SetActive(true);
+
         }
         Debug.Log(index);
     }
@@ -65,8 +69,10 @@ public class Switch : MonoBehaviour
         {
             
             maps[i].gameObject.SetActive(false);
+            Names[i].gameObject.SetActive(false);
             maps[index].gameObject.SetActive(true);
-            
+            Names[index].gameObject.SetActive(true);
+
         }
         Debug.Log(index);
     }

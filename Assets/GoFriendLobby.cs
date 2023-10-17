@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GoFriendLobby : MonoBehaviour
 {
+    public static bool RandomGame;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,10 @@ public class GoFriendLobby : MonoBehaviour
     }
     public void GoRandomLobby()
     {
+
+        RandomGame = true;
         SceneManager.LoadScene("UIRandomGameSelect");
+        
+
     }
 }

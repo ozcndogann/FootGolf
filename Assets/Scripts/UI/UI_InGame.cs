@@ -13,6 +13,8 @@ public class UI_InGame : MonoBehaviour
     public GameObject MainMenuPanel;
     public Image OldImage1,OldImage2,OldImage3,OldImage4;
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
+    public GameObject CodeSprite;
+    
     
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
@@ -37,6 +39,15 @@ public class UI_InGame : MonoBehaviour
             codeText.enabled = true;
         }
         ball = GameObject.FindGameObjectWithTag("Ball");
+
+        if (GoFriendLobby.RandomGame)
+        {
+            CodeSprite.SetActive(false);
+        }
+        else
+        {
+            CodeSprite.SetActive(true);
+        }
     }
     private void Update()
     {
