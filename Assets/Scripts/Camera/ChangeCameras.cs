@@ -67,6 +67,11 @@ public class ChangeCameras : MonoBehaviour
         }
         if (Ball.waitForShoot || Ball.waitForShootTri)
         {
+            disCam1 = transform.position - cam1.transform.position;
+            disCam2 = transform.position - cam2.transform.position;
+            disCam3 = transform.position - cam3.transform.position;
+            disCam4 = transform.position - cam4.transform.position;
+            disCam5 = transform.position - cam5.transform.position;
             if (!randomerBool)
             {
                 random = Random.Range(0, 5);
@@ -75,27 +80,22 @@ public class ChangeCameras : MonoBehaviour
             switch (random)
             {
                 case 0:
-                    disCam1 = transform.position - cam1.transform.position;
                     cam1.GetComponent<Camera>().enabled = true;
                     MainCam.GetComponent<Camera>().enabled = false;
                     break;
                 case 1:
-                    disCam2 = transform.position - cam2.transform.position;
                     cam2.GetComponent<Camera>().enabled = true;
                     MainCam.GetComponent<Camera>().enabled = false;
                     break;
                 case 2:
-                    disCam3 = transform.position - cam3.transform.position;
                     cam3.GetComponent<Camera>().enabled = true;
                     MainCam.GetComponent<Camera>().enabled = false;
                     break;
                 case 3:
-                    disCam4 = transform.position - cam4.transform.position;
                     cam4.GetComponent<Camera>().enabled = true;
                     MainCam.GetComponent<Camera>().enabled = false;
                     break;
                 case 4:
-                    disCam5 = transform.position - cam5.transform.position;
                     cam5.GetComponent<Camera>().enabled = true;
                     MainCam.GetComponent<Camera>().enabled = false;
                     break;
