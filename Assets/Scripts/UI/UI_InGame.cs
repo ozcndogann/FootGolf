@@ -24,10 +24,10 @@ public class UI_InGame : MonoBehaviour
         {
             codeText.text = roomCodeValue.ToString();
         }
-        if (CreateAndJoinRooms.practice)
-        {
-            codeText.enabled = false;
-        }
+        //if (CreateAndJoinRooms.practice)
+        //{
+        //    codeText.enabled = false;
+        //}
         else if (CreateAndJoinRooms.versus)
         {
             codeText.enabled = true;
