@@ -50,30 +50,53 @@ public class GameEnder : MonoBehaviour
     }
     private void UpdateScoreDisplay()
     {
-        // First, clear any existing score displays.
+        // Clear existing displays.
         foreach (Transform child in scoreDisplayParent)
         {
             Destroy(child.gameObject);
         }
 
-        // For each player, create a new score display.
-        foreach (Player p in PhotonNetwork.PlayerList)
+        // Sort players based on scores
+        List<Player> playersSorted = new List<Player>(PhotonNetwork.PlayerList);
+        playersSorted.Sort((player1, player2) =>
         {
-            int playerScore = 0;
-            if (p.CustomProperties.ContainsKey("FinalScore"))
+            int score1 = player1.CustomProperties.ContainsKey("FinalScore") ? (int)player1.CustomProperties["FinalScore"] : int.MaxValue;
+            int score2 = player2.CustomProperties.ContainsKey("FinalScore") ? (int)player2.CustomProperties["FinalScore"] : int.MaxValue;
+            return score1.CompareTo(score2);
+        });
+
+        // Display players with rank
+        int lastScore = int.MinValue;
+        int lastRank = 0;
+        int displayRank = 0;
+
+        foreach (Player p in playersSorted)
+        {
+            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
+
+            if (playerScore != lastScore)
             {
-                playerScore = (int)p.CustomProperties["FinalScore"];
+                lastRank = displayRank + 1;
             }
 
-            // Instantiate a new score display for this player.
             GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
             TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            scoreTextComponent.text = p.NickName + ": " + playerScore;
+            scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+
+            lastScore = playerScore;
+            displayRank++;
         }
     }
+
     //private void UpdateScoreDisplay()
     //{
-    //    string scoreText = "";
+    //    // First, clear any existing score displays.
+    //    foreach (Transform child in scoreDisplayParent)
+    //    {
+    //        Destroy(child.gameObject);
+    //    }
+
+    //    // For each player, create a new score display.
     //    foreach (Player p in PhotonNetwork.PlayerList)
     //    {
     //        int playerScore = 0;
@@ -81,9 +104,11 @@ public class GameEnder : MonoBehaviour
     //        {
     //            playerScore = (int)p.CustomProperties["FinalScore"];
     //        }
-    //        scoreText += p.NickName + ": " + playerScore + "\n";
-    //    }
-    //    scoreDisplayText.text = scoreText;
 
+    //        // Instantiate a new score display for this player.
+    //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
+    //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+    //        scoreTextComponent.text = p.NickName + ": " + playerScore;
+    //    }
     //}
 }
