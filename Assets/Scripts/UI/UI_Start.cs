@@ -12,12 +12,18 @@ public class UI_Start : MonoBehaviour
     }
     public void Practice()
     {
-        SceneManager.LoadScene("UIRandomGameSelect");
+        //SceneManager.LoadScene("UIRandomGameSelect");
+        StartCoroutine(DelayCheck2(.5f));
     }
     private IEnumerator DelayCheck(float delay)
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("LobbyOrQuick");
+    }
+    private IEnumerator DelayCheck2(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("UIRandomGameSelect");
     }
 
 }
