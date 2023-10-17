@@ -67,7 +67,7 @@ public class GameEnder : MonoBehaviour
 
             // Instantiate a new score display for this player.
             GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-            TMP_Text scoreTextComponent = newScoreDisplay.GetComponentInChildren<TMP_Text>();
+            TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
             scoreTextComponent.text = p.NickName + ": " + playerScore;
         }
     }
