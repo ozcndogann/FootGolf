@@ -134,9 +134,10 @@ public class Ball : MonoBehaviour
         Debug.Log("isminedegilse");
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.IsLocal)
+            if (!player.IsLocal)
             {
-                OurFootballer.SetActive(true);
+                PhotonNetwork.GetPhotonView(player.ActorNumber).GetComponent<Ball>().OurFootballer.SetActive(true);
+                //OurFootballer.SetActive(true);
             }
         }
 
