@@ -124,7 +124,14 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        
+        if (OurFootballer.activeSelf)
+        {
+            TrivelaFootballer.SetActive(false);
+        }
+        if (TrivelaFootballer.activeSelf)
+        {
+            OurFootballer.SetActive(false);
+        }
         //if (OurFootballerCloser == true)
         //{
         //    Debug.Log("isminesa");
@@ -154,14 +161,6 @@ public class Ball : MonoBehaviour
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
-                if (OurFootballer.activeInHierarchy)
-                {
-                    TrivelaFootballer.SetActive(false);
-                }
-                if (TrivelaFootballer.activeInHierarchy)
-                {
-                    OurFootballer.SetActive(false);
-                }
                 Stop();
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
