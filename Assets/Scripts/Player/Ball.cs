@@ -132,14 +132,14 @@ public class Ball : MonoBehaviour
         //    OurFootballerCloser = false;
         //}
         Debug.Log("isminedegilse");
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            if (!player.IsLocal)
-            {
-                PhotonNetwork.GetPhotonView(player.ActorNumber).GetComponent<Ball>().OurFootballer.SetActive(true);
-                //OurFootballer.SetActive(true);
-            }
-        }
+        //foreach (Player player in PhotonNetwork.PlayerList)
+        //{
+        //    if (!player.IsLocal)
+        //    {
+        //        PhotonNetwork.GetPhotonView(player.ActorNumber).GetComponent<Ball>().OurFootballer.SetActive(true);
+        //        //OurFootballer.SetActive(true);
+        //    }
+        //}
 
         if (TrivelaFootballer != null)
         {
