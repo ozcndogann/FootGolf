@@ -42,11 +42,13 @@ public class Ball : MonoBehaviour
     public static bool lineRendererOn;
     public static bool lineRendererController;
     public static bool Player1,Player2,Player3,Player4;
+    bool OurFootballerCloser;
 
 
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
+        OurFootballerCloser = false;
         lineRendererController = false;
         lineRendererOn = false;
         gameEnder = false;
@@ -80,6 +82,8 @@ public class Ball : MonoBehaviour
                 TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
                 footballerAnimator = OurFootballer.GetComponent<Animator>();
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+                OurFootballer.SetActive(false);
+                OurFootballerCloser = true;
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
             {
@@ -91,9 +95,10 @@ public class Ball : MonoBehaviour
                 TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
                 footballerAnimator = OurFootballer.GetComponent<Animator>();
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+                OurFootballer.SetActive(false);
+                OurFootballerCloser = true;
             }  
         }
-        OurFootballer.SetActive(false);
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -119,8 +124,26 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        if (OurFootballerCloser == true)
+        {
+            Debug.Log("isminesa");
+            OurFootballer.SetActive(false);
+            
+            OurFootballerCloser = false;
+        }
+        //if (!view.IsMine)
+        //{
+        //    Debug.Log("isminedegilse");
+        //    OurFootballer.SetActive(false);
+        //}
+        if (TrivelaFootballer != null)
+        {
+            TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        }
+        if(OurFootballer != null)
+        {
+            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        }
         if (view.IsMine)
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
