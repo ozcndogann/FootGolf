@@ -124,14 +124,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (OurFootballer.activeSelf)
-        {
-            TrivelaFootballer.SetActive(false);
-        }
-        if (TrivelaFootballer.activeSelf)
-        {
-            OurFootballer.SetActive(false);
-        }
+        
         //if (OurFootballerCloser == true)
         //{
         //    Debug.Log("isminesa");
@@ -152,10 +145,26 @@ public class Ball : MonoBehaviour
         if (TrivelaFootballer != null)
         {
             TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            if (OurFootballer.activeSelf)
+            {
+                TrivelaFootballer.SetActive(false);
+            }
+            if (TrivelaFootballer.activeSelf)
+            {
+                OurFootballer.SetActive(false);
+            }
         }
         if(OurFootballer != null)
         {
             OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            if (OurFootballer.activeSelf)
+            {
+                TrivelaFootballer.SetActive(false);
+            }
+            if (TrivelaFootballer.activeSelf)
+            {
+                OurFootballer.SetActive(false);
+            }
         }
         if (view.IsMine)
         {
