@@ -150,19 +150,20 @@ public class Ball : MonoBehaviour
         {
             OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
         }
-        if (TrivelaFootballer != null && OurFootballer != null)
-        {
-            if (OurFootballer.activeSelf)
-            {
-                TrivelaFootballer.SetActive(false);
-            }
-            if (TrivelaFootballer.activeSelf)
-            {
-                OurFootballer.SetActive(false);
-            }
-        }
+        
         if (view.IsMine)
         {
+            if (TrivelaFootballer != null && OurFootballer != null)
+            {
+                if (OurFootballer.activeSelf)
+                {
+                    TrivelaFootballer.SetActive(false);
+                }
+                if (TrivelaFootballer.activeSelf)
+                {
+                    OurFootballer.SetActive(false);
+                }
+            }
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
@@ -247,6 +248,8 @@ public class Ball : MonoBehaviour
             {
                 footballerTeleport = false;
             }
+
+            
         }
         //if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         //{
