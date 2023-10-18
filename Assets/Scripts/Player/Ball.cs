@@ -124,6 +124,14 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        if (OurFootballer.activeInHierarchy)
+        {
+            TrivelaFootballer.SetActive(false);
+        }
+        if (TrivelaFootballer.activeInHierarchy)
+        {
+            OurFootballer.SetActive(false);
+        }
         //if (OurFootballerCloser == true)
         //{
         //    Debug.Log("isminesa");
