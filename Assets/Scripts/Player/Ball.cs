@@ -128,21 +128,18 @@ public class Ball : MonoBehaviour
         //{
         //    Debug.Log("isminesa");
         //    OurFootballer.SetActive(false);
-            
+
         //    OurFootballerCloser = false;
         //}
-        if (!view.IsMine)
+        Debug.Log("isminedegilse");
+        foreach (Player player in PhotonNetwork.PlayerList)
         {
-            Debug.Log("isminedegilse");
-            foreach (Player player in PhotonNetwork.PlayerList)
+            if (player.IsLocal)
             {
-                if (!player.IsLocal)
-                {
-                   OurFootballer.SetActive(false);
-                }
+                OurFootballer.SetActive(true);
             }
-            OurFootballer.SetActive(false);
         }
+
         if (TrivelaFootballer != null)
         {
             TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
