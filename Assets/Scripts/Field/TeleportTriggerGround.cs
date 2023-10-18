@@ -47,8 +47,8 @@ public class TeleportTriggerGround : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.15f);
 
-                ballRigidbody.velocity = Vector3.zero; // harekete devam etmesin diye hýzý sýfýrlýyoruz
                 other.transform.position = newPosition; // topu teleport ediyoruz o noktaya
+                ballRigidbody.velocity = Vector3.zero; // harekete devam etmesin diye hýzý sýfýrlýyoruz
             }
 
             StartCoroutine(WFSOOB());
