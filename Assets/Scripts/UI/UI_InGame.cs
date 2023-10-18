@@ -46,7 +46,7 @@ public class UI_InGame : MonoBehaviour
         }
         else
         {
-            CodeSprite.SetActive(true);
+            //CodeSprite.SetActive(true);
         }
     }
     private void Update()
@@ -91,7 +91,7 @@ public class UI_InGame : MonoBehaviour
             if (Ball.Player1 == true)
             {
                 OldImage1.sprite = NewImage1;
-                OldImage2.sprite = OldSprite2;
+                //OldImage2.sprite = OldSprite2;
                 if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
                 {
                     OldImage3.sprite = oldsprite3;
