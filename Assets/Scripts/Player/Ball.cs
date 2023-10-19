@@ -5,6 +5,7 @@ using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Ball : MonoBehaviour
     private bool isIdle; // top duruyor mu hareketli mi boolu
     private bool isAiming; // oyuncu aim halinde mi boolu
     [SerializeField] private float stopVelocity; // topun durmasý için min hýz
-    [SerializeField] private float shotPower;
+    [SerializeField] private float shotPower,acý;
     private Rigidbody rb;
     public Camera cam;
     MoveAroundObject moveAroundObject;
@@ -43,6 +44,7 @@ public class Ball : MonoBehaviour
     public static bool lineRendererController;
     public static bool Player1,Player2,Player3,Player4;
     bool OurFootballerCloser;
+    public LayerMask ground;
 
 
     private void Start()
@@ -146,10 +148,21 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(MoveAroundObject.rotationaroundyaxis);
-        // sol artý sað eksi
-        
-        if(!Input.GetMouseButton(0))
+        //Debug.Log(MoveAroundObject.rotationaroundyaxis);
+        ////sol artý sað eksi
+        Ray rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        Ray rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        RaycastHit hit;
+
+        if (Physics.Raycast(rayNorm, out hit, Mathf.Infinity, ground))
+        {
+            OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x, hit.point.y - 0.2f, OurFootballer.transform.position.z);
+        }
+        if (Physics.Raycast(rayTri, out hit, Mathf.Infinity, ground))
+        {
+            TrivelaFootballer.transform.position = new Vector3(TrivelaFootballer.transform.position.x, hit.point.y - 0.2f, TrivelaFootballer.transform.position.z);
+        }
+        if (!Input.GetMouseButton(0))
         {
             if (OurFootballer != null)
             {
@@ -192,15 +205,53 @@ public class Ball : MonoBehaviour
                 }
             }
         }
-        if (TrivelaFootballer != null)
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Hole1")
         {
-            TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            if (TrivelaFootballer != null)
+            {
+                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            }
+            if (OurFootballer != null)
+            {
+                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            }
         }
-        if(OurFootballer != null)
+        else if(scene.name == "Hole2" || scene.name=="Hole2Rainy")
         {
-            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            if (TrivelaFootballer != null)
+            {
+                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y +30, 0);
+            }
+            if (OurFootballer != null)
+            {
+                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y +30, 0);
+            }
         }
-        
+        else if (scene.name == "Hole3" || scene.name == "Hole3Rainy")
+        {
+            if (TrivelaFootballer != null)
+            {
+                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
+            }
+            if (OurFootballer != null)
+            {
+                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
+            }
+        }
+        else if (scene.name == "Hole4" || scene.name == "Hole4Rainy")
+        {
+            if (TrivelaFootballer != null)
+            {
+                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+            }
+            if (OurFootballer != null)
+            {
+                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+            }
+        }
+
+
         if (view.IsMine)
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
