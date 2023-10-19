@@ -101,26 +101,9 @@ public class Ball : MonoBehaviour
         //}
         if (view.IsMine)
         {
-            if (PlayerPrefs.GetInt("FootballerChooser") == 1)
-            {
-                OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-                TrivelaFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
-            }
-            else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
-            {
-                OurFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-                TrivelaFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
-            }
-
-            // You should move these lines outside of the if-else blocks
-            distanceP = transform.position - OurFootballer.transform.position;
-            distanceT = transform.position - TrivelaFootballer.transform.position;
-            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-            TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-            footballerAnimator = OurFootballer.GetComponent<Animator>();
-            trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
-            OurFootballer.SetActive(false);
-            OurFootballerCloser = true;
+            int footballerChoice = PlayerPrefs.GetInt("FootballerChooser");
+            InstantiateMyFootballers(footballerChoice);
+            view.RPC("InstantiateOpponentFootballers", RpcTarget.OthersBuffered, footballerChoice);
         }
 
 
@@ -136,6 +119,40 @@ public class Ball : MonoBehaviour
             {
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
+        }
+    }
+
+    [PunRPC]
+    private void InstantiateOpponentFootballers(int footballerChoice)
+    {
+        // This will run for all other players when a new player joins
+        InstantiateMyFootballers(footballerChoice);
+    }
+
+    private void InstantiateMyFootballers(int footballerChoice)
+    {
+        GameObject footballerPrefab = (footballerChoice == 1) ? Ronaldinho : Messi;
+
+        OurFootballer = PhotonNetwork.Instantiate(footballerPrefab.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+        TrivelaFootballer = PhotonNetwork.Instantiate(footballerPrefab.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
+
+        // Setting distances
+        distanceP = transform.position - OurFootballer.transform.position;
+        distanceT = transform.position - TrivelaFootballer.transform.position;
+
+        // Setting rotations
+        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+
+        // Fetching animator components
+        footballerAnimator = OurFootballer.GetComponent<Animator>();
+        trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+
+        // If it's the local player, deactivate the OurFootballer
+        if (view.IsMine)
+        {
+            OurFootballer.SetActive(false);
+            OurFootballerCloser = true; // Assuming this is a boolean you want to set true here
         }
     }
     private void Awake()
