@@ -104,26 +104,25 @@ public class Ball : MonoBehaviour
             if (PlayerPrefs.GetInt("FootballerChooser") == 1)
             {
                 OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+                TrivelaFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
             {
                 OurFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+                TrivelaFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
             }
 
+            // You should move these lines outside of the if-else blocks
             distanceP = transform.position - OurFootballer.transform.position;
+            distanceT = transform.position - TrivelaFootballer.transform.position;
             OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
             footballerAnimator = OurFootballer.GetComponent<Animator>();
-            OurFootballer.SetActive(true);
+            trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+            OurFootballer.SetActive(false);
             OurFootballerCloser = true;
+        }
 
-            // Deactivate the other footballer for this player
-            TrivelaFootballer.SetActive(false);
-        }
-        else
-        {
-            // Deactivate one of the footballers for the other player
-            TrivelaFootballer.SetActive(false);
-        }
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
