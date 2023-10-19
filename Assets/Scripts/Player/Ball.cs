@@ -146,7 +146,33 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log(MoveAroundObject.rotationaroundyaxis);
+        // sol artý sað eksi
+        
+        if(!Input.GetMouseButton(0))
+        {
+            footballerAnimator.SetBool("rightWalk", false);
+            footballerAnimator.SetBool("leftWalk", false);
+            trivelaAnimator.SetBool("rightWalk", false);
+            trivelaAnimator.SetBool("leftWalk", false);
+        }
+        else
+        {
+            if (MoveAroundObject.rotationaroundyaxis < 0)
+            {
+                footballerAnimator.SetBool("rightWalk", true);
+                footballerAnimator.SetBool("leftWalk", false);
+                trivelaAnimator.SetBool("rightWalk", true);
+                trivelaAnimator.SetBool("leftWalk", false);
+            }
+            else if (MoveAroundObject.rotationaroundyaxis > 0)
+            {
+                footballerAnimator.SetBool("rightWalk", false);
+                footballerAnimator.SetBool("leftWalk", true);
+                trivelaAnimator.SetBool("rightWalk", false);
+                trivelaAnimator.SetBool("leftWalk", true);
+            }
+        }
         if (TrivelaFootballer != null)
         {
             TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
