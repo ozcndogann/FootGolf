@@ -208,7 +208,7 @@ public class Ball : MonoBehaviour
                 Stop();
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
-                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !GameEnder.EndGamePanelOpen)
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
                         if (timer > 0)
@@ -310,7 +310,7 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
             {
-                if ((bool)player.CustomProperties["turn"] && !GameEnder.EndGamePanelOpen)
+                if ((bool)player.CustomProperties["turn"]/* && !GameEnder.EndGamePanelOpen*/)
                 {
                     if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
                     {
