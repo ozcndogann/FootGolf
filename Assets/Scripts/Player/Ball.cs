@@ -725,6 +725,10 @@ public class Ball : MonoBehaviour
         {
             gameEnder = true;
         }
+        else
+        {
+            gameEnder = false;
+        }
         StartCoroutine(LoadNextSceneWithDelay(1f));
     }
 
@@ -735,6 +739,7 @@ public class Ball : MonoBehaviour
         if (!gameEnder)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         }
         
     }
@@ -754,6 +759,7 @@ public class Ball : MonoBehaviour
         {
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
+        Debug.Log(allPlayersReady);
     }
 
     
