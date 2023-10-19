@@ -70,35 +70,61 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
+        //if (view.IsMine)
+        //{
+        //    if (PlayerPrefs.GetInt("FootballerChooser") == 1)
+        //    {
+        //        OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+        //        TrivelaFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
+        //        distanceP = transform.position - OurFootballer.transform.position;
+        //        distanceT = transform.position - TrivelaFootballer.transform.position;
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        footballerAnimator = OurFootballer.GetComponent<Animator>();
+        //        trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+        //        OurFootballer.SetActive(false);
+        //        OurFootballerCloser = true;
+        //    }
+        //    else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
+        //    {
+        //        OurFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+        //        TrivelaFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
+        //        distanceP = transform.position - OurFootballer.transform.position;
+        //        distanceT = transform.position - TrivelaFootballer.transform.position;
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        footballerAnimator = OurFootballer.GetComponent<Animator>();
+        //        trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+        //        OurFootballer.SetActive(false);
+        //        OurFootballerCloser = true;
+        //    }
+        //}
         if (view.IsMine)
         {
             if (PlayerPrefs.GetInt("FootballerChooser") == 1)
             {
                 OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-                TrivelaFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
-                distanceP = transform.position - OurFootballer.transform.position;
-                distanceT = transform.position - TrivelaFootballer.transform.position;
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                footballerAnimator = OurFootballer.GetComponent<Animator>();
-                trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
-                OurFootballer.SetActive(false);
-                OurFootballerCloser = true;
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
             {
                 OurFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-                TrivelaFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
-                distanceP = transform.position - OurFootballer.transform.position;
-                distanceT = transform.position - TrivelaFootballer.transform.position;
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                footballerAnimator = OurFootballer.GetComponent<Animator>();
-                trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
-                OurFootballer.SetActive(false);
-                OurFootballerCloser = true;
             }
+
+            distanceP = transform.position - OurFootballer.transform.position;
+            OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            footballerAnimator = OurFootballer.GetComponent<Animator>();
+            OurFootballer.SetActive(true);
+            OurFootballerCloser = true;
+
+            // Deactivate the other footballer for this player
+            TrivelaFootballer.SetActive(false);
         }
+        else
+        {
+            // Deactivate one of the footballers for the other player
+            TrivelaFootballer.SetActive(false);
+        }
+
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -124,23 +150,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        
-        //if (OurFootballerCloser == true)
-        //{
-        //    Debug.Log("isminesa");
-        //    OurFootballer.SetActive(false);
-
-        //    OurFootballerCloser = false;
-        //}
-        Debug.Log("isminedegilse");
-        //foreach (Player player in PhotonNetwork.PlayerList)
-        //{
-        //    if (!player.IsLocal)
-        //    {
-        //        PhotonNetwork.GetPhotonView(player.ActorNumber).GetComponent<Ball>().OurFootballer.SetActive(true);
-        //        //OurFootballer.SetActive(true);
-        //    }
-        //}
 
         if (TrivelaFootballer != null)
         {
@@ -153,17 +162,6 @@ public class Ball : MonoBehaviour
         
         if (view.IsMine)
         {
-            //if (TrivelaFootballer != null && OurFootballer != null)
-            //{
-            //    if (OurFootballer.activeSelf)
-            //    {
-            //        TrivelaFootballer.SetActive(false);
-            //    }
-            //    if (TrivelaFootballer.activeSelf)
-            //    {
-            //        OurFootballer.SetActive(false);
-            //    }
-            //}
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
@@ -251,13 +249,6 @@ public class Ball : MonoBehaviour
 
             
         }
-        //if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
-        //{
-        //    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        //    {
-        //        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        //    }
-        //}
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (player.CustomProperties["holeC"] != null)
@@ -315,11 +306,6 @@ public class Ball : MonoBehaviour
             }
 
         }
-        //if (/*!view.IsMine && */!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        //{
-        //    // Spectator mode: Do not process input for spectator
-        //    return;
-        //}
 
 
         if (gravityChanger)
@@ -330,8 +316,6 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        //Debug.Log(gravityChanger);
-        //Debug.Log("gravity: " + Physics.gravity);
         
     }
     private void OnMouseDown()
@@ -345,14 +329,10 @@ public class Ball : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
                 mousePos = Input.mousePosition;
-                if (view.IsMine) { OurFootballer.SetActive(true); }
                 if (mousePos.x > Screen.width / 2)
                 {
-                    //if (view.IsMine)
-                    //{
                     OurFootballer.SetActive(true);
                     TrivelaFootballer.SetActive(false);
-                    //}
                     footballerAnimator.SetBool("penaltyKick", true);
                     distanceP = transform.position - OurFootballer.transform.position;
                     distanceT = transform.position - TrivelaFootballer.transform.position;
@@ -360,18 +340,14 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    //if (view.IsMine)
-                    //{
                     TrivelaFootballer.SetActive(true);
                     OurFootballer.SetActive(false);
-                    //}
                     trivelaAnimator.SetBool("trivela", true);
                     distanceT = transform.position - TrivelaFootballer.transform.position;
                     distanceP = transform.position - OurFootballer.transform.position;
                     waitForShootTri = true;
 
                 }
-                //footballerAnimator.SetBool("penaltyKick", true);
             }
             
         }
