@@ -151,26 +151,45 @@ public class Ball : MonoBehaviour
         
         if(!Input.GetMouseButton(0))
         {
-            footballerAnimator.SetBool("rightWalk", false);
-            footballerAnimator.SetBool("leftWalk", false);
-            trivelaAnimator.SetBool("rightWalk", false);
-            trivelaAnimator.SetBool("leftWalk", false);
+            if (OurFootballer != null)
+            {
+                footballerAnimator.SetBool("rightWalk", false);
+                footballerAnimator.SetBool("leftWalk", false);
+            }
+            
+            if (TrivelaFootballer != null)
+            {
+                trivelaAnimator.SetBool("rightWalk", false);
+                trivelaAnimator.SetBool("leftWalk", false);
+            }
         }
         else
         {
             if (MoveAroundObject.rotationaroundyaxis < 0)
             {
-                footballerAnimator.SetBool("rightWalk", true);
-                footballerAnimator.SetBool("leftWalk", false);
-                trivelaAnimator.SetBool("rightWalk", true);
-                trivelaAnimator.SetBool("leftWalk", false);
+                if (OurFootballer != null)
+                {
+                    footballerAnimator.SetBool("rightWalk", true);
+                    footballerAnimator.SetBool("leftWalk", false);
+                }
+                if (TrivelaFootballer != null)
+                {
+                    trivelaAnimator.SetBool("rightWalk", true);
+                    trivelaAnimator.SetBool("leftWalk", false);
+                }
             }
             else if (MoveAroundObject.rotationaroundyaxis > 0)
             {
-                footballerAnimator.SetBool("rightWalk", false);
-                footballerAnimator.SetBool("leftWalk", true);
-                trivelaAnimator.SetBool("rightWalk", false);
-                trivelaAnimator.SetBool("leftWalk", true);
+                if (OurFootballer != null)
+                {
+                    footballerAnimator.SetBool("rightWalk", false);
+                    footballerAnimator.SetBool("leftWalk", true);
+                }
+                if (TrivelaFootballer != null)
+                {
+                    trivelaAnimator.SetBool("rightWalk", false);
+                    trivelaAnimator.SetBool("leftWalk", true);
+                }
             }
         }
         if (TrivelaFootballer != null)
