@@ -153,6 +153,14 @@ public class Ball : MonoBehaviour
         
         if (view.IsMine)
         {
+            if (TrivelaFootballer != null)
+            {
+                TrivelaFootballer.SetActive(false);
+            }
+            if (OurFootballer != null)
+            {
+                OurFootballer.SetActive(false);
+            }
             //if (TrivelaFootballer != null && OurFootballer != null)
             //{
             //    if (OurFootballer.activeSelf)
@@ -348,11 +356,11 @@ public class Ball : MonoBehaviour
                 if (view.IsMine) { OurFootballer.SetActive(true); }
                 if (mousePos.x > Screen.width / 2)
                 {
-                    if (view.IsMine)
-                    {
+                    //if (view.IsMine)
+                    //{
                     OurFootballer.SetActive(true);
                     TrivelaFootballer.SetActive(false);
-                    }
+                    //}
                     footballerAnimator.SetBool("penaltyKick", true);
                     distanceP = transform.position - OurFootballer.transform.position;
                     distanceT = transform.position - TrivelaFootballer.transform.position;
@@ -360,11 +368,11 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    if (view.IsMine)
-                    {
+                    //if (view.IsMine)
+                    //{
                     TrivelaFootballer.SetActive(true);
                     OurFootballer.SetActive(false);
-                    }
+                    //}
                     trivelaAnimator.SetBool("trivela", true);
                     distanceT = transform.position - TrivelaFootballer.transform.position;
                     distanceP = transform.position - OurFootballer.transform.position;
