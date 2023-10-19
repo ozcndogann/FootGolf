@@ -126,6 +126,15 @@ public class Ball : MonoBehaviour
             targetFootballer.gameObject.SetActive(false);
         }
     }
+    [PunRPC]
+    void ShowOurFootballer(string footballerPhotonViewId)
+    {
+        PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
+        if (targetFootballer != null)
+        {
+            targetFootballer.gameObject.SetActive(true);
+        }
+    }
     private void Awake()
     {
         shootCloser = false;
@@ -318,8 +327,10 @@ public class Ball : MonoBehaviour
                 mousePos = Input.mousePosition;
                 if (mousePos.x > Screen.width / 2)
                 {
-                    OurFootballer.SetActive(true);
-                    TrivelaFootballer.SetActive(false);
+                    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    //OurFootballer.SetActive(true);
+                    //TrivelaFootballer.SetActive(false);
                     footballerAnimator.SetBool("penaltyKick", true);
                     distanceP = transform.position - OurFootballer.transform.position;
                     distanceT = transform.position - TrivelaFootballer.transform.position;
@@ -327,8 +338,10 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    TrivelaFootballer.SetActive(true);
-                    OurFootballer.SetActive(false);
+                    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    //TrivelaFootballer.SetActive(true);
+                    //OurFootballer.SetActive(false);
                     trivelaAnimator.SetBool("trivela", true);
                     distanceT = transform.position - TrivelaFootballer.transform.position;
                     distanceP = transform.position - OurFootballer.transform.position;
