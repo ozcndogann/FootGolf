@@ -45,8 +45,8 @@ public class Ball : MonoBehaviour
     public static bool Player1,Player2,Player3,Player4;
     bool OurFootballerCloser;
     public LayerMask ground;
-
-
+    Ray rayNorm;
+    Ray rayTri;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -150,8 +150,16 @@ public class Ball : MonoBehaviour
     {
         //Debug.Log(MoveAroundObject.rotationaroundyaxis);
         ////sol artý sað eksi
-        Ray rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
-        Ray rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        if (OurFootballer != null)
+        {
+            rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        }
+        if (TrivelaFootballer != null)
+        {
+            rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        }
+        
+        
         RaycastHit hit;
 
         if (Physics.Raycast(rayNorm, out hit, Mathf.Infinity, ground))
