@@ -312,36 +312,71 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"] && !GameEnder.EndGamePanelOpen)
                 {
-                    if (player.ActorNumber ==1)
+                    if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
                     {
-                       
-                        Player1 = true;
-                        Player2 = false;
-                        Player3 = false;
-                        Player4 = false;
+                        if (player.ActorNumber == 1)
+                        {
 
+                            Player1 = true;
+                            Player2 = false;
+                            Player3 = false;
+                            Player4 = false;
+
+                        }
                     }
-                    else if (player.ActorNumber == 2)
+                    if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
                     {
-                        Player1 = false;
-                        Player2 = true;
-                        Player3 = false;
-                        Player4 = false;
+                        if (player.ActorNumber == 1)
+                        {
+
+                            Player1 = true;
+                            Player2 = false;
+                            Player3 = false;
+                            Player4 = false;
+
+                        }
+                        else if (player.ActorNumber == 2)
+                        {
+                            Player1 = false;
+                            Player2 = true;
+                            Player3 = false;
+                            Player4 = false;
+                        }
                     }
-                    else if(player.ActorNumber == 3)
+                    if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
                     {
-                        Player1 = false;
-                        Player2 = false;
-                        Player3 = true;
-                        Player4 = false;
+                        if (player.ActorNumber == 1)
+                        {
+
+                            Player1 = true;
+                            Player2 = false;
+                            Player3 = false;
+                            Player4 = false;
+
+                        }
+                        else if (player.ActorNumber == 2)
+                        {
+                            Player1 = false;
+                            Player2 = true;
+                            Player3 = false;
+                            Player4 = false;
+                        }
+                        else if (player.ActorNumber == 3)
+                        {
+                            Player1 = false;
+                            Player2 = false;
+                            Player3 = true;
+                            Player4 = false;
+                        }
+                        else if (player.ActorNumber == 4)
+                        {
+                            Player1 = false;
+                            Player2 = false;
+                            Player3 = false;
+                            Player4 = true;
+                        }
                     }
-                    else if (player.ActorNumber == 4)
-                    {
-                        Player1 = false;
-                        Player2 = false;
-                        Player3 = false;
-                        Player4 = true;
-                    }
+                    
                 }
 
             }
