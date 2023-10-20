@@ -19,17 +19,20 @@ public class ChangeCameras : MonoBehaviour
     void Start()
     {
         view = GetComponent<PhotonView>();
-        MainCam = GameObject.FindGameObjectWithTag("MainCamera");
-        cam1 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x-4, transform.position.y + 1.4f , transform.position.z), Quaternion.identity);
-        disCam1 = transform.position - cam1.transform.position;
-        cam2 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z), Quaternion.identity);
-        disCam2 = transform.position - cam2.transform.position;
-        cam3 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z - 4), Quaternion.identity);
-        disCam3 = transform.position - cam3.transform.position;
-        cam4 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z + 4), Quaternion.identity);
-        disCam4 = transform.position - cam4.transform.position;
-        cam5 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z - 4), Quaternion.identity);
-        disCam5 = transform.position - cam5.transform.position;
+        if (view.IsMine)
+        {
+            MainCam = GameObject.FindGameObjectWithTag("MainCamera");
+            cam1 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x - 4, transform.position.y + 1.4f, transform.position.z), Quaternion.identity);
+            disCam1 = transform.position - cam1.transform.position;
+            cam2 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z), Quaternion.identity);
+            disCam2 = transform.position - cam2.transform.position;
+            cam3 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z - 4), Quaternion.identity);
+            disCam3 = transform.position - cam3.transform.position;
+            cam4 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z + 4), Quaternion.identity);
+            disCam4 = transform.position - cam4.transform.position;
+            cam5 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z - 4), Quaternion.identity);
+            disCam5 = transform.position - cam5.transform.position;
+        }
         Cameras.Add(cam1.GetComponent<Camera>());
         Cameras.Add(cam2.GetComponent<Camera>());
         Cameras.Add(cam3.GetComponent<Camera>());
@@ -82,8 +85,6 @@ public class ChangeCameras : MonoBehaviour
                 random = Random.Range(0, 5);
                 randomerBool = true;
             }
-            if (view.IsMine)
-            {
                 switch (random)
                 {
                     case 0:
@@ -107,12 +108,9 @@ public class ChangeCameras : MonoBehaviour
                         MainCam.GetComponent<Camera>().enabled = false;
                         break;
                 }
-            } 
         }
         else
         {
-            if (view.IsMine)
-            {
                 randomerBool = false;
                 MainCam.GetComponent<Camera>().enabled = true;
                 cam1.GetComponent<Camera>().enabled = false;
@@ -120,7 +118,6 @@ public class ChangeCameras : MonoBehaviour
                 cam3.GetComponent<Camera>().enabled = false;
                 cam4.GetComponent<Camera>().enabled = false;
                 cam5.GetComponent<Camera>().enabled = false;
-            }  
         }
         if (rb.velocity.magnitude < 0.75f && cameraChanger == false)
         {

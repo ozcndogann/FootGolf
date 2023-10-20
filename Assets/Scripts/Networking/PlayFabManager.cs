@@ -30,6 +30,7 @@ public class PlayFabManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Debug.Log(nameInput.text.Length);
         if (nameAccepter == true && PlayerPrefs.GetInt("NameWindowOpen")==0)
         {
             nameWindow.SetActive(true);
@@ -70,14 +71,22 @@ public class PlayFabManager : MonoBehaviour
     }
     public void SubmitNameButton()
     {
-        PlayerPrefs.SetInt("NameWindowOpen", 1);
-        var request = new UpdateUserTitleDisplayNameRequest
+        string userInput = nameInput.text.Trim();
+        if (!string.IsNullOrEmpty(userInput) && userInput.Length >= 3 && userInput.Length <= 8)
         {
-            DisplayName = nameInput.text,
+            PlayerPrefs.SetInt("NameWindowOpen", 1);
+            var request = new UpdateUserTitleDisplayNameRequest
+            {
+                DisplayName = nameInput.text,
 
-        };
-        nameWindow.SetActive(false);
-        PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+            };
+            nameWindow.SetActive(false);
+            PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+        }
+        else
+        {
+            //burda uyarý vercez
+        }
     }
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
     {
