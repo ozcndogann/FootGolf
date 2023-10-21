@@ -84,7 +84,6 @@ public class UI_InGame : MonoBehaviour
                 ReturnPanel.SetActive(false);
             }
         }
-
         if (!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice)
         {
             
