@@ -18,7 +18,6 @@ public class ShotCounter : MonoBehaviourPun
         set
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { SCORE_KEY, value } });
-            Debug.Log("Score Set to: " + value);
         }
     }
 

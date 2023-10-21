@@ -148,7 +148,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(MoveAroundObject.rotationaroundyaxis);
         ////sol artý sað eksi
         if (OurFootballer != null)
         {
@@ -721,7 +720,7 @@ public class Ball : MonoBehaviour
     [PunRPC]
     private void NotifyConditionMet()
     {
-        if (/*GameEnder.EndGame*/ SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 11 || SceneManager.GetActiveScene().buildIndex == 11)
+        if (/*GameEnder.EndGame*/ SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 11 || SceneManager.GetActiveScene().buildIndex == 13)
         {
             gameEnder = true;
         }

@@ -14,6 +14,7 @@ public class GameEnder : MonoBehaviour
     public static bool EndGamePanelOpen;
     Player player;
     private GameObject ball;
+    //Ball ballScript;
     ShotCounter ShotCounter;
     [SerializeField] private TMP_Text scoreDisplayText;  // Drag your Text UI element here in the Inspector
     public GameObject Panel;
@@ -23,6 +24,7 @@ public class GameEnder : MonoBehaviour
     private void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
+        //ballScript = ball.GetComponent<Ball>();
         ShotCounter = ball.GetComponent<ShotCounter>();
         Panel.SetActive(false);
         EndGame = true;
@@ -34,9 +36,6 @@ public class GameEnder : MonoBehaviour
             CalculateScore();
             UpdateScoreDisplay();
             Panel.SetActive(true);
-            //ShotCounter.ShotCount = 0;
-            //PhotonNetwork.LeaveRoom();
-            //SceneManager.LoadScene("MainMenu");
         }
     }
     private void CalculateScore()
@@ -46,7 +45,8 @@ public class GameEnder : MonoBehaviour
         // Set the score as a custom property
         ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
         customProperties["FinalScore"] = score;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties); EndGamePanelOpen = true;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties); 
+        EndGamePanelOpen = true;
     }
     private void UpdateScoreDisplay()
     {
@@ -87,28 +87,4 @@ public class GameEnder : MonoBehaviour
             displayRank++;
         }
     }
-
-    //private void UpdateScoreDisplay()
-    //{
-    //    // First, clear any existing score displays.
-    //    foreach (Transform child in scoreDisplayParent)
-    //    {
-    //        Destroy(child.gameObject);
-    //    }
-
-    //    // For each player, create a new score display.
-    //    foreach (Player p in PhotonNetwork.PlayerList)
-    //    {
-    //        int playerScore = 0;
-    //        if (p.CustomProperties.ContainsKey("FinalScore"))
-    //        {
-    //            playerScore = (int)p.CustomProperties["FinalScore"];
-    //        }
-
-    //        // Instantiate a new score display for this player.
-    //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-    //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-    //        scoreTextComponent.text = p.NickName + ": " + playerScore;
-    //    }
-    //}
 }

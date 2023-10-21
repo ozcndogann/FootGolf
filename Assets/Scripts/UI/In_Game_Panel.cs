@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Realtime;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
+
 public class In_Game_Panel : MonoBehaviour
 {
     public GameObject Practice, Versus, Tournament;
@@ -81,7 +83,12 @@ public class In_Game_Panel : MonoBehaviour
                 tournement_player4_score.text = playerScore.ToString();
             }
         }
-        Debug.Log(playerScore);
+    }
+    public void MainMenu()
+    {
+        ShotCounter.ShotCount = 0;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("MainMenu");
     }
 }
 
