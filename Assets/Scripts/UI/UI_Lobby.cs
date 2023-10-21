@@ -39,7 +39,7 @@ public class UI_Lobby : MonoBehaviour
             //eksik kisi ui
             Debug.Log("eksik kisi");
         }
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length < 4 && CreateAndJoinRooms.Tournament)
         {
             //eksik kisi
             Debug.Log("eksik kisi");
@@ -90,7 +90,7 @@ public class UI_Lobby : MonoBehaviour
         }
         
 
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length == 4 && CreateAndJoinRooms.Tournament)
         {
             if (Switch.index == 0)
             {

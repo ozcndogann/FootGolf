@@ -26,7 +26,7 @@ public class UI_RandomLobby : MonoBehaviour
             //eksik kisi ui
             Panel.transform.gameObject.SetActive(true);
         }
-        else if (PhotonNetwork.PlayerList.Length <= 3 && CreateAndJoinRandomRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length < 4 && CreateAndJoinRandomRooms.Tournament)
         {
             //eksik kisi
             Panel.transform.gameObject.SetActive(true);
@@ -52,7 +52,7 @@ public class UI_RandomLobby : MonoBehaviour
         {
            
         }
-        else if (PhotonNetwork.PlayerList.Length < 3 && CreateAndJoinRandomRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length < 4 && CreateAndJoinRandomRooms.Tournament)
         {
             
         }
@@ -104,7 +104,7 @@ public class UI_RandomLobby : MonoBehaviour
                 PhotonNetwork.LoadLevel("Hole2Rainy");
             }
         }
-        else if (PhotonNetwork.PlayerList.Length >= 3 && CreateAndJoinRandomRooms.Tournament)
+        else if (PhotonNetwork.PlayerList.Length == 4 && CreateAndJoinRandomRooms.Tournament)
         {
             if (Switch.index == 0)
             {
