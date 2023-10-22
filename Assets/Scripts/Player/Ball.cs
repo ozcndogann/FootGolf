@@ -125,30 +125,8 @@ public class Ball : MonoBehaviour
         PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
         if (targetFootballer != null)
         {
-            targetFootballer.gameObject.SetActive(false);
-        }
-    }
-    
-    [PunRPC]
-    void ShowOurBallForOthers(string PlayerPhotonViewId)
-    {
-        PhotonView otherballs = PhotonView.Find(int.Parse(PlayerPhotonViewId));
-
-        if (otherballs != null)
-        {
-            //otherballs.gameObject.SetActive(true);
-            otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        }
-    }
-    [PunRPC]
-    void HideOurBallForOthers(string PlayerPhotonViewId)
-    {
-        PhotonView otherballs = PhotonView.Find(int.Parse(PlayerPhotonViewId));
-
-        if (otherballs != null)
-        {
-            //otherballs.gameObject.SetActive(false);
-            otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            //targetFootballer.gameObject.SetActive(false);
+            targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
@@ -158,7 +136,8 @@ public class Ball : MonoBehaviour
         PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
         if (targetFootballer != null)
         {
-            targetFootballer.gameObject.SetActive(true);
+            //targetFootballer.gameObject.SetActive(true);
+            targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
     private void Awake()
@@ -374,7 +353,7 @@ public class Ball : MonoBehaviour
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
         {
-            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
                 //view.RPC("HideOurBallForOthers", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID.ToString());
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
