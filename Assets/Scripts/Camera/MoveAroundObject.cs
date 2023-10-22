@@ -15,11 +15,12 @@ public class MoveAroundObject : MonoBehaviour
     List<GameObject> passHit = new List<GameObject>();
     Ball ball;
     Ball1 ball1;
+    public PhotonView view;
     //PhotonView vievv;
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Ball").transform;
-        
+        view = target.GetComponent<PhotonView>();
         //targetObj = GameObject.FindGameObjectWithTag("Ball");
         ball = target.GetComponent<Ball>();
         ball1 = target.GetComponent<Ball1>();
@@ -174,7 +175,14 @@ public class MoveAroundObject : MonoBehaviour
             if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole" /*&& hit.transform.gameObject.tag != "Undeletable"*/)
             {
                 passHit.Add(hit.transform.gameObject);
-                hit.transform.gameObject.SetActive(false);
+                if (hit.transform.gameObject.tag == "Undeletable")
+                {
+                    view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                }
+                else
+                {
+                    hit.transform.gameObject.SetActive(false);
+                }
             }
 
         }
@@ -182,7 +190,14 @@ public class MoveAroundObject : MonoBehaviour
         {
             for (int i = 0; i < passHit.Count; i++)
             {
-                passHit[i].SetActive(true);
+                if (hit.transform.gameObject.tag == "Undeletable")
+                {
+                    view.RPC("ShowOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                }
+                else
+                {
+                    passHit[i].SetActive(true);
+                }
             }
         }
         else
@@ -192,6 +207,26 @@ public class MoveAroundObject : MonoBehaviour
             
         }
 
+    }
+    void HideOurFootballer(string footballerPhotonViewId)
+    {
+        PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
+        if (targetFootballer != null)
+        {
+            targetFootballer.gameObject.SetActive(false);
+            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
+
+    [PunRPC]
+    void ShowOurFootballer(string footballerPhotonViewId)
+    {
+        PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
+        if (targetFootballer != null)
+        {
+            targetFootballer.gameObject.SetActive(true);
+            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
+        }
     }
 
 }
