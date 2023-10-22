@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     public AudioSource MusicSource, SFXSource;
     public Sound[] MusicSounds, SFXSounds;
+    public GameObject MusicOn, MusicOff, SFXOn, SFXOff;
     private void Awake()
     {
         if(Instance == null)
@@ -60,20 +61,42 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void ToggleFSX()
+    public void ToggleSFXOff()
     {
-        SFXSource.mute = !SFXSource.mute;
+        SFXOn.SetActive(false);
+        SFXOff.SetActive(true);
+        SFXSource.Pause();
     }
-    public void ToggleMusic()
+    public void ToggleSFXOn()
     {
-        MusicSource.mute = !MusicSource.mute;
+        SFXOn.SetActive(true);
+        SFXOff.SetActive(false);
+        SFXSource.Play();
     }
-    public void MusicVolume(float volume)
+
+    public void ToggleMusicOff()
     {
-        MusicSource.volume = volume;
+        MusicOn.SetActive(false);
+        MusicOff.SetActive(true);
+        MusicSource.Pause();
     }
-    public void SFXVolume(float volume)
+    public void ToggleMusicOn()
     {
-        SFXSource.volume = volume;
+        MusicOn.SetActive(true);
+        MusicOff.SetActive(false);
+        MusicSource.Play();
     }
+
+
+
+
+
+    //public void MusicVolume(float volume)
+    //{
+    //    MusicSource.volume = volume;
+    //}
+    //public void SFXVolume(float volume)
+    //{
+    //    SFXSource.volume = volume;
+    //}
 }
