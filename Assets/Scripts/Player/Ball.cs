@@ -134,10 +134,10 @@ public class Ball : MonoBehaviour
     {
         PhotonView otherballs = PhotonView.Find(int.Parse(PlayerPhotonViewId));
 
-        if (otherballs != null && !otherballs.IsMine)
+        if (otherballs != null)
         {
-            otherballs.gameObject.SetActive(true);
-            //otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            //otherballs.gameObject.SetActive(true);
+            otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
     [PunRPC]
@@ -145,10 +145,10 @@ public class Ball : MonoBehaviour
     {
         PhotonView otherballs = PhotonView.Find(int.Parse(PlayerPhotonViewId));
 
-        if (otherballs != null && !otherballs.IsMine)
+        if (otherballs != null)
         {
-            otherballs.gameObject.SetActive(false);
-            //otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            //otherballs.gameObject.SetActive(false);
+            otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
