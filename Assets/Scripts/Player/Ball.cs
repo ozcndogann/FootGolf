@@ -74,8 +74,16 @@ public class Ball : MonoBehaviour
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         if (view.IsMine)
         {
-            gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g,
-                gameObject.GetComponent<MeshRenderer>().material.color.b, gameObject.GetComponent<MeshRenderer>().material.color.a);
+            //gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g,
+            //    gameObject.GetComponent<MeshRenderer>().material.color.b, gameObject.GetComponent<MeshRenderer>().material.color.a);
+
+            Renderer rend = GetComponent<Renderer>();
+            if (rend != null)
+            {
+                Color currentColor = rend.material.color;
+                rend.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, currentColor.a);
+            }
+
             if (PlayerPrefs.GetInt("FootballerChooser") == 1)
             {
                 OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
@@ -111,8 +119,14 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g, 
-                gameObject.GetComponent<MeshRenderer>().material.color.b, 0);
+            //gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g, 
+            //    gameObject.GetComponent<MeshRenderer>().material.color.b, 0);
+            Renderer rend = GetComponent<Renderer>();
+            if (rend != null)
+            {
+                Color currentColor = rend.material.color;
+                rend.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, 0);
+            }
         }
 
         foreach (Player player in PhotonNetwork.PlayerList)
