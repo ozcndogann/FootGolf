@@ -74,15 +74,6 @@ public class Ball : MonoBehaviour
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         if (view.IsMine)
         {
-            //gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g,
-            //    gameObject.GetComponent<MeshRenderer>().material.color.b, gameObject.GetComponent<MeshRenderer>().material.color.a);
-
-            MeshRenderer rend = GetComponent<MeshRenderer>();
-            if (rend != null)
-            {
-                Color currentColor = rend.material.color;
-                rend.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, currentColor.a);
-            }
 
             if (PlayerPrefs.GetInt("FootballerChooser") == 1)
             {
@@ -115,17 +106,6 @@ public class Ball : MonoBehaviour
                 //en baþta millet çok yakýnken futbolcular öne geçmesin diye
                 view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
                 OurFootballerCloser = true;
-            }
-        }
-        else
-        {
-            //gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g, 
-            //    gameObject.GetComponent<MeshRenderer>().material.color.b, 0);
-            MeshRenderer rend = GetComponent<MeshRenderer>();
-            if (rend != null)
-            {
-                Color currentColor = rend.material.color;
-                rend.material.color = new Color(currentColor.r, currentColor.g, currentColor.b, 0);
             }
         }
 
@@ -375,6 +355,22 @@ public class Ball : MonoBehaviour
 
             
         }
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties["turn"] != null)
+            {
+                if ((bool)player.CustomProperties["turn"])
+                {
+                    PhotonView targetFootballer = PhotonView.Find(player.ActorNumber);
+                    if (targetFootballer != null)
+                    {
+                        //targetFootballer.gameObject.SetActive(true);
+                        targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    }
+                }
+            }
+        }
+        
         //foreach (Player player in PhotonNetwork.PlayerList)
         //{
         //    if (player.CustomProperties["holeC"] != null)
