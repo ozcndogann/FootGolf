@@ -77,7 +77,7 @@ public class Ball : MonoBehaviour
             //gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g,
             //    gameObject.GetComponent<MeshRenderer>().material.color.b, gameObject.GetComponent<MeshRenderer>().material.color.a);
 
-            Renderer rend = GetComponent<Renderer>();
+            MeshRenderer rend = GetComponent<MeshRenderer>();
             if (rend != null)
             {
                 Color currentColor = rend.material.color;
@@ -121,7 +121,7 @@ public class Ball : MonoBehaviour
         {
             //gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g, 
             //    gameObject.GetComponent<MeshRenderer>().material.color.b, 0);
-            Renderer rend = GetComponent<Renderer>();
+            MeshRenderer rend = GetComponent<MeshRenderer>();
             if (rend != null)
             {
                 Color currentColor = rend.material.color;
