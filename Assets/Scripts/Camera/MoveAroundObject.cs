@@ -175,14 +175,14 @@ public class MoveAroundObject : MonoBehaviour
             if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole" /*&& hit.transform.gameObject.tag != "Undeletable"*/)
             {
                 passHit.Add(hit.transform.gameObject);
-                if (hit.transform.gameObject.tag == "Undeletable")
-                {
-                    view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                }
-                else
-                {
-                    hit.transform.gameObject.SetActive(false);
-                }
+                //if (hit.transform.gameObject.tag == "Undeletable")
+                //{
+                //    view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                //}
+                //else
+                //{
+                hit.transform.gameObject.SetActive(false);
+                //}
             }
 
         }
@@ -190,14 +190,14 @@ public class MoveAroundObject : MonoBehaviour
         {
             for (int i = 0; i < passHit.Count; i++)
             {
-                if (hit.transform.gameObject.tag == "Undeletable")
-                {
-                    view.RPC("ShowOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                }
-                else
-                {
-                    passHit[i].SetActive(true);
-                }
+                //if (hit.transform.gameObject.tag == "Undeletable")
+                //{
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                //}
+                //else
+                //{
+                passHit[i].SetActive(true);
+                //}
             }
         }
         else
