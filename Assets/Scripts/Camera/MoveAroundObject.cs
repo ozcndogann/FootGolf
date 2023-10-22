@@ -208,25 +208,25 @@ public class MoveAroundObject : MonoBehaviour
         }
 
     }
-    void HideOurFootballer(string footballerPhotonViewId)
-    {
-        PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
-        if (targetFootballer != null)
-        {
-            targetFootballer.gameObject.SetActive(false);
-            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        }
-    }
+    //void HideOurFootballer(string footballerPhotonViewId)
+    //{
+    //    PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
+    //    if (targetFootballer != null)
+    //    {
+    //        targetFootballer.gameObject.SetActive(false);
+    //        //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
+    //    }
+    //}
 
-    [PunRPC]
-    void ShowOurFootballer(string footballerPhotonViewId)
-    {
-        PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
-        if (targetFootballer != null)
-        {
-            targetFootballer.gameObject.SetActive(true);
-            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
-        }
-    }
+    //[PunRPC]
+    //void ShowOurFootballer(string footballerPhotonViewId)
+    //{
+    //    PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
+    //    if (targetFootballer != null)
+    //    {
+    //        targetFootballer.gameObject.SetActive(true);
+    //        //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
+    //    }
+    //}
 
 }
