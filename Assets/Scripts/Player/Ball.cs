@@ -128,6 +128,30 @@ public class Ball : MonoBehaviour
             targetFootballer.gameObject.SetActive(false);
         }
     }
+    
+    [PunRPC]
+    void ShowOurBallForOthers(string PlayerPhotonViewId)
+    {
+        PhotonView otherballs = PhotonView.Find(int.Parse(PlayerPhotonViewId));
+
+        if (otherballs != null && !otherballs.IsMine)
+        {
+            otherballs.gameObject.SetActive(true);
+            //otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
+    [PunRPC]
+    void HideOurBallForOthers(string PlayerPhotonViewId)
+    {
+        PhotonView otherballs = PhotonView.Find(int.Parse(PlayerPhotonViewId));
+
+        if (otherballs != null && !otherballs.IsMine)
+        {
+            otherballs.gameObject.SetActive(false);
+            //otherballs.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
+    }
+
     [PunRPC]
     void ShowOurFootballer(string footballerPhotonViewId)
     {
@@ -347,6 +371,21 @@ public class Ball : MonoBehaviour
             }
 
             
+        }
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                view.RPC("HideOurBallForOthers", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID.ToString());
+            }
+            else
+            {
+                view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                view.RPC("ShowOurBallForOthers", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID.ToString());
+            }
         }
         //foreach (Player player in PhotonNetwork.PlayerList)
         //{
