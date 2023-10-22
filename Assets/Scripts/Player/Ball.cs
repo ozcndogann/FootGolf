@@ -477,7 +477,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-
+            Debug.Log("toptopa");
             if (!view.IsMine)
             {
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -488,7 +488,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-
+            Debug.Log("toptopacikti");
             if (!view.IsMine)
             {
                 gameObject.GetComponent<MeshRenderer>().enabled = true;
