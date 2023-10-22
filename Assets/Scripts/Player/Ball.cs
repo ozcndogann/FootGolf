@@ -47,6 +47,7 @@ public class Ball : MonoBehaviour
     public LayerMask ground;
     Ray rayNorm;
     Ray rayTri;
+    private bool stopHoleC;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -393,7 +394,7 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
             {
-                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]/* && PhotonNetwork.CurrentRoom.PlayerCount != 1*/)
+                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]/* && PhotonNetwork.CurrentRoom.PlayerCount != 1*/ && !stopHoleC)
                 {
                     PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                     PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
@@ -760,12 +761,13 @@ public class Ball : MonoBehaviour
     }
     private void CheckAllPlayers()
     {
-        StartCoroutine(DelayCheck(1f));
+        StartCoroutine(DelayCheck(0.1f));
     }
 
     [PunRPC]
     private void NotifyConditionMet()
     {
+        stopHoleC = true;
         if (/*GameEnder.EndGame*/ SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 11 || SceneManager.GetActiveScene().buildIndex == 13)
         {
             gameEnder = true;
