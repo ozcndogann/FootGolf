@@ -112,7 +112,7 @@ public class Ball : MonoBehaviour
         else
         {
             gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g, 
-                gameObject.GetComponent<MeshRenderer>().material.color.b, 100);
+                gameObject.GetComponent<MeshRenderer>().material.color.b, 0);
         }
 
         foreach (Player player in PhotonNetwork.PlayerList)
