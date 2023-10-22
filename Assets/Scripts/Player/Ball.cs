@@ -374,10 +374,10 @@ public class Ball : MonoBehaviour
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
         {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
                 //view.RPC("HideOurBallForOthers", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
                 view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
             }
             else
