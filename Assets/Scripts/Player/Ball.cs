@@ -125,8 +125,8 @@ public class Ball : MonoBehaviour
         PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
         if (targetFootballer != null)
         {
-            //targetFootballer.gameObject.SetActive(false);
-            targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
+            targetFootballer.gameObject.SetActive(false);
+            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
@@ -136,8 +136,8 @@ public class Ball : MonoBehaviour
         PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
         if (targetFootballer != null)
         {
-            //targetFootballer.gameObject.SetActive(true);
-            targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            targetFootballer.gameObject.SetActive(true);
+            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
     private void Awake()
@@ -351,21 +351,6 @@ public class Ball : MonoBehaviour
 
             
         }
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                //view.RPC("HideOurBallForOthers", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-            }
-            else
-            {
-                //view.RPC("ShowOurBallForOthers", RpcTarget.All, gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-            }
-        }
         //foreach (Player player in PhotonNetwork.PlayerList)
         //{
         //    if (player.CustomProperties["holeC"] != null)
@@ -555,7 +540,8 @@ public class Ball : MonoBehaviour
         //ShotCounter.IncrementScore();
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
-
+        view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+        view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
 
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
