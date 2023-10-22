@@ -110,7 +110,7 @@ public class Ball : MonoBehaviour
         }
         if (!view.IsMine)
         {
-            SetTransparency(.5f);
+            SetTransparency(.2f);
         }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
