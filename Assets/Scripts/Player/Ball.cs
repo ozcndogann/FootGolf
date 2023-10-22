@@ -135,6 +135,13 @@ public class Ball : MonoBehaviour
             Color color = rend.material.color;
             color.a = alphaValue;
             rend.material.color = color;
+            rend.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            rend.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            rend.material.SetInt("_ZWrite", 0);
+            rend.material.DisableKeyword("_ALPHATEST_ON");
+            rend.material.DisableKeyword("_ALPHABLEND_ON");
+            rend.material.EnableKeyword("_ALPHAPREMULTIPLY_ON");
+            rend.material.renderQueue = 3000;
         }
     }
 
