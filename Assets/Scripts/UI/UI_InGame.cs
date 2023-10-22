@@ -73,7 +73,7 @@ public class UI_InGame : MonoBehaviour
         if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
         {
             //IsTournament.gameObject.SetActive(true);
-            if (PhotonNetwork.PlayerList.Length < 3)
+            if (PhotonNetwork.PlayerList.Length < 4)
             {
                 //eksik kisi
                 Debug.Log("eksik kisi");

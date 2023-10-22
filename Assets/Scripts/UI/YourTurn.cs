@@ -25,5 +25,12 @@ public class YourTurn : MonoBehaviour
                 yourTurnPanel.SetActive(false);
             }
         }
+        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+            {
+                yourTurnPanel.SetActive(false);
+            }
+        }
     }
 }
