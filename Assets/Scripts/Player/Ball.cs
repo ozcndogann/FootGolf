@@ -108,6 +108,10 @@ public class Ball : MonoBehaviour
                 OurFootballerCloser = true;
             }
         }
+        if (!view.IsMine)
+        {
+            SetTransparency(.5f);
+        }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -122,6 +126,18 @@ public class Ball : MonoBehaviour
             }
         }
     }
+
+    private void SetTransparency(float alphaValue)
+    {
+        Renderer rend = GetComponent<Renderer>();
+        if (rend)
+        {
+            Color color = rend.material.color;
+            color.a = alphaValue;
+            rend.material.color = color;
+        }
+    }
+
     [PunRPC]
     void HideOurFootballer(string footballerPhotonViewId)
     {
@@ -472,28 +488,6 @@ public class Ball : MonoBehaviour
        
         
         
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ball"))
-        {
-            Debug.Log("toptopa");
-            if (!view.IsMine)
-            {
-                gameObject.GetComponent<MeshRenderer>().enabled = false;
-            }
-        }
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ball"))
-        {
-            Debug.Log("toptopacikti");
-            if (!view.IsMine)
-            {
-                gameObject.GetComponent<MeshRenderer>().enabled = true;
-            }
-        }
     }
     private void OnMouseDown()
     {
