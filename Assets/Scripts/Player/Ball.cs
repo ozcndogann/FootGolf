@@ -86,6 +86,7 @@ public class Ball : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
                 OurFootballerCloser = true;
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
@@ -100,6 +101,7 @@ public class Ball : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
                 OurFootballerCloser = true;
             }
         }
@@ -540,8 +542,9 @@ public class Ball : MonoBehaviour
         //ShotCounter.IncrementScore();
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
-        view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-        view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+        //alttaki kýsým sadece vururken futbolcu görünsün diye
+        //view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+        //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
 
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
