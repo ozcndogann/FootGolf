@@ -382,7 +382,7 @@ public class Ball : MonoBehaviour
         {
             if (player.CustomProperties["holeC"] != null)
             {
-                if ((bool)player.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                if ((bool)player.CustomProperties["holeC"] && /*PhotonNetwork.CurrentRoom.PlayerCount != 1*/(!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice))
                 {
                     player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                     player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
@@ -400,7 +400,7 @@ public class Ball : MonoBehaviour
         //        }
         //    }
         //}
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
