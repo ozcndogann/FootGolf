@@ -389,17 +389,17 @@ public class Ball : MonoBehaviour
         //        }
         //    }
         //}
-        //foreach (Player player in PhotonNetwork.PlayerList)
-        //{
-        //    if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
-        //    {
-        //        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        //        {
-        //            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        //            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        //        }
-        //    }
-        //}
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+            {
+                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]/* && PhotonNetwork.CurrentRoom.PlayerCount != 1*/)
+                {
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                }
+            }
+        }
         if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
