@@ -74,6 +74,8 @@ public class Ball : MonoBehaviour
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         if (view.IsMine)
         {
+            gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g,
+                gameObject.GetComponent<MeshRenderer>().material.color.b, gameObject.GetComponent<MeshRenderer>().material.color.a);
             if (PlayerPrefs.GetInt("FootballerChooser") == 1)
             {
                 OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
@@ -86,6 +88,7 @@ public class Ball : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
                 view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
                 OurFootballerCloser = true;
             }
@@ -101,11 +104,16 @@ public class Ball : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
                 view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
                 OurFootballerCloser = true;
             }
         }
-
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().material.color = new Color(gameObject.GetComponent<MeshRenderer>().material.color.r, gameObject.GetComponent<MeshRenderer>().material.color.g, 
+                gameObject.GetComponent<MeshRenderer>().material.color.b, 100);
+        }
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
