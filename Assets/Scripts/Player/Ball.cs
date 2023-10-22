@@ -364,8 +364,8 @@ public class Ball : MonoBehaviour
                     PhotonView targetFootballer = PhotonView.Find(player.ActorNumber);
                     if (targetFootballer != null)
                     {
-                        //targetFootballer.gameObject.SetActive(true);
-                        targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                        targetFootballer.gameObject.SetActive(false);
+                        //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
                     }
                 }
             }
