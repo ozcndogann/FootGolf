@@ -108,7 +108,10 @@ public class Ball : MonoBehaviour
                 OurFootballerCloser = true;
             }
         }
-
+        else
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+        }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -354,21 +357,6 @@ public class Ball : MonoBehaviour
             }
 
             
-        }
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            if (player.CustomProperties["turn"] != null)
-            {
-                if ((bool)player.CustomProperties["turn"])
-                {
-                    PhotonView targetFootballer = PhotonView.Find(player.ActorNumber);
-                    if (targetFootballer != null)
-                    {
-                        targetFootballer.gameObject.SetActive(false);
-                        //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                    }
-                }
-            }
         }
         
         //foreach (Player player in PhotonNetwork.PlayerList)
