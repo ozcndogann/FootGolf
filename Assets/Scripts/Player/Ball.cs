@@ -108,10 +108,6 @@ public class Ball : MonoBehaviour
                 OurFootballerCloser = true;
             }
         }
-        else
-        {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-        }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -473,6 +469,31 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         
+       
+        
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+
+            if (!view.IsMine)
+            {
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+
+            if (!view.IsMine)
+            {
+                gameObject.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
     }
     private void OnMouseDown()
     {
