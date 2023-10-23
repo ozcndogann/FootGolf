@@ -1,67 +1,59 @@
 using Photon.Pun;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class NetworkPlayer : MonoBehaviourPun, IPunObservable
 {
+    private Rigidbody _rigidbody;
 
+    private Vector3 _netPosition;
+    private Quaternion _netRotation;
+    private Vector3 _previousPos;
 
-    Vector3 latestPos;
-    Quaternion latestRot;
-    //Lag compensation
-    float currentTime = 0;
-    double currentPacketTime = 0;
-    double lastPacketTime = 0;
-    Vector3 positionAtLastPacket = Vector3.zero;
-    Quaternion rotationAtLastPacket = Quaternion.identity;
     public bool teleportIfFar;
     public float teleportIfFarDistance;
-    [Header("Lerping[Experimental]")]
-    public float smoothpos = 0.5f;
-    public float smoothRot = 0.5f;
-    void Awake()
+
+    [Header("Lerping [Experimental")]
+    public float smoothPos = 5.0f;
+    public float smoothRot = 5.0f;
+
+    private void Awake()
     {
         PhotonNetwork.SendRate = 30;
         PhotonNetwork.SerializationRate = 10;
 
+        _rigidbody = gameObject.GetComponent<Rigidbody>();
     }
-
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
+            stream.SendNext(_rigidbody.position);
+            stream.SendNext(_rigidbody.rotation);
+            stream.SendNext(_rigidbody.velocity);
         }
         else
         {
-            latestPos = (Vector3)stream.ReceiveNext();
-            latestRot = (Quaternion)stream.ReceiveNext();
+            _netPosition = (Vector3)stream.ReceiveNext();
+            _netRotation = (Quaternion)stream.ReceiveNext();
+            _rigidbody.velocity = (Vector3)stream.ReceiveNext();
 
-            //Lag compensation
-            currentTime = 0.0f;
-            lastPacketTime = currentPacketTime;
-            currentPacketTime = info.SentServerTime;
-            positionAtLastPacket = transform.position;
-            rotationAtLastPacket = transform.rotation;
-
+            float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.SentServerTime));
+            _netPosition += (_rigidbody.velocity * lag);
         }
     }
+
     void FixedUpdate()
     {
         if (photonView.IsMine) return;
-        double timeToReachGoal = currentPacketTime - lastPacketTime;
-        currentTime += Time.deltaTime;
 
-        //Update remote player
-        transform.position = Vector3.Lerp(positionAtLastPacket, latestPos,
-(float)(currentTime / timeToReachGoal));
-        transform.rotation = Quaternion.Lerp(rotationAtLastPacket, latestRot,
-(float)(currentTime / timeToReachGoal));
+        _rigidbody.position = Vector3.Lerp(_rigidbody.position, _netPosition, smoothPos * Time.fixedDeltaTime);
+        _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, _netRotation, smoothRot * Time.fixedDeltaTime);
 
-        if (Vector3.Distance(transform.position, latestPos) > teleportIfFarDistance)
+        if(Vector3.Distance(_rigidbody.position, _netPosition) > teleportIfFarDistance)
         {
-            transform.position = latestPos;
+            _rigidbody.position = _netPosition;
         }
     }
 }
