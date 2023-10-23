@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 227973135}
   m_Layer: 0
   m_Name: Audio Manager
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -781,10 +781,6 @@ MonoBehaviour:
   - name: Theme
     clip: {fileID: 8300000, guid: de01faa0597bf8c4a8604877280f7eab, type: 3}
   SFXSounds: []
-  MusicOn: {fileID: 1719070633}
-  MusicOff: {fileID: 1889267745}
-  SFXOn: {fileID: 1514801637}
-  SFXOff: {fileID: 668652088}
 --- !u!4 &227973136
 Transform:
   m_ObjectHideFlags: 0
@@ -1392,7 +1388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3dcd8cdc0b19d4ba2857f3bb4e4d04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MusicPanel: {fileID: 120940247}
   Home: {fileID: 938857087}
   Raiting: {fileID: 0}
   Settings: {fileID: 1774159608}

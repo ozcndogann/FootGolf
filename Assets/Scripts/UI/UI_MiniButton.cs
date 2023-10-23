@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class UI_MiniButton : MonoBehaviour
 {
-    public GameObject MusicPanel;
+    //public GameObject MusicPanel;
     public Button Home;
     public Button Raiting;
     public Button Settings;
@@ -33,13 +33,13 @@ public class UI_MiniButton : MonoBehaviour
     }
     public void PushSettings()
     {
-        MusicPanel.SetActive(true);
-        //SceneManager.LoadScene("Settings");
+        //MusicPanel.SetActive(true);
+        SceneManager.LoadScene("Settings");
     }
-    public void CloseSettings()
-    {
-        MusicPanel.SetActive(false);
-    }
+    //public void CloseSettings()
+    //{
+    //    MusicPanel.SetActive(false);
+    //}
 
     // Update is called once per frame
     void Update()
