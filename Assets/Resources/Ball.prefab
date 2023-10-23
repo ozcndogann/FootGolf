@@ -179,6 +179,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: -8625552110504344645}
   - {fileID: 2536477933741608514}
+  - {fileID: 1061819326327935117}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -273,6 +274,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d63714b67355c3b4b88aa2cc9bf358c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teleportIfFar: 1
+  teleportIfFarDistance: 3
+  smoothpos: 0.5
+  smoothRot: 0.5
 --- !u!1 &9219378405429931175
 GameObject:
   m_ObjectHideFlags: 0
