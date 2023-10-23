@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     public AudioSource MusicSource, SFXSource;
     public Sound[] MusicSounds, SFXSounds;
-    public GameObject MusicOn, MusicOff, SFXOn, SFXOff;
+    //public GameObject MusicOn, MusicOff, SFXOn, SFXOff;
     private void Awake()
     {
         if(Instance == null)
@@ -61,31 +61,31 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public void ToggleSFXOff()
-    {
-        SFXOn.SetActive(false);
-        SFXOff.SetActive(true);
-        SFXSource.Pause();
-    }
-    public void ToggleSFXOn()
-    {
-        SFXOn.SetActive(true);
-        SFXOff.SetActive(false);
-        SFXSource.Play();
-    }
+    //public void ToggleSFXOff()
+    //{
+    //    SFXOn.SetActive(false);
+    //    SFXOff.SetActive(true);
+    //    SFXSource.Pause();
+    //}
+    //public void ToggleSFXOn()
+    //{
+    //    SFXOn.SetActive(true);
+    //    SFXOff.SetActive(false);
+    //    SFXSource.Play();
+    //}
 
-    public void ToggleMusicOff()
-    {
-        MusicOn.SetActive(false);
-        MusicOff.SetActive(true);
-        MusicSource.Pause();
-    }
-    public void ToggleMusicOn()
-    {
-        MusicOn.SetActive(true);
-        MusicOff.SetActive(false);
-        MusicSource.Play();
-    }
+    //public void ToggleMusicOff()
+    //{
+    //    MusicOn.SetActive(false);
+    //    MusicOff.SetActive(true);
+    //    MusicSource.Pause();
+    //}
+    //public void ToggleMusicOn()
+    //{
+    //    MusicOn.SetActive(true);
+    //    MusicOff.SetActive(false);
+    //    MusicSource.Play();
+    //}
 
 
 
