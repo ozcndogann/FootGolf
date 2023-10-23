@@ -16,10 +16,9 @@ GameObject:
   - component: {fileID: 678679326341240063}
   - component: {fileID: 7399152375808374893}
   - component: {fileID: -8625552110504344645}
-  - component: {fileID: 2536477933741608514}
   - component: {fileID: 7121476988973760189}
-  - component: {fileID: 1770250047157470578}
   - component: {fileID: 1061819326327935117}
+  - component: {fileID: 3763225489559847618}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Ball
@@ -178,7 +177,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -8625552110504344645}
-  - {fileID: 2536477933741608514}
   - {fileID: 1061819326327935117}
   sceneViewId: 0
   InstantiationId: 0
@@ -216,22 +214,6 @@ MonoBehaviour:
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 10
---- !u!114 &2536477933741608514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3859352307074843106}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1
 --- !u!114 &7121476988973760189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,24 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b5220856711ec4c9b62e2abed2c4cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1770250047157470578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3859352307074843106}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15dfb9ce31b890345978ebde7a934c34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  view: {fileID: 0}
-  Cameras: []
-  CasualCam: {fileID: 2332360823814469279, guid: dd700a213ed16db4db9cec181ed10769,
-    type: 3}
-  randomerBool: 0
-  cameraChanger: 0
 --- !u!114 &1061819326327935117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +242,19 @@ MonoBehaviour:
   teleportIfFarDistance: 3
   smoothPos: 5
   smoothRot: 5
+--- !u!114 &3763225489559847618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859352307074843106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8818dce1d7edbcb4789bb22870140f86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newBaseMap: {fileID: 2800000, guid: 80a86368072fbdd49a7659a21d901e4a, type: 3}
 --- !u!1 &9219378405429931175
 GameObject:
   m_ObjectHideFlags: 0
