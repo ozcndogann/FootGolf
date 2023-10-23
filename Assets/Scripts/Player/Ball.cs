@@ -110,7 +110,7 @@ public class Ball : MonoBehaviour
         }
         if (!view.IsMine)
         {
-            SetTransparency(.07f);
+            SetTransparency(.02f);
         }
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
 
