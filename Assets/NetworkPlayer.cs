@@ -19,8 +19,8 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
 
     private void Awake()
     {
-        PhotonNetwork.SendRate = 30;
-        PhotonNetwork.SerializationRate = 10;
+        PhotonNetwork.SendRate = 40;//30du
+        PhotonNetwork.SerializationRate = 20;//10du
 
         _rigidbody = gameObject.GetComponent<Rigidbody>();
     }
