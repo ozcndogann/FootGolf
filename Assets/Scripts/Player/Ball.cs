@@ -518,50 +518,42 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        if (isIdle)
         {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                if (isIdle)
-                {
-                    isAiming = true;
-                }
-
-                if (shooted == true)
-                {
-                    if (Input.GetMouseButtonDown(0) && shootCloser == false)
-                    {
-                        mousePos = Input.mousePosition;
-                        //if (mousePos.x > Screen.width / 2)
-                        //{
-                        //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    OurFootballer.SetActive(true);
-                        //    TrivelaFootballer.SetActive(false);
-                        //    footballerAnimator.SetBool("penaltyKick", true);
-                        //    distanceP = transform.position - OurFootballer.transform.position;
-                        //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                        //    waitForShoot = true;
-                        //}
-                        //else
-                        //{
-                        //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    TrivelaFootballer.SetActive(true);
-                        //    OurFootballer.SetActive(false);
-                        //    trivelaAnimator.SetBool("trivela", true);
-                        //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                        //    distanceP = transform.position - OurFootballer.transform.position;
-                        //    waitForShootTri = true;
-
-                        //}
-                    }
-
-                }
-            }
+            isAiming = true;
         }
 
-        
+        if (shooted == true)
+        {
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            {
+                mousePos = Input.mousePosition;
+                //if (mousePos.x > Screen.width / 2)
+                //{
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    OurFootballer.SetActive(true);
+                //    TrivelaFootballer.SetActive(false);
+                //    footballerAnimator.SetBool("penaltyKick", true);
+                //    distanceP = transform.position - OurFootballer.transform.position;
+                //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                //    waitForShoot = true;
+                //}
+                //else
+                //{
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    TrivelaFootballer.SetActive(true);
+                //    OurFootballer.SetActive(false);
+                //    trivelaAnimator.SetBool("trivela", true);
+                //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                //    distanceP = transform.position - OurFootballer.transform.position;
+                //    waitForShootTri = true;
+
+                //}
+            }
+
+        }
 
     }
     public void OnMouseShootPart()
@@ -631,7 +623,14 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+            }
+        }
+       
         if (AnimationFootballer.lineRendererController == false)
         {
             AnimationFootballer.lineRendererOn = true;
