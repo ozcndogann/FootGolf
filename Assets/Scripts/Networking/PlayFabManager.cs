@@ -34,7 +34,7 @@ public class PlayFabManager : MonoBehaviour
     private void Update()
     {
         Debug.Log(nameInput.text.Length);
-        if (nameAccepter == true && PlayerPrefs.GetInt("NameWindowOpen")==0)
+        if (nameAccepter == true || PlayerPrefs.GetInt("NameWindowOpen")==0)
         {
             nameWindow.SetActive(true);
             nameAccepter = false;
