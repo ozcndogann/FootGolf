@@ -752,7 +752,7 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-        if (!sýragecti)
+        if (sýragecti)
         {
             return null;
         }
