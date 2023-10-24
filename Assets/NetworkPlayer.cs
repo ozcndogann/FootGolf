@@ -16,7 +16,7 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     [Header("Lerping [Experimental")]
     public float smoothPos = 5.0f;
     public float smoothRot = 5.0f;
-    const float someSmallThreshold = 0.01f;// bunu 0.75 de yapabiliriz topun durduðu þey falan
+    const float someSmallThreshold = 0.75f;// bunu 0.75 de yapabiliriz topun durduðu þey falan
     private void Awake()
     {
         PhotonNetwork.SendRate = 40;//30du
