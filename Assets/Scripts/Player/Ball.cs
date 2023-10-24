@@ -517,6 +517,9 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        if (!IsPlayerTurn()) // Ensure that it's the player's turn before proceeding.
+            return;
+
         if (isIdle)
         {
             isAiming = true;
@@ -606,6 +609,9 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
+        if (!IsPlayerTurn()) // Ensure that it's the player's turn before proceeding.
+            return;
+
         if (!isAiming || !isIdle)
         {
             gravityChanger = false;
@@ -732,6 +738,14 @@ public class Ball : MonoBehaviour
             lineRenderer.enabled = false; // line visible}
         }
 
+    }
+    private bool IsPlayerTurn()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        {
+            return (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"];
+        }
+        return false;
     }
     private Vector3? CastMouseClickRay()
     {
