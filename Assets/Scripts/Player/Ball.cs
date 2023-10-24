@@ -279,7 +279,6 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        sýragecti = false;
                         if (timer > 0)
                         {
                             ProcessAim();
@@ -519,6 +518,7 @@ public class Ball : MonoBehaviour
 
         if (sýragecti)
         {
+            worldPoint = Vector3.zero;
             Debug.Log("sýragecti");
         }
 
@@ -616,24 +616,23 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
+        if (!isAiming || !isIdle)
+        {
+            gravityChanger = false;
+            return; // exit method
+        }
+        
+        if (!shooted)
+        {
+            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+        }
+
+        if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
+        {
+            return; // exit method
+        }
         if (!sýragecti)
         {
-            if (!isAiming || !isIdle)
-            {
-                gravityChanger = false;
-                return; // exit method
-            }
-
-            if (!shooted)
-            {
-                worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
-            }
-
-            if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
-            {
-                return; // exit method
-            }
-
             DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
             if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
@@ -642,14 +641,14 @@ public class Ball : MonoBehaviour
                 shooted = true;
                 Zoom.changeFovBool = true;
             }
-
-            if (AnimationFootballer.lineRendererController == false)
-            {
-                AnimationFootballer.lineRendererOn = true;
-                AnimationFootballer.lineRendererController = true;
-            }
         }
         
+
+        if (AnimationFootballer.lineRendererController == false)
+        {
+            AnimationFootballer.lineRendererOn = true;
+            AnimationFootballer.lineRendererController = true;
+        }
         
         
 
