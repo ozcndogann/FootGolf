@@ -754,6 +754,10 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
+        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        {
+            return null;
+        }
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
