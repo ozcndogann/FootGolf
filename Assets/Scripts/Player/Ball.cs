@@ -383,7 +383,6 @@ public class Ball : MonoBehaviour
                 }
             }
         }
-        Debug.Log(CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus);
         //foreach (Player player in PhotonNetwork.PlayerList)
         //{
         //    if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
@@ -849,7 +848,7 @@ public class Ball : MonoBehaviour
         {
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
-        //Debug.Log(allPlayersReady);
+        Debug.Log(allPlayersReady);
     }
 
     
