@@ -50,6 +50,7 @@ public class Ball : MonoBehaviour
     private bool sýragecti;
     private void Start()
     {
+        sýragecti = true;
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
         //lineRendererController = false;
@@ -526,42 +527,46 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (isIdle)
+        if (!sýragecti)
         {
-            isAiming = true;
-        }
-
-        if (shooted == true)
-        {
-            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            if (isIdle)
             {
-                mousePos = Input.mousePosition;
-                //if (mousePos.x > Screen.width / 2)
-                //{
-                //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    OurFootballer.SetActive(true);
-                //    TrivelaFootballer.SetActive(false);
-                //    footballerAnimator.SetBool("penaltyKick", true);
-                //    distanceP = transform.position - OurFootballer.transform.position;
-                //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                //    waitForShoot = true;
-                //}
-                //else
-                //{
-                //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    TrivelaFootballer.SetActive(true);
-                //    OurFootballer.SetActive(false);
-                //    trivelaAnimator.SetBool("trivela", true);
-                //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                //    distanceP = transform.position - OurFootballer.transform.position;
-                //    waitForShootTri = true;
-
-                //}
+                isAiming = true;
             }
 
+            if (shooted == true)
+            {
+                if (Input.GetMouseButtonDown(0) && shootCloser == false)
+                {
+                    mousePos = Input.mousePosition;
+                    //if (mousePos.x > Screen.width / 2)
+                    //{
+                    //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    //    OurFootballer.SetActive(true);
+                    //    TrivelaFootballer.SetActive(false);
+                    //    footballerAnimator.SetBool("penaltyKick", true);
+                    //    distanceP = transform.position - OurFootballer.transform.position;
+                    //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                    //    waitForShoot = true;
+                    //}
+                    //else
+                    //{
+                    //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                    //    TrivelaFootballer.SetActive(true);
+                    //    OurFootballer.SetActive(false);
+                    //    trivelaAnimator.SetBool("trivela", true);
+                    //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                    //    distanceP = transform.position - OurFootballer.transform.position;
+                    //    waitForShootTri = true;
+
+                    //}
+                }
+
+            }
         }
+        
 
     }
     public void OnMouseShootPart()
@@ -752,10 +757,6 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-        if (sýragecti)
-        {
-            return null;
-        }
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
