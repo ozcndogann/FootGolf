@@ -630,10 +630,10 @@ public class Ball : MonoBehaviour
         }
         if (!isAiming || !isIdle)
         {
-            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+            
             return; // exit method
         }
-        
+        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
         if (AnimationFootballer.lineRendererController == false)
         {
             AnimationFootballer.lineRendererOn = true;
@@ -650,7 +650,7 @@ public class Ball : MonoBehaviour
         {
             //Debug.Log("y buyuk");
         }
-        if (Input.GetMouseButtonUp(0) && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]) // parmaðýmý çektim mi
+        if (Input.GetMouseButtonUp(0) ^ !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]) // parmaðýmý çektim mi
         {
             AnimationFootballer.lineRendererOn = false;
             shooted = true;
