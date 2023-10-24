@@ -285,7 +285,7 @@ public class Ball : MonoBehaviour
                         else
                         {
                             AnimationFootballer.lineRendererController = false;
-                            shooted = false;
+                            shooted = true;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
                             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
