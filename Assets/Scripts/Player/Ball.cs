@@ -606,10 +606,17 @@ public class Ball : MonoBehaviour
             gravityChanger = false;
             return; // exit method
         }
-        if (!shooted)
+        if (player.CustomProperties["turn"] != null)
         {
-            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+            if ((bool)player.CustomProperties["turn"])
+            {
+                if (!shooted)
+                {
+                    worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+                }
+            }
         }
+        
 
         if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
         {
