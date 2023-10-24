@@ -296,6 +296,10 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
+                    else
+                    {
+                        lineRendererController = false;
+                    }
                 }
             }
             if (waitForShoot == true)
