@@ -280,7 +280,7 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        sýragecti = true;
+                        //sýragecti = true;
                         if (timer > 0)
                         {
                             ProcessAim();
