@@ -606,7 +606,7 @@ public class Ball : MonoBehaviour
             gravityChanger = false;
             return; // exit method
         }
-        if (player.CustomProperties["turn"] != null)
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
         {
             if ((bool)player.CustomProperties["turn"])
             {
