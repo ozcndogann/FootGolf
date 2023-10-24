@@ -47,8 +47,6 @@ public class Ball : MonoBehaviour
     public LayerMask ground;
     Ray rayNorm;
     Ray rayTri;
-    bool hasChangedSira = false;
-    private bool sýragecti;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -514,16 +512,11 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         
-        Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+        //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
     }
     private void OnMouseDown()
     {
-        //Debug.Log("mousedown");
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        {
-            Debug.Log("mousedown");
-        }
 
         if (isIdle)
         {
@@ -634,6 +627,12 @@ public class Ball : MonoBehaviour
 
         DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
+        if (AnimationFootballer.lineRendererController == false)
+        {
+            AnimationFootballer.lineRendererOn = true;
+            AnimationFootballer.lineRendererController = true;
+        }
+
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
             AnimationFootballer.lineRendererOn = false;
@@ -642,11 +641,7 @@ public class Ball : MonoBehaviour
         }
 
 
-        if (AnimationFootballer.lineRendererController == false)
-        {
-            AnimationFootballer.lineRendererOn = true;
-            AnimationFootballer.lineRendererController = true;
-        }
+        
         
         
 
