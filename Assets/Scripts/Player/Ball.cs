@@ -516,11 +516,7 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
 
-        if (sýragecti)
-        {
-            Debug.Log("sýragecti");
-        }
-
+        Debug.Log("sýragecti: " + sýragecti);
 
     }
     private void OnMouseDown()
