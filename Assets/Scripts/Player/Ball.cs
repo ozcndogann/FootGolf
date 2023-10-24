@@ -608,7 +608,7 @@ public class Ball : MonoBehaviour
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
         {
-            if ((bool)player.CustomProperties["turn"])
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
                 if (!shooted)
                 {
