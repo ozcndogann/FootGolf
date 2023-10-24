@@ -168,8 +168,8 @@ public class Ball : MonoBehaviour
         //{
         //    rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
         //}
-        
-        
+
+
         //RaycastHit hit;
 
         //if (Physics.Raycast(rayNorm, out hit, Mathf.Infinity, ground))
@@ -187,7 +187,7 @@ public class Ball : MonoBehaviour
         //        footballerAnimator.SetBool("rightWalk", false);
         //        footballerAnimator.SetBool("leftWalk", false);
         //    }
-            
+
         //    if (TrivelaFootballer != null)
         //    {
         //        trivelaAnimator.SetBool("rightWalk", false);
@@ -280,7 +280,6 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        //sýragecti = true;
                         if (timer > 0)
                         {
                             ProcessAim();
@@ -298,20 +297,11 @@ public class Ball : MonoBehaviour
                             }
                             timer = 20f;
                         }
-                        hasChangedSira = false;
                     }
                     else
                     {
-                        if (!hasChangedSira)
-                        {
-                            sýragecti = true;
-                            hasChangedSira = true;
-                        }
+                        sýragecti = true;
                     }
-                    
-
-                    
-
                 }
 
             }
@@ -527,7 +517,7 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
 
-        Debug.Log("sýragecti: " + sýragecti);
+        Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
     }
     private void OnMouseDown()
