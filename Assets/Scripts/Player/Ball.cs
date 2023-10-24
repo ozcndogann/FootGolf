@@ -519,8 +519,14 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        
+        //if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        //{
+
+        //}
+        if (false)
         {
+            Debug.Log("mousedown");
             if (isIdle)
             {
                 isAiming = true;
