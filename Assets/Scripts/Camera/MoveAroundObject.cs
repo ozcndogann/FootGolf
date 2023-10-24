@@ -177,6 +177,7 @@ public class MoveAroundObject : MonoBehaviour
                 passHit.Add(hit.transform.gameObject);
                 if (hit.transform.gameObject.tag == "Undeletable")
                 {
+                    Debug.Log("kapalan");
                     view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
                 }
                 else
@@ -192,6 +193,7 @@ public class MoveAroundObject : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "Undeletable")
                 {
+                    Debug.Log("açlan");
                     view.RPC("ShowOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
                 }
                 else
