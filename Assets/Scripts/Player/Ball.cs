@@ -606,17 +606,11 @@ public class Ball : MonoBehaviour
             gravityChanger = false;
             return; // exit method
         }
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                if (!shooted)
-                {
-                    worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
-                }
-            }
-        }
         
+        if (!shooted)
+        {
+            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+        }
 
         if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
         {
@@ -697,34 +691,41 @@ public class Ball : MonoBehaviour
                    
     private void DrawLine(Vector3 worldPoint)
     {
-        if (!shooted)
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
         {
-            Vector3 direction = worldPoint - transform.position; // lineýn directioný
-            float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
-            float maxLength = 1.25f; // max line length
-
-            if (lineLength > maxLength) // maxla current length kýyasý
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
-                direction = direction.normalized * maxLength;
-                worldPoint = transform.position + direction;
+                if (!shooted)
+                {
+                    Vector3 direction = worldPoint - transform.position; // lineýn directioný
+                    float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
+                    float maxLength = 1.25f; // max line length
+
+                    if (lineLength > maxLength) // maxla current length kýyasý
+                    {
+                        direction = direction.normalized * maxLength;
+                        worldPoint = transform.position + direction;
+                    }
+
+                    Vector3[] positions = { transform.position, worldPoint };
+                    lineRenderer.SetPositions(positions);
+
+                    for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
+                    {
+                        positions[i].y = gameObject.transform.position.y + .02f; // lineýn y axisi fixleme
+                    }
+
+                    lineRenderer.SetPositions(positions); // update positions
+                    lineRenderer.enabled = true; // line visible
+                    shootCloser = false;
+                }
+                else
+                {
+                    lineRenderer.enabled = false; // line visible}
+                }
             }
-
-            Vector3[] positions = { transform.position, worldPoint };
-            lineRenderer.SetPositions(positions);
-
-            for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
-            {
-                positions[i].y = gameObject.transform.position.y + .02f; // lineýn y axisi fixleme
-            }
-
-            lineRenderer.SetPositions(positions); // update positions
-            lineRenderer.enabled = true; // line visible
-            shootCloser = false;
         }
-        else
-        {
-            lineRenderer.enabled = false; // line visible}
-        }
+        
 
     }
     private Vector3? CastMouseClickRay()
