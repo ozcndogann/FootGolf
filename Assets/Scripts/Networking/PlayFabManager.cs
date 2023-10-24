@@ -94,6 +94,13 @@ public class PlayFabManager : MonoBehaviour
             Taken.SetActive(false);
 
         }
+        else if (string.IsNullOrEmpty(userInput))
+        {
+            Empty.SetActive(true);
+            Long.SetActive(false);
+            Short.SetActive(false);
+            Taken.SetActive(false);
+        }
         else if (userInput.Length < 3)
         {
             Short.SetActive(true);
@@ -101,13 +108,8 @@ public class PlayFabManager : MonoBehaviour
             Long.SetActive(false);
             Taken.SetActive(false);
         }
-        else
-        {
-            Empty.SetActive(true);
-            Long.SetActive(false);
-            Short.SetActive(false);
-            Taken.SetActive(false);
-        }
+       
+       
         
     }
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
