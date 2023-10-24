@@ -630,8 +630,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3907968619096859475}
   - component: {fileID: -4763320893496761517}
-  - component: {fileID: 646580800545565297}
-  - component: {fileID: 825507594082675002}
   m_Layer: 0
   m_Name: Wolf3D_Outfit_Footwear
   m_TagString: Untagged
@@ -713,32 +711,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0022293273, y: 0.011938747, z: 0.0014409183}
     m_Extent: {x: 0.004570534, y: 0.0043711704, z: 0.004879496}
   m_DirtyAABB: 0
---- !u!65 &646580800545565297
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: -5014025093650001051}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0034059954, y: 0.008784797, z: 0.0028441763}
-  m_Center: {x: -0.002453841, y: -0.0011008242, z: -0.024440642}
---- !u!65 &825507594082675002
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: -5014025093650001051}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.003350618, y: 0.009856178, z: 0.0028951752}
-  m_Center: {x: 0.0029588023, y: -0.000349434, z: -0.024473844}
 --- !u!1 &-4999088201633142198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,6 +2587,7 @@ GameObject:
   - component: {fileID: -5028747507336710356}
   - component: {fileID: -6324898149365628810}
   - component: {fileID: 3389436989087097542}
+  - component: {fileID: 1494293097184010154}
   m_Layer: 0
   m_Name: Messi
   m_TagString: Undeletable
@@ -2758,6 +2731,19 @@ MonoBehaviour:
     LayerIndex: 0
   - SynchronizeType: 0
     LayerIndex: 1
+--- !u!65 &1494293097184010154
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6639123544252919850}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3401525, y: 1.6429625, z: 0.2292064}
+  m_Center: {x: 0.027938753, y: -0.07038832, z: -0.017560922}
 --- !u!1 &6800821201919638797
 GameObject:
   m_ObjectHideFlags: 0
