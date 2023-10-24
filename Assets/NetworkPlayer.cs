@@ -16,7 +16,7 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     [Header("Lerping [Experimental")]
     public float smoothPos = 5.0f;
     public float smoothRot = 5.0f;
-    const float someSmallThreshold = 0.75f;// bunu 0.75 de yapabiliriz topun durduðu þey falan
+    //const float someSmallThreshold = 0.75f;// bunu 0.75 de yapabiliriz topun durduðu þey falan
     private void Awake()
     {
         PhotonNetwork.SendRate = 40;//30du
@@ -29,19 +29,20 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     {
         //if (stream.IsWriting)
         //{
-        //    stream.SendNext(_rigidbody.position);
-        //    stream.SendNext(_rigidbody.rotation);
-        //    stream.SendNext(_rigidbody.velocity);
+        //    if (_rigidbody.velocity.magnitude > someSmallThreshold)
+        //    {
+        //        stream.SendNext(_rigidbody.position);
+        //        stream.SendNext(_rigidbody.rotation);
+        //        stream.SendNext(_rigidbody.velocity);
+        //    }
         //}
         if (stream.IsWriting)
         {
-            if (_rigidbody.velocity.magnitude > someSmallThreshold)
-            {
-                stream.SendNext(_rigidbody.position);
-                stream.SendNext(_rigidbody.rotation);
-                stream.SendNext(_rigidbody.velocity);
-            }
+            stream.SendNext(_rigidbody.position);
+            stream.SendNext(_rigidbody.rotation);
+            stream.SendNext(_rigidbody.velocity);
         }
+        
 
         else
         {
@@ -57,10 +58,10 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     void FixedUpdate()
     {
         if (photonView.IsMine) return;
-        _rigidbody.MovePosition(Vector3.Lerp(_rigidbody.position, _netPosition, smoothPos * Time.fixedDeltaTime));
-        _rigidbody.MoveRotation(Quaternion.Lerp(_rigidbody.rotation, _netRotation, smoothRot * Time.fixedDeltaTime));
-        //_rigidbody.position = Vector3.Lerp(_rigidbody.position, _netPosition, smoothPos * Time.fixedDeltaTime);
-        //_rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, _netRotation, smoothRot * Time.fixedDeltaTime);
+        //_rigidbody.MovePosition(Vector3.Lerp(_rigidbody.position, _netPosition, smoothPos * Time.fixedDeltaTime));
+        //_rigidbody.MoveRotation(Quaternion.Lerp(_rigidbody.rotation, _netRotation, smoothRot * Time.fixedDeltaTime));
+        _rigidbody.position = Vector3.Lerp(_rigidbody.position, _netPosition, smoothPos * Time.fixedDeltaTime);
+        _rigidbody.rotation = Quaternion.Lerp(_rigidbody.rotation, _netRotation, smoothRot * Time.fixedDeltaTime);
 
         if(Vector3.Distance(_rigidbody.position, _netPosition) > teleportIfFarDistance)
         {
