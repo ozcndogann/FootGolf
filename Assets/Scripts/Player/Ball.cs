@@ -47,6 +47,7 @@ public class Ball : MonoBehaviour
     public LayerMask ground;
     Ray rayNorm;
     Ray rayTri;
+    private bool sýragecti;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -296,6 +297,10 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
+                    else
+                    {
+                        sýragecti = true;
+                    }
                 }
 
             }
@@ -512,11 +517,9 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
 
-        if (!isAiming || !isIdle)
+        if (sýragecti)
         {
-            gravityChanger = false;
-            Debug.Log("deneme");
-            //line çekerken hiç çalýþmayan bi yer
+            Debug.Log("sýragecti");
         }
 
 
@@ -628,35 +631,37 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        if (!isAiming || !isIdle)
+        if (!sýragecti)
         {
-            
-            return; // exit method
+            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+
+            if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
+            {
+                AnimationFootballer.lineRendererOn = false;
+                shooted = true;
+                Zoom.changeFovBool = true;
+            }
         }
-        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+        
+
         if (AnimationFootballer.lineRendererController == false)
         {
             AnimationFootballer.lineRendererOn = true;
             AnimationFootballer.lineRendererController = true;
         }
         
+        
+
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
         //if ((worldPoint.Value - transform.position).y < 0)
         //{
         //    //Debug.Log("y kucuk");
         //    //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
         //}
-        else
-        {
-            //Debug.Log("y buyuk");
-        }
-        if (Input.GetMouseButtonUp(0) ^ !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]) // parmaðýmý çektim mi
-        {
-            AnimationFootballer.lineRendererOn = false;
-            shooted = true;
-            Zoom.changeFovBool = true;
-        }
-        
+        //else
+        //{
+        //    //Debug.Log("y buyuk");
+        //}
     }
 
     public enum CurveDirection
