@@ -24,7 +24,6 @@ public class PlayFabManager : MonoBehaviour
     void Start()
     {
         PlayerPrefs.GetString("Username");
-        PlayerPrefs.GetInt("NameWindowOpen", 0);
         playerFound = false;
         nameAccepter = false;
         Login();
@@ -35,7 +34,7 @@ public class PlayFabManager : MonoBehaviour
     {
         userName.text= PlayerPrefs.GetString("Username");
         Debug.Log(nameInput.text.Length);
-        if (nameAccepter == true || PlayerPrefs.GetInt("NameWindowOpen")==0)
+        if (nameAccepter == true)
         {
             nameWindow.SetActive(true);
             nameAccepter = false;
@@ -122,7 +121,6 @@ public class PlayFabManager : MonoBehaviour
     }
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
     {
-        PlayerPrefs.SetInt("NameWindowOpen", 1);
         nameWindow.SetActive(false);
         Debug.Log("NameUpdated");
         Scene scene = SceneManager.GetActiveScene();
