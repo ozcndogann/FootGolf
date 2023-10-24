@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -17,6 +17,8 @@ public class PlayFabManager : MonoBehaviour
     //public Transform rowsParent;
     string loggedInPlayedId;
     public static bool nameAccepter, playerFound;
+    public GameObject Long, Short, Taken,Empty;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -74,28 +76,64 @@ public class PlayFabManager : MonoBehaviour
         string userInput = nameInput.text.Trim();
         if (!string.IsNullOrEmpty(userInput) && userInput.Length >= 3 && userInput.Length <= 8)
         {
-            PlayerPrefs.SetInt("NameWindowOpen", 1);
+            
             var request = new UpdateUserTitleDisplayNameRequest
             {
                 DisplayName = nameInput.text,
 
             };
-            nameWindow.SetActive(false);
+         
             PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnDisplayNameUpdate, OnError);
+        }
+        else if (userInput.Length > 8)
+        {
+            Long.SetActive(true);
+            Short.SetActive(false);
+            Empty.SetActive(false);
+            Taken.SetActive(false);
+
+        }
+        else if (userInput.Length < 3)
+        {
+            Short.SetActive(true);
+            Empty.SetActive(false);
+            Long.SetActive(false);
+            Taken.SetActive(false);
         }
         else
         {
-            //burda uyarý vercez
+            Empty.SetActive(true);
+            Long.SetActive(false);
+            Short.SetActive(false);
+            Taken.SetActive(false);
         }
+        
     }
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
+
     {
+
+        PlayerPrefs.SetInt("NameWindowOpen", 1);
+        nameWindow.SetActive(false);
         Debug.Log("NameUpdated");
+
     }
     void OnError(PlayFabError error)
     {
         Debug.Log("Error");
         Debug.Log(error.GenerateErrorReport());
+        Taken.SetActive(true);
+        Short.SetActive(false);
+        Empty.SetActive(false);
+        Long.SetActive(false);
+
+    }
+    public void PopCloser()
+    {
+        Taken.SetActive(false);
+        Short.SetActive(false);
+        Empty.SetActive(false);
+        Long.SetActive(false);
     }
     //public void SendLeaderboard(int score)
     //{

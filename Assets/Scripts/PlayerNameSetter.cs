@@ -8,8 +8,8 @@ using TMPro;
 public class PlayerNameSetter : MonoBehaviourPunCallbacks
 {
     public TMP_InputField PlayerNickname;
-    public GameObject Submit;
-    public GameObject Panel;
+    public GameObject Submit,GotIt;
+    public GameObject Panel,NameLong;
     public static bool nameAccepter, playerFound;
 
     public void Start()
@@ -30,6 +30,15 @@ public class PlayerNameSetter : MonoBehaviourPunCallbacks
         {
             Panel.SetActive(true);
             nameAccepter = false;
+        }
+        if(PlayerNickname.text.Length > 6)
+        {
+            NameLong.SetActive(true);
+
+            if(GotIt == true)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }
