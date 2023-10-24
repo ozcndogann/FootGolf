@@ -511,10 +511,13 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        
-       
-        
-        
+
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        {
+            Debug.Log("turn" + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+        }
+
+
     }
     private void OnMouseDown()
     {
@@ -623,14 +626,8 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
-            }
-        }
-       
+        
+        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
         if (AnimationFootballer.lineRendererController == false)
         {
             AnimationFootballer.lineRendererOn = true;
