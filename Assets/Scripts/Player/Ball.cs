@@ -849,7 +849,7 @@ public class Ball : MonoBehaviour
         {
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
         }
-        Debug.Log(allPlayersReady);
+        //Debug.Log(allPlayersReady);
     }
 
     
