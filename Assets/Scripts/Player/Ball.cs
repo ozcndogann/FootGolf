@@ -519,7 +519,6 @@ public class Ball : MonoBehaviour
 
         if (sýragecti)
         {
-            worldPoint = Vector3.zero;
             Debug.Log("sýragecti");
         }
 
@@ -632,18 +631,18 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        if (!sýragecti)
-        {
-            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+        //if (!sýragecti)
+        //{
+            
+        //}
+        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
-            if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
-            {
-                AnimationFootballer.lineRendererOn = false;
-                shooted = true;
-                Zoom.changeFovBool = true;
-            }
+        if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
+        {
+            AnimationFootballer.lineRendererOn = false;
+            shooted = true;
+            Zoom.changeFovBool = true;
         }
-        
 
         if (AnimationFootballer.lineRendererController == false)
         {
@@ -753,6 +752,10 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
+        if (!sýragecti)
+        {
+            return null;
+        }
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
