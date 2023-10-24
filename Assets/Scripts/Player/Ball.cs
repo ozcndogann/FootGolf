@@ -754,7 +754,7 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             return null;
         }
