@@ -616,10 +616,6 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        //if (!sýragecti)
-        //{
-
-        //}
         if (!isAiming || !isIdle)
         {
             gravityChanger = false;
@@ -715,13 +711,6 @@ public class Ball : MonoBehaviour
                    
     private void DrawLine(Vector3 worldPoint)
     {
-        //if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        //{
-        //    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        //    {
-                
-        //    }
-        //}
         if (!shooted)
         {
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
@@ -776,7 +765,6 @@ public class Ball : MonoBehaviour
         {
             return null; // eðer ray bi þeye çarpmazsa return null
         }
-
 
     }
 
