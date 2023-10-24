@@ -47,7 +47,7 @@ public class Ball : MonoBehaviour
     public LayerMask ground;
     Ray rayNorm;
     Ray rayTri;
-    private bool sýrasende;
+    private bool sýragecti;
     private void Start()
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
@@ -279,7 +279,6 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        sýrasende = true;
                         if (timer > 0)
                         {
                             ProcessAim();
@@ -290,18 +289,18 @@ public class Ball : MonoBehaviour
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
-                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                            {
-                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                            }
+                            //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                            //{
+                            //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                            //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            //}
                             timer = 20f;
                         }
                     }
-                    //else
-                    //{
-                        
-                    //}
+                    else
+                    {
+                        sýragecti = true;
+                    }
                 }
 
             }
@@ -517,7 +516,7 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
 
-        Debug.Log("sýrasende: " + sýrasende);
+        Debug.Log("sýragecti: " + sýragecti);
 
     }
     private void OnMouseDown()
@@ -632,7 +631,7 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        if (sýrasende)
+        if (!sýragecti)
         {
             DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
