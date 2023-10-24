@@ -281,7 +281,6 @@ public class Ball : MonoBehaviour
                         timer -= Time.deltaTime;
                         if (timer > 0)
                         {
-                            sýragecti = false;
                             ProcessAim();
                         }
                         else
