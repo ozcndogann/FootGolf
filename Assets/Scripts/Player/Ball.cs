@@ -278,9 +278,11 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
+                        Debug.Log("sýrasende");
                         timer -= Time.deltaTime;
                         if (timer > 0)
                         {
+                            Debug.Log("sýrasendesürenyüksek");
                             ProcessAim();
                         }
                         else
@@ -289,11 +291,14 @@ public class Ball : MonoBehaviour
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
-                            //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                            //{
-                            //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                            //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                            //}
+                            Debug.Log("sýrasendesürenbitti");
+                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                            {
+                                Debug.Log("sýrasendesürenbittiifiçi");
+                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                Debug.Log("sýrasendesürenbittiifsonu");
+                            }
                             timer = 20f;
                         }
                     }
