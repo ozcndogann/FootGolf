@@ -6,6 +6,7 @@ using PlayFab.ClientModels;
 using TMPro;
 using Photon.Pun;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -110,13 +111,12 @@ public class PlayFabManager : MonoBehaviour
         
     }
     void OnDisplayNameUpdate(UpdateUserTitleDisplayNameResult result)
-
     {
-
         PlayerPrefs.SetInt("NameWindowOpen", 1);
         nameWindow.SetActive(false);
         Debug.Log("NameUpdated");
-
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
     void OnError(PlayFabError error)
     {
