@@ -50,7 +50,6 @@ public class Ball : MonoBehaviour
     private bool sýragecti;
     private void Start()
     {
-        sýragecti = true;
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
         //lineRendererController = false;
