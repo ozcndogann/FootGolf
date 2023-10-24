@@ -33,6 +33,7 @@ public class PlayFabManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        userName.text= PlayerPrefs.GetString("Username");
         Debug.Log(nameInput.text.Length);
         if (nameAccepter == true || PlayerPrefs.GetInt("NameWindowOpen")==0)
         {
@@ -108,6 +109,13 @@ public class PlayFabManager : MonoBehaviour
             Long.SetActive(false);
             Taken.SetActive(false);
         }
+        else
+        {
+            Taken.SetActive(true);
+            Short.SetActive(false);
+            Empty.SetActive(false);
+            Long.SetActive(false);
+        }
        
        
         
@@ -124,11 +132,6 @@ public class PlayFabManager : MonoBehaviour
     {
         Debug.Log("Error");
         Debug.Log(error.GenerateErrorReport());
-        Taken.SetActive(true);
-        Short.SetActive(false);
-        Empty.SetActive(false);
-        Long.SetActive(false);
-
     }
     public void PopCloser()
     {
