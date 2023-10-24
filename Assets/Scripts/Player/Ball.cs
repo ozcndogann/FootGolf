@@ -632,7 +632,7 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-        if (!sýragecti)
+        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
