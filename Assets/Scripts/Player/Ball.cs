@@ -758,28 +758,32 @@ public class Ball : MonoBehaviour
         {
             return null;
         }
-        Vector3 screenMousePosFar = new Vector3(
+        else
+        {
+            Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
             Camera.main.farClipPlane
             );
-        Vector3 screenMousePosNear = new Vector3(
-            Input.mousePosition.x,
-            Input.mousePosition.y,
-            Camera.main.nearClipPlane
-            );
-        Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
-        Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
-        RaycastHit hit;
+            Vector3 screenMousePosNear = new Vector3(
+                Input.mousePosition.x,
+                Input.mousePosition.y,
+                Camera.main.nearClipPlane
+                );
+            Vector3 worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
+            Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
+            RaycastHit hit;
 
-        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
-        {
-            return hit.point; // eðer ray bi þeye çarparsa return hit point
+            if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
+            {
+                return hit.point; // eðer ray bi þeye çarparsa return hit point
+            }
+            else
+            {
+                return null; // eðer ray bi þeye çarpmazsa return null
+            }
         }
-        else
-        {
-            return null; // eðer ray bi þeye çarpmazsa return null
-        }
+        
 
     }
 
