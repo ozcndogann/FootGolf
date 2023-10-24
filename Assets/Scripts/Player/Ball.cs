@@ -532,10 +532,10 @@ public class Ball : MonoBehaviour
             isAiming = true;
         }
 
-        if (isIdle)
-        {
-            isAiming = true;
-        }
+        //if (isIdle)
+        //{
+        //    isAiming = true;
+        //}
         if (shooted == true)
         {
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
