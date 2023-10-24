@@ -279,7 +279,7 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        
+                        sýragecti = false;
                         if (timer > 0)
                         {
                             ProcessAim();
@@ -622,17 +622,18 @@ public class Ball : MonoBehaviour
             return; // exit method
         }
         
-        if (!shooted)
-        {
-            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
-        }
-
-        if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
-        {
-            return; // exit method
-        }
+        
         if (!sýragecti)
         {
+            if (!shooted)
+            {
+                worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+            }
+
+            if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
+            {
+                return; // exit method
+            }
             DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
             if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
