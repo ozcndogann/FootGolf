@@ -62,12 +62,12 @@ public class MoveAroundObject : MonoBehaviour
         //}
         #region CamFollow
 
-        if (Ball.shooted == false && Ball.lineRendererOn == false)
+        if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
-            if (Ball.footballerTeleport == true)
+            if (AnimationFootballer.footballerTeleport == true)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -83,7 +83,7 @@ public class MoveAroundObject : MonoBehaviour
 
                     cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                     //if(rotationaroundyaxis)
-                    if (Ball.footballerTeleport == true)
+                    if (AnimationFootballer.footballerTeleport == true)
                     {
                         cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 60, Space.World);
                         cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
@@ -93,11 +93,11 @@ public class MoveAroundObject : MonoBehaviour
                 }
             }
         }
-        else if (Ball.lineRendererOn == true)
+        else if (AnimationFootballer.lineRendererOn == true)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
-            if (Ball.footballerTeleport == true)
+            if (AnimationFootballer.footballerTeleport == true)
             {
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -113,7 +113,7 @@ public class MoveAroundObject : MonoBehaviour
 
                     cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
                     //if(rotationaroundyaxis)
-                    if (Ball.footballerTeleport == true)
+                    if (AnimationFootballer.footballerTeleport == true)
                     {
                         cam.transform.Rotate(new Vector3(0, .65f, 0), rotationaroundyaxis / 300, Space.World);
                         cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
@@ -123,7 +123,7 @@ public class MoveAroundObject : MonoBehaviour
                 }
             }
         }
-        else if (Ball.waitForShoot == true || Ball.waitForShootTri == true)
+        else if (AnimationFootballer.waitForShoot == true || AnimationFootballer.waitForShootTri == true)
         {
             cam.transform.position = new Vector3(cam.transform.position.x, /*heightwhileshooting*/target.transform.position.y + 2, cam.transform.position.z);
         }
@@ -176,15 +176,15 @@ public class MoveAroundObject : MonoBehaviour
             if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole" /*&& hit.transform.gameObject.tag != "Undeletable"*/)
             {
                 passHit.Add(hit.transform.gameObject);
-                if (hit.transform.gameObject.tag == "Undeletable")
-                {
-                    Debug.Log("kapalan");
-                    view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                }
-                else
-                {
-                    hit.transform.gameObject.SetActive(false);
-                }
+                //if (hit.transform.gameObject.tag == "Undeletable")
+                //{
+                //    Debug.Log("kapalan");
+                //    view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                //}
+                //else
+                //{
+                hit.transform.gameObject.SetActive(false);
+                //}
             }
 
         }
@@ -192,15 +192,15 @@ public class MoveAroundObject : MonoBehaviour
         {
             for (int i = 0; i < passHit.Count; i++)
             {
-                if (hit.transform.gameObject.tag == "Undeletable")
-                {
-                    Debug.Log("açlan");
-                    view.RPC("ShowOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                }
-                else
-                {
-                    passHit[i].SetActive(true);
-                }
+                //if (hit.transform.gameObject.tag == "Undeletable")
+                //{
+                //    Debug.Log("açlan");
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                //}
+                //else
+                //{
+                passHit[i].SetActive(true);
+                //}
             }
         }
         else

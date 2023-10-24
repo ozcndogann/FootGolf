@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7121476988973760189}
   - component: {fileID: 1061819326327935117}
   - component: {fileID: 3763225489559847618}
+  - component: {fileID: 2004154329386670004}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Ball
@@ -140,19 +141,12 @@ MonoBehaviour:
   cam: {fileID: 0}
   isShooting: 0
   LineRenderer: {fileID: 9219378405429931175}
-  shootCloser: 0
   mousePos: {x: 0, y: 0, z: 0}
   upForce: {x: 0, y: 0, z: 0}
   curveValue: 0
   forceValue: 0
   lineX: 0
   view: {fileID: 0}
-  Ronaldinho: {fileID: 8153281012861015783, guid: d3078b78797eecf4f8cd70d2fb9ed0bc,
-    type: 3}
-  Messi: {fileID: 6639123544252919850, guid: 95d8178b28152ad49b5c1a5576883297, type: 3}
-  waitForShootTimer: 0
-  waitForShootTriTimer: 0
-  whichAnim: 0
   gravityChanger: 0
   ground:
     serializedVersion: 2
@@ -255,6 +249,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newBaseMap: {fileID: 2800000, guid: 80a86368072fbdd49a7659a21d901e4a, type: 3}
+--- !u!114 &2004154329386670004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859352307074843106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e96e183ba8ca14b8dba9804001a455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopVelocity: 0.75
+  "ac\u0131": 50
+  Ronaldinho: {fileID: 8153281012861015783, guid: d3078b78797eecf4f8cd70d2fb9ed0bc,
+    type: 3}
+  Messi: {fileID: 6639123544252919850, guid: 95d8178b28152ad49b5c1a5576883297, type: 3}
+  waitForShootTimer: 0
+  waitForShootTriTimer: 0
+  whichAnim: 0
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
+  mousePos: {x: 0, y: 0, z: 0}
 --- !u!1 &9219378405429931175
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,7 +57,7 @@ public class ChangeCameras : MonoBehaviour
         cam4.transform.rotation = Quaternion.Euler(0, MainCam.transform.rotation.eulerAngles.y, 0);
         //cam5.transform.position = new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z - 4); // -225 main cameradan
         cam5.transform.rotation = Quaternion.Euler(0, MainCam.transform.rotation.eulerAngles.y - 225, 0);
-        if (Ball.lineRendererOn == false && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f && Ball.shooted==false)
+        if (AnimationFootballer.lineRendererOn == false && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f && Ball.shooted==false)
         {
             cam1.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
             cam2.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
@@ -65,7 +65,7 @@ public class ChangeCameras : MonoBehaviour
             cam4.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
             cam5.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
         }
-        else if(Ball.lineRendererOn == true && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f && Ball.shooted==false)
+        else if(AnimationFootballer.lineRendererOn == true && Input.GetMouseButton(0) && rb.velocity.magnitude < 0.75f && Ball.shooted==false)
         {
             cam1.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
             cam2.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
@@ -73,7 +73,7 @@ public class ChangeCameras : MonoBehaviour
             cam4.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
             cam5.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
         }
-        if (Ball.waitForShoot || Ball.waitForShootTri)
+        if (AnimationFootballer.waitForShoot || AnimationFootballer.waitForShootTri)
         {
             disCam1 = transform.position - cam1.transform.position;
             disCam2 = transform.position - cam2.transform.position;

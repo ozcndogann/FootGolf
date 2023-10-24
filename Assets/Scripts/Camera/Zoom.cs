@@ -43,7 +43,7 @@ public class Zoom : MonoBehaviour
             //Ball.lineRendererController = false;
             ChangeFOV();
         }
-        else if (Ball.waitForShoot == true)
+        else if (AnimationFootballer.waitForShoot == true)
         {
             MainCam.fieldOfView = 65;
         }

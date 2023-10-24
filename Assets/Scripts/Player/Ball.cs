@@ -11,8 +11,8 @@ public class Ball : MonoBehaviour
 {
     Vector3 distanceP,distanceT;
     [SerializeField] private LineRenderer lineRenderer; // aim için line
-    private bool isIdle; // top duruyor mu hareketli mi boolu
-    private bool isAiming; // oyuncu aim halinde mi boolu
+    public static bool isIdle; // top duruyor mu hareketli mi boolu
+    public static bool isAiming; // oyuncu aim halinde mi boolu
     [SerializeField] private float stopVelocity; // topun durmasý için min hýz
     [SerializeField] private float shotPower,acý;
     private Rigidbody rb;
@@ -22,7 +22,7 @@ public class Ball : MonoBehaviour
     public bool isShooting; // shoot hali boolu
     public static bool shooted;
     public GameObject LineRenderer;
-    public bool shootCloser;
+    public static bool shootCloser;
     Vector3? worldPoint;
     public Vector3 mousePos, upForce;
     public float curveValue, forceValue;
@@ -31,17 +31,17 @@ public class Ball : MonoBehaviour
     public PhotonView view;
     private GameObject hole;
     [SerializeField] public static float timer;
-    public GameObject Ronaldinho,Messi;
-    Animator footballerAnimator,trivelaAnimator;
-    GameObject OurFootballer,TrivelaFootballer;
-    public static bool waitForShoot, waitForShootTri;
-    public float waitForShootTimer,waitForShootTriTimer,whichAnim;
-    public static bool footballerTeleport;
+    //public GameObject Ronaldinho,Messi;
+    //Animator footballerAnimator,trivelaAnimator;
+    //GameObject OurFootballer,TrivelaFootballer;
+    //public static bool waitForShoot, waitForShootTri;
+    //public float waitForShootTimer,waitForShootTriTimer,whichAnim;
+    //public static bool footballerTeleport;
     public static bool gameEnder;
     Photon.Realtime.Player player;
     public bool gravityChanger;
-    public static bool lineRendererOn;
-    public static bool lineRendererController;
+    //public static bool lineRendererOn;
+    //public static bool lineRendererController;
     public static bool Player1,Player2,Player3,Player4;
     bool OurFootballerCloser;
     public LayerMask ground;
@@ -51,16 +51,16 @@ public class Ball : MonoBehaviour
     {
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
-        lineRendererController = false;
-        lineRendererOn = false;
+        //lineRendererController = false;
+        //lineRendererOn = false;
         gameEnder = false;
-        whichAnim = 0;
+        //whichAnim = 0;
         timer = 20;
-        waitForShoot = false;
-        waitForShootTri = false;
-        footballerTeleport = false;
-        waitForShootTimer = 0;
-        waitForShootTriTimer = 0;
+        //waitForShoot = false;
+        //waitForShootTri = false;
+        //footballerTeleport = false;
+        //waitForShootTimer = 0;
+        //waitForShootTriTimer = 0;
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
@@ -72,42 +72,42 @@ public class Ball : MonoBehaviour
         cam.enabled = (true);
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
-        if (view.IsMine)
-        {
+        //if (view.IsMine)
+        //{
 
-            if (PlayerPrefs.GetInt("FootballerChooser") == 1)
-            {
-                OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-                TrivelaFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
-                distanceP = transform.position - OurFootballer.transform.position;
-                distanceT = transform.position - TrivelaFootballer.transform.position;
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                footballerAnimator = OurFootballer.GetComponent<Animator>();
-                trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
-                //OurFootballer.SetActive(false);
-                view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
-                view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                OurFootballerCloser = true;
-            }
-            else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
-            {
-                OurFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-                TrivelaFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
-                distanceP = transform.position - OurFootballer.transform.position;
-                distanceT = transform.position - TrivelaFootballer.transform.position;
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                footballerAnimator = OurFootballer.GetComponent<Animator>();
-                trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
-                //OurFootballer.SetActive(false);
-                view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
-                view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                OurFootballerCloser = true;
-            }
-        }
+        //    if (PlayerPrefs.GetInt("FootballerChooser") == 1)
+        //    {
+        //        OurFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+        //        TrivelaFootballer = PhotonNetwork.Instantiate(Ronaldinho.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
+        //        distanceP = transform.position - OurFootballer.transform.position;
+        //        distanceT = transform.position - TrivelaFootballer.transform.position;
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        footballerAnimator = OurFootballer.GetComponent<Animator>();
+        //        trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+        //        //OurFootballer.SetActive(false);
+        //        view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+        //        //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+        //        view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+        //        OurFootballerCloser = true;
+        //    }
+        //    else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
+        //    {
+        //        OurFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+        //        TrivelaFootballer = PhotonNetwork.Instantiate(Messi.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
+        //        distanceP = transform.position - OurFootballer.transform.position;
+        //        distanceT = transform.position - TrivelaFootballer.transform.position;
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //        footballerAnimator = OurFootballer.GetComponent<Animator>();
+        //        trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+        //        //OurFootballer.SetActive(false);
+        //        view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+        //        //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+        //        view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+        //        OurFootballerCloser = true;
+        //    }
+        //}
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
 
         foreach (Player player in PhotonNetwork.PlayerList)
@@ -125,27 +125,27 @@ public class Ball : MonoBehaviour
         }
     }
 
-    [PunRPC]
-    void HideOurFootballer(string footballerPhotonViewId)
-    {
-        PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
-        if (targetFootballer != null)
-        {
-            targetFootballer.gameObject.SetActive(false);
-            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        }
-    }
+    //[PunRPC]
+    //void HideOurFootballer(string footballerPhotonViewId)
+    //{
+    //    PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
+    //    if (targetFootballer != null)
+    //    {
+    //        targetFootballer.gameObject.SetActive(false);
+    //        //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = false;
+    //    }
+    //}
 
-    [PunRPC]
-    void ShowOurFootballer(string footballerPhotonViewId)
-    {
-        PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
-        if (targetFootballer != null)
-        {
-            targetFootballer.gameObject.SetActive(true);
-            //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
-        }
-    }
+    //[PunRPC]
+    //void ShowOurFootballer(string footballerPhotonViewId)
+    //{
+    //    PhotonView targetFootballer = PhotonView.Find(int.Parse(footballerPhotonViewId));
+    //    if (targetFootballer != null)
+    //    {
+    //        targetFootballer.gameObject.SetActive(true);
+    //        //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
+    //    }
+    //}
     private void Awake()
     {
         shootCloser = false;
@@ -158,114 +158,114 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         ////sol artý sað eksi
-        if (OurFootballer != null)
-        {
-            rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
-        }
-        if (TrivelaFootballer != null)
-        {
-            rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
-        }
+        //if (OurFootballer != null)
+        //{
+        //    rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        //}
+        //if (TrivelaFootballer != null)
+        //{
+        //    rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        //}
         
         
-        RaycastHit hit;
+        //RaycastHit hit;
 
-        if (Physics.Raycast(rayNorm, out hit, Mathf.Infinity, ground))
-        {
-            OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x, hit.point.y - 0.2f, OurFootballer.transform.position.z);
-        }
-        if (Physics.Raycast(rayTri, out hit, Mathf.Infinity, ground))
-        {
-            TrivelaFootballer.transform.position = new Vector3(TrivelaFootballer.transform.position.x, hit.point.y - 0.2f, TrivelaFootballer.transform.position.z);
-        }
-        if (!Input.GetMouseButton(0))
-        {
-            if (OurFootballer != null)
-            {
-                footballerAnimator.SetBool("rightWalk", false);
-                footballerAnimator.SetBool("leftWalk", false);
-            }
+        //if (Physics.Raycast(rayNorm, out hit, Mathf.Infinity, ground))
+        //{
+        //    OurFootballer.transform.position = new Vector3(OurFootballer.transform.position.x, hit.point.y - 0.2f, OurFootballer.transform.position.z);
+        //}
+        //if (Physics.Raycast(rayTri, out hit, Mathf.Infinity, ground))
+        //{
+        //    TrivelaFootballer.transform.position = new Vector3(TrivelaFootballer.transform.position.x, hit.point.y - 0.2f, TrivelaFootballer.transform.position.z);
+        //}
+        //if (!Input.GetMouseButton(0))
+        //{
+        //    if (OurFootballer != null)
+        //    {
+        //        footballerAnimator.SetBool("rightWalk", false);
+        //        footballerAnimator.SetBool("leftWalk", false);
+        //    }
             
-            if (TrivelaFootballer != null)
-            {
-                trivelaAnimator.SetBool("rightWalk", false);
-                trivelaAnimator.SetBool("leftWalk", false);
-            }
-        }
-        else
-        {
-            if (MoveAroundObject.rotationaroundyaxis < 0)
-            {
-                if (OurFootballer != null)
-                {
-                    footballerAnimator.SetBool("rightWalk", true);
-                    footballerAnimator.SetBool("leftWalk", false);
-                }
-                if (TrivelaFootballer != null)
-                {
-                    trivelaAnimator.SetBool("rightWalk", true);
-                    trivelaAnimator.SetBool("leftWalk", false);
-                }
-            }
-            else if (MoveAroundObject.rotationaroundyaxis > 0)
-            {
-                if (OurFootballer != null)
-                {
-                    footballerAnimator.SetBool("rightWalk", false);
-                    footballerAnimator.SetBool("leftWalk", true);
-                }
-                if (TrivelaFootballer != null)
-                {
-                    trivelaAnimator.SetBool("rightWalk", false);
-                    trivelaAnimator.SetBool("leftWalk", true);
-                }
-            }
-        }
-        Scene scene = SceneManager.GetActiveScene();
-        if (scene.name == "Hole1")
-        {
-            if (TrivelaFootballer != null)
-            {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-            }
-            if (OurFootballer != null)
-            {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-            }
-        }
-        else if(scene.name == "Hole2" || scene.name=="Hole2Rainy")
-        {
-            if (TrivelaFootballer != null)
-            {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y +30, 0);
-            }
-            if (OurFootballer != null)
-            {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y +30, 0);
-            }
-        }
-        else if (scene.name == "Hole3" || scene.name == "Hole3Rainy")
-        {
-            if (TrivelaFootballer != null)
-            {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
-            }
-            if (OurFootballer != null)
-            {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
-            }
-        }
-        else if (scene.name == "Hole4" || scene.name == "Hole4Rainy")
-        {
-            if (TrivelaFootballer != null)
-            {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
-            }
-            if (OurFootballer != null)
-            {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
-            }
-        }
+        //    if (TrivelaFootballer != null)
+        //    {
+        //        trivelaAnimator.SetBool("rightWalk", false);
+        //        trivelaAnimator.SetBool("leftWalk", false);
+        //    }
+        //}
+        //else
+        //{
+        //    if (MoveAroundObject.rotationaroundyaxis < 0)
+        //    {
+        //        if (OurFootballer != null)
+        //        {
+        //            footballerAnimator.SetBool("rightWalk", true);
+        //            footballerAnimator.SetBool("leftWalk", false);
+        //        }
+        //        if (TrivelaFootballer != null)
+        //        {
+        //            trivelaAnimator.SetBool("rightWalk", true);
+        //            trivelaAnimator.SetBool("leftWalk", false);
+        //        }
+        //    }
+        //    else if (MoveAroundObject.rotationaroundyaxis > 0)
+        //    {
+        //        if (OurFootballer != null)
+        //        {
+        //            footballerAnimator.SetBool("rightWalk", false);
+        //            footballerAnimator.SetBool("leftWalk", true);
+        //        }
+        //        if (TrivelaFootballer != null)
+        //        {
+        //            trivelaAnimator.SetBool("rightWalk", false);
+        //            trivelaAnimator.SetBool("leftWalk", true);
+        //        }
+        //    }
+        //}
+        //Scene scene = SceneManager.GetActiveScene();
+        //if (scene.name == "Hole1")
+        //{
+        //    if (TrivelaFootballer != null)
+        //    {
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //    }
+        //    if (OurFootballer != null)
+        //    {
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+        //    }
+        //}
+        //else if(scene.name == "Hole2" || scene.name=="Hole2Rainy")
+        //{
+        //    if (TrivelaFootballer != null)
+        //    {
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y +30, 0);
+        //    }
+        //    if (OurFootballer != null)
+        //    {
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y +30, 0);
+        //    }
+        //}
+        //else if (scene.name == "Hole3" || scene.name == "Hole3Rainy")
+        //{
+        //    if (TrivelaFootballer != null)
+        //    {
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
+        //    }
+        //    if (OurFootballer != null)
+        //    {
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
+        //    }
+        //}
+        //else if (scene.name == "Hole4" || scene.name == "Hole4Rainy")
+        //{
+        //    if (TrivelaFootballer != null)
+        //    {
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+        //    }
+        //    if (OurFootballer != null)
+        //    {
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+        //    }
+        //}
 
 
         if (view.IsMine)
@@ -284,7 +284,7 @@ public class Ball : MonoBehaviour
                         }
                         else
                         {
-                            lineRendererController = false;
+                            AnimationFootballer.lineRendererController = false;
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
@@ -298,62 +298,67 @@ public class Ball : MonoBehaviour
                     }
                 }
             }
-            if (waitForShoot == true)
+            //if (waitForShoot == true)
+            //{
+            //    waitForShootTimer += Time.deltaTime;
+            //    Zoom.changeFovBool = false;
+            //}
+            //if (waitForShootTri == true)
+            //{
+            //    waitForShootTriTimer += Time.deltaTime;
+            //    Zoom.changeFovBool = false;
+            //}
+            //if (waitForShootTimer >= 0.9f)
+            //{
+            //    //OurFootballer.SetActive(false);
+            //    waitForShoot = false;
+            //    waitForShootTimer = 0;
+            //    footballerAnimator.SetBool("penaltyKick", false);
+            //    trivelaAnimator.SetBool("trivela", false);
+            //    OnMouseShootPart();
+            //}
+            if (AnimationFootballer.AcceptShoot == true)
             {
-                waitForShootTimer += Time.deltaTime;
-                Zoom.changeFovBool = false;
-            }
-            if (waitForShootTri == true)
-            {
-                waitForShootTriTimer += Time.deltaTime;
-                Zoom.changeFovBool = false;
-            }
-            if (waitForShootTimer >= 0.9f)
-            {
-                //OurFootballer.SetActive(false);
-                waitForShoot = false;
-                waitForShootTimer = 0;
-                footballerAnimator.SetBool("penaltyKick", false);
-                trivelaAnimator.SetBool("trivela", false);
                 OnMouseShootPart();
+                AnimationFootballer.AcceptShoot = false;
             }
-            if (waitForShootTriTimer >= 0.65f)
-            {
-                //OurFootballer.SetActive(false);
-                waitForShootTri = false;
-                waitForShootTriTimer = 0;
-                footballerAnimator.SetBool("penaltyKick", false);
-                trivelaAnimator.SetBool("trivela", false);
-                OnMouseShootPart();
-            }
-            if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
-            {
-                if (lineRendererOn == false)
-                {
-                    OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
-                    TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
-                }
-                else
-                {
-                    OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
-                    TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
-                }
+            //if (waitForShootTriTimer >= 0.65f)
+            //{
+            //    //OurFootballer.SetActive(false);
+            //    waitForShootTri = false;
+            //    waitForShootTriTimer = 0;
+            //    footballerAnimator.SetBool("penaltyKick", false);
+            //    trivelaAnimator.SetBool("trivela", false);
+            //    OnMouseShootPart();
+            //}
+            //if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
+            //{
+            //    if (lineRendererOn == false)
+            //    {
+            //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
+            //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
+            //    }
+            //    else
+            //    {
+            //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
+            //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
+            //    }
                 
-            }
-            if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
-            {
-                distanceP.y = 0.3f;
-                distanceT.y = 0.3f;
-                OurFootballer.transform.position = transform.position - distanceP;
-                TrivelaFootballer.transform.position = transform.position - distanceT;
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                TrivelaFootballer.transform.rotation= Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-                footballerTeleport = true;
-            }
-            else if(rb.velocity.magnitude > stopVelocity)
-            {
-                footballerTeleport = false;
-            }
+            //}
+            //if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
+            //{
+            //    distanceP.y = 0.3f;
+            //    distanceT.y = 0.3f;
+            //    OurFootballer.transform.position = transform.position - distanceP;
+            //    TrivelaFootballer.transform.position = transform.position - distanceT;
+            //    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            //    TrivelaFootballer.transform.rotation= Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            //    footballerTeleport = true;
+            //}
+            //else if(rb.velocity.magnitude > stopVelocity)
+            //{
+            //    footballerTeleport = false;
+            //}
 
             
         }
@@ -521,33 +526,33 @@ public class Ball : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
                 mousePos = Input.mousePosition;
-                if (mousePos.x > Screen.width / 2)
-                {
-                    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                    //OurFootballer.SetActive(true);
-                    //TrivelaFootballer.SetActive(false);
-                    footballerAnimator.SetBool("penaltyKick", true);
-                    distanceP = transform.position - OurFootballer.transform.position;
-                    distanceT = transform.position - TrivelaFootballer.transform.position;
-                    waitForShoot = true; 
-                }
-                else
-                {
-                    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                    //TrivelaFootballer.SetActive(true);
-                    //OurFootballer.SetActive(false);
-                    trivelaAnimator.SetBool("trivela", true);
-                    distanceT = transform.position - TrivelaFootballer.transform.position;
-                    distanceP = transform.position - OurFootballer.transform.position;
-                    waitForShootTri = true;
+                //if (mousePos.x > Screen.width / 2)
+                //{
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    OurFootballer.SetActive(true);
+                //    TrivelaFootballer.SetActive(false);
+                //    footballerAnimator.SetBool("penaltyKick", true);
+                //    distanceP = transform.position - OurFootballer.transform.position;
+                //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                //    waitForShoot = true;
+                //}
+                //else
+                //{
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    TrivelaFootballer.SetActive(true);
+                //    OurFootballer.SetActive(false);
+                //    trivelaAnimator.SetBool("trivela", true);
+                //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                //    distanceP = transform.position - OurFootballer.transform.position;
+                //    waitForShootTri = true;
 
-                }
+                //}
             }
-            
+
         }
-            
+
     }
     public void OnMouseShootPart()
     {
@@ -579,7 +584,7 @@ public class Ball : MonoBehaviour
                 Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
             }
         }
-        lineRendererController = false;
+        AnimationFootballer.lineRendererController = false;
         shootCloser = true;
         //ShotCounter.IncrementScore();
         Zoom.changeFovBool = false;
@@ -617,10 +622,10 @@ public class Ball : MonoBehaviour
             return; // exit method
         }
         DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
-        if (lineRendererController == false)
+        if (AnimationFootballer.lineRendererController == false)
         {
-            lineRendererOn = true;
-            lineRendererController = true;
+            AnimationFootballer.lineRendererOn = true;
+            AnimationFootballer.lineRendererController = true;
         }
         
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
@@ -635,7 +640,7 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
-            lineRendererOn = false;
+            AnimationFootballer.lineRendererOn = false;
             shooted = true;
             Zoom.changeFovBool = true;
         }
