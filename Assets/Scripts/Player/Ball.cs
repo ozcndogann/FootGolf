@@ -512,9 +512,11 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
 
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        if (!isAiming || !isIdle)
         {
-            Debug.Log("turn" + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+            gravityChanger = false;
+            Debug.Log("deneme");
+            //line çekerken hiç çalýþmayan bi yer
         }
 
 
@@ -626,8 +628,12 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
+        if (!isAiming || !isIdle)
+        {
+            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+            return; // exit method
+        }
         
-        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
         if (AnimationFootballer.lineRendererController == false)
         {
             AnimationFootballer.lineRendererOn = true;
@@ -635,16 +641,16 @@ public class Ball : MonoBehaviour
         }
         
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
-        if ((worldPoint.Value - transform.position).y < 0)
-        {
-            //Debug.Log("y kucuk");
-            //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
-        }
+        //if ((worldPoint.Value - transform.position).y < 0)
+        //{
+        //    //Debug.Log("y kucuk");
+        //    //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
+        //}
         else
         {
             //Debug.Log("y buyuk");
         }
-        if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
+        if (Input.GetMouseButtonUp(0) && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]) // parmaðýmý çektim mi
         {
             AnimationFootballer.lineRendererOn = false;
             shooted = true;
