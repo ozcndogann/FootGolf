@@ -7,7 +7,7 @@ using Photon.Pun;
 
 public class ListingPlayerMenu : MonoBehaviourPunCallbacks
 {
-    [SerializeField] public Transform _playersSpace;//oyuncu iconlarýnýn gözükeceði yer
+    [SerializeField] public Transform _playersSpace, _playersSpace1, _playersSpace2, _playersSpace3;//oyuncu iconlarýnýn gözükeceði yer
 
     [SerializeField] public ListingPlayer _listingPlayer;//listing player scriptini çekiyor
 
@@ -29,12 +29,44 @@ public class ListingPlayerMenu : MonoBehaviourPunCallbacks
 
     private void AddPlayerToListing(Player player)
     {
-        ListingPlayer listing = Instantiate(_listingPlayer, _playersSpace);
-        if (listing != null)
+        
+        if (player.ActorNumber == 1)
         {
-            listing.SetPlayerInfo(player);
-            _listing.Add(listing);
+            ListingPlayer listing1 = Instantiate(_listingPlayer, _playersSpace);
+            if (listing1 != null)
+            {
+                listing1.SetPlayerInfo(player);
+                _listing.Add(listing1);
+            }
         }
+        else if (player.ActorNumber == 2)
+        {
+            ListingPlayer listing2 = Instantiate(_listingPlayer, _playersSpace1);
+            if (listing2 != null)
+            {
+                listing2.SetPlayerInfo(player);
+                _listing.Add(listing2);
+            }
+        }
+        else if (player.ActorNumber == 3)
+        {
+            ListingPlayer listing3 = Instantiate(_listingPlayer, _playersSpace2);
+            if (listing3 != null)
+            {
+                listing3.SetPlayerInfo(player);
+                _listing.Add(listing3);
+            }
+        }
+        else if (player.ActorNumber == 4)
+        {
+            ListingPlayer listing4 = Instantiate(_listingPlayer, _playersSpace3);
+            if (listing4 != null)
+            {
+                listing4.SetPlayerInfo(player);
+                _listing.Add(listing4);
+            }
+        }
+
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

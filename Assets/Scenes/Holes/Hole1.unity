@@ -2836,6 +2836,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1131281434659630206, guid: 3c118200475903c4da95f67c2029cc9d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049440414495315875, guid: 3c118200475903c4da95f67c2029cc9d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4007660289463144368, guid: 3c118200475903c4da95f67c2029cc9d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6236,11 +6246,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 3859352307074843106, guid: 9d0d1bbdbd647624f8013206583ecbdb, type: 3}
-  minX: 9.4
-  minZ: 95.2
-  maxX: 11.3
-  maxZ: 95.2
   Y: 1.69
+  minZ: 95.2
+  maxZ: 95.2
+  minX: 9.4
+  maxX: 11.3
 --- !u!4 &910352765
 Transform:
   m_ObjectHideFlags: 0
