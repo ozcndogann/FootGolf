@@ -650,7 +650,7 @@ public class Ball : MonoBehaviour
         {
             //Debug.Log("y buyuk");
         }
-        if (Input.GetMouseButtonUp(0) && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]) // parmaðýmý çektim mi
+        if (Input.GetMouseButtonUp(0) && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]) // parmaðýmý çektim mi
         {
             AnimationFootballer.lineRendererOn = false;
             shooted = true;
