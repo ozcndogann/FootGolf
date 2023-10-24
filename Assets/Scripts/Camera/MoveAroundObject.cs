@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun.UtilityScripts;
 public class MoveAroundObject : MonoBehaviour
 {
     [SerializeField] private Camera cam;
