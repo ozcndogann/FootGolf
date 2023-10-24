@@ -616,15 +616,14 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        if (!isAiming || !isIdle)
-        {
-            gravityChanger = false;
-            return; // exit method
-        }
-        
-        
         if (!sýragecti)
         {
+            if (!isAiming || !isIdle)
+            {
+                gravityChanger = false;
+                return; // exit method
+            }
+
             if (!shooted)
             {
                 worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
@@ -634,6 +633,7 @@ public class Ball : MonoBehaviour
             {
                 return; // exit method
             }
+
             DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
             if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
@@ -642,14 +642,14 @@ public class Ball : MonoBehaviour
                 shooted = true;
                 Zoom.changeFovBool = true;
             }
+
+            if (AnimationFootballer.lineRendererController == false)
+            {
+                AnimationFootballer.lineRendererOn = true;
+                AnimationFootballer.lineRendererController = true;
+            }
         }
         
-
-        if (AnimationFootballer.lineRendererController == false)
-        {
-            AnimationFootballer.lineRendererOn = true;
-            AnimationFootballer.lineRendererController = true;
-        }
         
         
 
