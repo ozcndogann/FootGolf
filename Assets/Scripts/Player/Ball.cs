@@ -296,7 +296,14 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
+                    else
+                    {
+                        AnimationFootballer.lineRendererController = false;
+                        lineRenderer.enabled = false;  // This ensures the line doesn't show up
+                        shooted = false;
+                    }
                 }
+
             }
             //if (waitForShoot == true)
             //{
@@ -517,8 +524,13 @@ public class Ball : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (!IsPlayerTurn()) // Ensure that it's the player's turn before proceeding.
-            return;
+        // Only start aiming if it's the player's turn
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") &&
+            (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] &&
+            isIdle)
+        {
+            isAiming = true;
+        }
 
         if (isIdle)
         {
@@ -609,9 +621,11 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        if (!IsPlayerTurn()) // Ensure that it's the player's turn before proceeding.
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] == null ||
+        !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        {
             return;
-
+        }
         if (!isAiming || !isIdle)
         {
             gravityChanger = false;
@@ -738,14 +752,6 @@ public class Ball : MonoBehaviour
             lineRenderer.enabled = false; // line visible}
         }
 
-    }
-    private bool IsPlayerTurn()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        {
-            return (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"];
-        }
-        return false;
     }
     private Vector3? CastMouseClickRay()
     {
