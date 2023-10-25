@@ -9,7 +9,6 @@ using Photon.Pun.UtilityScripts;
 public class Ball : MonoBehaviour
 {
     #region Definings
-    bool zlkmfsdkl;
     Vector3 screenMousePosFar;
     Vector3 screenMousePosNear;
     Vector3 worldMousePosFar;
@@ -322,6 +321,11 @@ public class Ball : MonoBehaviour
                             }
                             timer = 20f;
                         }
+                    }
+                    else
+                    {
+                        Debug.Log("BOYLE OYUNU SIKEYIM CEREBRUM HAYATIMI GERI VER");
+                        worldPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     }
                 }
 
@@ -654,7 +658,7 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        Debug.Log("procaimbas");
+        
         if (!isAiming || !isIdle)
         {
             gravityChanger = false;
@@ -670,7 +674,7 @@ public class Ball : MonoBehaviour
         {
             return; // exit method
         }
-
+        
         DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
         if (AnimationFootballer.lineRendererController == false)
@@ -679,7 +683,7 @@ public class Ball : MonoBehaviour
             AnimationFootballer.lineRendererController = true;
         }
 
-        if (Input.GetMouseButtonUp(0) && zlkmfsdkl) // parmaðýmý çektim mi
+        if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
             AnimationFootballer.lineRendererOn = false;
             shooted = true;
@@ -784,15 +788,15 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-        
+
         //if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         //{
         //    Debug.Log("returnoncesi");
         //    return null;
         //}
+        
         if (Input.GetMouseButton(0))
         {
-            zlkmfsdkl = true;
             screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
@@ -808,7 +812,6 @@ public class Ball : MonoBehaviour
         }
         
         RaycastHit hit;
-
         if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
             return hit.point; // eðer ray bi þeye çarparsa return hit point
