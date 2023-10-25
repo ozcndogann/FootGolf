@@ -83,36 +83,9 @@ public class UI_InGame : MonoBehaviour
             {
                 ReturnPanel.SetActive(false);
             }
-            //if(Ball.Player1 == true)
-            //{
-            //    OldImage1.sprite = NewImage1;
-            //    OldImage2.sprite = OldSprite2;
-            //    OldImage3.sprite = oldsprite3;
-            //    OldImage4.sprite = oldsprite4;
-            //}
-            //else if(Ball.Player2 == true)
-            //{
-            //    OldImage2.sprite = NewImage2;
-            //    OldImage1.sprite = OldSprite1;
-            //    OldImage3.sprite = oldsprite3;
-            //    OldImage4.sprite = oldsprite4;
-            //}
-            //else if (Ball.Player3 == true)
-            //{
-            //    OldImage3.sprite = NewImage3;
-            //    OldImage4.sprite = oldsprite4;
-            //    OldImage2.sprite = OldSprite2;
-            //    OldImage1.sprite = OldSprite1;
-            //}
-            //else if(Ball.Player4 == true)
-            //{
-            //    OldImage4.sprite = NewImage4;
-            //    OldImage1.sprite = OldSprite1;
-            //    OldImage2.sprite = OldSprite2;
-            //    OldImage3.sprite = oldsprite3;
-            //}
+           
         }
-        if (!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice)
+        if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus || CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
         {
             
             if (Ball.Player1 == true)
