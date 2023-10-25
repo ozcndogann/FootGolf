@@ -659,7 +659,11 @@ public class Ball : MonoBehaviour
         
         if (!shooted)
         {
-            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+            if (Input.GetMouseButton(0))
+            {
+                worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+            }
+            
         }
 
         if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
@@ -781,12 +785,12 @@ public class Ball : MonoBehaviour
     private Vector3? CastMouseClickRay()
     {
 
-        //if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        //{
-        //    Debug.Log("returnoncesi");
-        //    return null;
-        //}
-        return null;
+        if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        {
+            Debug.Log("returnoncesi");
+            return null;
+        }
+        
         Debug.Log("returnsonrasý");
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
