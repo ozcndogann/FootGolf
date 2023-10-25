@@ -199,7 +199,7 @@ public class MoveAroundObject : MonoBehaviour
             {
                 if (passHit[i].transform.gameObject.tag == "Undeletable")
                 {
-                    view.RPC("ShowOurFootballer", RpcTarget.All, passHit[i].transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                    //view.RPC("ShowOurFootballer", RpcTarget.All, passHit[i].transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
                 }
                 else
                 {
