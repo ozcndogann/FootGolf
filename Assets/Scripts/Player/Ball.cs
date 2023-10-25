@@ -511,7 +511,18 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
-
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                lineRenderer.enabled = true;
+            }
+            else
+            {
+                lineRenderer.enabled = false;
+            }
+        }
+        
     }
     private void OnMouseDown()
     {
@@ -711,7 +722,7 @@ public class Ball : MonoBehaviour
                    
     private void DrawLine(Vector3 worldPoint)
     {
-        if (!shooted && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        if (!shooted)
         {
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
