@@ -514,10 +514,11 @@ public class Ball : MonoBehaviour
         {
             if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
-                lineRenderer.ResetBounds();
+                //lineRenderer.enabled = false;
+                LineRenderer.SetActive(false);
             }
         }
-        Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+        //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
     }
     private void OnMouseDown()
