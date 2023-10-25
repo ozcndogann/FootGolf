@@ -511,7 +511,7 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         
-        //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+        Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
     }
     private void OnMouseDown()
@@ -532,7 +532,7 @@ public class Ball : MonoBehaviour
 
         if (shooted == true)
         {
-            if (Input.GetMouseButtonDown(0) && shootCloser == false && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
                 mousePos = Input.mousePosition;
                 //if (mousePos.x > Screen.width / 2)
