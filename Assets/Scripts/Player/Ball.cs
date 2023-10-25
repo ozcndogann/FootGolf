@@ -718,7 +718,10 @@ public class Ball : MonoBehaviour
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
             float maxLength = 1.25f; // max line length
-
+            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                lineLength = 0;
+            }
             if (lineLength > maxLength) // maxla current length kýyasý
             {
                 direction = direction.normalized * maxLength;
