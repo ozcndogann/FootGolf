@@ -287,7 +287,6 @@ public class Ball : MonoBehaviour
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
-                            LineRenderer.SetActive(false);
                             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
@@ -512,17 +511,7 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
-        //if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        //{
-        //    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        //    {
-        //        LineRenderer.SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        LineRenderer.SetActive(false);
-        //    }
-        //}
+
     }
     private void OnMouseDown()
     {
@@ -543,39 +532,39 @@ public class Ball : MonoBehaviour
         if (shooted == true)
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
-                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-                {
-                    if (Input.GetMouseButtonDown(0) && shootCloser == false)
-                    {
-                        mousePos = Input.mousePosition;
-                        //if (mousePos.x > Screen.width / 2)
-                        //{
-                        //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    OurFootballer.SetActive(true);
-                        //    TrivelaFootballer.SetActive(false);
-                        //    footballerAnimator.SetBool("penaltyKick", true);
-                        //    distanceP = transform.position - OurFootballer.transform.position;
-                        //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                        //    waitForShoot = true;
-                        //}
-                        //else
-                        //{
-                        //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                        //    TrivelaFootballer.SetActive(true);
-                        //    OurFootballer.SetActive(false);
-                        //    trivelaAnimator.SetBool("trivela", true);
-                        //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                        //    distanceP = transform.position - OurFootballer.transform.position;
-                        //    waitForShootTri = true;
-
-                        //}
-                    }
-                }
+                Debug.Log("mousedown");
             }
-            
+        }
+            if (Input.GetMouseButtonDown(0) && shootCloser == false)
+            {
+                mousePos = Input.mousePosition;
+                //if (mousePos.x > Screen.width / 2)
+                //{
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    OurFootballer.SetActive(true);
+                //    TrivelaFootballer.SetActive(false);
+                //    footballerAnimator.SetBool("penaltyKick", true);
+                //    distanceP = transform.position - OurFootballer.transform.position;
+                //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                //    waitForShoot = true;
+                //}
+                //else
+                //{
+                //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //    TrivelaFootballer.SetActive(true);
+                //    OurFootballer.SetActive(false);
+                //    trivelaAnimator.SetBool("trivela", true);
+                //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                //    distanceP = transform.position - OurFootballer.transform.position;
+                //    waitForShootTri = true;
+
+                //}
+            }
 
         }
 
