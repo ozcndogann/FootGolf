@@ -322,6 +322,11 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
+                    else
+                    {
+                        Debug.Log("BOYLE OYUNU SIKEYIM CEREBRUM HAYATIMI GERI VER");
+                        worldPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    }
                 }
 
             }
@@ -662,16 +667,7 @@ public class Ball : MonoBehaviour
         
         if (!shooted)
         {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                Debug.Log("sikperen tunc");
-                worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
-            }
-            else
-            {
-                Debug.Log("else");
-                worldPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            }
+            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
         }
 
         if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
