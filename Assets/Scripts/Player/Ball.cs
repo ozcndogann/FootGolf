@@ -752,7 +752,7 @@ public class Ball : MonoBehaviour
                    
     private void DrawLine(Vector3 worldPoint)
     {
-        if (!shooted && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        if (!shooted && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
