@@ -110,6 +110,7 @@ public class Ball : MonoBehaviour
         //    }
         //}
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "vurmak", false } });
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -293,13 +294,15 @@ public class Ball : MonoBehaviour
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "vurmak", false } });
+                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "vurmak", true } });
                             }
                             timer = 20f;
                         }
                     }
                     else
                     {
-                        sýragecti = true;
+                        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "vurmak", false } });
                     }
                 }
 
@@ -749,7 +752,7 @@ public class Ball : MonoBehaviour
     private Vector3? CastMouseClickRay()
     {
 
-        if (sýragecti)
+        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["vurmak"])
         {
             Debug.Log("returnoncesi");
             return null;
