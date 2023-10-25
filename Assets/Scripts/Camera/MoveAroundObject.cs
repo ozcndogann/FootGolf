@@ -62,14 +62,14 @@ public class MoveAroundObject : MonoBehaviour
         //}
         #region CamFollow
 
-        if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
             if (AnimationFootballer.footballerTeleport == true)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                 {
                     previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
                 }
