@@ -510,7 +510,13 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        {
+            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                lineRenderer.ResetBounds();
+            }
+        }
         Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
     }
@@ -718,10 +724,7 @@ public class Ball : MonoBehaviour
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
             float maxLength = 1.25f; // max line length
-            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                lineLength = 0;
-            }
+            
             if (lineLength > maxLength) // maxla current length kýyasý
             {
                 direction = direction.normalized * maxLength;
