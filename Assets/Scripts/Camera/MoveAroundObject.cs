@@ -170,21 +170,26 @@ public class MoveAroundObject : MonoBehaviour
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         float distance = Vector3.Distance(cam.transform.position, target.transform.position);
-        if (Physics.Raycast(cam.transform.position, target.transform.TransformDirection(Vector3.forward), out hit, distance))
+        //Debug.DrawRay(target.transform.position, cam.transform.position, Color.green);
+        if (Physics.SphereCast(cam.transform.position,0.3f, cam.transform.forward, out hit, distance))
         {
+            //Gizmos.color = Color.green;
+            //Vector3 sphereCastMidpoint = transform.position + (transform.forward * hit.distance);
+            //Gizmos.DrawWireSphere(sphereCastMidpoint, 4);
+            //Gizmos.DrawSphere(hit.point, 0.1f);
+            //Debug.DrawLine(transform.position, sphereCastMidpoint, Color.green);
             //Debug.Log("Did Hit");
             if (hit.transform.gameObject.tag != "Ground" && hit.transform.gameObject.tag != "Ball" && hit.transform.gameObject.tag != "Hole" /*&& hit.transform.gameObject.tag != "Undeletable"*/)
             {
                 passHit.Add(hit.transform.gameObject);
-                //if (hit.transform.gameObject.tag == "Undeletable")
-                //{
-                //    Debug.Log("kapalan");
-                //    view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                //}
-                //else
-                //{
-                hit.transform.gameObject.SetActive(false);
-                //}
+                if (hit.transform.gameObject.tag == "Undeletable")
+                {
+                    view.RPC("HideOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                }
+                else
+                {
+                    hit.transform.gameObject.SetActive(false);
+                }
             }
 
         }
@@ -192,15 +197,14 @@ public class MoveAroundObject : MonoBehaviour
         {
             for (int i = 0; i < passHit.Count; i++)
             {
-                //if (hit.transform.gameObject.tag == "Undeletable")
-                //{
-                //    Debug.Log("açlan");
-                //    view.RPC("ShowOurFootballer", RpcTarget.All, hit.transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                //}
-                //else
-                //{
-                passHit[i].SetActive(true);
-                //}
+                if (passHit[i].transform.gameObject.tag == "Undeletable")
+                {
+                    //view.RPC("ShowOurFootballer", RpcTarget.All, passHit[i].transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                }
+                else
+                {
+                    passHit[i].SetActive(true);
+                }
             }
         }
         else
@@ -209,8 +213,22 @@ public class MoveAroundObject : MonoBehaviour
             //Debug.Log("Did not Hit");
             
         }
-
+        
     }
+    void OnDrawGizmos()
+    {
+        Vector3 origin = cam.transform.position; // Iþýnýn baþladýðý konum
+        Vector3 direction = cam.transform.forward; // Iþýnýn yönü
+        float radius = 0.3f; // Iþýnýn yarýçapý (ayarlayýn)
+        float maxDistance = Vector3.Distance(cam.transform.position, target.transform.position);// Iþýnýn maksimum menzili (ayarlayýn)
+
+        // Gizmos renk ayarý
+        Gizmos.color = Color.blue;
+
+        // SphereCast yörüngesini çiz
+        Gizmos.DrawWireSphere(origin + direction * maxDistance, radius);
+    }
+
     [PunRPC]
     void HideOurFootballer(string footballerPhotonViewId)
     {
