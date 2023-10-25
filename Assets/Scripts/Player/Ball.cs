@@ -653,7 +653,7 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        Debug.Log("procaimbas");
+        
         if (!isAiming || !isIdle)
         {
             gravityChanger = false;
@@ -662,14 +662,23 @@ public class Ball : MonoBehaviour
         
         if (!shooted)
         {
-            worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                Debug.Log("sikperen tunc");
+                worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+            }
+            else
+            {
+                Debug.Log("else");
+                worldPoint = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            }
         }
 
         if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
         {
             return; // exit method
         }
-
+        
         DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
         if (AnimationFootballer.lineRendererController == false)
@@ -807,10 +816,6 @@ public class Ball : MonoBehaviour
         }
         
         RaycastHit hit;
-        if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        {
-            return null;
-        }
         if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
             return hit.point; // eðer ray bi þeye çarparsa return hit point
