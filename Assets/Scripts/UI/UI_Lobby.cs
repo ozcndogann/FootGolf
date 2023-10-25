@@ -57,6 +57,7 @@ public class UI_Lobby : MonoBehaviour
         //buraya sahalarýn türlerine göre if state gelcek
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRooms.practice)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             if (Switch.index == 0)
             {
                 PhotonNetwork.LoadLevel("Hole1");
@@ -74,6 +75,7 @@ public class UI_Lobby : MonoBehaviour
         }
         else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRooms.versus)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             if (Switch.index == 0)
             {
                 PhotonNetwork.LoadLevel("Hole1");
@@ -92,6 +94,7 @@ public class UI_Lobby : MonoBehaviour
 
         else if (PhotonNetwork.PlayerList.Length == 4 && CreateAndJoinRooms.Tournament)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             if (Switch.index == 0)
             {
                 PhotonNetwork.LoadLevel("Hole1");

@@ -76,6 +76,7 @@ public class UI_RandomLobby : MonoBehaviour
     {
         if (PhotonNetwork.PlayerList.Length == 1 && CreateAndJoinRandomRooms.practice)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             if (Switch.index == 0)
             {
                 PhotonNetwork.LoadLevel("Hole1");
@@ -91,6 +92,7 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else if (PhotonNetwork.PlayerList.Length == 2 && CreateAndJoinRandomRooms.versus)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             if (Switch.index == 0)
             {
                 PhotonNetwork.LoadLevel("Hole1");
@@ -106,6 +108,7 @@ public class UI_RandomLobby : MonoBehaviour
         }
         else if (PhotonNetwork.PlayerList.Length == 4 && CreateAndJoinRandomRooms.Tournament)
         {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
             if (Switch.index == 0)
             {
                 PhotonNetwork.LoadLevel("Hole1");

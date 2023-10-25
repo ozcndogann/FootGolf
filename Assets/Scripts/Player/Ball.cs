@@ -689,15 +689,15 @@ public class Ball : MonoBehaviour
 
         #region aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
         //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
-        if ((worldPoint.Value - transform.position).y < 0)
-        {
-            Debug.Log("y kucuk");
-            //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
-        }
-        else
-        {
-            Debug.Log("y buyuk");
-        }
+        //if ((worldPoint.Value - transform.position).y < 0)
+        //{
+        //    Debug.Log("y kucuk");
+        //    //cam.transform.position = new Vector3(cam.transform.position.x,cam.transform.position.y, (cam.transform.position.z - 2*Mathf.Abs(gameObject.transform.position.z - cam.transform.position.z)));
+        //}
+        //else
+        //{
+        //    Debug.Log("y buyuk");
+        //}
         #endregion
     }
 
