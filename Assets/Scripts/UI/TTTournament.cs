@@ -32,6 +32,7 @@ public class TTTournament : MonoBehaviour
                 if (PlayerPrefs.GetInt("isShown") == 0)
                 {
                     TT1.SetActive(true);
+                    
                     if (Zoom.changeFovBool == true)
                     {
                         TTZoom.SetActive(true);
