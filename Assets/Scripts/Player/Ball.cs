@@ -514,16 +514,20 @@ public class Ball : MonoBehaviour
         {
             if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
-                //lineRenderer.enabled = false;
-                LineRenderer.SetActive(false);
+                OnMouseOver();
             }
             else
             {
-                LineRenderer.SetActive(true);
+                OnMouseDown();
+
             }
         }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
+    }
+    private void OnMouseOver()
+    {
+        
     }
     private void OnMouseDown()
     {
