@@ -69,7 +69,7 @@ public class MoveAroundObject : MonoBehaviour
 
             if (AnimationFootballer.footballerTeleport == true)
             {
-                if (Input.GetMouseButtonDown(0) && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                if (Input.GetMouseButtonDown(0))
                 {
                     previousPosition = cam.ScreenToViewportPoint(Input.mousePosition);
                 }
