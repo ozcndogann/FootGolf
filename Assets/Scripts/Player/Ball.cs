@@ -51,7 +51,6 @@ public class Ball : MonoBehaviour
     public LayerMask ground;
     Ray rayNorm;
     Ray rayTri;
-    bool götveren;
     #endregion
 
 
@@ -322,11 +321,6 @@ public class Ball : MonoBehaviour
                             }
                             timer = 20f;
                         }
-                    }
-                    else
-                    {
-                        Vector3 position0 = lineRenderer.GetPosition(0);
-                        lineRenderer.SetPosition(1, position0);
                     }
                 }
 
