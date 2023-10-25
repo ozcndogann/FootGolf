@@ -36,6 +36,7 @@ public class GameEnder : MonoBehaviour
             CalculateScore();
             UpdateScoreDisplay();
             Panel.SetActive(true);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
         }
     }
     private void CalculateScore()
