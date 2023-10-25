@@ -18,7 +18,7 @@ public class GameEnder : MonoBehaviour
     ShotCounter ShotCounter;
     [SerializeField] private TMP_Text scoreDisplayText;  // Drag your Text UI element here in the Inspector
     public GameObject Panel;
-    [SerializeField] private Transform scoreDisplayParent;  // Drag the parent object (like a Vertical Layout Group) here
+    [SerializeField] private Transform scoreDisplayParent, scoreDisplayParent1, scoreDisplayParent2, scoreDisplayParent3;  // Drag the parent object (like a Vertical Layout Group) here
     [SerializeField] private GameObject playerScorePrefab;
 
     private void Start()
@@ -79,10 +79,33 @@ public class GameEnder : MonoBehaviour
             {
                 lastRank = displayRank + 1;
             }
+            if(lastRank == 0)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+            }
+            if (lastRank == 1)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+            }
+            if (lastRank == 2)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+            }
+            if (lastRank == 3)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+            }
 
-            GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-            TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+
+
 
             lastScore = playerScore;
             displayRank++;
