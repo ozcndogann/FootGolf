@@ -302,7 +302,7 @@ public class Ball : MonoBehaviour
                         timer -= Time.deltaTime;
                         if (timer > 0)
                         {
-                            if (Input.GetMouseButtonDown(0))
+                            if (Input.GetMouseButton(0))
                             {
                                 ProcessAim();
                             }
