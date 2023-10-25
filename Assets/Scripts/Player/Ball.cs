@@ -48,7 +48,6 @@ public class Ball : MonoBehaviour
     public LayerMask ground;
     Ray rayNorm;
     Ray rayTri;
-    bool tiklandi;
     #endregion
 
 
@@ -302,11 +301,8 @@ public class Ball : MonoBehaviour
                         timer -= Time.deltaTime;
                         if (timer > 0)
                         {
-                            if (tiklandi)
-                            {
-                                ProcessAim();
-                            }
-                            
+                            ProcessAim();
+
                         }
                         else
                         {
@@ -315,7 +311,6 @@ public class Ball : MonoBehaviour
                             shootCloser = true;
                             Zoom.changeFovBool = false;
                             //lineRenderer.enabled = false;
-                            tiklandi = false;
                             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
@@ -604,7 +599,6 @@ public class Ball : MonoBehaviour
             }
 
         }
-        tiklandi = true;
 
     }
     public void OnMouseShootPart()
@@ -652,8 +646,6 @@ public class Ball : MonoBehaviour
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
         gravityChanger = false;
-        tiklandi = false;
-
     }
     
     private void ProcessAim()
@@ -768,7 +760,6 @@ public class Ball : MonoBehaviour
                 direction = direction.normalized * maxLength;
                 worldPoint = transform.position + direction;
             }
-
             Vector3[] positions = { transform.position, worldPoint };
             lineRenderer.SetPositions(positions);
 
@@ -795,7 +786,8 @@ public class Ball : MonoBehaviour
         //    Debug.Log("returnoncesi");
         //    return null;
         //}
-        //Debug.Log("returnsonrasý");
+        return null;
+        Debug.Log("returnsonrasý");
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
