@@ -5,7 +5,6 @@ using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using Photon.Pun.UtilityScripts;
-using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -522,46 +521,47 @@ public class Ball : MonoBehaviour
             if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
                 Debug.Log("mousedown");
+                if (isIdle)
+                {
+                    isAiming = true;
+                }
+
+                if (shooted == true)
+                {
+                    if (Input.GetMouseButtonDown(0) && shootCloser == false)
+                    {
+                        mousePos = Input.mousePosition;
+                        //if (mousePos.x > Screen.width / 2)
+                        //{
+                        //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                        //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                        //    OurFootballer.SetActive(true);
+                        //    TrivelaFootballer.SetActive(false);
+                        //    footballerAnimator.SetBool("penaltyKick", true);
+                        //    distanceP = transform.position - OurFootballer.transform.position;
+                        //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                        //    waitForShoot = true;
+                        //}
+                        //else
+                        //{
+                        //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                        //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                        //    TrivelaFootballer.SetActive(true);
+                        //    OurFootballer.SetActive(false);
+                        //    trivelaAnimator.SetBool("trivela", true);
+                        //    distanceT = transform.position - TrivelaFootballer.transform.position;
+                        //    distanceP = transform.position - OurFootballer.transform.position;
+                        //    waitForShootTri = true;
+
+                        //}
+                    }
+
+                }
             }
         }
         
 
-        if (isIdle)
-        {
-            isAiming = true;
-        }
-
-        if (shooted == true)
-        {
-            if (Input.GetMouseButtonDown(0) && shootCloser == false)
-            {
-                mousePos = Input.mousePosition;
-                //if (mousePos.x > Screen.width / 2)
-                //{
-                //    view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    OurFootballer.SetActive(true);
-                //    TrivelaFootballer.SetActive(false);
-                //    footballerAnimator.SetBool("penaltyKick", true);
-                //    distanceP = transform.position - OurFootballer.transform.position;
-                //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                //    waitForShoot = true;
-                //}
-                //else
-                //{
-                //    view.RPC("ShowOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //    TrivelaFootballer.SetActive(true);
-                //    OurFootballer.SetActive(false);
-                //    trivelaAnimator.SetBool("trivela", true);
-                //    distanceT = transform.position - TrivelaFootballer.transform.position;
-                //    distanceP = transform.position - OurFootballer.transform.position;
-                //    waitForShootTri = true;
-
-                //}
-            }
-
-        }
+        
 
 
     }
