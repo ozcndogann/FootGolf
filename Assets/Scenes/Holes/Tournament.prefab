@@ -410,19 +410,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1144116208719315297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5550509186923918444}
-        m_TargetAssemblyTypeName: TTTournament, Assembly-CSharp
-        m_MethodName: TT1Close
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &151003798414329776
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +505,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.65
+  m_fontSize: 60
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1582,7 +1570,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.35
+  m_fontSize: 60
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3789,6 +3777,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TT1: {fileID: 1131281434659630206}
   TTZoom: {fileID: 3049440414495315875}
+  click: {fileID: 4086950736159021129}
+  ZoomClick: {fileID: 1590318647492434889}
 --- !u!114 &2217370600744226518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4078,19 +4068,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7509018533342370277}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5550509186923918444}
-        m_TargetAssemblyTypeName: TTTournament, Assembly-CSharp
-        m_MethodName: TTZoomClose
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6277835097324913235
 GameObject:
   m_ObjectHideFlags: 0
@@ -4185,7 +4163,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.8
+  m_fontSize: 60
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4557,7 +4535,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.65
+  m_fontSize: 60
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

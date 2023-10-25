@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
+
+
 
 public class TTTournament : MonoBehaviour
 {
     public GameObject TT1;
     public GameObject TTZoom;
+    public Button click, ZoomClick;
+
+   
     //public GameObject TTNetwork;
     Camera cam;
     Zoom zoom;
@@ -32,11 +38,20 @@ public class TTTournament : MonoBehaviour
                 if (PlayerPrefs.GetInt("isShown") == 0)
                 {
                     TT1.SetActive(true);
+
+                    if(click == true)
+                    {
+                        TT1.SetActive(false);
+                    }
                     
                     if (Zoom.changeFovBool == true)
                     {
                         TTZoom.SetActive(true);
-                        TT1.SetActive(false);
+                        
+                        if(ZoomClick == true)
+                        {
+                            TTZoom.SetActive(false);
+                        }
                         if (Input.GetMouseButtonDown(0) == true)
                         {
                             TTZoom.SetActive(false);
