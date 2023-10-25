@@ -302,11 +302,7 @@ public class Ball : MonoBehaviour
                         timer -= Time.deltaTime;
                         if (timer > 0)
                         {
-                            if (Input.GetMouseButton(0))
-                            {
-                                ProcessAim();
-                            }
-                            
+                            ProcessAim();
                         }
                         else
                         {
@@ -314,6 +310,7 @@ public class Ball : MonoBehaviour
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
+                            //lineRenderer.enabled = false;
                             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
@@ -755,7 +752,7 @@ public class Ball : MonoBehaviour
                    
     private void DrawLine(Vector3 worldPoint)
     {
-        if (!shooted)
+        if (!shooted && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
