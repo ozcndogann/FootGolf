@@ -656,28 +656,27 @@ public class Ball : MonoBehaviour
             gravityChanger = false;
             return; // exit method
         }
-        
-        if (!shooted)
+        if (Input.GetMouseButton(0))
         {
-            if (Input.GetMouseButton(0))
+            if (!shooted)
             {
                 worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
             }
-            
-        }
 
-        if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
-        {
-            return; // exit method
-        }
+            if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
+            {
+                return; // exit method
+            }
 
-        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
 
-        if (AnimationFootballer.lineRendererController == false)
-        {
-            AnimationFootballer.lineRendererOn = true;
-            AnimationFootballer.lineRendererController = true;
+            if (AnimationFootballer.lineRendererController == false)
+            {
+                AnimationFootballer.lineRendererOn = true;
+                AnimationFootballer.lineRendererController = true;
+            }
         }
+        
 
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
@@ -785,11 +784,11 @@ public class Ball : MonoBehaviour
     private Vector3? CastMouseClickRay()
     {
 
-        if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        {
-            Debug.Log("returnoncesi");
-            return null;
-        }
+        //if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        //{
+        //    Debug.Log("returnoncesi");
+        //    return null;
+        //}
         
         Debug.Log("returnsonrasý");
         Vector3 screenMousePosFar = new Vector3(
