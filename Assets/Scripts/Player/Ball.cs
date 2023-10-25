@@ -747,10 +747,11 @@ public class Ball : MonoBehaviour
         {
             if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
+                Debug.Log("returnoncesi");
                 return null;
             }
         }
-        
+        Debug.Log("returnsonrasý");
         Vector3 screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
