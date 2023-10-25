@@ -662,21 +662,21 @@ public class Ball : MonoBehaviour
             {
                 worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
             }
-
-            if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
-            {
-                return; // exit method
-            }
-
-            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
-
-            if (AnimationFootballer.lineRendererController == false)
-            {
-                AnimationFootballer.lineRendererOn = true;
-                AnimationFootballer.lineRendererController = true;
-            }
         }
         
+
+        if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
+        {
+            return; // exit method
+        }
+
+        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+
+        if (AnimationFootballer.lineRendererController == false)
+        {
+            AnimationFootballer.lineRendererOn = true;
+            AnimationFootballer.lineRendererController = true;
+        }
 
         if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
         {
