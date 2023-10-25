@@ -517,6 +517,10 @@ public class Ball : MonoBehaviour
                 //lineRenderer.enabled = false;
                 LineRenderer.SetActive(false);
             }
+            else
+            {
+                LineRenderer.SetActive(true);
+            }
         }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
