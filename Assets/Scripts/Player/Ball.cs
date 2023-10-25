@@ -531,13 +531,6 @@ public class Ball : MonoBehaviour
 
         if (shooted == true)
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                Debug.Log("mousedown");
-            }
-        }
             if (Input.GetMouseButtonDown(0) && shootCloser == false)
             {
                 mousePos = Input.mousePosition;
