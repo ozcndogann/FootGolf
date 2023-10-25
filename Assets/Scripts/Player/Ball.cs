@@ -290,107 +290,107 @@ public class Ball : MonoBehaviour
 
 
 
-        //if (view.IsMine)
-        //{
-            
-        //}
-        if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
+        if (view.IsMine)
         {
-            Stop();
-            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+            if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
-                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                Stop();
+                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
-                    timer -= Time.deltaTime;
-                    if (timer > 0)
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        ProcessAim();
-                    }
-                    else
-                    {
-                        AnimationFootballer.lineRendererController = false;
-                        shooted = false;
-                        shootCloser = true;
-                        Zoom.changeFovBool = false;
-                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                        timer -= Time.deltaTime;
+                        if (timer > 0)
                         {
-                            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            ProcessAim();
                         }
-                        timer = 20f;
+                        else
+                        {
+                            AnimationFootballer.lineRendererController = false;
+                            shooted = false;
+                            shootCloser = true;
+                            Zoom.changeFovBool = false;
+                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                            {
+                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            }
+                            timer = 20f;
+                        }
                     }
                 }
+
             }
+            #region CommentedOldAnimations
+            //if (waitForShoot == true)
+            //{
+            //    waitForShootTimer += Time.deltaTime;
+            //    Zoom.changeFovBool = false;
+            //}
+            //if (waitForShootTri == true)
+            //{
+            //    waitForShootTriTimer += Time.deltaTime;
+            //    Zoom.changeFovBool = false;
+            //}
+            //if (waitForShootTimer >= 0.9f)
+            //{
+            //    //OurFootballer.SetActive(false);
+            //    waitForShoot = false;
+            //    waitForShootTimer = 0;
+            //    footballerAnimator.SetBool("penaltyKick", false);
+            //    trivelaAnimator.SetBool("trivela", false);
+            //    OnMouseShootPart();
+            //}
 
+            #endregion
+            
+            if (AnimationFootballer.AcceptShoot == true)
+            {
+                OnMouseShootPart();
+                AnimationFootballer.AcceptShoot = false;
+            }
+            #region CommentedOldAnimations
+            //if (waitForShootTriTimer >= 0.65f)
+            //{
+            //    //OurFootballer.SetActive(false);
+            //    waitForShootTri = false;
+            //    waitForShootTriTimer = 0;
+            //    footballerAnimator.SetBool("penaltyKick", false);
+            //    trivelaAnimator.SetBool("trivela", false);
+            //    OnMouseShootPart();
+            //}
+            //if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
+            //{
+            //    if (lineRendererOn == false)
+            //    {
+            //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
+            //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
+            //    }
+            //    else
+            //    {
+            //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
+            //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
+            //    }
+
+            //}
+            //if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
+            //{
+            //    distanceP.y = 0.3f;
+            //    distanceT.y = 0.3f;
+            //    OurFootballer.transform.position = transform.position - distanceP;
+            //    TrivelaFootballer.transform.position = transform.position - distanceT;
+            //    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            //    TrivelaFootballer.transform.rotation= Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            //    footballerTeleport = true;
+            //}
+            //else if(rb.velocity.magnitude > stopVelocity)
+            //{
+            //    footballerTeleport = false;
+            //}
+
+            #endregion
         }
-        #region CommentedOldAnimations
-        //if (waitForShoot == true)
-        //{
-        //    waitForShootTimer += Time.deltaTime;
-        //    Zoom.changeFovBool = false;
-        //}
-        //if (waitForShootTri == true)
-        //{
-        //    waitForShootTriTimer += Time.deltaTime;
-        //    Zoom.changeFovBool = false;
-        //}
-        //if (waitForShootTimer >= 0.9f)
-        //{
-        //    //OurFootballer.SetActive(false);
-        //    waitForShoot = false;
-        //    waitForShootTimer = 0;
-        //    footballerAnimator.SetBool("penaltyKick", false);
-        //    trivelaAnimator.SetBool("trivela", false);
-        //    OnMouseShootPart();
-        //}
 
-        #endregion
-
-        if (AnimationFootballer.AcceptShoot == true)
-        {
-            OnMouseShootPart();
-            AnimationFootballer.AcceptShoot = false;
-        }
-        #region CommentedOldAnimations
-        //if (waitForShootTriTimer >= 0.65f)
-        //{
-        //    //OurFootballer.SetActive(false);
-        //    waitForShootTri = false;
-        //    waitForShootTriTimer = 0;
-        //    footballerAnimator.SetBool("penaltyKick", false);
-        //    trivelaAnimator.SetBool("trivela", false);
-        //    OnMouseShootPart();
-        //}
-        //if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
-        //{
-        //    if (lineRendererOn == false)
-        //    {
-        //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
-        //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
-        //    }
-        //    else
-        //    {
-        //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
-        //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
-        //    }
-
-        //}
-        //if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
-        //{
-        //    distanceP.y = 0.3f;
-        //    distanceT.y = 0.3f;
-        //    OurFootballer.transform.position = transform.position - distanceP;
-        //    TrivelaFootballer.transform.position = transform.position - distanceT;
-        //    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-        //    TrivelaFootballer.transform.rotation= Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-        //    footballerTeleport = true;
-        //}
-        //else if(rb.velocity.magnitude > stopVelocity)
-        //{
-        //    footballerTeleport = false;
-        //}
-
-        #endregion
         #region OldTurnAfterHole
         //foreach (Player player in PhotonNetwork.PlayerList)
         //{
