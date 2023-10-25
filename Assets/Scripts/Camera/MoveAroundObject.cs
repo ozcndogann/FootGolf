@@ -62,7 +62,7 @@ public class MoveAroundObject : MonoBehaviour
         //}
         #region CamFollow
 
-        if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
+        if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
