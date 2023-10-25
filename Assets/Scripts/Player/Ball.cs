@@ -323,6 +323,11 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
+                    else
+                    {
+                        Vector3 position0 = lineRenderer.GetPosition(0);
+                        lineRenderer.SetPosition(1, position0);
+                    }
                 }
 
             }
@@ -655,12 +660,7 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        if (!götveren)
-        {
-            Vector3 position0 = lineRenderer.GetPosition(0);
-            lineRenderer.SetPosition(1, position0);
-            götveren = true;
-        }
+       
         if (!isAiming || !isIdle)
         {
             gravityChanger = false;
@@ -689,7 +689,6 @@ public class Ball : MonoBehaviour
         {
             AnimationFootballer.lineRendererOn = false;
             shooted = true;
-            götveren = false;
             Zoom.changeFovBool = true;
         }
 
