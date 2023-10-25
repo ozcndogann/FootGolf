@@ -287,6 +287,7 @@ public class Ball : MonoBehaviour
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
+                            LineRenderer.SetActive(false);
                             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
@@ -511,7 +512,17 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
-
+        //if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        //{
+        //    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        //    {
+        //        LineRenderer.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        LineRenderer.SetActive(false);
+        //    }
+        //}
     }
     private void OnMouseDown()
     {
