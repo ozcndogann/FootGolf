@@ -652,6 +652,7 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
+        Debug.Log("procaimbas");
         if (!isAiming || !isIdle)
         {
             gravityChanger = false;
@@ -783,7 +784,7 @@ public class Ball : MonoBehaviour
     private Vector3? CastMouseClickRay()
     {
 
-        //if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["vurmak"])
+        //if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         //{
         //    Debug.Log("returnoncesi");
         //    return null;
