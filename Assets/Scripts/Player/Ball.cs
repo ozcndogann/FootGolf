@@ -510,24 +510,8 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        {
-            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                OnMouseOver();
-            }
-            else
-            {
-                OnMouseDown();
-
-            }
-        }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
 
-    }
-    private void OnMouseOver()
-    {
-        
     }
     private void OnMouseDown()
     {
