@@ -62,6 +62,7 @@ public class UI_InGame : MonoBehaviour
                 //eksik kisi ui
                 Debug.Log("eksik kisi");
                 ReturnPanel.SetActive(true);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
             else
             {
@@ -78,6 +79,7 @@ public class UI_InGame : MonoBehaviour
                 //eksik kisi
                 Debug.Log("eksik kisi");
                 ReturnPanel.SetActive(true);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
             else
             {
