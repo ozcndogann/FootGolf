@@ -556,13 +556,14 @@ public class Ball : MonoBehaviour
             if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
                 Debug.Log("mousedown");
+                if (isIdle)
+                {
+                    isAiming = true;
+                }
             }
         }
 
-        if (isIdle)
-        {
-            isAiming = true;
-        }
+        
 
         if (shooted == true)
         {
@@ -777,7 +778,7 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            lineRenderer.enabled = false; // line visible}
+            lineRenderer.enabled = false; // line visible
         }
 
     }
