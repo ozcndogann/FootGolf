@@ -300,9 +300,13 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        if (timer > 0 && Input.GetMouseButtonDown(0))
+                        if (timer > 0)
                         {
-                            ProcessAim();
+                            if (Input.GetMouseButtonDown(0))
+                            {
+                                ProcessAim();
+                            }
+                            
                         }
                         else
                         {
