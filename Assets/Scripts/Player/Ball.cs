@@ -300,7 +300,7 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        if (timer > 0)
+                        if (timer > 0 && Input.GetMouseButtonDown(0))
                         {
                             ProcessAim();
                         }
@@ -556,14 +556,13 @@ public class Ball : MonoBehaviour
             if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
                 Debug.Log("mousedown");
-                if (isIdle)
-                {
-                    isAiming = true;
-                }
             }
         }
 
-        
+        if (isIdle)
+        {
+            isAiming = true;
+        }
 
         if (shooted == true)
         {
