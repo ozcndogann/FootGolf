@@ -711,7 +711,7 @@ public class Ball : MonoBehaviour
                    
     private void DrawLine(Vector3 worldPoint)
     {
-        if (!shooted)
+        if (!shooted && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             Vector3 direction = worldPoint - transform.position; // lineýn directioný
             float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
@@ -764,7 +764,7 @@ public class Ball : MonoBehaviour
         Vector3 worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         RaycastHit hit;
 
-        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity) && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]) // neardan far'a ray yolla
+        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
             return hit.point; // eðer ray bi þeye çarparsa return hit point
         }
