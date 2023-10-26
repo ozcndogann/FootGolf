@@ -7,10 +7,14 @@ using Photon.Realtime;
 using TMPro;
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class ServerConnection : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TMP_Text warningConnectionFailed;
+    public Slider LoadBar;
+   
     private void Start()
     {
         //PhotonNetwork.GameVersion = "1.0.2";
@@ -23,8 +27,24 @@ public class ServerConnection : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedLobby()
     {
-        SceneManager.LoadScene("MainMenu");
+        LoadScene("MainMenu");
+       
     }
+    public async void LoadScene(string SceneName)
+    {
+        var scene = SceneManager.LoadSceneAsync(SceneName);
+        scene.allowSceneActivation = false;
+        do
+        {
+            await Task.Delay(100);
+            LoadBar.value = scene.progress;
+        }
+        while (scene.progress < 0.9f);
+        await Task.Delay(100);
+        scene.allowSceneActivation = true;
+    }
+    
+   
     public override void OnDisconnected(DisconnectCause cause)
     {
         //burda debug yerine bi pop up veririz
