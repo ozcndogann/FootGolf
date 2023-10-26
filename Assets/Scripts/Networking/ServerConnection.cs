@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 
 public class ServerConnection : MonoBehaviourPunCallbacks
 {
+
+    /// <summary>
+    /// /
+    /// </summary>
     [SerializeField] private TMP_Text warningConnectionFailed;
     public Slider LoadBar;
    
