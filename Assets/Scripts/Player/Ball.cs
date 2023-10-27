@@ -43,7 +43,6 @@ public class Ball : MonoBehaviour
     //public static bool footballerTeleport;
     public static bool gameEnder;
     Photon.Realtime.Player player;
-    public bool gravityChanger;
     //public static bool lineRendererOn;
     //public static bool lineRendererController;
     public static bool Player1,Player2,Player3,Player4;
@@ -417,20 +416,43 @@ public class Ball : MonoBehaviour
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
 
-        if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
+        //if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
+        //{
+        //    foreach (Player player in PhotonNetwork.PlayerList)
+        //    {
+        //        if (player.CustomProperties["holeC"] != null && player.CustomProperties["turn"] != null)
+        //        {
+        //            if ((bool)player.CustomProperties["holeC"] && /*PhotonNetwork.CurrentRoom.PlayerCount != 1*/(!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice))
+        //            {
+        //                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        //                player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        //            }
+        //        }
+        //    }
+        //}
+        if ((CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus))
         {
-            foreach (Player player in PhotonNetwork.PlayerList)
-            {
-                if (player.CustomProperties["holeC"] != null)
+            if(PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null && PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
-                    if ((bool)player.CustomProperties["holeC"] && /*PhotonNetwork.CurrentRoom.PlayerCount != 1*/(!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice))
-                    {
-                        player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                        player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                    }
+                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && (!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice))
+                {
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 }
             }
         }
+
+        //if ((CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament))
+        //{
+        //    if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null && PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+        //    {
+        //        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && (!CreateAndJoinRandomRooms.practice || !CreateAndJoinRooms.practice))
+        //        {
+        //            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        //            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        //        }
+        //    }
+        //}
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -542,7 +564,7 @@ public class Ball : MonoBehaviour
 
         #endregion
 
-        if (gravityChanger)
+        if (lineRenderer.enabled == true || Zoom.changeFovBool)
         {
             Physics.gravity = Vector3.zero;
         }
@@ -649,7 +671,6 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
-        gravityChanger = false;
     }
     
     private void ProcessAim()
@@ -657,7 +678,6 @@ public class Ball : MonoBehaviour
        
         if (!isAiming || !isIdle)
         {
-            gravityChanger = false;
             return; // exit method
         }
         
@@ -825,7 +845,6 @@ public class Ball : MonoBehaviour
     {
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
-        gravityChanger = true;
         isIdle = true;
     }
     #region Bir Sonraki Hole'e Gecmesi Icin

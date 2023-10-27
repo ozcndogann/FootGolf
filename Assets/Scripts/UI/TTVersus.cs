@@ -10,6 +10,7 @@ public class TTVersus : MonoBehaviour
     public GameObject TT1;
     public GameObject TTZoom;
     public Button click, ZoomClick;
+    bool versusBool,versusfirst;
     //public GameObject TTNetwork;
     Camera cam;
     Zoom zoom;
@@ -19,7 +20,8 @@ public class TTVersus : MonoBehaviour
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         zoom = cam.GetComponent<Zoom>();
-
+        versusBool = false;
+        versusfirst = false;
         //if (PlayerPrefs.GetInt("isShown") == 0)
         //{
         //    Tutorial();
@@ -34,27 +36,20 @@ public class TTVersus : MonoBehaviour
             {
                 if (PlayerPrefs.GetInt("isShown") == 0)
                 {
-                    TT1.SetActive(true);
-
-                    if(click == true)
+                    if (versusfirst == false)
                     {
-                        TT1.SetActive(false);
-                    }
-                    if (Zoom.changeFovBool == true)
+                        TT1.SetActive(true);
+                    } 
+                    if (Zoom.changeFovBool == true && versusBool==false)
                     {
                         TTZoom.SetActive(true);
-                        
-
-                        if(ZoomClick == true)
-                        {
-                            TTZoom.SetActive(false);
-                        }
-                        if (Input.GetMouseButtonDown(0) == true)
-                        {
-                            TTZoom.SetActive(false);
-                        }
-                        PlayerPrefs.SetInt("isShown", 1);
+                        versusBool = true;
                     }
+                }
+                if (Zoom.changeFovBool == true && Input.GetMouseButtonDown(0) == true)
+                {
+                    TTZoom.SetActive(false);
+                    PlayerPrefs.SetInt("isShown",1);
                 }
 
             }
@@ -80,11 +75,13 @@ public class TTVersus : MonoBehaviour
     public void TT1Close()
     {
         TT1.SetActive(false);
+        versusfirst = true;
     }
 
     public void TTZoomClose()
     {
         TTZoom.SetActive(false);
+        PlayerPrefs.SetInt("isShown", 1);
     }
 
 }

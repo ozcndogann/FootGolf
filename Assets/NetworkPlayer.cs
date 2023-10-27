@@ -19,8 +19,8 @@ public class NetworkPlayer : MonoBehaviourPun, IPunObservable
     //const float someSmallThreshold = 0.75f;// bunu 0.75 de yapabiliriz topun durduðu þey falan
     private void Awake()
     {
-        PhotonNetwork.SendRate = 40;//30du
-        PhotonNetwork.SerializationRate = 20;//10du
+        PhotonNetwork.SendRate = 30;//40du
+        PhotonNetwork.SerializationRate = 10;//20du
 
         _rigidbody = gameObject.GetComponent<Rigidbody>();
     }

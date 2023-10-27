@@ -9,6 +9,7 @@ public class UI_InGame : MonoBehaviour
 {
     [SerializeField] public TMP_Text codeText;
     [SerializeField] public TMP_Text timeText;
+    [SerializeField] public TMP_Text pingText;
     public GameObject ReturnPanel;
     public GameObject MainMenuPanel;
     public Image OldImage1,OldImage2,OldImage3,OldImage4;
@@ -54,6 +55,7 @@ public class UI_InGame : MonoBehaviour
         
         
         timeText.text = ((int)Ball.timer).ToString();
+        pingText.text = PhotonNetwork.GetPing().ToString();
         if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         {
             //IsVersus.gameObject.SetActive(true);

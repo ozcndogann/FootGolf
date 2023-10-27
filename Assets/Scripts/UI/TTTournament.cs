@@ -11,8 +11,9 @@ public class TTTournament : MonoBehaviour
     public GameObject TT1;
     public GameObject TTZoom;
     public Button click, ZoomClick;
+    bool tournamentBool, tournamentfirst;
 
-   
+
     //public GameObject TTNetwork;
     Camera cam;
     Zoom zoom;
@@ -22,7 +23,8 @@ public class TTTournament : MonoBehaviour
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         zoom = cam.GetComponent<Zoom>();
-
+        tournamentBool = false;
+        tournamentfirst = false;
         //if (PlayerPrefs.GetInt("isShown") == 0)
         //{
         //    Tutorial();
@@ -37,27 +39,20 @@ public class TTTournament : MonoBehaviour
             {
                 if (PlayerPrefs.GetInt("isShown") == 0)
                 {
-                    TT1.SetActive(true);
-
-                    if(click == true)
+                    if (tournamentfirst == false)
                     {
-                        TT1.SetActive(false);
+                        TT1.SetActive(true);
                     }
-                    
-                    if (Zoom.changeFovBool == true)
+                    if (Zoom.changeFovBool == true && tournamentBool == false)
                     {
                         TTZoom.SetActive(true);
-                        
-                        if(ZoomClick == true)
-                        {
-                            TTZoom.SetActive(false);
-                        }
-                        if (Input.GetMouseButtonDown(0) == true)
-                        {
-                            TTZoom.SetActive(false);
-                        }
-                        PlayerPrefs.SetInt("isShown", 1);
+                        tournamentBool = true;
                     }
+                }
+                if (Zoom.changeFovBool == true && Input.GetMouseButtonDown(0) == true)
+                {
+                    TTZoom.SetActive(false);
+                    PlayerPrefs.SetInt("isShown", 1);
                 }
 
             }
@@ -83,11 +78,13 @@ public class TTTournament : MonoBehaviour
     public void TT1Close()
     {
         TT1.SetActive(false);
+        tournamentfirst = true;
     }
 
     public void TTZoomClose()
     {
         TTZoom.SetActive(false);
+        PlayerPrefs.SetInt("isShown", 1);
     }
 
 }
