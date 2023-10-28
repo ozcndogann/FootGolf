@@ -441,7 +441,7 @@ public class Ball : MonoBehaviour
                 }
             }
         }
-        if ((CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament))
+        else if ((CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament))
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null && PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
             {
@@ -452,8 +452,9 @@ public class Ball : MonoBehaviour
                 }
             }
         }
-        
+        Debug.Log("versus: "+CreateAndJoinRandomRooms.versus);
 
+        Debug.Log("Tournament: " + CreateAndJoinRandomRooms.Tournament);
         //if ((CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament))
         //{
         //    if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null && PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
