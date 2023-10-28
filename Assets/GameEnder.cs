@@ -70,44 +70,38 @@ public class GameEnder : MonoBehaviour
         int lastScore = int.MinValue;
         int lastRank = 0;
         int displayRank = 0;
-        int sameScoreCount = 0; // To track the number of players with the same score
-
+        
         foreach (Player p in playersSorted)
         {
-            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
+            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : (int)p.CustomProperties["FinalScore"];
 
             if (playerScore != lastScore)
             {
-                lastRank += sameScoreCount; // Adjust the rank based on the number of players that had the same score
-                sameScoreCount = 1; // Reset the count for this new score
-            }
-            else
-            {
-                sameScoreCount++; // Increase the count for players with the same score
+                lastRank = displayRank + 1;
             }
 
-            if (lastRank ==  0/*&& !hasProcessed*/)
+            if (lastRank == 1 /*&& !hasProcessed*/)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 //hasProcessed = true;
             }
-            else if (lastRank == 1 && !hasProcessed1)
+            else if (lastRank == 2 && !hasProcessed1)
             {
                 GameObject newScoreDisplay2 = Instantiate(playerScorePrefab, scoreDisplayParent1);
                 TMP_Text scoreTextComponent2 = newScoreDisplay2.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent2.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed1 = true;
             }
-            else if (lastRank == 2 && !hasProcessed2)
+            else if (lastRank == 3 && !hasProcessed2)
             {
                 GameObject newScoreDisplay3 = Instantiate(playerScorePrefab, scoreDisplayParent2);
                 TMP_Text scoreTextComponent3 = newScoreDisplay3.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent3.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed2 = true;
             }
-            else if (lastRank == 3 && !hasProcessed3)
+            else if (lastRank == 4 && !hasProcessed3)
             {
                 GameObject newScoreDisplay4 = Instantiate(playerScorePrefab, scoreDisplayParent3);
                 TMP_Text scoreTextComponent4 = newScoreDisplay4.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
