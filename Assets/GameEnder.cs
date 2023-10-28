@@ -129,28 +129,28 @@ public class GameEnder : MonoBehaviour
             {
                 lastRank = displayRank + 1;
             }
-            if (lastRank == 1 && hasProcessed)
+            if (lastRank == 1 && !hasProcessed)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed = true;
             }
-            if (lastRank == 2 && hasProcessed1)
+            if (lastRank == 2 && !hasProcessed1)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed1 = true;
             }
-            if (lastRank == 3 && hasProcessed2)
+            if (lastRank == 3 && !hasProcessed2)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed2 = true;
             }
-            if (lastRank == 4 && hasProcessed3)
+            if (lastRank == 4 && !hasProcessed3)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
