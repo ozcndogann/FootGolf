@@ -20,7 +20,7 @@ public class GameEnder : MonoBehaviour
     public GameObject Panel;
     [SerializeField] private Transform scoreDisplayParent, scoreDisplayParent1, scoreDisplayParent2, scoreDisplayParent3;  // Drag the parent object (like a Vertical Layout Group) here
     [SerializeField] private GameObject playerScorePrefab;
-    private bool hasProcessed = false;
+    private bool hasProcessed = false, hasProcessed1 = false, hasProcessed2 = false, hasProcessed3 = false;
     private void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
@@ -71,90 +71,98 @@ public class GameEnder : MonoBehaviour
         int lastRank = 0;
         int displayRank = 0;
 
-        if (!hasProcessed)
+        //if (!hasProcessed)
+        //{
+        //    foreach (Player p in playersSorted)
+        //    {
+        //        int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
+
+        //        if (playerScore != lastScore)
+        //        {
+        //            lastRank = displayRank + 1;
+        //        }
+        //        Debug.Log(lastRank + "for" + p.NickName);
+        //        GameObject newScoreDisplay = null;
+        //        TMP_Text scoreTextComponent;
+
+        //        switch (lastRank)
+        //        {
+        //            case 1:
+        //                newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
+        //                Debug.Log("Case 1 executed for player " + p.NickName);
+        //                break;
+        //            case 2:
+        //                newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
+        //                Debug.Log("Case 2 executed for player " + p.NickName);
+        //                break;
+        //            case 3:
+        //                newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
+        //                Debug.Log("Case 3 executed for player " + p.NickName);
+        //                break;
+        //            case 4:
+        //                newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
+        //                Debug.Log("Case 4 executed for player " + p.NickName);
+        //                break;
+        //        }
+
+        //        if (newScoreDisplay != null)
+        //        {
+        //            scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+        //            scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+        //        }
+
+        //        lastScore = playerScore;
+        //        displayRank++;
+        //    }
+
+        //    hasProcessed = true; // Prevent the loop from running again
+        //}
+        //if (!hasProcessed)
+        //{
+            
+        //}
+        foreach (Player p in playersSorted)
         {
-            foreach (Player p in playersSorted)
+            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
+
+            if (playerScore != lastScore)
             {
-                int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
-
-                if (playerScore != lastScore)
-                {
-                    lastRank = displayRank + 1;
-                }
-                Debug.Log(lastRank + "for" + p.NickName);
-                GameObject newScoreDisplay = null;
-                TMP_Text scoreTextComponent;
-
-                switch (lastRank)
-                {
-                    case 1:
-                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-                        Debug.Log("Case 1 executed for player " + p.NickName);
-                        break;
-                    case 2:
-                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
-                        Debug.Log("Case 2 executed for player " + p.NickName);
-                        break;
-                    case 3:
-                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
-                        Debug.Log("Case 3 executed for player " + p.NickName);
-                        break;
-                    case 4:
-                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
-                        Debug.Log("Case 4 executed for player " + p.NickName);
-                        break;
-                }
-
-                if (newScoreDisplay != null)
-                {
-                    scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                    scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-                }
-
-                lastScore = playerScore;
-                displayRank++;
+                lastRank = displayRank + 1;
+            }
+            if (lastRank == 1 && hasProcessed)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                hasProcessed = true;
+            }
+            if (lastRank == 2 && hasProcessed1)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                hasProcessed1 = true;
+            }
+            if (lastRank == 3 && hasProcessed2)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                hasProcessed2 = true;
+            }
+            if (lastRank == 4 && hasProcessed3)
+            {
+                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
+                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                hasProcessed3 = true;
             }
 
-            hasProcessed = true; // Prevent the loop from running again
+
+            Debug.Log(lastRank + "for" + p.NickName);
+
+            lastScore = playerScore;
+            displayRank++;
         }
-        //foreach (Player p in playersSorted)
-        //{
-        //    int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
-
-        //    if (playerScore != lastScore)
-        //    {
-        //        lastRank = displayRank + 1;
-        //    }
-        //    if(lastRank == 1)
-        //    {
-        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-        //    }
-        //    if (lastRank == 2)
-        //    {
-        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
-        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-        //    }
-        //    if (lastRank == 3)
-        //    {
-        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
-        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-        //    }
-        //    if (lastRank == 4)
-        //    {
-        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
-        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-        //    }
-
-
-
-
-        //    lastScore = playerScore;
-        //    displayRank++;
-        //}
     }
 }
