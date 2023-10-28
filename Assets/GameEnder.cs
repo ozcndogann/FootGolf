@@ -70,6 +70,7 @@ public class GameEnder : MonoBehaviour
         int lastScore = int.MinValue;
         int lastRank = 0;
         int displayRank = 0;
+
         if (!hasProcessed)
         {
             foreach (Player p in playersSorted)
@@ -86,16 +87,16 @@ public class GameEnder : MonoBehaviour
 
                 switch (lastRank)
                 {
-                    case 1:
+                    case 0:
                         newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
                         break;
-                    case 2:
+                    case 1:
                         newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
                         break;
-                    case 3:
+                    case 2:
                         newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
                         break;
-                    case 4:
+                    case 3:
                         newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
                         break;
                 }
