@@ -88,31 +88,32 @@ public class GameEnder : MonoBehaviour
             }
             if (lastRank == 2 && !hasProcessed1)
             {
-                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
-                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                GameObject newScoreDisplay2 = Instantiate(playerScorePrefab, scoreDisplayParent1);
+                TMP_Text scoreTextComponent2 = newScoreDisplay2.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent2.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed1 = true;
             }
             if (lastRank == 3 && !hasProcessed2)
             {
-                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
-                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                GameObject newScoreDisplay3 = Instantiate(playerScorePrefab, scoreDisplayParent2);
+                TMP_Text scoreTextComponent3 = newScoreDisplay3.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent3.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed2 = true;
             }
             if (lastRank == 4 && !hasProcessed3)
             {
-                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
-                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                GameObject newScoreDisplay4 = Instantiate(playerScorePrefab, scoreDisplayParent3);
+                TMP_Text scoreTextComponent4 = newScoreDisplay4.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                scoreTextComponent4.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 hasProcessed3 = true;
             }
 
 
-            Debug.Log(lastRank + "for" + p.NickName);
+            
 
             lastScore = playerScore;
             displayRank++;
+            Debug.Log(lastRank + "for" + p.NickName);
         }
     }
 }
