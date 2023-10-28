@@ -73,13 +73,13 @@ public class GameEnder : MonoBehaviour
         
         foreach (Player p in playersSorted)
         {
-            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
+            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : (int)p.CustomProperties["FinalScore"];
 
             if (playerScore != lastScore)
             {
                 lastRank = displayRank + 1;
             }
-          
+            
 
 
             
