@@ -84,24 +84,28 @@ public class GameEnder : MonoBehaviour
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                break;
             }
             if (lastRank == 1)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                break;
             }
             if (lastRank == 2)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                break;
             }
             if (lastRank == 3)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                break;
             }
 
 
