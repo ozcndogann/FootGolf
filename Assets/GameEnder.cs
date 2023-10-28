@@ -59,19 +59,19 @@ public class GameEnder : MonoBehaviour
 
         // Sort players based on scores
         List<Player> playersSorted = new List<Player>(PhotonNetwork.PlayerList);
-        playersSorted.Sort((player1, player2) =>
-        {
-            int score1 = player1.CustomProperties.ContainsKey("FinalScore") ? (int)player1.CustomProperties["FinalScore"] : int.MaxValue;
-            int score2 = player2.CustomProperties.ContainsKey("FinalScore") ? (int)player2.CustomProperties["FinalScore"] : int.MaxValue;
-            return score1.CompareTo(score2);
-        });
+        //playersSorted.Sort((player1, player2) =>
+        //{
+        //    int score1 = player1.CustomProperties.ContainsKey("FinalScore") ? (int)player1.CustomProperties["FinalScore"] : int.MaxValue;
+        //    int score2 = player2.CustomProperties.ContainsKey("FinalScore") ? (int)player2.CustomProperties["FinalScore"] : int.MaxValue;
+        //    return score1.CompareTo(score2);
+        //});
 
         // Display players with rank
         int lastScore = int.MinValue;
         int lastRank = 0;
         int displayRank = 0;
         
-        foreach (Player p in playersSorted)
+        foreach (Player p in PhotonNetwork.PlayerList)
         {
             int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : (int)p.CustomProperties["FinalScore"];
 
