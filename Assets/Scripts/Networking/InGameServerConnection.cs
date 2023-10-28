@@ -14,7 +14,7 @@ public class InGameServerConnection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(PhotonNetwork.GetPing());
+        //Debug.Log(PhotonNetwork.GetPing());
         //if (!PhotonNetwork.IsConnectedAndReady)
         //{
         //    Debug.Log("connection error");
