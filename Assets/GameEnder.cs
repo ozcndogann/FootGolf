@@ -70,14 +70,20 @@ public class GameEnder : MonoBehaviour
         int lastScore = int.MinValue;
         int lastRank = 0;
         int displayRank = 0;
-        
+        int sameScoreCount = 0; // To track the number of players with the same score
+
         foreach (Player p in playersSorted)
         {
-            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : (int)p.CustomProperties["FinalScore"];
+            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
 
             if (playerScore != lastScore)
             {
-                lastRank = displayRank + 1;
+                lastRank += sameScoreCount; // Adjust the rank based on the number of players that had the same score
+                sameScoreCount = 1; // Reset the count for this new score
+            }
+            else
+            {
+                sameScoreCount++; // Increase the count for players with the same score
             }
 
             if (lastRank == 1 /*&& !hasProcessed*/)
