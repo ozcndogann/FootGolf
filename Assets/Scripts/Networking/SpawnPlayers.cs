@@ -32,7 +32,7 @@ public class SpawnPlayers : MonoBehaviour
 
     void GenerateSpawnPositions()
     {
-        float spacingX = (maxX - minX) / 3; 
+        float spacingX = (maxX - minX) / 4; 
         float middleZ = (minZ + maxZ) / 2; 
 
         for (int i = 0; i < 4; i++)
