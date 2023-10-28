@@ -471,7 +471,7 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
             {
-                if ((bool)player.CustomProperties["turn"] && !GameEnder.EndGamePanelOpen)
+                if ((bool)player.CustomProperties["turn"]/* && !GameEnder.EndGamePanelOpen*/)
                 {
                     if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
                     {
