@@ -20,7 +20,7 @@ public class GameEnder : MonoBehaviour
     public GameObject Panel;
     [SerializeField] private Transform scoreDisplayParent, scoreDisplayParent1, scoreDisplayParent2, scoreDisplayParent3;  // Drag the parent object (like a Vertical Layout Group) here
     [SerializeField] private GameObject playerScorePrefab;
-
+    private bool hasProcessed = false;
     private void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
@@ -70,52 +70,86 @@ public class GameEnder : MonoBehaviour
         int lastScore = int.MinValue;
         int lastRank = 0;
         int displayRank = 0;
-
-        foreach (Player p in playersSorted)
+        if (!hasProcessed)
         {
-            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
+            foreach (Player p in playersSorted)
+            {
+                int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
 
-            if (playerScore != lastScore)
-            {
-                lastRank = displayRank + 1;
-            }
-            if(lastRank == 1)
-            {
-                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-            }
-            if (lastRank == 2)
-            {
-                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
-                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-                if ((CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus))
+                if (playerScore != lastScore)
                 {
-                    break;                }
-            }
-            if (lastRank == 3)
-            {
-                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
-                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-            }
-            if (lastRank == 4)
-            {
-                GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
-                TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-                scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-                if ((CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament))
-                {
-                    break;
+                    lastRank = displayRank + 1;
                 }
+
+                GameObject newScoreDisplay = null;
+                TMP_Text scoreTextComponent;
+
+                switch (lastRank)
+                {
+                    case 1:
+                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
+                        break;
+                    case 2:
+                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
+                        break;
+                    case 3:
+                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
+                        break;
+                    case 4:
+                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
+                        break;
+                }
+
+                if (newScoreDisplay != null)
+                {
+                    scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+                    scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                }
+
+                lastScore = playerScore;
+                displayRank++;
             }
 
-
-
-
-            lastScore = playerScore;
-            displayRank++;
+            hasProcessed = true; // Prevent the loop from running again
         }
+        //foreach (Player p in playersSorted)
+        //{
+        //    int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : 0;
+
+        //    if (playerScore != lastScore)
+        //    {
+        //        lastRank = displayRank + 1;
+        //    }
+        //    if(lastRank == 1)
+        //    {
+        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
+        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+        //    }
+        //    if (lastRank == 2)
+        //    {
+        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
+        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+        //    }
+        //    if (lastRank == 3)
+        //    {
+        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
+        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+        //    }
+        //    if (lastRank == 4)
+        //    {
+        //        GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
+        //        TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+        //        scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+        //    }
+
+
+
+
+        //    lastScore = playerScore;
+        //    displayRank++;
+        //}
     }
 }
