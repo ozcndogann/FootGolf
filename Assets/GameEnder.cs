@@ -90,6 +90,9 @@ public class GameEnder : MonoBehaviour
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                if ((CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus))
+                {
+                    break;                }
             }
             if (lastRank == 3)
             {
@@ -102,6 +105,10 @@ public class GameEnder : MonoBehaviour
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+                if ((CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament))
+                {
+                    break;
+                }
             }
 
 
@@ -109,7 +116,6 @@ public class GameEnder : MonoBehaviour
 
             lastScore = playerScore;
             displayRank++;
-            break;
         }
     }
 }
