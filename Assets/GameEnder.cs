@@ -81,23 +81,27 @@ public class GameEnder : MonoBehaviour
                 {
                     lastRank = displayRank + 1;
                 }
-
+                Debug.Log(lastRank + "for" + p.NickName);
                 GameObject newScoreDisplay = null;
                 TMP_Text scoreTextComponent;
 
                 switch (lastRank)
                 {
-                    case 0:
-                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-                        break;
                     case 1:
-                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
+                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
+                        Debug.Log("Case 1 executed for player " + p.NickName);
                         break;
                     case 2:
-                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
+                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
+                        Debug.Log("Case 2 executed for player " + p.NickName);
                         break;
                     case 3:
+                        newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
+                        Debug.Log("Case 3 executed for player " + p.NickName);
+                        break;
+                    case 4:
                         newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
+                        Debug.Log("Case 4 executed for player " + p.NickName);
                         break;
                 }
 
