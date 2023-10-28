@@ -109,6 +109,7 @@ public class GameEnder : MonoBehaviour
 
             lastScore = playerScore;
             displayRank++;
+            break;
         }
     }
 }
