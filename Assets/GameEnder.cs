@@ -80,7 +80,7 @@ public class GameEnder : MonoBehaviour
                 lastRank = displayRank + 1;
             }
             GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-            TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
+            TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponent/*InChildren*/<TMP_Text>();
             scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
             //if (lastRank == 1 /*&& !hasProcessed*/)
             //{
