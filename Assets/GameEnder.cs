@@ -79,28 +79,28 @@ public class GameEnder : MonoBehaviour
             {
                 lastRank = displayRank + 1;
             }
-            if(lastRank == 0)
+            if(lastRank == 1)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 break;
             }
-            if (lastRank == 1)
+            if (lastRank == 2)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent1);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 break;
             }
-            if (lastRank == 2)
+            if (lastRank == 3)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent2);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
                 scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
                 break;
             }
-            if (lastRank == 3)
+            if (lastRank == 4)
             {
                 GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent3);
                 TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
