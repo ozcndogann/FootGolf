@@ -709,53 +709,7 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        Vector3? CastMouseClickRay()
-        {
-            //if (!MoveAroundObject.deneme)
-            //{
-            //    MoveAroundObject.deneme = true;
-            //    return null;
-            //}
-            //if (shooted)
-            //{
-            //    Debug.Log("returnoncesi");
-            //    return null;
-            //}
-            //else
-            //{
-
-            //}
-            //if (Input.GetMouseButton(0))
-            //{
-
-            //}
-            screenMousePosFar = new Vector3(
-                Input.mousePosition.x,
-                Input.mousePosition.y,
-                Camera.main.farClipPlane
-                );
-            screenMousePosNear = new Vector3(
-                Input.mousePosition.x,
-                Input.mousePosition.y,
-                Camera.main.nearClipPlane
-                );
-            worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
-            worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
-
-            RaycastHit hit;
-            if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
-            {
-                return hit.point; // eðer ray bi þeye çarparsa return hit point
-            }
-            else
-            {
-                return null; // eðer ray bi þeye çarpmazsa return null
-            }
-
-
-
-
-        }
+          
         if (!isAiming || !isIdle)
         {
             return; // exit method
@@ -882,53 +836,53 @@ public class Ball : MonoBehaviour
         }
 
     }
-    //private Vector3? CastMouseClickRay()
-    //{
-    //    //if (!MoveAroundObject.deneme)
-    //    //{
-    //    //    MoveAroundObject.deneme = true;
-    //    //    return null;
-    //    //}
-    //    //if (shooted)
-    //    //{
-    //    //    Debug.Log("returnoncesi");
-    //    //    return null;
-    //    //}
-    //    //else
-    //    //{
+    private Vector3? CastMouseClickRay()
+    {
+        //if (!MoveAroundObject.deneme)
+        //{
+        //    MoveAroundObject.deneme = true;
+        //    return null;
+        //}
+        //if (shooted)
+        //{
+        //    Debug.Log("returnoncesi");
+        //    return null;
+        //}
+        //else
+        //{
 
-    //    //}
-    //    //if (Input.GetMouseButton(0))
-    //    //{
+        //}
+        //if (Input.GetMouseButton(0))
+        //{
 
-    //    //}
-    //    screenMousePosFar = new Vector3(
-    //        Input.mousePosition.x,
-    //        Input.mousePosition.y,
-    //        Camera.main.farClipPlane
-    //        );
-    //    screenMousePosNear = new Vector3(
-    //        Input.mousePosition.x,
-    //        Input.mousePosition.y,
-    //        Camera.main.nearClipPlane
-    //        );
-    //    worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
-    //    worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
+        //}
+        screenMousePosFar = new Vector3(
+            Input.mousePosition.x,
+            Input.mousePosition.y,
+            Camera.main.farClipPlane
+            );
+        screenMousePosNear = new Vector3(
+            Input.mousePosition.x,
+            Input.mousePosition.y,
+            Camera.main.nearClipPlane
+            );
+        worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
+        worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
 
-    //    RaycastHit hit;
-    //    if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
-    //    {
-    //        return hit.point; // eðer ray bi þeye çarparsa return hit point
-    //    }
-    //    else
-    //    {
-    //        return null; // eðer ray bi þeye çarpmazsa return null
-    //    }
-
-
+        RaycastHit hit;
+        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
+        {
+            return hit.point; // eðer ray bi þeye çarparsa return hit point
+        }
+        else
+        {
+            return null; // eðer ray bi þeye çarpmazsa return null
+        }
 
 
-    //}
+
+
+    }
 
     private void Stop()
     {
