@@ -873,26 +873,22 @@ public class Ball : MonoBehaviour
             worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
             worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
         }
-        
 
-        RaycastHit hit;
-        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
+        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
-            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            RaycastHit hit;
+            if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
             {
-                hit.point = Vector3.zero;
-                return null;
+                
+                return hit.point; // eðer ray bi þeye çarparsa return hit point
+
             }
             else
             {
-                return hit.point; // eðer ray bi þeye çarparsa return hit point
+                return null; // eðer ray bi þeye çarpmazsa return null
             }
-            
         }
-        else
-        {
-            return null; // eðer ray bi þeye çarpmazsa return null
-        }
+        
 
 
 
