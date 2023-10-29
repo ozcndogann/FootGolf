@@ -303,6 +303,7 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
+                        worldPoint = null;
                         timer -= Time.deltaTime;
                         //if (OurTurn == true)
                         //{
@@ -335,7 +336,7 @@ public class Ball : MonoBehaviour
                     else
                     {
                         Debug.Log("worldpoint");
-                        //worldPoint = null;
+                        worldPoint = null;
                     }
                 }
 
