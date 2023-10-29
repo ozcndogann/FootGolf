@@ -60,7 +60,7 @@ public class Ball : MonoBehaviour
         
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
-        OurTurn = true;
+        OurTurn = true; ;
         //lineRendererController = false;
         //lineRendererOn = false;
         gameEnder = false;
@@ -335,10 +335,6 @@ public class Ball : MonoBehaviour
                             }
                             timer = 20f;
                         }
-                    }
-                    else
-                    {
-                        ProcessAim();
                     }
                 }
 
@@ -706,8 +702,6 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        {
             if (!isAiming || !isIdle)
             {
                 return; // exit method
@@ -737,11 +731,6 @@ public class Ball : MonoBehaviour
                 shooted = true;
                 Zoom.changeFovBool = true;
             }
-        }
-        else
-        {
-            worldPoint = null;
-        }
         
 
 
@@ -870,45 +859,19 @@ public class Ball : MonoBehaviour
             Input.mousePosition.y,
             Camera.main.nearClipPlane
             );
-        if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        {
-            screenMousePosFar = Vector3.zero;
-            screenMousePosNear = Vector3.zero;
-        }
-        else
-        {
             worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
             worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
-        }
 
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        RaycastHit hit;
+        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
-            if (OurTurn)
-            {
-                OurTurn = false;
-                return null;
-            }
-            else
-            {
-                RaycastHit hit;
-                if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
-                {
 
-                    return hit.point; // eðer ray bi þeye çarparsa return hit point
+            return hit.point; // eðer ray bi þeye çarparsa return hit point
 
-                }
-                else
-                {
-                    return null; // eðer ray bi þeye çarpmazsa return null
-                }
-            }
-            
         }
         else
         {
-            OurTurn = true;
-            return null;
-
+            return null; // eðer ray bi þeye çarpmazsa return null
         }
 
 
