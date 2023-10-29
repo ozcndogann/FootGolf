@@ -304,7 +304,6 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
                         timer -= Time.deltaTime;
                         //if (OurTurn == true)
                         //{
@@ -335,10 +334,10 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
-                    else
-                    {
-                        lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
-                    }
+                    //else
+                    //{
+                    //    lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+                    //}
                 }
 
             }
@@ -707,7 +706,6 @@ public class Ball : MonoBehaviour
         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
         {
             PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-            OurTurn = true;
         }
     }
     
@@ -853,6 +851,7 @@ public class Ball : MonoBehaviour
         //{
 
         //}
+        return null;
         screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
