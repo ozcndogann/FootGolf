@@ -312,10 +312,10 @@ public class Ball : MonoBehaviour
 
                         //    OurTurn = false;
                         //}
-                        //if (!Input.GetMouseButton(0))
-                        //{
-                        //    lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
-                        //}
+                        if (!Input.GetMouseButton(0))
+                        {
+                            lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+                        }
                         if (timer > 0 && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                         {
                             ProcessAim();
