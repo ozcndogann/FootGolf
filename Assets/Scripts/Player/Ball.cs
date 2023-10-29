@@ -52,7 +52,6 @@ public class Ball : MonoBehaviour
     Ray rayNorm;
     Ray rayTri;
     #endregion
-    private bool previousTurnState = false;
 
 
     private void Start()
@@ -295,166 +294,123 @@ public class Ball : MonoBehaviour
 
 
 
-        //if (view.IsMine)
-        //{
-        //    if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
-        //    {
-        //        Stop();
-        //        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        //        {
-        //            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        //            {
-        //                //if (!OurTurn && worldPoint==null)
-        //                //{
-        //                //    OurTurn = true;
-        //                //}
-        //                timer -= Time.deltaTime;
-        //                //if (OurTurn == true)
-        //                //{
-        //                //    Debug.Log("sýfýrla aq");
-        //                //    lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
-
-        //                //    OurTurn = false;
-        //                //}
-
-        //                if (timer > 0)
-        //                {
-        //                    ProcessAim();
-
-        //                }
-        //                else
-        //                {
-        //                    AnimationFootballer.lineRendererController = false;
-        //                    shooted = false;
-        //                    shootCloser = true;
-        //                    Zoom.changeFovBool = false;
-        //                    //lineRenderer.enabled = false;
-        //                    if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        //                    {
-        //                        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        //                        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        //                    }
-        //                    timer = 20f;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                ProcessAim();
-        //            }
-        //        }
-
-        //    }
-        //    #region CommentedOldAnimations
-        //    //if (waitForShoot == true)
-        //    //{
-        //    //    waitForShootTimer += Time.deltaTime;
-        //    //    Zoom.changeFovBool = false;
-        //    //}
-        //    //if (waitForShootTri == true)
-        //    //{
-        //    //    waitForShootTriTimer += Time.deltaTime;
-        //    //    Zoom.changeFovBool = false;
-        //    //}
-        //    //if (waitForShootTimer >= 0.9f)
-        //    //{
-        //    //    //OurFootballer.SetActive(false);
-        //    //    waitForShoot = false;
-        //    //    waitForShootTimer = 0;
-        //    //    footballerAnimator.SetBool("penaltyKick", false);
-        //    //    trivelaAnimator.SetBool("trivela", false);
-        //    //    OnMouseShootPart();
-        //    //}
-
-        //    #endregion
-
-        //    if (AnimationFootballer.AcceptShoot == true)
-        //    {
-        //        OnMouseShootPart();
-        //        AnimationFootballer.AcceptShoot = false;
-        //    }
-        //    #region CommentedOldAnimations
-        //    //if (waitForShootTriTimer >= 0.65f)
-        //    //{
-        //    //    //OurFootballer.SetActive(false);
-        //    //    waitForShootTri = false;
-        //    //    waitForShootTriTimer = 0;
-        //    //    footballerAnimator.SetBool("penaltyKick", false);
-        //    //    trivelaAnimator.SetBool("trivela", false);
-        //    //    OnMouseShootPart();
-        //    //}
-        //    //if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
-        //    //{
-        //    //    if (lineRendererOn == false)
-        //    //    {
-        //    //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
-        //    //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
-        //    //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
-        //    //    }
-
-        //    //}
-        //    //if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
-        //    //{
-        //    //    distanceP.y = 0.3f;
-        //    //    distanceT.y = 0.3f;
-        //    //    OurFootballer.transform.position = transform.position - distanceP;
-        //    //    TrivelaFootballer.transform.position = transform.position - distanceT;
-        //    //    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-        //    //    TrivelaFootballer.transform.rotation= Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
-        //    //    footballerTeleport = true;
-        //    //}
-        //    //else if(rb.velocity.magnitude > stopVelocity)
-        //    //{
-        //    //    footballerTeleport = false;
-        //    //}
-
-        //    #endregion
-        //}
         if (view.IsMine)
         {
-            bool currentTurnState = false;
-
-            if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-            {
-                currentTurnState = (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"];
-            }
-
-            if (currentTurnState && !previousTurnState) // Detect change from false to true
-            {
-                worldPoint = null; // Reset worldPoint
-            }
-
-            previousTurnState = currentTurnState; // Update the previous state for the next frame
-
             if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
             {
                 Stop();
-                if (currentTurnState)
+                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
-                    timer -= Time.deltaTime;
-
-                    if (timer > 0)
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        ProcessAim();
+                        //if (!OurTurn && worldPoint==null)
+                        //{
+                        //    OurTurn = true;
+                        //}
+                        timer -= Time.deltaTime;
+                        //if (OurTurn == true)
+                        //{
+                        //    Debug.Log("sýfýrla aq");
+                        //    lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+
+                        //    OurTurn = false;
+                        //}
+                        
+                        if (timer > 0)
+                        {
+                            ProcessAim();
+
+                        }
+                        else
+                        {
+                            AnimationFootballer.lineRendererController = false;
+                            shooted = false;
+                            shootCloser = true;
+                            Zoom.changeFovBool = false;
+                            //lineRenderer.enabled = false;
+                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                            {
+                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            }
+                            timer = 20f;
+                        }
                     }
                     else
                     {
-                        AnimationFootballer.lineRendererController = false;
-                        shooted = false;
-                        shootCloser = true;
-                        Zoom.changeFovBool = false;
-                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                        {
-                            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                        }
-                        timer = 20f;
+                        ProcessAim();
                     }
                 }
+
             }
+            #region CommentedOldAnimations
+            //if (waitForShoot == true)
+            //{
+            //    waitForShootTimer += Time.deltaTime;
+            //    Zoom.changeFovBool = false;
+            //}
+            //if (waitForShootTri == true)
+            //{
+            //    waitForShootTriTimer += Time.deltaTime;
+            //    Zoom.changeFovBool = false;
+            //}
+            //if (waitForShootTimer >= 0.9f)
+            //{
+            //    //OurFootballer.SetActive(false);
+            //    waitForShoot = false;
+            //    waitForShootTimer = 0;
+            //    footballerAnimator.SetBool("penaltyKick", false);
+            //    trivelaAnimator.SetBool("trivela", false);
+            //    OnMouseShootPart();
+            //}
+
+            #endregion
+            
+            if (AnimationFootballer.AcceptShoot == true)
+            {
+                OnMouseShootPart();
+                AnimationFootballer.AcceptShoot = false;
+            }
+            #region CommentedOldAnimations
+            //if (waitForShootTriTimer >= 0.65f)
+            //{
+            //    //OurFootballer.SetActive(false);
+            //    waitForShootTri = false;
+            //    waitForShootTriTimer = 0;
+            //    footballerAnimator.SetBool("penaltyKick", false);
+            //    trivelaAnimator.SetBool("trivela", false);
+            //    OnMouseShootPart();
+            //}
+            //if (shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
+            //{
+            //    if (lineRendererOn == false)
+            //    {
+            //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
+            //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 60);
+            //    }
+            //    else
+            //    {
+            //        OurFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
+            //        TrivelaFootballer.transform.RotateAround(transform.position, Vector3.up, MoveAroundObject.rotationaroundyaxis / 300);
+            //    }
+
+            //}
+            //if (rb.velocity.magnitude < stopVelocity && footballerTeleport==false)
+            //{
+            //    distanceP.y = 0.3f;
+            //    distanceT.y = 0.3f;
+            //    OurFootballer.transform.position = transform.position - distanceP;
+            //    TrivelaFootballer.transform.position = transform.position - distanceT;
+            //    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            //    TrivelaFootballer.transform.rotation= Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+            //    footballerTeleport = true;
+            //}
+            //else if(rb.velocity.magnitude > stopVelocity)
+            //{
+            //    footballerTeleport = false;
+            //}
+
+            #endregion
         }
 
         #region OldTurnAfterHole
