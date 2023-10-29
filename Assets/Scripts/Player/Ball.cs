@@ -52,6 +52,7 @@ public class Ball : MonoBehaviour
     Ray rayNorm;
     Ray rayTri;
     #endregion
+    private bool turnWasFalse = false;
 
 
     private void Start()
@@ -303,6 +304,11 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
+                        if(turnWasFalse)
+    {
+                            worldPoint = null; // Reset worldPoint
+                            turnWasFalse = false;
+                        }
                         //if (!OurTurn && worldPoint==null)
                         //{
                         //    OurTurn = true;
@@ -335,6 +341,10 @@ public class Ball : MonoBehaviour
                             }
                             timer = 20f;
                         }
+                    }
+                    else
+                    {
+                        turnWasFalse = true;
                     }
                 }
 
