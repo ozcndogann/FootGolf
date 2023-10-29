@@ -609,7 +609,21 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
-        
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties["turn"] != null)
+            {
+                if (!(bool)player.CustomProperties["turn"])
+                {
+                    OurTurn = false;
+                }
+                else
+                {
+                    OurTurn = true;
+                }
+            }
+        }
+
     }
     private void OnMouseDown()
     {
@@ -841,38 +855,42 @@ public class Ball : MonoBehaviour
     private Vector3? CastMouseClickRay()
     {
 
-        if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        if (!OurTurn)
         {
             Debug.Log("returnoncesi");
             return null;
         }
-
-        //if (Input.GetMouseButton(0))
-        //{
-
-        //}
-        screenMousePosFar = new Vector3(
-            Input.mousePosition.x,
-            Input.mousePosition.y,
-            Camera.main.farClipPlane
-            );
-        screenMousePosNear = new Vector3(
-            Input.mousePosition.x,
-            Input.mousePosition.y,
-            Camera.main.nearClipPlane
-            );
-        worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
-        worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
-
-        RaycastHit hit;
-        if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
-        {
-            return hit.point; // eðer ray bi þeye çarparsa return hit point
-        }
         else
         {
-            return null; // eðer ray bi þeye çarpmazsa return null
+            //if (Input.GetMouseButton(0))
+            //{
+
+            //}
+            screenMousePosFar = new Vector3(
+                Input.mousePosition.x,
+                Input.mousePosition.y,
+                Camera.main.farClipPlane
+                );
+            screenMousePosNear = new Vector3(
+                Input.mousePosition.x,
+                Input.mousePosition.y,
+                Camera.main.nearClipPlane
+                );
+            worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
+            worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
+
+            RaycastHit hit;
+            if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
+            {
+                return hit.point; // eðer ray bi þeye çarparsa return hit point
+            }
+            else
+            {
+                return null; // eðer ray bi þeye çarpmazsa return null
+            }
         }
+
+        
 
 
     }
