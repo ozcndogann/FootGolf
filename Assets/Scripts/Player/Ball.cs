@@ -60,7 +60,7 @@ public class Ball : MonoBehaviour
         
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
-        OurTurn = false;
+        OurTurn = true;
         //lineRendererController = false;
         //lineRendererOn = false;
         gameEnder = false;
@@ -883,20 +883,30 @@ public class Ball : MonoBehaviour
 
         if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
-            RaycastHit hit;
-            if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
+            if (OurTurn)
             {
-                
-                return hit.point; // eðer ray bi þeye çarparsa return hit point
-
+                OurTurn = false;
+                return null;
             }
             else
             {
-                return null; // eðer ray bi þeye çarpmazsa return null
+                RaycastHit hit;
+                if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
+                {
+
+                    return hit.point; // eðer ray bi þeye çarparsa return hit point
+
+                }
+                else
+                {
+                    return null; // eðer ray bi þeye çarpmazsa return null
+                }
             }
+            
         }
         else
         {
+            OurTurn = true;
             return null;
 
         }
