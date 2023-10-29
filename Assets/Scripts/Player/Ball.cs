@@ -888,7 +888,12 @@ public class Ball : MonoBehaviour
                 return null; // eðer ray bi þeye çarpmazsa return null
             }
         }
-        
+        else
+        {
+            return null;
+
+        }
+
 
 
 
