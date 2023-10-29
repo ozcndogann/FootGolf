@@ -336,10 +336,6 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
-                    else
-                    {
-                        ProcessAim();
-                    }
                 }
 
             }
