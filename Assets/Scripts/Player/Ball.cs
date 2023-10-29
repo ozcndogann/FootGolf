@@ -607,7 +607,7 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
+        Debug.Log("MoveAroundObject.deneme: " + MoveAroundObject.deneme);
     }
     private void OnMouseDown()
     {
