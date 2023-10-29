@@ -304,6 +304,7 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
+                        lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
                         timer -= Time.deltaTime;
                         //if (OurTurn == true)
                         //{
