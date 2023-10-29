@@ -60,7 +60,7 @@ public class Ball : MonoBehaviour
         
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
-        OurTurn = true;
+        OurTurn = false;
         //lineRendererController = false;
         //lineRendererOn = false;
         gameEnder = false;
@@ -303,7 +303,10 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        worldPoint = null;
+                        if (!OurTurn && worldPoint==null)
+                        {
+                            OurTurn = true;
+                        }
                         timer -= Time.deltaTime;
                         //if (OurTurn == true)
                         //{
@@ -335,8 +338,10 @@ public class Ball : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("worldpoint");
-                        worldPoint = null;
+                        if (OurTurn) 
+                        {
+                            OurTurn = false;
+                        }
                     }
                 }
 
@@ -833,7 +838,10 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-
+        if (OurTurn == false)
+        {
+            return null;
+        }
         //if (shooted)
         //{
         //    Debug.Log("returnoncesi");
