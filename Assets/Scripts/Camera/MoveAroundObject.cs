@@ -17,6 +17,7 @@ public class MoveAroundObject : MonoBehaviour
     Ball ball;
     Ball1 ball1;
     public PhotonView view;
+    public static bool deneme;
     //PhotonView vievv;
     private void Start()
     {
@@ -250,5 +251,8 @@ public class MoveAroundObject : MonoBehaviour
             //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
-
+    private void OnMouseDown()
+    {
+        deneme = false;
+    }
 }

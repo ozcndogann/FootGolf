@@ -303,10 +303,10 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        if (!OurTurn && worldPoint==null)
-                        {
-                            OurTurn = true;
-                        }
+                        //if (!OurTurn && worldPoint==null)
+                        //{
+                        //    OurTurn = true;
+                        //}
                         timer -= Time.deltaTime;
                         //if (OurTurn == true)
                         //{
@@ -336,13 +336,13 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
-                    else
-                    {
-                        if (OurTurn) 
-                        {
-                            OurTurn = false;
-                        }
-                    }
+                    //else
+                    //{
+                    //    if (OurTurn) 
+                    //    {
+                    //        OurTurn = false;
+                    //    }
+                    //}
                 }
 
             }
@@ -838,8 +838,9 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-        if (OurTurn == false)
+        if (!MoveAroundObject.deneme)
         {
+            MoveAroundObject.deneme = true;
             return null;
         }
         //if (shooted)
@@ -849,7 +850,7 @@ public class Ball : MonoBehaviour
         //}
         //else
         //{
-            
+
         //}
         //if (Input.GetMouseButton(0))
         //{
