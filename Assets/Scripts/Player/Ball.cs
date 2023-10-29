@@ -305,14 +305,18 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
-                        if (OurTurn == true)
-                        {
-                            Debug.Log("sýfýrla aq");
-                            lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
-                            
-                            OurTurn = false;
-                        }
-                        if (timer > 0)
+                        //if (OurTurn == true)
+                        //{
+                        //    Debug.Log("sýfýrla aq");
+                        //    lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+
+                        //    OurTurn = false;
+                        //}
+                        //if (!Input.GetMouseButton(0))
+                        //{
+                        //    lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+                        //}
+                        if (timer > 0 && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                         {
                             ProcessAim();
 
