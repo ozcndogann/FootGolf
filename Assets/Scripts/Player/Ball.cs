@@ -141,20 +141,6 @@ public class Ball : MonoBehaviour
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            if (player.CustomProperties["turn"] != null)
-            {
-                if (!(bool)player.CustomProperties["turn"])
-                {
-                    OurTurn = false;
-                }
-                else
-                {
-                    OurTurn = true;
-                }
-            }
-        }
     }
 
     #region CommentedOldAnimations
@@ -615,21 +601,6 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("turn: " + (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]);
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            if (player.CustomProperties["turn"] != null)
-            {
-                if (!(bool)player.CustomProperties["turn"])
-                {
-                    OurTurn = false;
-                }
-                else
-                {
-                    OurTurn = true;
-                }
-            }
-        }
-        Debug.Log("ourturn: " + OurTurn);
     }
     private void OnMouseDown()
     {
@@ -861,7 +832,7 @@ public class Ball : MonoBehaviour
     private Vector3? CastMouseClickRay()
     {
 
-        if (!OurTurn)
+        if (shooted)
         {
             Debug.Log("returnoncesi");
             return null;
