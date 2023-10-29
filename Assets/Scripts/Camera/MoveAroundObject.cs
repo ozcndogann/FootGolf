@@ -251,8 +251,8 @@ public class MoveAroundObject : MonoBehaviour
             //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
-    private void OnMouseDown()
-    {
-        deneme = false;
-    }
+    //private void OnMouseDown()
+    //{
+    //    deneme = false;
+    //}
 }

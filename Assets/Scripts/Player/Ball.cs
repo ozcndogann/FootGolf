@@ -607,7 +607,7 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        Debug.Log("MoveAroundObject.deneme: " + MoveAroundObject.deneme);
+        //Debug.Log("MoveAroundObject.deneme: " + MoveAroundObject.deneme);
     }
     private void OnMouseDown()
     {
@@ -838,11 +838,11 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-        if (!MoveAroundObject.deneme)
-        {
-            MoveAroundObject.deneme = true;
-            return null;
-        }
+        //if (!MoveAroundObject.deneme)
+        //{
+        //    MoveAroundObject.deneme = true;
+        //    return null;
+        //}
         //if (shooted)
         //{
         //    Debug.Log("returnoncesi");
