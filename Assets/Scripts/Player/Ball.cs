@@ -141,7 +141,22 @@ public class Ball : MonoBehaviour
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties["turn"] != null)
+            {
+                if (!(bool)player.CustomProperties["turn"])
+                {
+                    OurTurn = false;
+                }
+                else
+                {
+                    OurTurn = true;
+                }
+            }
+        }
     }
+
     #region CommentedOldAnimations
     //[PunRPC]
     //void HideOurFootballer(string footballerPhotonViewId)
