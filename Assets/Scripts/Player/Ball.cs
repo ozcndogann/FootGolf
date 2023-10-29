@@ -338,7 +338,7 @@ public class Ball : MonoBehaviour
                     }
                     else
                     {
-                        CastMouseClickRay();
+                        worldPoint=CastMouseClickRay();
                     }
                 }
 
