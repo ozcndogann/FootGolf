@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private LineRenderer lineRenderer; // aim için line
     public static bool isIdle; // top duruyor mu hareketli mi boolu
     public static bool isAiming; // oyuncu aim halinde mi boolu
+    bool OurTurn;
     [SerializeField] private float stopVelocity; // topun durmasý için min hýz
     [SerializeField] private float shotPower,acý;
     private Rigidbody rb;
@@ -59,6 +60,7 @@ public class Ball : MonoBehaviour
         
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
+        OurTurn = false;
         //lineRendererController = false;
         //lineRendererOn = false;
         gameEnder = false;
@@ -301,6 +303,11 @@ public class Ball : MonoBehaviour
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
                         timer -= Time.deltaTime;
+                        if (OurTurn == true)
+                        {
+                            lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
+                            OurTurn = false;
+                        }
                         if (timer > 0)
                         {
                             ProcessAim();
@@ -316,6 +323,7 @@ public class Ball : MonoBehaviour
                             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                                OurTurn = false;
                                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                             }
                             timer = 20f;
@@ -414,6 +422,7 @@ public class Ball : MonoBehaviour
         if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            OurTurn = true;
         }
 
         if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
