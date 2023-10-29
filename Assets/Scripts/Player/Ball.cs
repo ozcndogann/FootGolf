@@ -60,7 +60,7 @@ public class Ball : MonoBehaviour
         
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
-        OurTurn = false;
+        OurTurn = true;
         //lineRendererController = false;
         //lineRendererOn = false;
         gameEnder = false;
