@@ -334,7 +334,8 @@ public class Ball : MonoBehaviour
                     }
                     else
                     {
-                        worldPoint = null;
+                        Debug.Log("worldpoint");
+                        //worldPoint = null;
                     }
                 }
 
