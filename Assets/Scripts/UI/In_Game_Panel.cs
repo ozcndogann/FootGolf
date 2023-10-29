@@ -56,6 +56,18 @@ public class In_Game_Panel : MonoBehaviour
     }   
     private void Update()
     {
+        if (GameEnder.EndGamePanelOpen)
+        {
+            Versus.SetActive(false);
+        }
+        if (GameEnder.EndGamePanelOpen)
+        {
+            Practice.SetActive(false);
+        }
+        if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+        {
+            Tournament.SetActive(true);
+        }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -83,6 +95,7 @@ public class In_Game_Panel : MonoBehaviour
                 tournement_player4_score.text = playerScore.ToString();
             }
         }
+
     }
     public void MainMenu()
     {

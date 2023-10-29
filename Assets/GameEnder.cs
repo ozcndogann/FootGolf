@@ -33,6 +33,7 @@ public class GameEnder : MonoBehaviour
     {
         if (Ball.gameEnder)
         {
+            EndGamePanelOpen = true;
             Panel.SetActive(true);
             CalculateScore();
             UpdateScoreDisplay();
