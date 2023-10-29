@@ -706,7 +706,7 @@ public class Ball : MonoBehaviour
     
     private void ProcessAim()
     {
-        if ((bool)player.CustomProperties["turn"])
+        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             if (!isAiming || !isIdle)
             {
