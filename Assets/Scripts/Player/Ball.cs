@@ -336,13 +336,10 @@ public class Ball : MonoBehaviour
                             timer = 20f;
                         }
                     }
-                    //else
-                    //{
-                    //    if (OurTurn) 
-                    //    {
-                    //        OurTurn = false;
-                    //    }
-                    //}
+                    else
+                    {
+                        CastMouseClickRay();
+                    }
                 }
 
             }
@@ -866,13 +863,31 @@ public class Ball : MonoBehaviour
             Input.mousePosition.y,
             Camera.main.nearClipPlane
             );
-        worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
-        worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
+        if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        {
+            screenMousePosFar = Vector3.zero;
+            screenMousePosNear = Vector3.zero;
+        }
+        else
+        {
+            worldMousePosFar = Camera.main.ScreenToWorldPoint(screenMousePosFar);
+            worldMousePosNear = Camera.main.ScreenToWorldPoint(screenMousePosNear);
+        }
+        
 
         RaycastHit hit;
         if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
         {
-            return hit.point; // eðer ray bi þeye çarparsa return hit point
+            if (!(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                hit.point = Vector3.zero;
+                return null;
+            }
+            else
+            {
+                return hit.point; // eðer ray bi þeye çarparsa return hit point
+            }
+            
         }
         else
         {
