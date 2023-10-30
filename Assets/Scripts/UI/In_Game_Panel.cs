@@ -15,6 +15,7 @@ public class In_Game_Panel : MonoBehaviour
     ShotCounter ShotCounter;
     private GameObject ball;
      int playerScore;
+    bool dene;
     void Start()
     {
         if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
@@ -56,7 +57,7 @@ public class In_Game_Panel : MonoBehaviour
     }   
     private void Update()
     {
-        if (Ball.gameEnder)
+        if (GameEnder.EndGamePanelOpen)
         {
             Versus.SetActive(false);
         }
@@ -100,7 +101,6 @@ public class In_Game_Panel : MonoBehaviour
     public void MainMenu()
     {
         ShotCounter.ShotCount = 0;
-        GameEnder.EndGamePanelOpen = false;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
