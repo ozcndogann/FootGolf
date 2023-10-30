@@ -906,6 +906,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89e9a7d20c508c440a18fe92c5fd565d, type: 3}
+--- !u!1 &73617677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4007660289463144369, guid: 89e9a7d20c508c440a18fe92c5fd565d,
+    type: 3}
+  m_PrefabInstance: {fileID: 73617676}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &78187876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1429,7 +1435,7 @@ PrefabInstance:
     - target: {fileID: 4955265777499150391, guid: a7c6e275679c9ed4b85544a56aa2e6b7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4955265777499150395, guid: a7c6e275679c9ed4b85544a56aa2e6b7,
         type: 3}
@@ -1580,12 +1586,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 104784631}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &104784633 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2520950664667054031, guid: a7c6e275679c9ed4b85544a56aa2e6b7,
-    type: 3}
-  m_PrefabInstance: {fileID: 104784631}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &104784634 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4955265776076530657, guid: a7c6e275679c9ed4b85544a56aa2e6b7,
@@ -1598,24 +1598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &104784635 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8900555819883554497, guid: a7c6e275679c9ed4b85544a56aa2e6b7,
-    type: 3}
-  m_PrefabInstance: {fileID: 104784631}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &104784636 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4486428146221752311, guid: a7c6e275679c9ed4b85544a56aa2e6b7,
-    type: 3}
-  m_PrefabInstance: {fileID: 104784631}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &104784637 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5944755676496898246, guid: a7c6e275679c9ed4b85544a56aa2e6b7,
-    type: 3}
-  m_PrefabInstance: {fileID: 104784631}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &110327458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20415,6 +20397,21 @@ PrefabInstance:
       objectReference: {fileID: 104784632}
     - target: {fileID: 890863789642467579, guid: 27b57ef08721e4d46a207451f9793aab,
         type: 3}
+      propertyPath: Versus
+      value: 
+      objectReference: {fileID: 1865203382}
+    - target: {fileID: 890863789642467579, guid: 27b57ef08721e4d46a207451f9793aab,
+        type: 3}
+      propertyPath: Practice
+      value: 
+      objectReference: {fileID: 73617677}
+    - target: {fileID: 890863789642467579, guid: 27b57ef08721e4d46a207451f9793aab,
+        type: 3}
+      propertyPath: Tournament
+      value: 
+      objectReference: {fileID: 469910111}
+    - target: {fileID: 890863789642467579, guid: 27b57ef08721e4d46a207451f9793aab,
+        type: 3}
       propertyPath: firstHolePar
       value: 5
       objectReference: {fileID: 0}
@@ -20438,26 +20435,31 @@ PrefabInstance:
         type: 3}
       propertyPath: scoreDisplayParent
       value: 
-      objectReference: {fileID: 104784637}
+      objectReference: {fileID: 0}
     - target: {fileID: 890863789642467579, guid: 27b57ef08721e4d46a207451f9793aab,
         type: 3}
       propertyPath: scoreDisplayParent1
       value: 
-      objectReference: {fileID: 104784636}
+      objectReference: {fileID: 0}
     - target: {fileID: 890863789642467579, guid: 27b57ef08721e4d46a207451f9793aab,
         type: 3}
       propertyPath: scoreDisplayParent2
       value: 
-      objectReference: {fileID: 104784635}
+      objectReference: {fileID: 0}
     - target: {fileID: 890863789642467579, guid: 27b57ef08721e4d46a207451f9793aab,
         type: 3}
       propertyPath: scoreDisplayParent3
       value: 
-      objectReference: {fileID: 104784633}
+      objectReference: {fileID: 0}
     - target: {fileID: 890863789642467580, guid: 27b57ef08721e4d46a207451f9793aab,
         type: 3}
       propertyPath: m_Name
       value: GameEnder
+      objectReference: {fileID: 0}
+    - target: {fileID: 890863789642467580, guid: 27b57ef08721e4d46a207451f9793aab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27b57ef08721e4d46a207451f9793aab, type: 3}

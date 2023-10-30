@@ -57,6 +57,7 @@ public class In_Game_Panel : MonoBehaviour
     }   
     private void Update()
     {
+        
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
