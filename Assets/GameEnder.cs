@@ -33,15 +33,10 @@ public class GameEnder : MonoBehaviour
     {
         if (Ball.gameEnder)
         {
-            EndGamePanelOpen = true;
             Panel.SetActive(true);
             CalculateScore();
             UpdateScoreDisplay();
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        }
-        else
-        {
-            EndGamePanelOpen = false;
         }
     }
     private void CalculateScore()

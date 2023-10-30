@@ -57,18 +57,6 @@ public class In_Game_Panel : MonoBehaviour
     }   
     private void Update()
     {
-        if (GameEnder.EndGamePanelOpen)
-        {
-            Versus.SetActive(false);
-        }
-        if (GameEnder.EndGamePanelOpen)
-        {
-            Practice.SetActive(false);
-        }
-        if (GameEnder.EndGamePanelOpen)
-        {
-            Tournament.SetActive(false);
-        }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
