@@ -64,9 +64,9 @@ public class In_Game_Panel : MonoBehaviour
         {
             Practice.SetActive(false);
         }
-        if (CreateAndJoinRandomRooms.Tournament || CreateAndJoinRooms.Tournament)
+        if (GameEnder.EndGamePanelOpen)
         {
-            Tournament.SetActive(true);
+            Tournament.SetActive(false);
         }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -100,6 +100,7 @@ public class In_Game_Panel : MonoBehaviour
     public void MainMenu()
     {
         ShotCounter.ShotCount = 0;
+        GameEnder.EndGamePanelOpen = false;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }

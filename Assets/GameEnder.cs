@@ -18,9 +18,8 @@ public class GameEnder : MonoBehaviour
     ShotCounter ShotCounter;
     [SerializeField] private TMP_Text scoreDisplayText;  // Drag your Text UI element here in the Inspector
     public GameObject Panel;
-    [SerializeField] private Transform scoreDisplayParent/*, scoreDisplayParent1, scoreDisplayParent2, scoreDisplayParent3*/;  // Drag the parent object (like a Vertical Layout Group) here
+    [SerializeField] private Transform scoreDisplayParent;  // Drag the parent object (like a Vertical Layout Group) here
     [SerializeField] private GameObject playerScorePrefab;
-    private bool hasProcessed = false, hasProcessed1 = false, hasProcessed2 = false, hasProcessed3 = false;
     private void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
@@ -28,6 +27,7 @@ public class GameEnder : MonoBehaviour
         ShotCounter = ball.GetComponent<ShotCounter>();
         Panel.SetActive(false);
         EndGame = true;
+        EndGamePanelOpen = false;
     }
     void Update()
     {
@@ -48,7 +48,6 @@ public class GameEnder : MonoBehaviour
         ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
         customProperties["FinalScore"] = score;
         PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties); 
-        EndGamePanelOpen = true;
     }
     private void UpdateScoreDisplay()
     {

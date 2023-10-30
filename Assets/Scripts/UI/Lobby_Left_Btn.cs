@@ -33,8 +33,7 @@ public class Lobby_Left_Btn : MonoBehaviour
         {
             ShotCounter.ShotCount = 0;
             PhotonNetwork.LeaveRoom();
-            PhotonNetwork.Disconnect();
-            SceneManager.LoadScene("Loading");
+            SceneManager.LoadScene("MainMenu");
         }
         
     }
