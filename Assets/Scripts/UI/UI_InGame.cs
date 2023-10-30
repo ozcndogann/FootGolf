@@ -169,6 +169,7 @@ public class UI_InGame : MonoBehaviour
     {
         ShotCounter.ShotCount = 0;
         GameEnder.EndGamePanelOpen = false;
+        Ball.gameEnder = false;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
