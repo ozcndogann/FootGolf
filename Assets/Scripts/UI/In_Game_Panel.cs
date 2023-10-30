@@ -56,7 +56,7 @@ public class In_Game_Panel : MonoBehaviour
     }   
     private void Update()
     {
-        if (GameEnder.EndGamePanelOpen)
+        if (Ball.gameEnder)
         {
             Versus.SetActive(false);
         }
