@@ -72,7 +72,7 @@ public class GameEnder : MonoBehaviour
         
         foreach (Player p in playersSorted)
         {
-            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : (int)p.CustomProperties["FinalScore"];
+            int playerScore = p.CustomProperties.ContainsKey("FinalScore") ? (int)p.CustomProperties["FinalScore"] : /*(int)p.CustomProperties["FinalScore"]*/0;
 
             if (playerScore != lastScore)
             {
@@ -80,7 +80,7 @@ public class GameEnder : MonoBehaviour
             }
             GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
             TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
+            scoreTextComponent.text = "  " + lastRank + ") " + p.NickName + ": " + playerScore;
             //if (lastRank == 1 /*&& !hasProcessed*/)
             //{
             //    GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
