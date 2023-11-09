@@ -20,6 +20,8 @@ public class GameEnder : MonoBehaviour
     public GameObject Panel;
     [SerializeField] private Transform scoreDisplayParent;  // Drag the parent object (like a Vertical Layout Group) here
     [SerializeField] private GameObject playerScorePrefab;
+    private int lastRank;
+    [SerializeField] private int prize1, prize2, prize3, prize4;
     private void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
@@ -67,7 +69,7 @@ public class GameEnder : MonoBehaviour
 
         // Display players with rank
         int lastScore = int.MinValue;
-        int lastRank = 0;
+        //int lastRank = 0;
         int displayRank = 0;
         
         foreach (Player p in playersSorted)
@@ -81,42 +83,40 @@ public class GameEnder : MonoBehaviour
             GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
             TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
             scoreTextComponent.text = "  " + lastRank + ") " + p.NickName + ": " + playerScore;
-            //if (lastRank == 1 /*&& !hasProcessed*/)
-            //{
-            //    GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
-            //    TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            //    scoreTextComponent.text = lastRank + ") " + p.NickName + ": " + playerScore;
-            //    //hasProcessed = true;
-            //}
-            //else if (lastRank == 2 && !hasProcessed1)
-            //{
-            //    GameObject newScoreDisplay2 = Instantiate(playerScorePrefab, scoreDisplayParent1);
-            //    TMP_Text scoreTextComponent2 = newScoreDisplay2.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            //    scoreTextComponent2.text = lastRank + ") " + p.NickName + ": " + playerScore;
-            //    hasProcessed1 = true;
-            //}
-            //else if (lastRank == 3 && !hasProcessed2)
-            //{
-            //    GameObject newScoreDisplay3 = Instantiate(playerScorePrefab, scoreDisplayParent2);
-            //    TMP_Text scoreTextComponent3 = newScoreDisplay3.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            //    scoreTextComponent3.text = lastRank + ") " + p.NickName + ": " + playerScore;
-            //    hasProcessed2 = true;
-            //}
-            //else if (lastRank == 4 && !hasProcessed3)
-            //{
-            //    GameObject newScoreDisplay4 = Instantiate(playerScorePrefab, scoreDisplayParent3);
-            //    TMP_Text scoreTextComponent4 = newScoreDisplay4.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
-            //    scoreTextComponent4.text = lastRank + ") " + p.NickName + ": " + playerScore;
-            //    hasProcessed3 = true;
-            //}
-
-
-
-
             lastScore = playerScore;
             displayRank++;
             Debug.Log(lastRank + "for" + p.NickName);
             
         }
+    }
+    public void MainMenu()
+    {
+        int totalCoins = PlayerPrefs.GetInt("Coins", 0);
+
+        if (lastRank == 1)
+        {
+            totalCoins += prize1;
+            Debug.Log("prize1");
+        }
+        else if (lastRank == 2)
+        {
+            totalCoins += prize2;
+            Debug.Log("prize2");
+        }
+        else if (lastRank == 3)
+        {
+            totalCoins += prize3;
+            Debug.Log("prize3");
+        }
+        else if (lastRank == 4)
+        {
+            totalCoins += prize4;
+            Debug.Log("prize4");
+        }
+
+
+        ShotCounter.ShotCount = 0;
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("MainMenu");
     }
 }
