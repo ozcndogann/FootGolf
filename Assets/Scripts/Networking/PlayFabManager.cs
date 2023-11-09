@@ -23,6 +23,7 @@ public class PlayFabManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SendLeaderboard(PlayerPrefs.GetInt("Score"));
         PlayerPrefs.GetString("Username");
         playerFound = false;
         nameAccepter = false;

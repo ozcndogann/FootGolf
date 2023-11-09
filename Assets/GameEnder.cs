@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using PlayFab;
 public class GameEnder : MonoBehaviour
 {
     [SerializeField] private int firstHolePar;
     [SerializeField] private int secondHolePar;
-    private int score;
+    List<int> playerScores =new List<int> { };
+    private int score,i;
     public static bool EndGame;
     public static bool EndGamePanelOpen;
     Player player;
@@ -24,6 +26,8 @@ public class GameEnder : MonoBehaviour
     [SerializeField] private int prize1, prize2, prize3, prize4;
     private void Start()
     {
+        i = 1;
+        PlayerPrefs.GetInt("Score", 0);
         ball = GameObject.FindGameObjectWithTag("Ball");
         //ballScript = ball.GetComponent<Ball>();
         ShotCounter = ball.GetComponent<ShotCounter>();
@@ -83,6 +87,8 @@ public class GameEnder : MonoBehaviour
             GameObject newScoreDisplay = Instantiate(playerScorePrefab, scoreDisplayParent);
             TMP_Text scoreTextComponent = newScoreDisplay.transform.GetChild(0).GetComponentInChildren<TMP_Text>();
             scoreTextComponent.text = "  " + lastRank + ") " + p.NickName + ": " + playerScore;
+            playerScores.Add(playerScore);
+            i++;
             lastScore = playerScore;
             displayRank++;
             Debug.Log(lastRank + "for" + p.NickName);
@@ -96,20 +102,33 @@ public class GameEnder : MonoBehaviour
         if (lastRank == 1)
         {
             totalCoins += prize1;
+            PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
             Debug.Log("prize1");
         }
         else if (lastRank == 2)
         {
+            if (playerScores[0] == playerScores[1])
+            {
+                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+            }
             totalCoins += prize2;
             Debug.Log("prize2");
         }
         else if (lastRank == 3)
         {
+            if (playerScores[0] == playerScores[2])
+            {
+                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+            }
             totalCoins += prize3;
             Debug.Log("prize3");
         }
         else if (lastRank == 4)
         {
+            if (playerScores[0] == playerScores[3])
+            {
+                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+            }
             totalCoins += prize4;
             Debug.Log("prize4");
         }
