@@ -17,7 +17,8 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public static RoomOptions roomOptions = new RoomOptions();
     public GameObject Panel;
     public Button IGotIt;
-
+    public int turkeyfee, englandfee, hollandfee;
+    private int coins;
     public void ClosePopup()
     {
         if (IGotIt == true)
@@ -29,6 +30,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     {
         //PlayerPrefs.GetInt("MatchType");
 
+        coins = PlayerPrefs.GetInt("Coins");
 
     }
     public void Update()
@@ -73,24 +75,77 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
             expectedCustomRoomProperties.Add("GameMode", Switch.index);
             PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 1);
         }
-        else if (versus)
+        if (Switch.index == 0 && coins >= turkeyfee)
         {
-            //PhotonNetwork.JoinRandomRoom(null, 2);
-            PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
-            expectedCustomRoomProperties.Add("GameMode", Switch.index);
-            PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
+            if (versus)
+            {
+                //PhotonNetwork.JoinRandomRoom(null, 2);
+                PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+                expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
+            }
+            else if (Tournament)
+            {
+                //PhotonNetwork.JoinRandomRoom(null, 4);
+                PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+                expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
+            }
+            else
+            {
+                Panel.transform.gameObject.SetActive(true);
+            }
+            coins -= turkeyfee;
         }
-        else if (Tournament)
+        else if (Switch.index == 1 && coins >= englandfee)
         {
-            //PhotonNetwork.JoinRandomRoom(null, 4);
-            PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
-            expectedCustomRoomProperties.Add("GameMode", Switch.index);
-            PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
+            if (versus)
+            {
+                //PhotonNetwork.JoinRandomRoom(null, 2);
+                PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+                expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
+            }
+            else if (Tournament)
+            {
+                //PhotonNetwork.JoinRandomRoom(null, 4);
+                PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+                expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
+            }
+            else
+            {
+                Panel.transform.gameObject.SetActive(true);
+            }
+            coins -= englandfee;
+        }
+        else if (Switch.index == 2 && coins >= hollandfee)
+        {
+            if (versus)
+            {
+                //PhotonNetwork.JoinRandomRoom(null, 2);
+                PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+                expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
+            }
+            else if (Tournament)
+            {
+                //PhotonNetwork.JoinRandomRoom(null, 4);
+                PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
+                expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
+            }
+            else
+            {
+                Panel.transform.gameObject.SetActive(true);
+            }
+            coins -= hollandfee;
         }
         else
         {
-            Panel.transform.gameObject.SetActive(true);
+            Debug.Log("paran yetersiz");
         }
+        
     }
     public override void OnJoinRandomFailed(short returnCode, string message)
     {

@@ -17,12 +17,20 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public GameObject panel;
     public Button IGotIt;
 
+    public int turkeyfee, englandfee, hollandfee;
+    private int coins;
 
     public void Update()
     {
         //Debug.Log("practice: " + practice + " versus: " + versus + " tournement: " + Tournament);
     }
+    public void Start()
+    {
+        //PlayerPrefs.GetInt("MatchType");
 
+        coins = PlayerPrefs.GetInt("Coins");
+
+    }
     public void IsPractice()
 
     {
@@ -63,19 +71,59 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
 
-        if (practice || versus || Tournament)
+        
+        if (Switch.index == 0 && coins >= turkeyfee)
         {
-            randomCreate = GenerateRandomSixDigitNumber();
-            // Setting the room property
-            roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
-            roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
-            PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+            if (practice || versus || Tournament)
+            {
+                randomCreate = GenerateRandomSixDigitNumber();
+                // Setting the room property
+                roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
+                roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
+                PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+            }
+            else
+            {
+                panel.transform.gameObject.SetActive(true);
+            }
+            coins -= turkeyfee;
+        }
+        else if (Switch.index == 1 && coins >= englandfee)
+        {
+            if (practice || versus || Tournament)
+            {
+                randomCreate = GenerateRandomSixDigitNumber();
+                // Setting the room property
+                roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
+                roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
+                PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+            }
+            else
+            {
+                panel.transform.gameObject.SetActive(true);
+            }
+            coins -= englandfee;
+        }
+        else if (Switch.index == 2 && coins >= hollandfee)
+        {
+            if (practice || versus || Tournament)
+            {
+                randomCreate = GenerateRandomSixDigitNumber();
+                // Setting the room property
+                roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
+                roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
+                PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+            }
+            else
+            {
+                panel.transform.gameObject.SetActive(true);
+            }
+            coins -= hollandfee;
         }
         else
         {
-            panel.transform.gameObject.SetActive(true);
+            Debug.Log("paran yetersiz");
         }
-
 
     }
     private string GenerateRandomSixDigitNumber()
