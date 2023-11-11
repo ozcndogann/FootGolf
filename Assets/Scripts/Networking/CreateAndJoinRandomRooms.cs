@@ -95,7 +95,8 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
             {
                 Panel.transform.gameObject.SetActive(true);
             }
-            coins -= turkeyfee;
+            //coins -= turkeyfee;
+            PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
         }
         else if (Switch.index == 1 && coins >= englandfee)
         {
@@ -117,7 +118,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
             {
                 Panel.transform.gameObject.SetActive(true);
             }
-            coins -= englandfee;
+            PlayerPrefs.SetInt("Coins", coins -= englandfee);
         }
         else if (Switch.index == 2 && coins >= hollandfee)
         {
@@ -139,7 +140,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
             {
                 Panel.transform.gameObject.SetActive(true);
             }
-            coins -= hollandfee;
+            PlayerPrefs.SetInt("Coins", coins -= hollandfee);
         }
         else
         {
