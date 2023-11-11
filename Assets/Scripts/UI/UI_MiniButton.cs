@@ -36,6 +36,14 @@ public class UI_MiniButton : MonoBehaviour
         //MusicPanel.SetActive(true);
         SceneManager.LoadScene("Settings");
     }
+    public void ParaKas()
+    {
+        int totalCoins = PlayerPrefs.GetInt("Coins", 0);
+
+        PlayerPrefs.SetInt("Coins", totalCoins += 100);
+        Debug.Log("paraa");
+
+    }
     //public void CloseSettings()
     //{
     //    MusicPanel.SetActive(false);

@@ -81,12 +81,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);
             }
             else
             {
                 panel.transform.gameObject.SetActive(true);
             }
-            coins -= turkeyfee;
+            //coins -= turkeyfee;
         }
         else if (Switch.index == 1 && coins >= englandfee)
         {
@@ -97,12 +98,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+                PlayerPrefs.SetInt("Coins", coins -= englandfee);
             }
             else
             {
                 panel.transform.gameObject.SetActive(true);
             }
-            coins -= englandfee;
+            //coins -= englandfee;
         }
         else if (Switch.index == 2 && coins >= hollandfee)
         {
@@ -113,12 +115,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
+                PlayerPrefs.SetInt("Coins", coins -= hollandfee);
             }
             else
             {
                 panel.transform.gameObject.SetActive(true);
             }
-            coins -= hollandfee;
+            //coins -= hollandfee;
         }
         else
         {

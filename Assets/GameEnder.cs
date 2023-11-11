@@ -98,41 +98,45 @@ public class GameEnder : MonoBehaviour
     public void MainMenu()
     {
         int totalCoins = PlayerPrefs.GetInt("Coins", 0);
+        //if (!CreateAndJoinRandomRooms.practice && !CreateAndJoinRooms.practice)
+        //{
+            if (lastRank == 1)
+            {
+                //totalCoins += prize1;
+                PlayerPrefs.SetInt("Coins", totalCoins += prize1);
+                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+                Debug.Log("prize1");
+            }
+            else if (lastRank == 2)
+            {
+                if (playerScores[0] == playerScores[1])
+                {
+                    PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+                }
+                PlayerPrefs.SetInt("Coins", totalCoins += prize2);
+                Debug.Log("prize2");
+            }
+            else if (lastRank == 3)
+            {
+                if (playerScores[0] == playerScores[2])
+                {
+                    PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+                }
+                PlayerPrefs.SetInt("Coins", totalCoins += prize3);
+                Debug.Log("prize3");
+            }
+            else if (lastRank == 4)
+            {
+                if (playerScores[0] == playerScores[3])
+                {
+                    PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+                }
+                PlayerPrefs.SetInt("Coins", totalCoins += prize4);
+                Debug.Log("prize4");
+            }
+        //}
 
-        if (lastRank == 1)
-        {
-            //totalCoins += prize1;
-            PlayerPrefs.SetInt("Coins", totalCoins += prize1);
-            PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
-            Debug.Log("prize1");
-        }
-        else if (lastRank == 2)
-        {
-            if (playerScores[0] == playerScores[1])
-            {
-                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
-            }
-            PlayerPrefs.SetInt("Coins", totalCoins += prize2);
-            Debug.Log("prize2");
-        }
-        else if (lastRank == 3)
-        {
-            if (playerScores[0] == playerScores[2])
-            {
-                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
-            }
-            PlayerPrefs.SetInt("Coins", totalCoins += prize3);
-            Debug.Log("prize3");
-        }
-        else if (lastRank == 4)
-        {
-            if (playerScores[0] == playerScores[3])
-            {
-                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
-            }
-            PlayerPrefs.SetInt("Coins", totalCoins += prize4);
-            Debug.Log("prize4");
-        }
+        
 
 
         ShotCounter.ShotCount = 0;

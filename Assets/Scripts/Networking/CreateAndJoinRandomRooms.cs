@@ -83,6 +83,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
+                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
             }
             else if (Tournament)
             {
@@ -90,13 +91,14 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
+                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
             }
             else
             {
                 Panel.transform.gameObject.SetActive(true);
             }
             //coins -= turkeyfee;
-            PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
+            
         }
         else if (Switch.index == 1 && coins >= englandfee)
         {
@@ -106,6 +108,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
+                PlayerPrefs.SetInt("Coins", coins -= englandfee);
             }
             else if (Tournament)
             {
@@ -113,12 +116,13 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
+                PlayerPrefs.SetInt("Coins", coins -= englandfee);
             }
             else
             {
                 Panel.transform.gameObject.SetActive(true);
             }
-            PlayerPrefs.SetInt("Coins", coins -= englandfee);
+            
         }
         else if (Switch.index == 2 && coins >= hollandfee)
         {
@@ -128,6 +132,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
+                PlayerPrefs.SetInt("Coins", coins -= hollandfee);
             }
             else if (Tournament)
             {
@@ -135,12 +140,13 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
+                PlayerPrefs.SetInt("Coins", coins -= hollandfee);
             }
             else
             {
                 Panel.transform.gameObject.SetActive(true);
             }
-            PlayerPrefs.SetInt("Coins", coins -= hollandfee);
+            
         }
         else
         {
