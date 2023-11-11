@@ -34,6 +34,7 @@ public class Ball : MonoBehaviour
     public float curveValue, forceValue;
     public float lineX;
     Camera cam2;
+    Camera barrierCam;
     public PhotonView view;
     private GameObject hole;
     [SerializeField] public static float timer;
@@ -74,7 +75,8 @@ public class Ball : MonoBehaviour
         //waitForShootTriTimer = 0;
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
-        cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera;
+        cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera; 
+        barrierCam = GameObject.FindGameObjectWithTag("BarrierCam").GetComponent<Camera>() as Camera;
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
@@ -304,21 +306,11 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        //if (!OurTurn && worldPoint==null)
-                        //{
-                        //    OurTurn = true;
-                        //}
                         timer -= Time.deltaTime;
-                        //if (OurTurn == true)
-                        //{
-                        //    Debug.Log("sýfýrla aq");
-                        //    lineRenderer.SetPosition(1, new Vector3(transform.position.x, transform.position.y, transform.position.z));
-
-                        //    OurTurn = false;
-                        //}
                         
                         if (timer > 0)
                         {
+                            barrierCam.gameObject.SetActive(false);
                             ProcessAim();
 
                         }
@@ -331,8 +323,10 @@ public class Ball : MonoBehaviour
                             //lineRenderer.enabled = false;
                             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                             {
+                               
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                
                             }
                             timer = 20f;
                         }
@@ -691,7 +685,7 @@ public class Ball : MonoBehaviour
         //alttaki kýsým sadece vururken futbolcu görünsün diye
         //view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-
+        barrierCam.gameObject.SetActive(true);
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
