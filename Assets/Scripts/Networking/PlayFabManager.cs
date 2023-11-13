@@ -235,4 +235,8 @@ public class PlayFabManager : MonoBehaviour
         };
         PlayFabClientAPI.GetLeaderboardAroundPlayer(request, OnLeaderboardAroundPlayerGet, OnError);
     }
+    public void CloseLeaderboardPanel() 
+    {
+        LeaderBoardPanel.SetActive(false);
+    }
 }

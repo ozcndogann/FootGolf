@@ -15,11 +15,7 @@ public class UI_MiniButton : MonoBehaviour
     // Start is called before the first frame update
     public void PushHome()
     {
-        if (Home == true)
-        {
-            
-            SceneManager.LoadScene("MainMenu");
-        }
+        SceneManager.LoadScene("MainMenu");
     }
     public void PushShop()
     {
@@ -28,13 +24,16 @@ public class UI_MiniButton : MonoBehaviour
     }
     public void PushPlayer()
     {
-        
         SceneManager.LoadScene("Player");
     }
     public void PushSettings()
     {
         //MusicPanel.SetActive(true);
         SceneManager.LoadScene("Settings");
+    }
+    public void PushLeaderboard() 
+    {
+        SceneManager.LoadScene("MainMenu");
     }
     public void ParaKas()
     {

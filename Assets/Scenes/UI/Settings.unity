@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Home: {fileID: 272210624}
-  Raiting: {fileID: 0}
+  Raiting: {fileID: 340622050}
   Settings: {fileID: 2018483509}
   Shop: {fileID: 323772719}
   Player: {fileID: 901281452}
@@ -836,7 +836,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 340622051}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 248636257}
+        m_TargetAssemblyTypeName: UI_MiniButton, Assembly-CSharp
+        m_MethodName: PushLeaderboard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &340622051
 MonoBehaviour:
   m_ObjectHideFlags: 0
