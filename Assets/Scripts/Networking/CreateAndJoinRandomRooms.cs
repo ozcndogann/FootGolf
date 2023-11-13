@@ -68,11 +68,15 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
 
     public void JoinRandomRoom()
     {
+        int playerScore = PlayerPrefs.GetInt("Score");
+        string scoreRange = GetScoreRange(playerScore);
+
         if (practice)
         {
             //PhotonNetwork.JoinRandomRoom(null ,1);
             PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
             expectedCustomRoomProperties.Add("GameMode", Switch.index);
+            expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
             PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 1);
         }
         if (Switch.index == 0 && coins >= turkeyfee)
@@ -82,6 +86,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 //PhotonNetwork.JoinRandomRoom(null, 2);
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
                 PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
             }
@@ -90,6 +95,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 //PhotonNetwork.JoinRandomRoom(null, 4);
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
                 PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
             }
@@ -107,6 +113,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 //PhotonNetwork.JoinRandomRoom(null, 2);
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
                 PlayerPrefs.SetInt("Coins", coins -= englandfee);
             }
@@ -115,6 +122,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 //PhotonNetwork.JoinRandomRoom(null, 4);
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
                 PlayerPrefs.SetInt("Coins", coins -= englandfee);
             }
@@ -131,6 +139,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 //PhotonNetwork.JoinRandomRoom(null, 2);
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
                 PlayerPrefs.SetInt("Coins", coins -= hollandfee);
             }
@@ -139,6 +148,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 //PhotonNetwork.JoinRandomRoom(null, 4);
                 PhotonHashTable expectedCustomRoomProperties = new PhotonHashTable();
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
+                expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
                 PlayerPrefs.SetInt("Coins", coins -= hollandfee);
             }
@@ -154,17 +164,28 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         }
         
     }
+    //Ranks
+    private string GetScoreRange(int score)
+    {
+        if (score <= 50) return "0-50";
+        else if (score <= 100) return "51-100";
+        else if (score <= 150) return "101-150";
+        else if (score <= 200) return "151-200";
+        else if (score <= 250) return "201-250";
+        else if (score <= 300) return "251-300";
+        else if (score <= 350) return "301-350";
+        else if (score <= 400) return "351-400";
+        else if (score <= 450) return "401-450";
+        else if (score <= 500) return "451-500";
+        else return "Above 500"; // For scores above 500
+    }
+
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         base.OnJoinRandomFailed(returnCode, message);
         Debug.Log(message);
         CreateAndJoinRoom();
     }
-    //void CreateAndJoinRoom()
-    //{
-    //    randomCreate = GenerateRandomSixDigitNumber();
-    //    PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-    //}
     void CreateAndJoinRoom()
     {
         randomCreate = GenerateRandomSixDigitNumber();
@@ -186,18 +207,6 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", 0 } });
         }
         PhotonNetwork.LoadLevel("RandomLobby");
-        //if (Switch.index == 0)
-        //{
-        //    PhotonNetwork.LoadLevel("RandomLobbyTR");
-        //}
-        //else if (Switch.index == 1)
-        //{
-        //    PhotonNetwork.LoadLevel("RandomLobbyENG");
-        //}
-        //else if (Switch.index == 2)
-        //{
-        //    PhotonNetwork.LoadLevel("RandomLobbyNED");
-        //}
     }
     
 }

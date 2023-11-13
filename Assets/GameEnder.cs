@@ -98,8 +98,8 @@ public class GameEnder : MonoBehaviour
     public void MainMenu()
     {
         int totalCoins = PlayerPrefs.GetInt("Coins", 0);
-        //if (!CreateAndJoinRandomRooms.practice && !CreateAndJoinRooms.practice)
-        //{
+        if (!CreateAndJoinRandomRooms.practice && !CreateAndJoinRooms.practice)
+        {
             if (lastRank == 1)
             {
                 //totalCoins += prize1;
@@ -134,7 +134,7 @@ public class GameEnder : MonoBehaviour
                 PlayerPrefs.SetInt("Coins", totalCoins += prize4);
                 Debug.Log("prize4");
             }
-        //}
+        }
 
         
 
