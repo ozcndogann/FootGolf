@@ -63,7 +63,7 @@ public class BunkerDynamic : MonoBehaviour
 
     void ApplyBunkerPhysics()
     {
-        rb.mass = 1f;
+        rb.mass = 1.15f;
         rb.angularDrag = 0.05f;
         rb.drag = 0.075f;
         rbphy.bounciness = 0.15f;

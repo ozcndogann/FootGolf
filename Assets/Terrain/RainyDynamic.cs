@@ -17,7 +17,7 @@ public class RainyDynamic : MonoBehaviour
         rb.mass = 1;
         rb.angularDrag = 0.05f;
         rb.drag = 0.075f;
-        rbphy.bounciness = 0.55f;
+        rbphy.bounciness = 0.5f;
     }
 
     private void OnCollisionEnter(Collision other)
