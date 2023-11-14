@@ -16,6 +16,9 @@ public class PlayFabManager : MonoBehaviour
     public GameObject LeaderBoardPanel;
     public GameObject rowPrefab;
     public Transform rowsParent;
+    public GameObject firstAward;
+    public GameObject secondAward;
+    public GameObject thirdAward;
     string loggedInPlayedId;
     public static bool nameAccepter, playerFound;
     public GameObject Long, Short, Taken,Empty;
@@ -23,7 +26,8 @@ public class PlayFabManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SendLeaderboard(PlayerPrefs.GetInt("Score"));
+        //SendLeaderboard(PlayerPrefs.GetInt("Score"));
+        SendLeaderboard(80);
         PlayerPrefs.GetString("Username");
         playerFound = false;
         nameAccepter = false;
@@ -179,6 +183,7 @@ public class PlayFabManager : MonoBehaviour
         {
             if (item.Position < 10)
             {
+                
                 GameObject newGo = Instantiate(rowPrefab, rowsParent);
                 TMP_Text[] texts = newGo.GetComponentsInChildren<TMP_Text>();
                 texts[0].text = (item.Position + 1).ToString();
@@ -191,6 +196,18 @@ public class PlayFabManager : MonoBehaviour
                     texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
                     texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
                     texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                }
+                if (item.Position == 0) 
+                {
+                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
+                }
+                if (item.Position == 1) 
+                {
+                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
+                }
+                if (item.Position == 2) 
+                {
+                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
                 }
             }
             else

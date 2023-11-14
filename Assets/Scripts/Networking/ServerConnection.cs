@@ -17,7 +17,6 @@ public class ServerConnection : MonoBehaviourPunCallbacks
     /// /
     /// </summary>
     [SerializeField] private TMP_Text warningConnectionFailed;
-    public Slider LoadBar;
    
     private void Start()
     {
@@ -41,7 +40,8 @@ public class ServerConnection : MonoBehaviourPunCallbacks
         do
         {
             await Task.Delay(100);
-            LoadBar.value = scene.progress;
+            //şimdilik slider'ı kapattım sonra scene progrese göre yaparsak animation'a değer verererk yaparız
+            //LoadBar.value = scene.progress;
         }
         while (scene.progress < 0.9f);
         await Task.Delay(100);
