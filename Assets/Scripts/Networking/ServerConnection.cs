@@ -9,15 +9,11 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using System;
 
 public class ServerConnection : MonoBehaviourPunCallbacks
 {
-
-    /// <summary>
-    /// /
-    /// </summary>
     [SerializeField] private TMP_Text warningConnectionFailed;
-   
     private void Start()
     {
         //PhotonNetwork.GameVersion = "1.0.2";

@@ -25,5 +25,8 @@ public class UI_Start : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("UIRandomGameSelect");
     }
-
+    public void ProfileScene()
+    {
+        SceneManager.LoadScene("Profile");
+    }
 }
