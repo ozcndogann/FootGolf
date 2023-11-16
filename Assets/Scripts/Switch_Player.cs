@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// bu kodun deðiþmesi gerek full versiyonda çünkü þuan 2 index'e göre ayarlandý
+// bu kodun deï¿½iï¿½mesi gerek full versiyonda ï¿½ï¿½nkï¿½ ï¿½uan 2 index'e gï¿½re ayarlandï¿½
 public class Switch_Player : MonoBehaviour
 {
     public GameObject[] maps;
@@ -28,7 +28,7 @@ public class Switch_Player : MonoBehaviour
     void Update()
     {
         Debug.Log(index);
-        if (index == 1)
+        if (index == maps.Length - 1)
         {
 
             NextButton.gameObject.SetActive(false);
