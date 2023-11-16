@@ -167,17 +167,17 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     //Ranks
     private string GetScoreRange(int score)
     {
-        if (score <= 50) return "0-50";
-        else if (score <= 100) return "51-100";
-        else if (score <= 150) return "101-150";
-        else if (score <= 200) return "151-200";
-        else if (score <= 250) return "201-250";
-        else if (score <= 300) return "251-300";
-        else if (score <= 350) return "301-350";
-        else if (score <= 400) return "351-400";
-        else if (score <= 450) return "401-450";
-        else if (score <= 500) return "451-500";
-        else return "Above 500"; // For scores above 500
+        if (score <= 5) return "Rank10";
+        else if (score <= 20) return "Rank9";
+        else if (score <= 50) return "Rank8";
+        else if (score <= 100) return "Rank7";
+        else if (score <= 160) return "Rank6";
+        else if (score <= 230) return "Rank5";
+        else if (score <= 310) return "Rank4";
+        else if (score <= 400) return "Rank3";
+        else if (score <= 500) return "Rank2";
+        else if (score <= 600) return "Rank1";
+        else return "Rank0"; // For scores above 500
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)

@@ -23,7 +23,7 @@ public class GameEnder : MonoBehaviour
     [SerializeField] private Transform scoreDisplayParent;  // Drag the parent object (like a Vertical Layout Group) here
     [SerializeField] private GameObject playerScorePrefab;
     private int lastRank;
-    [SerializeField] private int prize1, prize2, prize3, prize4;
+    [SerializeField] private int tprize1, tprize2, tprize3, tprize4, vsprize1, vsprize2;
     private void Start()
     {
         i = 1;
@@ -98,12 +98,12 @@ public class GameEnder : MonoBehaviour
     public void MainMenu()
     {
         int totalCoins = PlayerPrefs.GetInt("Coins", 0);
-        if (!CreateAndJoinRandomRooms.practice && !CreateAndJoinRooms.practice)
+        if (CreateAndJoinRandomRooms.Tournament && CreateAndJoinRooms.Tournament)
         {
             if (lastRank == 1)
             {
                 //totalCoins += prize1;
-                PlayerPrefs.SetInt("Coins", totalCoins += prize1);
+                PlayerPrefs.SetInt("Coins", totalCoins += tprize1);
                 PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
                 Debug.Log("prize1");
             }
@@ -113,7 +113,7 @@ public class GameEnder : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
                 }
-                PlayerPrefs.SetInt("Coins", totalCoins += prize2);
+                PlayerPrefs.SetInt("Coins", totalCoins += tprize2);
                 Debug.Log("prize2");
             }
             else if (lastRank == 3)
@@ -122,7 +122,7 @@ public class GameEnder : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
                 }
-                PlayerPrefs.SetInt("Coins", totalCoins += prize3);
+                PlayerPrefs.SetInt("Coins", totalCoins += tprize3);
                 Debug.Log("prize3");
             }
             else if (lastRank == 4)
@@ -131,12 +131,30 @@ public class GameEnder : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
                 }
-                PlayerPrefs.SetInt("Coins", totalCoins += prize4);
+                PlayerPrefs.SetInt("Coins", totalCoins += tprize4);
                 Debug.Log("prize4");
             }
         }
 
-        
+        else if (CreateAndJoinRandomRooms.versus && CreateAndJoinRooms.versus)
+        {
+            if (lastRank == 1)
+            {
+                //totalCoins += prize1;
+                PlayerPrefs.SetInt("Coins", totalCoins += vsprize1);
+                PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+                Debug.Log("prize1");
+            }
+            else if (lastRank == 2)
+            {
+                if (playerScores[0] == playerScores[1])
+                {
+                    PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 1);
+                }
+                PlayerPrefs.SetInt("Coins", totalCoins += vsprize2);
+                Debug.Log("prize2");
+            }
+        }
 
 
         ShotCounter.ShotCount = 0;
