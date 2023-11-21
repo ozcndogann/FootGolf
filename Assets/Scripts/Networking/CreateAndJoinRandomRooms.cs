@@ -16,6 +16,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
     public GameObject Panel;
+    public GameObject MoneyPopup;
     public Button IGotIt;
     public int turkeyfee, englandfee, hollandfee;
     public TMP_Text TRPrice, ENGPrice, NLPrice;
@@ -165,6 +166,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("paran yetersiz");
+            MoneyPopup.SetActive(true);
         }
         
     }
