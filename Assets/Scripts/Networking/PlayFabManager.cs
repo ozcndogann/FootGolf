@@ -22,10 +22,12 @@ public class PlayFabManager : MonoBehaviour
     string loggedInPlayedId;
     public static bool nameAccepter, playerFound;
     public GameObject Long, Short, Taken,Empty;
+    private int LeaguePosition;
     
     // Start is called before the first frame update
     void Start()
     {
+        LeaguePosition = 0;
         SendLeaderboard(PlayerPrefs.GetInt("Score"));
         PlayerPrefs.GetString("Username");
         playerFound = false;
@@ -172,6 +174,96 @@ public class PlayFabManager : MonoBehaviour
         };
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
     }
+    public void GetLeaderboardLeague()
+    {
+        LeaguePosition = 0;
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = "FootGolf Leaderboard",
+            StartPosition = 0,
+            MaxResultsCount = 11
+        };
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardLeagueGet, OnError);
+    }
+    void OnLeaderboardLeagueGet(GetLeaderboardResult result)
+    {
+        foreach (Transform item in rowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (var item in result.Leaderboard)
+        {
+            if (item.StatValue < 50 && PlayerPrefs.GetInt("Score") < 50)
+            {
+                LeaguePosition += 1;
+                GameObject newGo = Instantiate(rowPrefab, rowsParent);
+                TMP_Text[] texts = newGo.GetComponentsInChildren<TMP_Text>();
+                texts[0].text = (LeaguePosition).ToString();
+                texts[1].text = item.DisplayName;
+                texts[2].text = item.StatValue.ToString();
+                Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
+                if (item.PlayFabId == loggedInPlayedId)
+                {
+                    playerFound = true;
+                    texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                }
+                if (LeaguePosition == 1)
+                {
+                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
+                }
+                if (LeaguePosition == 2)
+                {
+                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
+                }
+                if (LeaguePosition == 3)
+                {
+                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
+                }
+            }
+            else if (50 < item.StatValue && item.StatValue < 100 && 50 < PlayerPrefs.GetInt("Score") && PlayerPrefs.GetInt("Score") < 100)
+            {
+                LeaguePosition += 1;
+                GameObject newGo = Instantiate(rowPrefab, rowsParent);
+                TMP_Text[] texts = newGo.GetComponentsInChildren<TMP_Text>();
+                texts[0].text = (LeaguePosition).ToString();
+                texts[1].text = item.DisplayName;
+                texts[2].text = item.StatValue.ToString();
+                Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
+                if (item.PlayFabId == loggedInPlayedId)
+                {
+                    playerFound = true;
+                    texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                }
+                if (LeaguePosition == 1)
+                {
+                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
+                }
+                if (LeaguePosition == 2)
+                {
+                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
+                }
+                if (LeaguePosition == 3)
+                {
+                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
+                }
+            }
+            else
+            {
+                if (playerFound == false)
+                {
+                    Debug.Log("getaroundcart");
+                    GetLeaderboardAroundPlayer();
+                }
+            }
+
+        }
+
+
+    }
     void OnLeaderboardGet(GetLeaderboardResult result)
     {
         foreach (Transform item in rowsParent)
@@ -211,9 +303,11 @@ public class PlayFabManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("getaroundcart");
-                GetLeaderboardAroundPlayer();
-
+                if (playerFound == false)
+                {
+                    Debug.Log("getaroundcart");
+                    GetLeaderboardAroundPlayer();
+                }
             }
 
         }
@@ -254,5 +348,6 @@ public class PlayFabManager : MonoBehaviour
     public void CloseLeaderboardPanel() 
     {
         LeaderBoardPanel.SetActive(false);
+        LeaguePosition = 0;
     }
 }
