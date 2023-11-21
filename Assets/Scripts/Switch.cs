@@ -8,6 +8,7 @@ public class Switch : MonoBehaviour
 {
     public GameObject[] maps;
     public GameObject[] Names;
+    public GameObject[] Map_details;
     public Button NextButton;
     public Button PrevButton;
 
@@ -41,6 +42,7 @@ public class Switch : MonoBehaviour
         {
             maps[0].gameObject.SetActive(true);
             Names[0].gameObject.SetActive(true);
+            Map_details[0].gameObject.SetActive(true);
             PrevButton.gameObject.SetActive(false);
         }
         else
@@ -56,8 +58,10 @@ public class Switch : MonoBehaviour
             
             maps[i].gameObject.SetActive(false);
             Names[i].gameObject.SetActive(false);
+            Map_details[i].gameObject.SetActive(false);
             maps[index].gameObject.SetActive(true);
             Names[index].gameObject.SetActive(true);
+            Map_details[index].gameObject.SetActive(true);
 
         }
         Debug.Log(index);
@@ -70,8 +74,10 @@ public class Switch : MonoBehaviour
             
             maps[i].gameObject.SetActive(false);
             Names[i].gameObject.SetActive(false);
+            Map_details[i].gameObject.SetActive(false);
             maps[index].gameObject.SetActive(true);
             Names[index].gameObject.SetActive(true);
+            Map_details[index].gameObject.SetActive(true);
 
         }
         Debug.Log(index);

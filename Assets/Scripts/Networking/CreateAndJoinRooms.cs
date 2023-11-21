@@ -16,6 +16,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public static RoomOptions roomOptions = new RoomOptions();
     public GameObject panel;
     public Button IGotIt;
+    public TMP_Text TRPrice, ENGPrice, NLPrice;
 
     public int turkeyfee, englandfee, hollandfee;
     private int coins;
@@ -28,6 +29,9 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         //PlayerPrefs.GetInt("MatchType");
 
+        TRPrice.text = turkeyfee.ToString();
+        ENGPrice.text = englandfee.ToString();
+        NLPrice.text = hollandfee.ToString();
         coins = PlayerPrefs.GetInt("Coins");
 
     }

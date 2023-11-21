@@ -18,6 +18,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public GameObject Panel;
     public Button IGotIt;
     public int turkeyfee, englandfee, hollandfee;
+    public TMP_Text TRPrice, ENGPrice, NLPrice;
     private int coins;
     public void ClosePopup()
     {
@@ -31,6 +32,9 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         //PlayerPrefs.GetInt("MatchType");
 
         coins = PlayerPrefs.GetInt("Coins");
+        TRPrice.text = turkeyfee.ToString();
+        ENGPrice.text = englandfee.ToString();
+        NLPrice.text = hollandfee.ToString();
 
     }
     public void Update()
