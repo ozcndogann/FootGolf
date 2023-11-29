@@ -11,6 +11,7 @@ public class Switch_Player : MonoBehaviour
     public Button PrevButton;
     public Button PlayerSelect;
     public GameObject Selected;
+    PlayerSwipe swipeScript;
     
 
     public static int index;
@@ -56,11 +57,11 @@ public class Switch_Player : MonoBehaviour
       
         for (int i = 0; i < maps.Length; i++)
         {
-
+            //Ekran değişirken dönmeyi sıfırlıyorum
+            swipeScript = maps[i].gameObject.GetComponent<PlayerSwipe>();
+            swipeScript.resetMove();
             maps[i].gameObject.SetActive(false);
             maps[index].gameObject.SetActive(true);
-
-
         }
         Selected.SetActive(false);
         if (PlayerPrefs.GetInt("FootballerChooser") == index)
