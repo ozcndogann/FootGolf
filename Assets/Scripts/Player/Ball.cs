@@ -973,6 +973,7 @@ public class Ball : MonoBehaviour
         if (allPlayersReady)
         {
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
+            //cam.GetComponent<MoveAroundObject>().enabled = false;
         }
         Debug.Log(allPlayersReady);
     }
