@@ -18,6 +18,8 @@ public class MoveAroundObject : MonoBehaviour
     Ball1 ball1;
     public PhotonView view;
     public static bool deneme;
+    private Dictionary<Player, GameObject> playerGameObjects = new Dictionary<Player, GameObject>();
+
     //PhotonView vievv;
     private void Start()
     {
@@ -65,6 +67,17 @@ public class MoveAroundObject : MonoBehaviour
 
         if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
         {
+            foreach (Player player in PhotonNetwork.PlayerList)
+            {
+                if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
+                {
+                    Debug.Log("It's the turn of player: " + player.NickName);
+                    if (playerGameObjects.TryGetValue(player, out GameObject playerGameObject))
+                    {
+                        target = playerGameObject.transform;
+                    }
+                }
+            }
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 

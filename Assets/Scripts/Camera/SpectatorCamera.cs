@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SpectatorCamera : MonoBehaviour
 {
+    private Dictionary<Player, GameObject> playerGameObjects = new Dictionary<Player, GameObject>();
+
     void Start()
     {
         
@@ -21,6 +23,10 @@ public class SpectatorCamera : MonoBehaviour
             if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
             {
                 Debug.Log("It's the turn of player: " + player.NickName);
+                if(playerGameObjects.TryGetValue(player, out GameObject playerGameObject))
+                {
+
+                }
             }
         }
     }
