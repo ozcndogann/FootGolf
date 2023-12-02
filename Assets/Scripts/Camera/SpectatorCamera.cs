@@ -18,7 +18,7 @@ public class SpectatorCamera : MonoBehaviour
     {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.CustomProperties.ContainsKey("IsTurn") && (bool)player.CustomProperties["IsTurn"])
+            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
             {
                 Debug.Log("It's the turn of player: " + player.NickName);
             }
