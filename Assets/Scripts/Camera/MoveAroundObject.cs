@@ -90,8 +90,12 @@ public class MoveAroundObject : MonoBehaviour
                     Debug.Log("assignn");
                     if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
                     {
+                        if (target != playerGameObject.transform)
+                        {
+                            target = playerGameObject.transform;
+
+                        }
                         Debug.Log("assign");
-                        target = playerGameObject.transform;
                     }
                 }
             }
