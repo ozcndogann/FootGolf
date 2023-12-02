@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour
     public Vector3 mousePos, upForce;
     public float curveValue, forceValue;
     public float lineX;
-    //Camera cam2;
+    Camera cam2;
     Camera barrierCam;
     public PhotonView view;
     private GameObject hole;
@@ -74,16 +74,16 @@ public class Ball : MonoBehaviour
         //waitForShootTimer = 0;
         //waitForShootTriTimer = 0;
         view = GetComponent<PhotonView>();
-        //cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
-        //cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera; 
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
+        cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera; 
         barrierCam = GameObject.FindGameObjectWithTag("BarrierCam").GetComponent<Camera>() as Camera;
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
-        //cam.GetComponent<AudioListener>().enabled = true;
-        //cam2.GetComponent<AudioListener>().enabled = false;
-        //cam.enabled = (true);
-        //cam2.enabled = (false);
+        cam.GetComponent<AudioListener>().enabled = true;
+        cam2.GetComponent<AudioListener>().enabled = false;
+        cam.enabled = (true);
+        cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
 
@@ -829,6 +829,24 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
+        //if (!MoveAroundObject.deneme)
+        //{
+        //    MoveAroundObject.deneme = true;
+        //    return null;
+        //}
+        //if (shooted)
+        //{
+        //    Debug.Log("returnoncesi");
+        //    return null;
+        //}
+        //else
+        //{
+
+        //}
+        //if (Input.GetMouseButton(0))
+        //{
+
+        //}
         screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
@@ -901,11 +919,11 @@ public class Ball : MonoBehaviour
             if (view.IsMine)
             {
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
-                //cam.enabled = (false);
-                //cam.GetComponent<Zoom>().enabled = false;
-                //cam.GetComponent<AudioListener>().enabled = false;
-                //cam2.GetComponent<AudioListener>().enabled = true;
-                //cam2.enabled = (true);
+                cam.enabled = (false);
+                cam.GetComponent<Zoom>().enabled = false;
+                cam.GetComponent<AudioListener>().enabled = false;
+                cam2.GetComponent<AudioListener>().enabled = true;
+                cam2.enabled = (true);
                 CheckAllPlayers();
             }
         }
