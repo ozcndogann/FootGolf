@@ -18,7 +18,7 @@ public class MoveAroundObject : MonoBehaviour
     Ball1 ball1;
     public PhotonView view;
     public static bool deneme;
-    private Dictionary<Player, GameObject> playerGameObjects = new Dictionary<Player, GameObject>();
+
 
     //PhotonView vievv;
     private void Start()
@@ -64,20 +64,21 @@ public class MoveAroundObject : MonoBehaviour
         //    //}
         //}
         #region CamFollow
-
+       
         if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
         {
             foreach (Player player in PhotonNetwork.PlayerList)
             {
-                if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
+                if (player.CustomProperties.ContainsKey("IsTurn") && (bool)player.CustomProperties["IsTurn"])
                 {
-                    Debug.Log("It's the turn of player: " + player.NickName);
-                    if (playerGameObjects.TryGetValue(player, out GameObject playerGameObject))
+                    GameObject playerGameObject = FindPlayerGameObject(player);
+                    if (playerGameObject != null)
                     {
                         target = playerGameObject.transform;
                     }
                 }
             }
+
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
@@ -178,6 +179,18 @@ public class MoveAroundObject : MonoBehaviour
         //    cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/target.transform.position.y + .397f, cam.transform.position.z);
         //}
         #endregion
+    }
+    private GameObject FindPlayerGameObject(Player player)
+    {
+        PhotonView[] photonViews = FindObjectsOfType<PhotonView>();
+        foreach (PhotonView view in photonViews)
+        {
+            if (view.Owner == player)
+            {
+                return view.gameObject;
+            }
+        }
+        return null;
     }
     void FixedUpdate()
     {
