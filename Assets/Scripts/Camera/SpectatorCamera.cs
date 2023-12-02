@@ -22,7 +22,6 @@ public class SpectatorCamera : MonoBehaviour
         {
             if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
             {
-                Debug.Log("It's the turn of player: " + player.NickName);
                 if(playerGameObjects.TryGetValue(player, out GameObject playerGameObject))
                 {
 

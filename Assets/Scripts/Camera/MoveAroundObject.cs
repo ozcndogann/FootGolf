@@ -78,23 +78,23 @@ public class MoveAroundObject : MonoBehaviour
         //    //}
         //}
         #region CamFollow
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            Debug.Log("assignnn");
-            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
-            {
-                GameObject playerGameObject = FindPlayerGameObject(player);
-                Debug.Log("assignn");
-                if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
-                {
-                    Debug.Log("assign");
-                    target = playerGameObject.transform;
-                }
-            }
-        }
+      
         if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
         {
-            
+            foreach (Player player in PhotonNetwork.PlayerList)
+            {
+                Debug.Log(player.NickName + "'s turn value(outside): " + (bool)player.CustomProperties["turn"]);
+                if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
+                {
+                    Debug.Log(player.NickName + "'s turn value(inside): " + (bool)player.CustomProperties["turn"]);
+                    GameObject playerGameObject = FindPlayerGameObject(player);
+                    if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
+                    {
+                        Debug.Log(player.NickName + "'s turn value(inside2): " + (bool)player.CustomProperties["turn"]);
+                        target = playerGameObject.transform;
+                    }
+                }
+            }
 
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
