@@ -23,6 +23,20 @@ public class MoveAroundObject : MonoBehaviour
     //PhotonView vievv;
     private void Start()
     {
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            Debug.Log("assignnn");
+            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
+            {
+                GameObject playerGameObject = FindPlayerGameObject(player);
+                Debug.Log("assignn");
+                if (playerGameObject != null)
+                {
+                    Debug.Log("assign");
+                    target = playerGameObject.transform;
+                }
+            }
+        }
         //target = GameObject.FindGameObjectWithTag("Ball").transform;
         view = target.GetComponent<PhotonView>();
         //targetObj = GameObject.FindGameObjectWithTag("Ball");
@@ -69,11 +83,14 @@ public class MoveAroundObject : MonoBehaviour
         {
             foreach (Player player in PhotonNetwork.PlayerList)
             {
-                if (player.CustomProperties.ContainsKey("IsTurn") && (bool)player.CustomProperties["IsTurn"])
+                Debug.Log("assignnn");
+                if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
                 {
                     GameObject playerGameObject = FindPlayerGameObject(player);
+                    Debug.Log("assignn");
                     if (playerGameObject != null)
                     {
+                        Debug.Log("assign");
                         target = playerGameObject.transform;
                     }
                 }
