@@ -15,6 +15,7 @@ public class PhotonFriendController : MonoBehaviourPunCallbacks
     //[SerializeField] private float refreshCountdown;
     [SerializeField] private List<PlayfabFriendInfo> friendList;
     public static Action<List<PhotonFriendInfo>> OnDisplayFriends = delegate { };
+    public static string[] friendDisplayNames;
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class PhotonFriendController : MonoBehaviourPunCallbacks
         //}
     }
 
-    private void HandleFriendsUpdated(List<PlayfabFriendInfo> friends)
+    public void HandleFriendsUpdated(List<PlayfabFriendInfo> friends)
     {
         friendList = friends;
         FindPhotonFriends(friendList);
@@ -52,7 +53,8 @@ public class PhotonFriendController : MonoBehaviourPunCallbacks
         Debug.Log($"Handle getting Photon friends {friends.Count}");
         if (friends.Count != 0)
         {
-            string[] friendDisplayNames = friends.Select(f => f.TitleDisplayName).ToArray();
+            friendDisplayNames = friends.Select(f => f.TitleDisplayName).ToArray();
+            Debug.Log(friendDisplayNames);
             PhotonNetwork.FindFriends(friendDisplayNames);
         }
         else

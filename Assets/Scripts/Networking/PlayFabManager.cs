@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Linq;
 using PlayFab;
 using PlayFab.ClientModels;
 using TMPro;
@@ -23,7 +25,8 @@ public class PlayFabManager : MonoBehaviour
     public static bool nameAccepter, playerFound;
     public GameObject Long, Short, Taken,Empty;
     private int LeaguePosition;
-    
+    public static string[] friendDisplayNames;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,17 +37,18 @@ public class PlayFabManager : MonoBehaviour
         nameAccepter = false;
         Login();
     }
-
     // Update is called once per frame
     private void Update()
     {
-        userName.text= PlayerPrefs.GetString("Username");
-        Debug.Log(nameInput.text.Length);
+        userName.text = PlayerPrefs.GetString("Username");
+        //Debug.Log(nameInput.text.Length);
         if (nameAccepter == true)
         {
             nameWindow.SetActive(true);
             nameAccepter = false;
         }
+        friendDisplayNames = PlayfabFriendController.friends.Select(f => f.TitleDisplayName).ToArray();
+        Debug.Log(friendDisplayNames[0]);
     }
     void Login()
     {
@@ -185,6 +189,17 @@ public class PlayFabManager : MonoBehaviour
         };
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardLeagueGet, OnError);
     }
+    public void GetLeaderboardFriends()
+    {
+        LeaguePosition = 0;
+        var request = new GetLeaderboardRequest
+        {
+            StatisticName = "FootGolf Leaderboard",
+            StartPosition = 0,
+            MaxResultsCount = 11
+        };
+        PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardFriendsGet, OnError);
+    }
     void OnLeaderboardLeagueGet(GetLeaderboardResult result)
     {
         foreach (Transform item in rowsParent)
@@ -223,6 +238,56 @@ public class PlayFabManager : MonoBehaviour
                 }
             }
             else if (50 < item.StatValue && item.StatValue < 100 && 50 < PlayerPrefs.GetInt("Score") && PlayerPrefs.GetInt("Score") < 100)
+            {
+                LeaguePosition += 1;
+                GameObject newGo = Instantiate(rowPrefab, rowsParent);
+                TMP_Text[] texts = newGo.GetComponentsInChildren<TMP_Text>();
+                texts[0].text = (LeaguePosition).ToString();
+                texts[1].text = item.DisplayName;
+                texts[2].text = item.StatValue.ToString();
+                Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
+                if (item.PlayFabId == loggedInPlayedId)
+                {
+                    playerFound = true;
+                    texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                }
+                if (LeaguePosition == 1)
+                {
+                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
+                }
+                if (LeaguePosition == 2)
+                {
+                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
+                }
+                if (LeaguePosition == 3)
+                {
+                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
+                }
+            }
+            else
+            {
+                if (playerFound == false)
+                {
+                    Debug.Log("getaroundcart");
+                    GetLeaderboardAroundPlayer();
+                }
+            }
+
+        }
+
+
+    }
+    void OnLeaderboardFriendsGet(GetLeaderboardResult result)
+    {
+        foreach (Transform item in rowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (var item in result.Leaderboard)
+        {
+            if (friendDisplayNames.Contains(item.DisplayName) || item.PlayFabId == loggedInPlayedId)
             {
                 LeaguePosition += 1;
                 GameObject newGo = Instantiate(rowPrefab, rowsParent);

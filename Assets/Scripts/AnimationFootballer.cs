@@ -16,7 +16,7 @@ public class AnimationFootballer : MonoBehaviour
     Camera cam;
     PhotonView view;
     Ball ballScript;
-    public GameObject Ronaldinho, Messi,Alexia;
+    public GameObject Ronaldinho, Messi,Alexia,Esmer;
     Animator footballerAnimator, trivelaAnimator;
     GameObject OurFootballer, TrivelaFootballer;
     public float waitForShootTimer, waitForShootTriTimer, whichAnim;
@@ -82,6 +82,21 @@ public class AnimationFootballer : MonoBehaviour
             {
                 OurFootballer = PhotonNetwork.Instantiate(Alexia.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
                 TrivelaFootballer = PhotonNetwork.Instantiate(Alexia.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
+                distanceP = transform.position - OurFootballer.transform.position;
+                distanceT = transform.position - TrivelaFootballer.transform.position;
+                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+                footballerAnimator = OurFootballer.GetComponent<Animator>();
+                trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
+                //OurFootballer.SetActive(false);
+                view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
+                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+                view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
+            }
+            else if (PlayerPrefs.GetInt("FootballerChooser") == 3)
+            {
+                OurFootballer = PhotonNetwork.Instantiate(Esmer.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+                TrivelaFootballer = PhotonNetwork.Instantiate(Esmer.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
                 distanceP = transform.position - OurFootballer.transform.position;
                 distanceT = transform.position - TrivelaFootballer.transform.position;
                 OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);

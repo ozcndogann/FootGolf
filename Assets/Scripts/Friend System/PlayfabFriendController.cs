@@ -9,8 +9,13 @@ using UnityEngine;
 public class PlayfabFriendController : MonoBehaviour
 {
     public static Action<List<FriendInfo>> OnFriendListUpdated = delegate { };
-    private List<FriendInfo> friends;
+    public static List<FriendInfo> friends;
     bool seeList;
+
+    private void Start()
+    {
+        HandleGetFriends();
+    }
     private void Awake()
     {
         friends = new List<FriendInfo>();
