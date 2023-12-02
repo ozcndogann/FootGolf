@@ -23,7 +23,7 @@ public class MoveAroundObject : MonoBehaviour
     //PhotonView vievv;
     private void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Ball").transform;
+        //target = GameObject.FindGameObjectWithTag("Ball").transform;
         view = target.GetComponent<PhotonView>();
         //targetObj = GameObject.FindGameObjectWithTag("Ball");
         ball = target.GetComponent<Ball>();
