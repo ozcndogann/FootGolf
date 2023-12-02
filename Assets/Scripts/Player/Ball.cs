@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour
     public Vector3 mousePos, upForce;
     public float curveValue, forceValue;
     public float lineX;
-    Camera cam2;
+    //Camera cam2;
     Camera barrierCam;
     public PhotonView view;
     private GameObject hole;
@@ -75,15 +75,15 @@ public class Ball : MonoBehaviour
         //waitForShootTriTimer = 0;
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
-        cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera; 
+        //cam2 = GameObject.FindGameObjectWithTag("AfterCamera").GetComponent<Camera>() as Camera; 
         barrierCam = GameObject.FindGameObjectWithTag("BarrierCam").GetComponent<Camera>() as Camera;
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
         cam.GetComponent<AudioListener>().enabled = true;
-        cam2.GetComponent<AudioListener>().enabled = false;
+        //cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
-        cam2.enabled = (false);
+        //cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
 
@@ -922,7 +922,7 @@ public class Ball : MonoBehaviour
                 //cam.enabled = (false);
                 //cam.GetComponent<Zoom>().enabled = false;
                 cam.GetComponent<AudioListener>().enabled = false;
-                cam2.GetComponent<AudioListener>().enabled = true;
+                //cam2.GetComponent<AudioListener>().enabled = true;
                 //cam2.enabled = (true);
                 CheckAllPlayers();
             }
