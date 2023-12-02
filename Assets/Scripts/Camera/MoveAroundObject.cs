@@ -88,19 +88,11 @@ public class MoveAroundObject : MonoBehaviour
                 {
                     Debug.Log(player.NickName + "'s turn value(inside): " + (bool)player.CustomProperties["turn"]);
                     GameObject playerGameObject = FindPlayerGameObject(player);
-                    if (target != playerGameObject.transform)
+                    if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
                     {
-                        if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
-                        {
-                            Debug.Log(player.NickName + "'s turn value(inside2): " + (bool)player.CustomProperties["turn"]);
-                            target = playerGameObject.transform;
-                        }
+                        Debug.Log(player.NickName + "'s turn value(inside2): " + (bool)player.CustomProperties["turn"]);
+                        target = playerGameObject.transform;
                     }
-                    else
-                    {
-                        Debug.Log("hata aq");
-                    }
-                    
                 }
             }
 
@@ -207,10 +199,11 @@ public class MoveAroundObject : MonoBehaviour
     }
     private GameObject FindPlayerGameObject(Player player)
     {
+
         PhotonView[] photonViews = FindObjectsOfType<PhotonView>();
         foreach (PhotonView view in photonViews)
         {
-            if (view.Owner == player)
+            if (view.Owner == player && view.gameObject.CompareTag("Ball"))
             {
                 return view.gameObject;
             }
