@@ -83,16 +83,24 @@ public class MoveAroundObject : MonoBehaviour
         {
             foreach (Player player in PhotonNetwork.PlayerList)
             {
-                Debug.Log(player.NickName + "'s turn value(outside): " + (bool)player.CustomProperties["turn"]);
+                Debug.Log(player.NickName + "'s turn value(outside2): " + (bool)player.CustomProperties["turn"]);
                 if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
                 {
                     Debug.Log(player.NickName + "'s turn value(inside): " + (bool)player.CustomProperties["turn"]);
                     GameObject playerGameObject = FindPlayerGameObject(player);
-                    if (/*playerGameObject != null && */playerGameObject.CompareTag("Ball"))
+                    if (target != playerGameObject.transform)
                     {
-                        Debug.Log(player.NickName + "'s turn value(inside2): " + (bool)player.CustomProperties["turn"]);
-                        target = playerGameObject.transform;
+                        if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
+                        {
+                            Debug.Log(player.NickName + "'s turn value(inside2): " + (bool)player.CustomProperties["turn"]);
+                            target = playerGameObject.transform;
+                        }
                     }
+                    else
+                    {
+                        Debug.Log("hata aq");
+                    }
+                    
                 }
             }
 
