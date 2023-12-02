@@ -88,7 +88,7 @@ public class MoveAroundObject : MonoBehaviour
                 {
                     GameObject playerGameObject = FindPlayerGameObject(player);
                     Debug.Log("assignn");
-                    if (playerGameObject != null)
+                    if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
                     {
                         Debug.Log("assign");
                         target = playerGameObject.transform;
