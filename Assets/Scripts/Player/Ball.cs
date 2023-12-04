@@ -931,11 +931,11 @@ public class Ball : MonoBehaviour
             if (view.IsMine)
             {
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
-                cam.enabled = (false);
-                cam.GetComponent<Zoom>().enabled = false;
-                cam.GetComponent<AudioListener>().enabled = false;
-                cam2.GetComponent<AudioListener>().enabled = true;
-                cam2.enabled = (true);
+                //cam.enabled = (false);
+                //cam.GetComponent<Zoom>().enabled = false;
+                //cam.GetComponent<AudioListener>().enabled = false;
+                //cam2.GetComponent<AudioListener>().enabled = true;
+                //cam2.enabled = (true);
                 CheckAllPlayers();
             }
         }
