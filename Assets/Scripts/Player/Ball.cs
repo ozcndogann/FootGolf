@@ -335,6 +335,18 @@ public class Ball : MonoBehaviour
                 }
 
             }
+            if (nextPlayerTurn && isIdle)
+            {
+                Debug.Log("beforenext");
+                if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                {
+                    Debug.Log("beforenext");
+                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                    Debug.Log("afternext");
+                }
+                Debug.Log("afternext");
+                nextPlayerTurn = false;
+            }
             #region CommentedOldAnimations
             //if (waitForShoot == true)
             //{
@@ -357,7 +369,7 @@ public class Ball : MonoBehaviour
             //}
 
             #endregion
-            
+
             if (AnimationFootballer.AcceptShoot == true)
             {
                 OnMouseShootPart();
@@ -909,18 +921,7 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
-        if (nextPlayerTurn && isIdle)
-        {
-            Debug.Log("beforenext");
-            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-            {
-                Debug.Log("beforenext");
-                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                Debug.Log("afternext");
-            }
-            Debug.Log("afternext");
-            nextPlayerTurn = false;
-        }
+        
     }
     #region Bir Sonraki Hole'e Gecmesi Icin
     private void OnTriggerEnter(Collider other)
