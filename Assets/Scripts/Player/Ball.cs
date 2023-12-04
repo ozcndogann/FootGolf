@@ -295,7 +295,7 @@ public class Ball : MonoBehaviour
         //}
 
         #endregion
-        Debug.Log(isIdle);
+        Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
 
 
         if (view.IsMine)
@@ -594,7 +594,7 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("MoveAroundObject.deneme: " + MoveAroundObject.deneme);
-        Debug.Log(isIdle);
+        Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
     }
     private void OnMouseDown()
     {

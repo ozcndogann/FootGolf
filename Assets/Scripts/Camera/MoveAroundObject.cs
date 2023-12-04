@@ -186,7 +186,7 @@ public class MoveAroundObject : MonoBehaviour
     }
     IEnumerator SpectatorChoose()
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(0.25f);
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             //Debug.Log(player.NickName + "'s turn value(outside2): " + (bool)player.CustomProperties["turn"]);
