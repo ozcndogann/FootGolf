@@ -53,6 +53,7 @@ public class Ball : MonoBehaviour
     public LayerMask ground;
     Ray rayNorm;
     Ray rayTri;
+    bool nextPlayerTurn;
     #endregion
 
 
@@ -294,7 +295,7 @@ public class Ball : MonoBehaviour
         //}
 
         #endregion
-
+        Debug.Log(isIdle);
 
 
         if (view.IsMine)
@@ -593,6 +594,7 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("MoveAroundObject.deneme: " + MoveAroundObject.deneme);
+        Debug.Log(isIdle);
     }
     private void OnMouseDown()
     {
@@ -685,10 +687,8 @@ public class Ball : MonoBehaviour
         barrierCam.gameObject.SetActive(true);
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        {
-            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        }
+        nextPlayerTurn = true;
+        
     }
     
     private void ProcessAim()
@@ -909,6 +909,18 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
         isIdle = true;
+        if (nextPlayerTurn && isIdle)
+        {
+            Debug.Log("beforenext");
+            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            {
+                Debug.Log("beforenext");
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                Debug.Log("afternext");
+            }
+            Debug.Log("afternext");
+            nextPlayerTurn = false;
+        }
     }
     #region Bir Sonraki Hole'e Gecmesi Icin
     private void OnTriggerEnter(Collider other)
