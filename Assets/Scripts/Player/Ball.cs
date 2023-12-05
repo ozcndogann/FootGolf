@@ -15,12 +15,12 @@ public class Ball : MonoBehaviour
     Vector3 worldMousePosFar;
     Vector3 worldMousePosNear;
     Vector3 distanceP,distanceT;
-    [SerializeField] private LineRenderer lineRenderer; // aim için line
+    [SerializeField] private LineRenderer lineRenderer; // aim iï¿½in line
     public static bool isIdle; // top duruyor mu hareketli mi boolu
     public static bool isAiming; // oyuncu aim halinde mi boolu
     bool OurTurn;
-    [SerializeField] private float stopVelocity; // topun durmasý için min hýz
-    [SerializeField] private float shotPower,acý;
+    [SerializeField] private float stopVelocity; // topun durmasï¿½ iï¿½in min hï¿½z
+    [SerializeField] private float shotPower,ace;
     private Rigidbody rb;
     public Camera cam;
     MoveAroundObject moveAroundObject;
@@ -106,7 +106,7 @@ public class Ball : MonoBehaviour
         //        trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
         //        //OurFootballer.SetActive(false);
         //        view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-        //        //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+        //        //en baï¿½ta millet ï¿½ok yakï¿½nken futbolcular ï¿½ne geï¿½mesin diye
         //        view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //        OurFootballerCloser = true;
         //    }
@@ -122,7 +122,7 @@ public class Ball : MonoBehaviour
         //        trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
         //        //OurFootballer.SetActive(false);
         //        view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-        //        //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+        //        //en baï¿½ta millet ï¿½ok yakï¿½nken futbolcular ï¿½ne geï¿½mesin diye
         //        view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //        OurFootballerCloser = true;
         //    }
@@ -177,21 +177,21 @@ public class Ball : MonoBehaviour
         shootCloser = false;
         rb = GetComponent<Rigidbody>();
         isAiming = false;
-        lineRenderer.enabled = false; // baþta line görünmemesi için
+        lineRenderer.enabled = false; // baï¿½ta line gï¿½rï¿½nmemesi iï¿½in
         
     }
 
     private void Update()
     {
         #region CommentedOldAnimations
-        ////sol artý sað eksi
+        ////sol artï¿½ saï¿½ eksi
         //if (OurFootballer != null)
         //{
-        //    rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        //    rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi tï¿½k altï¿½ndan baï¿½latï¿½yoruz topun kendisini algï¿½lamasï¿½n diye
         //}
         //if (TrivelaFootballer != null)
         //{
-        //    rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+        //    rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi tï¿½k altï¿½ndan baï¿½latï¿½yoruz topun kendisini algï¿½lamasï¿½n diye
         //}
 
 
@@ -286,11 +286,11 @@ public class Ball : MonoBehaviour
         //{
         //    if (TrivelaFootballer != null)
         //    {
-        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+        //        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
         //    }
         //    if (OurFootballer != null)
         //    {
-        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+        //        OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
         //    }
         //}
 
@@ -300,7 +300,7 @@ public class Ball : MonoBehaviour
 
         if (view.IsMine)
         {
-            if (rb.velocity.magnitude < stopVelocity) // topun durmasý için hýz kontrolü
+            if (rb.velocity.magnitude < stopVelocity) // topun durmasï¿½ iï¿½in hï¿½z kontrolï¿½
             {
                 Stop();
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
@@ -693,7 +693,7 @@ public class Ball : MonoBehaviour
         shootCloser = true;
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
-        //alttaki kýsým sadece vururken futbolcu görünsün diye
+        //alttaki kï¿½sï¿½m sadece vururken futbolcu gï¿½rï¿½nsï¿½n diye
         //view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
         barrierCam.gameObject.SetActive(true);
@@ -714,15 +714,15 @@ public class Ball : MonoBehaviour
 
             if (!shooted)
             {
-                worldPoint = CastMouseClickRay();// world pointi belirlemek için clickten ray yolla 
+                worldPoint = CastMouseClickRay();// world pointi belirlemek iï¿½in clickten ray yolla 
             }
 
-            if (!worldPoint.HasValue) // ray bi þeye çarptý mý diye check
+            if (!worldPoint.HasValue) // ray bi ï¿½eye ï¿½arptï¿½ mï¿½ diye check
             {
                 return; // exit method
             }
 
-            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line çiz
+            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line ï¿½iz
 
             if (AnimationFootballer.lineRendererController == false)
             {
@@ -730,7 +730,7 @@ public class Ball : MonoBehaviour
                 AnimationFootballer.lineRendererController = true;
             }
 
-            if (Input.GetMouseButtonUp(0)) // parmaðýmý çektim mi
+            if (Input.GetMouseButtonUp(0)) // parmaï¿½ï¿½mï¿½ ï¿½ektim mi
             {
                 AnimationFootballer.lineRendererOn = false;
                 shooted = true;
@@ -747,8 +747,8 @@ public class Ball : MonoBehaviour
 
 
 
-        #region aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
-        //aþaðýdaki ifleri topa iyice yakýn olduðu zaman býrakabilmesi için kullanabiliriz
+        #region aï¿½aï¿½ï¿½daki ifleri topa iyice yakï¿½n olduï¿½u zaman bï¿½rakabilmesi iï¿½in kullanabiliriz
+        //aï¿½aï¿½ï¿½daki ifleri topa iyice yakï¿½n olduï¿½u zaman bï¿½rakabilmesi iï¿½in kullanabiliriz
         //if ((worldPoint.Value - transform.position).y < 0)
         //{
         //    Debug.Log("y kucuk");
@@ -812,11 +812,11 @@ public class Ball : MonoBehaviour
     {
         if (!shooted)
         {
-            Vector3 direction = worldPoint - transform.position; // lineýn directioný
-            float lineLength = direction.magnitude; // lineýn uzunluðunun hesaplanmasý
+            Vector3 direction = worldPoint - transform.position; // lineï¿½n directionï¿½
+            float lineLength = direction.magnitude; // lineï¿½n uzunluï¿½unun hesaplanmasï¿½
             float maxLength = 1.25f; // max line length
             
-            if (lineLength > maxLength) // maxla current length kýyasý
+            if (lineLength > maxLength) // maxla current length kï¿½yasï¿½
             {
                 direction = direction.normalized * maxLength;
                 worldPoint = transform.position + direction;
@@ -824,9 +824,9 @@ public class Ball : MonoBehaviour
             Vector3[] positions = { transform.position, worldPoint };
             lineRenderer.SetPositions(positions);
 
-            for (int i = 0; i < positions.Length; i++) // yukarýda aldýðýmýz positionlarý looplama
+            for (int i = 0; i < positions.Length; i++) // yukarï¿½da aldï¿½ï¿½ï¿½mï¿½z positionlarï¿½ looplama
             {
-                positions[i].y = gameObject.transform.position.y + .02f; // lineýn y axisi fixleme
+                positions[i].y = gameObject.transform.position.y + .02f; // lineï¿½n y axisi fixleme
             }
 
             lineRenderer.SetPositions(positions); // update positions
@@ -893,12 +893,12 @@ public class Ball : MonoBehaviour
                 if (Physics.Raycast(worldMousePosNear, worldMousePosFar - worldMousePosNear, out hit, float.PositiveInfinity)) // neardan far'a ray yolla
                 {
 
-                    return hit.point; // eðer ray bi þeye çarparsa return hit point
+                    return hit.point; // eï¿½er ray bi ï¿½eye ï¿½arparsa return hit point
 
                 }
                 else
                 {
-                    return null; // eðer ray bi þeye çarpmazsa return null
+                    return null; // eï¿½er ray bi ï¿½eye ï¿½arpmazsa return null
                 }
             }
             
@@ -918,8 +918,8 @@ public class Ball : MonoBehaviour
 
     private void Stop()
     {
-        rb.velocity = Vector3.zero; // topun velocitysini 0a eþitle
-        rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eþitle
+        rb.velocity = Vector3.zero; // topun velocitysini 0a eï¿½itle
+        rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a eï¿½itle
         isIdle = true;
         
     }
@@ -985,7 +985,7 @@ public class Ball : MonoBehaviour
         }
         if (allPlayersReady)
         {
-            view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayný holeC bool statete
+            view.RPC("NotifyConditionMet", RpcTarget.All);//herkes aynï¿½ holeC bool statete
             //cam.GetComponent<MoveAroundObject>().enabled = false;
         }
         Debug.Log(allPlayersReady);

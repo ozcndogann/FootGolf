@@ -12,7 +12,7 @@ public class AnimationFootballer : MonoBehaviour
     public static bool AcceptShoot;
     Rigidbody rb;
     [SerializeField] private float stopVelocity;
-    [SerializeField] private float acý;
+    [SerializeField] private float ace;
     Camera cam;
     PhotonView view;
     Ball ballScript;
@@ -60,7 +60,7 @@ public class AnimationFootballer : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+                //en baï¿½ta millet ï¿½ok yakï¿½nken futbolcular ï¿½ne geï¿½mesin diye
                 view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 0)
@@ -75,7 +75,7 @@ public class AnimationFootballer : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+                //en baï¿½ta millet ï¿½ok yakï¿½nken futbolcular ï¿½ne geï¿½mesin diye
                 view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 2)
@@ -90,7 +90,7 @@ public class AnimationFootballer : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+                //en baï¿½ta millet ï¿½ok yakï¿½nken futbolcular ï¿½ne geï¿½mesin diye
                 view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 3)
@@ -105,7 +105,7 @@ public class AnimationFootballer : MonoBehaviour
                 trivelaAnimator = TrivelaFootballer.GetComponent<Animator>();
                 //OurFootballer.SetActive(false);
                 view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-                //en baþta millet çok yakýnken futbolcular öne geçmesin diye
+                //en baï¿½ta millet ï¿½ok yakï¿½nken futbolcular ï¿½ne geï¿½mesin diye
                 view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
             }
         }
@@ -116,11 +116,11 @@ public class AnimationFootballer : MonoBehaviour
     {
         if (OurFootballer != null)
         {
-            rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+            rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi tï¿½k altï¿½ndan baï¿½latï¿½yoruz topun kendisini algï¿½lamasï¿½n diye
         }
         if (TrivelaFootballer != null)
         {
-            rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi týk altýndan baþlatýyoruz topun kendisini algýlamasýn diye
+            rayTri = new Ray(TrivelaFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi tï¿½k altï¿½ndan baï¿½latï¿½yoruz topun kendisini algï¿½lamasï¿½n diye
         }
         RaycastHit hit;
 
@@ -213,11 +213,11 @@ public class AnimationFootballer : MonoBehaviour
         {
             if (TrivelaFootballer != null)
             {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
             }
             if (OurFootballer != null)
             {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - acý, 0);
+                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
             }
         }
         if (view.IsMine)
