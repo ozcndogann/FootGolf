@@ -220,9 +220,9 @@ public class PlayFabManager : MonoBehaviour
                 if (item.PlayFabId == loggedInPlayedId)
                 {
                     playerFound = true;
-                    texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[0].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                 }
                 if (LeaguePosition == 1)
                 {
@@ -249,9 +249,9 @@ public class PlayFabManager : MonoBehaviour
                 if (item.PlayFabId == loggedInPlayedId)
                 {
                     playerFound = true;
-                    texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[0].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                 }
                 if (LeaguePosition == 1)
                 {
@@ -299,9 +299,9 @@ public class PlayFabManager : MonoBehaviour
                 if (item.PlayFabId == loggedInPlayedId)
                 {
                     playerFound = true;
-                    texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[0].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                 }
                 if (LeaguePosition == 1)
                 {
@@ -349,9 +349,9 @@ public class PlayFabManager : MonoBehaviour
                 if (item.PlayFabId == loggedInPlayedId)
                 {
                     playerFound = true;
-                    texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                    texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                    texts[0].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                    texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                 }
                 if (item.Position == 0) 
                 {
@@ -394,9 +394,9 @@ public class PlayFabManager : MonoBehaviour
             texts[2].text = item.StatValue.ToString();
             if (item.PlayFabId == loggedInPlayedId)
             {
-                texts[0].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                texts[1].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
-                texts[2].color = new Color(97 / 255f, 56 / 255f, 253 / 255f);
+                texts[0].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
+                texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
             }
             Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
         }

@@ -16,7 +16,9 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
     public GameObject Panel;
-    public GameObject MoneyPopup;
+    public GameObject MoneyPopupTR;
+    public GameObject MoneyPopupENG;
+    public GameObject MoneyPopupNL;
     public Button IGotIt;
     public int turkeyfee, englandfee, hollandfee;
     public TMP_Text TRPrice, ENGPrice, NLPrice;
@@ -26,6 +28,21 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         if (IGotIt == true)
         {
             Panel.gameObject.SetActive(false);
+        }
+    }
+    public void CloseMoneyPopup()
+    {
+        if (IGotIt == true && Switch.index == 0)
+        {
+            MoneyPopupTR.SetActive(false);
+        }
+        else if (IGotIt == true && Switch.index == 1)
+        {
+            MoneyPopupENG.SetActive(false);
+        }
+        else if (IGotIt == true && Switch.index == 2)
+        {
+            MoneyPopupNL.SetActive(false);
         }
     }
     public void Start()
@@ -93,7 +110,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 2);
-                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
+                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x ï¿½ï¿½karabilir ama practice ï¿½zel de olabilir, test etmek ï¿½art
             }
             else if (Tournament)
             {
@@ -102,7 +119,7 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
                 expectedCustomRoomProperties.Add("GameMode", Switch.index);
                 expectedCustomRoomProperties.Add("ScoreRange", scoreRange);
                 PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 4);
-                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x çýkarabilir ama practice özel de olabilir, test etmek þart
+                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);//2x ï¿½ï¿½karabilir ama practice ï¿½zel de olabilir, test etmek ï¿½art
             }
             else
             {
@@ -163,12 +180,26 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
             }
             
         }
-        else
+        //Farkli Paran Yok Pop Uplari Ekledim
+        else if (Switch.index == 0 && coins < turkeyfee)
         {
-            Debug.Log("paran yetersiz");
-            MoneyPopup.SetActive(true);
+            Debug.Log("tÃ¼rkiyeye paran yetersiz");
+            MoneyPopupTR.SetActive(true);
         }
-        
+        else if (Switch.index == 1 && coins < englandfee)
+        {
+            Debug.Log("ingiltereye paran yetersiz");
+            MoneyPopupENG.SetActive(true);
+        }
+        else if (Switch.index == 2 && coins < hollandfee)
+        {
+            Debug.Log("hollandaya paran yetersiz");
+            MoneyPopupNL.SetActive(true);
+        }
+        else 
+        {
+            Debug.Log("bilinmeyen hata");
+        }
     }
     //Ranks
     private string GetScoreRange(int score)
