@@ -910,12 +910,7 @@ public class Ball : MonoBehaviour
 
         }
 
-
-
-
-
     }
-
     private void Stop()
     {
         rb.velocity = Vector3.zero; // topun velocitysini 0a e�itle
