@@ -413,7 +413,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70.45
+  m_fontSize: 50.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2584,6 +2584,7 @@ GameObject:
   - component: {fileID: 756494006}
   - component: {fileID: 756494009}
   - component: {fileID: 756494010}
+  - component: {fileID: 756494011}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2658,12 +2659,6 @@ MonoBehaviour:
   MoneyPopupENG: {fileID: 942759960}
   MoneyPopupNL: {fileID: 940323257}
   IGotIt: {fileID: 1114213515}
-  turkeyfee: 15
-  englandfee: 20
-  hollandfee: 25
-  TRPrice: {fileID: 1279089986}
-  ENGPrice: {fileID: 1801556926}
-  NLPrice: {fileID: 490218546}
 --- !u!114 &756494010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2681,6 +2676,21 @@ MonoBehaviour:
   Settings: {fileID: 1073288248}
   Shop: {fileID: 528227187}
   Player: {fileID: 128522458}
+--- !u!114 &756494011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756494005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa4811490733f24d9686d507b526ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TRPrice: {fileID: 1279089986}
+  ENGPrice: {fileID: 1801556926}
+  NLPrice: {fileID: 490218546}
 --- !u!1 &823798827
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,7 +2777,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 54.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3149,7 +3159,8 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8e5aa9e2c3a10449a332366dfb9adc2, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 7709652502858125240, guid: e8e5aa9e2c3a10449a332366dfb9adc2,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3173,7 +3184,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.45
+  m_fontSize: 31.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4596,7 +4607,8 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e8e5aa9e2c3a10449a332366dfb9adc2, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 7709652502858125240, guid: e8e5aa9e2c3a10449a332366dfb9adc2,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4620,7 +4632,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.7
+  m_fontSize: 31.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -17,9 +17,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public GameObject panel;
     public GameObject MoneyPopup;
     public Button IGotIt;
-    public TMP_Text TRPrice, ENGPrice, NLPrice;
 
-    public int turkeyfee, englandfee, hollandfee;
+    //public int turkeyfee, englandfee, hollandfee;
     private int coins;
 
     public void Update()
@@ -28,11 +27,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public void Start()
     {
-        //PlayerPrefs.GetInt("MatchType");
-
-        TRPrice.text = turkeyfee.ToString();
-        ENGPrice.text = englandfee.ToString();
-        NLPrice.text = hollandfee.ToString();
         coins = PlayerPrefs.GetInt("Coins");
 
     }
@@ -77,7 +71,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
 
         
-        if (Switch.index == 0 && coins >= turkeyfee)
+        if (Switch.index == 0 && coins >= FeesAndUI.turkeyfee)
         {
             if (practice || versus || Tournament)
             {
@@ -86,7 +80,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-                PlayerPrefs.SetInt("Coins", coins -= turkeyfee);
+                PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.turkeyfee);
             }
             else
             {
@@ -94,7 +88,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             }
             //coins -= turkeyfee;
         }
-        else if (Switch.index == 1 && coins >= englandfee)
+        else if (Switch.index == 1 && coins >= FeesAndUI.englandfee)
         {
             if (practice || versus || Tournament)
             {
@@ -103,7 +97,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-                PlayerPrefs.SetInt("Coins", coins -= englandfee);
+                PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.englandfee);
             }
             else
             {
@@ -111,7 +105,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             }
             //coins -= englandfee;
         }
-        else if (Switch.index == 2 && coins >= hollandfee)
+        else if (Switch.index == 2 && coins >= FeesAndUI.hollandfee)
         {
             if (practice || versus || Tournament)
             {
@@ -120,7 +114,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-                PlayerPrefs.SetInt("Coins", coins -= hollandfee);
+                PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.hollandfee);
             }
             else
             {

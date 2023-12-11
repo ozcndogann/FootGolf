@@ -48,7 +48,7 @@ public class PlayFabManager : MonoBehaviour
             nameAccepter = false;
         }
         friendDisplayNames = PlayfabFriendController.friends.Select(f => f.TitleDisplayName).ToArray();
-        Debug.Log(friendDisplayNames[0]);
+        //Debug.Log(friendDisplayNames[0]);
     }
     void Login()
     {

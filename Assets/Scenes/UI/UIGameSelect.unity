@@ -2732,6 +2732,7 @@ GameObject:
   - component: {fileID: 756494006}
   - component: {fileID: 756494009}
   - component: {fileID: 756494010}
+  - component: {fileID: 756494011}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2828,6 +2829,24 @@ MonoBehaviour:
   Settings: {fileID: 1122036248}
   Shop: {fileID: 528568519}
   Player: {fileID: 214767272}
+--- !u!114 &756494011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756494005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa4811490733f24d9686d507b526ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turkeyfee: 15
+  englandfee: 20
+  hollandfee: 25
+  TRPrice: {fileID: 1604567631}
+  ENGPrice: {fileID: 1642107000}
+  NLPrice: {fileID: 1151494278}
 --- !u!1 &757442514
 GameObject:
   m_ObjectHideFlags: 0
