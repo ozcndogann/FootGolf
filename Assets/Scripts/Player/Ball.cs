@@ -298,17 +298,22 @@ public class Ball : MonoBehaviour
         //Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
         //Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
         //Debug.Log("isIdle: " + (isIdle));
-        if ((rb.velocity.magnitude < stopVelocity) && nextPlayerTurn)
+        if ((rb.velocity.magnitude < stopVelocity))
         {
-            Debug.Log("beforenext");
-            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            if (nextPlayerTurn)
             {
-                //Debug.Log("beforenextiç");
-                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                //Debug.Log("afternextiç");
+                Debug.Log("beforenext");
+                if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                {
+                    //Debug.Log("beforenextiç");
+                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                    //Debug.Log("afternextiç");
+                    nextPlayerTurn = false;
+                }
+                Debug.Log("afternext");
+                
             }
-            Debug.Log("afternext");
-            nextPlayerTurn = false;
+            
         }
 
         if (view.IsMine)
