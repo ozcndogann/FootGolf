@@ -295,8 +295,21 @@ public class Ball : MonoBehaviour
         //}
 
         #endregion
-        Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
-
+        //Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
+        //Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
+        //Debug.Log("isIdle: " + (isIdle));
+        if ((rb.velocity.magnitude < stopVelocity) && nextPlayerTurn)
+        {
+            Debug.Log("beforenext");
+            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            {
+                //Debug.Log("beforenextiç");
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                //Debug.Log("afternextiç");
+            }
+            Debug.Log("afternext");
+            nextPlayerTurn = false;
+        }
 
         if (view.IsMine)
         {
@@ -335,18 +348,18 @@ public class Ball : MonoBehaviour
                 }
 
             }
-            if (nextPlayerTurn && isIdle)
-            {
-                Debug.Log("beforenext");
-                if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                {
-                    Debug.Log("beforenext");
-                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                    Debug.Log("afternext");
-                }
-                Debug.Log("afternext");
-                nextPlayerTurn = false;
-            }
+            //if (nextPlayerTurn && isIdle)
+            //{
+            //    Debug.Log("beforenext");
+            //    if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            //    {
+            //        Debug.Log("beforenextiç");
+            //        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+            //        Debug.Log("afternextiç");
+            //    }
+            //    Debug.Log("afternext");
+            //    nextPlayerTurn = false;
+            //}
             #region CommentedOldAnimations
             //if (waitForShoot == true)
             //{
@@ -606,7 +619,6 @@ public class Ball : MonoBehaviour
             Physics.gravity = new Vector3(0,-12,0);
         }
         //Debug.Log("MoveAroundObject.deneme: " + MoveAroundObject.deneme);
-        Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
     }
     private void OnMouseDown()
     {
@@ -615,7 +627,6 @@ public class Ball : MonoBehaviour
             if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
                 
-                Debug.Log("mousedown");
                 if (isIdle)
                 {
                     isAiming = true;
