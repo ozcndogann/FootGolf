@@ -10,6 +10,7 @@ public class AnimationFootballer : MonoBehaviour
 {
     public static bool footballerTeleport;
     public static bool AcceptShoot;
+    public bool ObjectMirrorBool,ObjectMirrorReverse;
     Rigidbody rb;
     [SerializeField] private float stopVelocity;
     [SerializeField] private float ace;
@@ -25,12 +26,17 @@ public class AnimationFootballer : MonoBehaviour
     Ray rayNorm;
     Ray rayTri;
     public static bool waitForShoot, waitForShootTri;
+    public static bool LastTouch,FirstTouch;
     public static bool lineRendererOn;
     public static bool lineRendererController;
-    public Vector3 mousePos;
+    public Vector3 mousePos,mouseStartPos,mouseLastPos;
     // Start is called before the first frame update
     void Start()
     {
+        LastTouch = false;
+        FirstTouch = false;
+        ObjectMirrorBool = false;
+        ObjectMirrorReverse = false;
         AcceptShoot = false;
         rb = GetComponent<Rigidbody>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
@@ -114,6 +120,13 @@ public class AnimationFootballer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if(mouseStartPos != null && mouseLastPos !=null && ObjectMirrorBool==false)
+        //{
+        //    if (mouseLastPos.y>mouseStartPos.y && LastTouch==true)
+        //    {
+        //        MirrorTheObject();
+        //    }
+        //}
         if (OurFootballer != null)
         {
             rayNorm = new Ray(OurFootballer.transform.position + Vector3.up * 10, Vector3.down); // bi t�k alt�ndan ba�lat�yoruz topun kendisini alg�lamas�n diye
@@ -176,48 +189,51 @@ public class AnimationFootballer : MonoBehaviour
             }
         }
         Scene scene = SceneManager.GetActiveScene();
-        if (scene.name == "Hole1")
+        if (ObjectMirrorBool == false)
         {
-            if (TrivelaFootballer != null)
+            if (scene.name == "Hole1")
             {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+                if (TrivelaFootballer != null)
+                {
+                    TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+                }
+                if (OurFootballer != null)
+                {
+                    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+                }
             }
-            if (OurFootballer != null)
+            else if (scene.name == "Hole2" || scene.name == "Hole2Rainy")
             {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
+                if (TrivelaFootballer != null)
+                {
+                    TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 30, 0);
+                }
+                if (OurFootballer != null)
+                {
+                    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 30, 0);
+                }
             }
-        }
-        else if (scene.name == "Hole2" || scene.name == "Hole2Rainy")
-        {
-            if (TrivelaFootballer != null)
+            else if (scene.name == "Hole3" || scene.name == "Hole3Rainy")
             {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 30, 0);
+                if (TrivelaFootballer != null)
+                {
+                    TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
+                }
+                if (OurFootballer != null)
+                {
+                    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
+                }
             }
-            if (OurFootballer != null)
+            else if (scene.name == "Hole4" || scene.name == "Hole4Rainy")
             {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 30, 0);
-            }
-        }
-        else if (scene.name == "Hole3" || scene.name == "Hole3Rainy")
-        {
-            if (TrivelaFootballer != null)
-            {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
-            }
-            if (OurFootballer != null)
-            {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y + 65, 0);
-            }
-        }
-        else if (scene.name == "Hole4" || scene.name == "Hole4Rainy")
-        {
-            if (TrivelaFootballer != null)
-            {
-                TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
-            }
-            if (OurFootballer != null)
-            {
-                OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
+                if (TrivelaFootballer != null)
+                {
+                    TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
+                }
+                if (OurFootballer != null)
+                {
+                    OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - ace, 0);
+                }
             }
         }
         if (view.IsMine)
@@ -249,6 +265,7 @@ public class AnimationFootballer : MonoBehaviour
                 footballerAnimator.SetBool("penaltyKick", false);
                 trivelaAnimator.SetBool("trivela", false);
                 AcceptShoot = true;
+
             }
             if (Ball.shooted == false && rb.velocity.magnitude < stopVelocity && Input.GetMouseButton(0))
             {
@@ -270,6 +287,19 @@ public class AnimationFootballer : MonoBehaviour
                 distanceT.y = 0.3f;
                 OurFootballer.transform.position = transform.position - distanceP;
                 TrivelaFootballer.transform.position = transform.position - distanceT;
+                //if (ObjectMirrorReverse == true)
+                //{
+                //    Debug.Log("calistim");
+                //    MirrorTheObjectReverse();
+                //}
+                //ObjectMirrorBool = false;
+                if (ObjectMirrorBool == true)
+                {
+                    MirrorTheObjectReverse();
+                    ObjectMirrorBool = false;
+                }
+                LastTouch = false;
+                FirstTouch = false;
                 OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
                 TrivelaFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
                 footballerTeleport = true;
@@ -281,7 +311,38 @@ public class AnimationFootballer : MonoBehaviour
         }
         
     }
+    void MirrorTheObject()
+    {
+        // Calculate mirrored position
+        Vector3 directionToReferencePoint = OurFootballer.transform.position - transform.position;
+        Vector3 mirroredPosition = transform.position - directionToReferencePoint;
+        Vector3 directionToReferencePointTri = TrivelaFootballer.transform.position - transform.position;
+        Vector3 mirroredPositionTri = transform.position - directionToReferencePointTri;
+        //ObjectMirrorBool = true;
+        //ObjectMirrorReverse = true;
+        // Set the mirrored object's position
+        OurFootballer.transform.position = mirroredPosition;
+        TrivelaFootballer.transform.position = mirroredPositionTri;
 
+        // Calculate mirrored rotation
+        OurFootballer.transform.rotation = Quaternion.Euler(0, (cam.transform.rotation.eulerAngles.y - 320)-180, 0);
+        TrivelaFootballer.transform.rotation = Quaternion.Euler(0, (cam.transform.rotation.eulerAngles.y - 320) - 180, 0);
+
+    }
+    void MirrorTheObjectReverse()
+    {
+        // Calculate mirrored position
+        Vector3 directionToReferencePoint = OurFootballer.transform.position - transform.position;
+        Vector3 mirroredPosition = transform.position - directionToReferencePoint;
+        Vector3 directionToReferencePointTri = TrivelaFootballer.transform.position - transform.position;
+        Vector3 mirroredPositionTri = transform.position - directionToReferencePointTri;
+        // Set the mirrored object's position
+        OurFootballer.transform.position = mirroredPosition;
+        TrivelaFootballer.transform.position = mirroredPositionTri;
+        //ObjectMirrorReverse = false;
+        //ObjectMirrorBool = false;
+
+    }
     [PunRPC]
     void HideOurFootballer(string footballerPhotonViewId)
     {
@@ -303,17 +364,48 @@ public class AnimationFootballer : MonoBehaviour
             //targetFootballer.gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
+    private void OnMouseUp()
+    {
+        if (LastTouch == false)
+        {
+            mouseLastPos = Input.mousePosition;
+            Debug.Log(mouseLastPos + " Last");
+            LastTouch = true;
+        }
+    }
     private void OnMouseDown()
     {
+        if (FirstTouch == false)
+        {
+            mouseStartPos = Input.mousePosition;
+            mouseStartPos = Input.mousePosition;
+            FirstTouch = true;
+        }
+        
+        Debug.Log(mouseStartPos + " Start");
         if (Ball.isIdle)
         {
             Ball.isAiming = true;
         }
         if (Ball.shooted == true)
         {
+            //if(FirstTouch == false)
+            //{
+            //    mouseStartPos = Input.mousePosition;
+            //    Debug.Log(mouseStartPos + " Start");
+            //    FirstTouch = true;
+            //}
             if (Input.GetMouseButtonDown(0) && Ball.shootCloser == false)
             {
+                if (mouseLastPos.y > mouseStartPos.y)
+                {
+                    MirrorTheObject();
+                    ObjectMirrorBool = true;
+                }
                 mousePos = Input.mousePosition;
+                mouseStartPos = Vector3.zero;
+                mouseLastPos = Vector3.zero;
+                //Debug.Log(mousePos + " Sonuc");
                 if (mousePos.x > Screen.width / 2)
                 {
                     view.RPC("ShowOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
