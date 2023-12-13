@@ -356,7 +356,7 @@ public class Ball : MonoBehaviour
                             {
                                
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                                nextPlayerTurn = true;
+                                //nextPlayerTurn = true;
                                 //PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                                 
                             }
