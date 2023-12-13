@@ -180,7 +180,6 @@ public class MoveAroundObject : MonoBehaviour
         //    cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/target.transform.position.y + .397f, cam.transform.position.z);
         //}
         #endregion
-        Debug.Log("kamera su an: " + target.gameObject.GetPhotonView().Owner.NickName);
     }
     IEnumerator SpectatorChoose()
     {

@@ -183,13 +183,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
-            {
-                Debug.Log(player.NickName + "'s turn value: " + (bool)player.CustomProperties["turn"]);
-            }
-        }
+
         #region CommentedOldAnimations
         ////sol art� sa� eksi
         //if (OurFootballer != null)
@@ -302,35 +296,18 @@ public class Ball : MonoBehaviour
         //}
 
         #endregion
-        //Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
-        //if ((rb.velocity.magnitude < stopVelocity))
-        //{
-        //    Debug.Log("stop");
-        //}
-        //else
-        //{
-        //    Debug.Log("move");
-        //}
+        Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
+        if ((rb.velocity.magnitude < stopVelocity))
+        {
+            Debug.Log("stop");
+        }
+        else
+        {
+            Debug.Log("move");
+        }
 
-        //if (nextPlayerTurn)
-        //{
-        //    //Debug.Log("beforenext");
-
-
-        //    if ((rb.velocity.magnitude < stopVelocity))
-        //    {
-
-        //        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        //        {
-        //            //Debug.Log("beforenextiç");
-        //            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        //            //Debug.Log("afternextiç");
-        //            nextPlayerTurn = false;
-        //        }
-
-        //    }
-        //    //Debug.Log("afternext");
-        //}
+        
+        #region BarrierCam
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
             barrierCam.gameObject.SetActive(false);
@@ -342,9 +319,10 @@ public class Ball : MonoBehaviour
                 barrierCam.gameObject.SetActive(true);
             }
         }
+        #endregion
 
-            if (view.IsMine)
-        {
+        if (view.IsMine)
+            {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
             {
                 Stop();
@@ -367,32 +345,21 @@ public class Ball : MonoBehaviour
                             shootCloser = true;
                             Zoom.changeFovBool = false;
                             //lineRenderer.enabled = false;
-                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                            {
-                               
-                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                                //barrierCam.gameObject.SetActive(true);
-                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                                
-                            }
+                            //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                            //{
+
+                            //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                            //    //barrierCam.gameObject.SetActive(true);
+                            //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+
+                            //}
+                            GetTurn();
                             timer = 20f;
                         }
                     }
                 }
 
             }
-            //if (nextPlayerTurn && isIdle)
-            //{
-            //    Debug.Log("beforenext");
-            //    if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-            //    {
-            //        Debug.Log("beforenextiç");
-            //        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-            //        Debug.Log("afternextiç");
-            //    }
-            //    Debug.Log("afternext");
-            //    nextPlayerTurn = false;
-            //}
             #region CommentedOldAnimations
             //if (waitForShoot == true)
             //{
@@ -742,17 +709,36 @@ public class Ball : MonoBehaviour
         //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //barrierCam.gameObject.SetActive(true);
         timer = 20f;
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        //{
+
+        //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+
+        //}
+        GetTurn();
+
+    }
+    private void GetTurn()
+    {
+        nextPlayerTurn = true;
+        if (nextPlayerTurn)
         {
+            //Debug.Log("beforenext");
+            if ((rb.velocity.magnitude < stopVelocity))
+            {
 
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                {
+                    //Debug.Log("beforenextiç");
+                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                    //Debug.Log("afternextiç");
+                    nextPlayerTurn = false;
+                }
 
+            }
+            //Debug.Log("afternext");
         }
-        //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        ////nextPlayerTurn = true;
-        //PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-
     }
     
     private void ProcessAim()
