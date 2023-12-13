@@ -723,7 +723,7 @@ public class Ball : MonoBehaviour
         barrierCam.gameObject.SetActive(true);
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        //nextPlayerTurn = true;
+        nextPlayerTurn = true;
 
 
     }
