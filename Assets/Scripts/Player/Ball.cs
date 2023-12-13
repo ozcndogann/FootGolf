@@ -330,9 +330,9 @@ public class Ball : MonoBehaviour
         }
         else
         {
-            if (barrierCam.isActiveAndEnabled)
+            if (!barrierCam.gameObject.activeSelf)
             {
-                barrierCam.gameObject.SetActive(false);
+                barrierCam.gameObject.SetActive(true);
             }
         }
 
