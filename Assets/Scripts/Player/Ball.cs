@@ -324,9 +324,16 @@ public class Ball : MonoBehaviour
             }
             //Debug.Log("afternext");
         }
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        {
+            barrierCam.gameObject.SetActive(false);
+        }
+        else
+        {
+            barrierCam.gameObject.SetActive(true);
+        }
 
-
-        if (view.IsMine)
+            if (view.IsMine)
         {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
             {
@@ -339,7 +346,7 @@ public class Ball : MonoBehaviour
                         
                         if (timer > 0)
                         {
-                            barrierCam.gameObject.SetActive(false);
+                            //barrierCam.gameObject.SetActive(false);
                             ProcessAim();
 
                         }
@@ -354,7 +361,7 @@ public class Ball : MonoBehaviour
                             {
                                
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                                barrierCam.gameObject.SetActive(true);
+                                //barrierCam.gameObject.SetActive(true);
                                 nextPlayerTurn = true;
                                 //PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                                 
@@ -724,7 +731,7 @@ public class Ball : MonoBehaviour
         //alttaki k�s�m sadece vururken futbolcu g�r�ns�n diye
         //view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-        barrierCam.gameObject.SetActive(true);
+        //barrierCam.gameObject.SetActive(true);
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
         nextPlayerTurn = true;
