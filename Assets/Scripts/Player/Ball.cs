@@ -296,13 +296,21 @@ public class Ball : MonoBehaviour
 
         #endregion
         //Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
-        //Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
+        Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
         //Debug.Log("isIdle: " + (isIdle));
         if ((rb.velocity.magnitude < stopVelocity))
         {
-            if (nextPlayerTurn)
+            Debug.Log("stop");
+        }
+
+        if (nextPlayerTurn)
+        {
+            //Debug.Log("beforenext");
+            
+            
+            if ((rb.velocity.magnitude < stopVelocity))
             {
-                Debug.Log("beforenext");
+
                 if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                 {
                     //Debug.Log("beforenextiç");
@@ -310,11 +318,11 @@ public class Ball : MonoBehaviour
                     //Debug.Log("afternextiç");
                     nextPlayerTurn = false;
                 }
-                Debug.Log("afternext");
-                
+
             }
-            
+            //Debug.Log("afternext");
         }
+
 
         if (view.IsMine)
         {
@@ -715,8 +723,9 @@ public class Ball : MonoBehaviour
         barrierCam.gameObject.SetActive(true);
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        nextPlayerTurn = true;
-        
+        //nextPlayerTurn = true;
+
+
     }
     
     private void ProcessAim()
@@ -821,7 +830,6 @@ public class Ball : MonoBehaviour
         rb.AddForce(-finalDirection * force);
         isIdle = false;
         shooted = false;
-
     }
                    
     private void DrawLine(Vector3 worldPoint)

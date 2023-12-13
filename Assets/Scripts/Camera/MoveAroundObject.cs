@@ -25,14 +25,11 @@ public class MoveAroundObject : MonoBehaviour
     {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            Debug.Log("assignnn");
             if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
             {
                 GameObject playerGameObject = FindPlayerGameObject(player);
-                Debug.Log("assignn");
                 if (playerGameObject != null)
                 {
-                    Debug.Log("assign");
                     target = playerGameObject.transform;
                 }
             }

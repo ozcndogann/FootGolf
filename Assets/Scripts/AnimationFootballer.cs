@@ -369,7 +369,7 @@ public class AnimationFootballer : MonoBehaviour
         if (LastTouch == false)
         {
             mouseLastPos = Input.mousePosition;
-            Debug.Log(mouseLastPos + " Last");
+            //Debug.Log(mouseLastPos + " Last");
             LastTouch = true;
         }
     }
@@ -382,7 +382,7 @@ public class AnimationFootballer : MonoBehaviour
             FirstTouch = true;
         }
         
-        Debug.Log(mouseStartPos + " Start");
+        //Debug.Log(mouseStartPos + " Start");
         if (Ball.isIdle)
         {
             Ball.isAiming = true;
