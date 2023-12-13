@@ -192,7 +192,7 @@ public class MoveAroundObject : MonoBehaviour
             {
                 //Debug.Log(player.NickName + "'s turn value(inside): " + (bool)player.CustomProperties["turn"]);
                 GameObject playerGameObject = FindPlayerGameObject(player);
-                if (playerGameObject != null && playerGameObject.CompareTag("Ball"))
+                if (/*playerGameObject != null && */playerGameObject.CompareTag("Ball"))
                 {
                     //Debug.Log(player.NickName + "'s turn value(inside2): " + (bool)player.CustomProperties["turn"]);
                     target = playerGameObject.transform;
