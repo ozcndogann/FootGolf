@@ -43,6 +43,7 @@ public class MoveAroundObject : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(target.gameObject.GetPhotonView().name);
         //foreach (Player player in PhotonNetwork.PlayerList)
         //{
         //    if (player.CustomProperties["turn"] != null)
@@ -75,7 +76,7 @@ public class MoveAroundObject : MonoBehaviour
         //    //}
         //}
         #region CamFollow
-      
+
         if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
         {
 
@@ -180,6 +181,7 @@ public class MoveAroundObject : MonoBehaviour
         //    cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/target.transform.position.y + .397f, cam.transform.position.z);
         //}
         #endregion
+        Debug.Log("kamera su an: " + target.gameObject.GetPhotonView().name);
     }
     IEnumerator SpectatorChoose()
     {
