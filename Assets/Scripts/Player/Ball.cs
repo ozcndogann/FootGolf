@@ -354,7 +354,7 @@ public class Ball : MonoBehaviour
 
                             //}
                             GetTurn();
-                            timer = 20f;
+                            //timer = 20f;
                         }
                     }
                 }
@@ -708,7 +708,7 @@ public class Ball : MonoBehaviour
         //view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //barrierCam.gameObject.SetActive(true);
-        timer = 20f;
+        //timer = 20f;
         //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
         //{
 
@@ -722,6 +722,7 @@ public class Ball : MonoBehaviour
     private void GetTurn()
     {
         nextPlayerTurn = true;
+        timer = 20f;
         if (nextPlayerTurn)
         {
             //Debug.Log("beforenext");
@@ -730,9 +731,8 @@ public class Ball : MonoBehaviour
 
                 if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                 {
-                    //Debug.Log("beforenextiç");
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                     PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                    //Debug.Log("afternextiç");
                     nextPlayerTurn = false;
                 }
 
