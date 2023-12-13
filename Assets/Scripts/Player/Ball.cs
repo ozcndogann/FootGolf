@@ -352,11 +352,11 @@ public class Ball : MonoBehaviour
                             shootCloser = true;
                             Zoom.changeFovBool = false;
                             //lineRenderer.enabled = false;
-                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && !nextPlayerTurn)
                             {
                                
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                                //nextPlayerTurn = true;
+                                nextPlayerTurn = true;
                                 //PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                                 
                             }
