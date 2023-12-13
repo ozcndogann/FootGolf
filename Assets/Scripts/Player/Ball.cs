@@ -324,19 +324,13 @@ public class Ball : MonoBehaviour
             }
             //Debug.Log("afternext");
         }
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && barrierCam.isActiveAndEnabled)
         {
-            if (barrierCam.gameObject != null)
-            {
-                barrierCam.gameObject.SetActive(false);
-            }
+            barrierCam.gameObject.SetActive(false);
         }
         else
         {
-            if (barrierCam.gameObject != null)
-            {
-                barrierCam.gameObject.SetActive(true);
-            }
+            barrierCam.gameObject.SetActive(true);
         }
 
             if (view.IsMine)
