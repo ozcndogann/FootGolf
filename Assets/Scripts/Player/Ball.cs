@@ -183,6 +183,13 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
+            {
+                Debug.Log(player.NickName + "'s turn value: " + (bool)player.CustomProperties["turn"]);
+            }
+        }
         #region CommentedOldAnimations
         ////sol art� sa� eksi
         //if (OurFootballer != null)
@@ -308,8 +315,8 @@ public class Ball : MonoBehaviour
         //if (nextPlayerTurn)
         //{
         //    //Debug.Log("beforenext");
-            
-            
+
+
         //    if ((rb.velocity.magnitude < stopVelocity))
         //    {
 
@@ -735,55 +742,50 @@ public class Ball : MonoBehaviour
         //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
         //barrierCam.gameObject.SetActive(true);
         timer = 20f;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        //nextPlayerTurn = true;
-        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        {
+
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+
+        }
+        //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        ////nextPlayerTurn = true;
+        //PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
 
     }
     
     private void ProcessAim()
     {
-        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        if (!isAiming || !isIdle)
         {
-            if (!isAiming || !isIdle)
-            {
-                return; // exit method
-            }
-
-            if (!shooted)
-            {
-                worldPoint = CastMouseClickRay();// world pointi belirlemek i�in clickten ray yolla 
-            }
-
-            if (!worldPoint.HasValue) // ray bi �eye �arpt� m� diye check
-            {
-                return; // exit method
-            }
-
-            DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line �iz
-
-            if (AnimationFootballer.lineRendererController == false)
-            {
-                AnimationFootballer.lineRendererOn = true;
-                AnimationFootballer.lineRendererController = true;
-            }
-
-            if (Input.GetMouseButtonUp(0)) // parma��m� �ektim mi
-            {
-                AnimationFootballer.lineRendererOn = false;
-                shooted = true;
-                Zoom.changeFovBool = true;
-            }
+            return; // exit method
         }
-        else
+
+        if (!shooted)
         {
-            worldPoint = null;
+            worldPoint = CastMouseClickRay();// world pointi belirlemek i�in clickten ray yolla 
         }
-        
 
+        if (!worldPoint.HasValue) // ray bi �eye �arpt� m� diye check
+        {
+            return; // exit method
+        }
 
+        DrawLine(transform.position - (worldPoint.Value - transform.position));// aim line �iz
 
+        if (AnimationFootballer.lineRendererController == false)
+        {
+            AnimationFootballer.lineRendererOn = true;
+            AnimationFootballer.lineRendererController = true;
+        }
 
+        if (Input.GetMouseButtonUp(0)) // parma��m� �ektim mi
+        {
+            AnimationFootballer.lineRendererOn = false;
+            shooted = true;
+            Zoom.changeFovBool = true;
+        }
 
         #region a�a��daki ifleri topa iyice yak�n oldu�u zaman b�rakabilmesi i�in kullanabiliriz
         //a�a��daki ifleri topa iyice yak�n oldu�u zaman b�rakabilmesi i�in kullanabiliriz
