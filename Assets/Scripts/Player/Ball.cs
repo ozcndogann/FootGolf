@@ -302,6 +302,10 @@ public class Ball : MonoBehaviour
         {
             Debug.Log("stop");
         }
+        else
+        {
+            Debug.Log("move");
+        }
 
         if (nextPlayerTurn)
         {
