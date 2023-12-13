@@ -295,17 +295,15 @@ public class Ball : MonoBehaviour
         //}
 
         #endregion
-        //Debug.Log("nextPlayerTurn && isIdle: " + (nextPlayerTurn && isIdle));
-        Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
-        //Debug.Log("isIdle: " + (isIdle));
-        if ((rb.velocity.magnitude < stopVelocity))
-        {
-            Debug.Log("stop");
-        }
-        else
-        {
-            Debug.Log("move");
-        }
+        //Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
+        //if ((rb.velocity.magnitude < stopVelocity))
+        //{
+        //    Debug.Log("stop");
+        //}
+        //else
+        //{
+        //    Debug.Log("move");
+        //}
 
         if (nextPlayerTurn)
         {
@@ -352,10 +350,11 @@ public class Ball : MonoBehaviour
                             shootCloser = true;
                             Zoom.changeFovBool = false;
                             //lineRenderer.enabled = false;
-                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && !nextPlayerTurn)
+                            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                             {
                                
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                                barrierCam.gameObject.SetActive(true);
                                 nextPlayerTurn = true;
                                 //PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                                 
