@@ -54,6 +54,7 @@ public class Ball : MonoBehaviour
     Ray rayNorm;
     Ray rayTri;
     bool nextPlayerTurn;
+    bool shotClicked;
     #endregion
 
 
@@ -326,6 +327,10 @@ public class Ball : MonoBehaviour
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
             {
                 Stop();
+                if (shotClicked)
+                {
+                    GetTurn();
+                }
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
@@ -716,8 +721,8 @@ public class Ball : MonoBehaviour
         //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
 
         //}
-        GetTurn();
-
+        //GetTurn();
+        StartCoroutine(ShootedBool());
     }
     private void GetTurn()
     {
@@ -725,22 +730,22 @@ public class Ball : MonoBehaviour
         timer = 20f;
         if (nextPlayerTurn)
         {
-            //Debug.Log("beforenext");
-            if ((rb.velocity.magnitude < stopVelocity))
+            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-
-                if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                {
-                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                    nextPlayerTurn = false;
-                }
-
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                shotClicked = false;
+                nextPlayerTurn = false;
             }
-            //Debug.Log("afternext");
         }
     }
     
+    IEnumerator ShootedBool()
+    {
+        yield return new WaitForSeconds(0.25f);
+        shotClicked = true;
+    }
+
     private void ProcessAim()
     {
         if (!isAiming || !isIdle)
