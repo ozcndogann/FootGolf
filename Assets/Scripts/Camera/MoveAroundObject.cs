@@ -75,11 +75,11 @@ public class MoveAroundObject : MonoBehaviour
         //    //}
         //}
         #region CamFollow
-
+        StartCoroutine(SpectatorChoose());
         if (Ball.shooted == false && AnimationFootballer.lineRendererOn == false)
         {
 
-            StartCoroutine(SpectatorChoose());
+            
             cam.transform.position = new Vector3(target.position.x, 1 + target.position.y, target.transform.position.z);
             cam.transform.Translate(new Vector3(0, 0, -distanceToTarget));
 
@@ -180,7 +180,6 @@ public class MoveAroundObject : MonoBehaviour
         //    cam.transform.position = new Vector3(cam.transform.position.x, /*heightWhileShooting*/target.transform.position.y + .397f, cam.transform.position.z);
         //}
         #endregion
-        Debug.Log("kamera su an: " + target.gameObject.GetPhotonView().Owner.NickName);
     }
     IEnumerator SpectatorChoose()
     {
