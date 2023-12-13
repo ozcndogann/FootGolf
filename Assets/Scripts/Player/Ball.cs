@@ -305,32 +305,35 @@ public class Ball : MonoBehaviour
         //    Debug.Log("move");
         //}
 
-        if (nextPlayerTurn)
-        {
-            //Debug.Log("beforenext");
+        //if (nextPlayerTurn)
+        //{
+        //    //Debug.Log("beforenext");
             
             
-            if ((rb.velocity.magnitude < stopVelocity))
-            {
+        //    if ((rb.velocity.magnitude < stopVelocity))
+        //    {
 
-                if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                {
-                    //Debug.Log("beforenextiç");
-                    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                    //Debug.Log("afternextiç");
-                    nextPlayerTurn = false;
-                }
+        //        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        //        {
+        //            //Debug.Log("beforenextiç");
+        //            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        //            //Debug.Log("afternextiç");
+        //            nextPlayerTurn = false;
+        //        }
 
-            }
-            //Debug.Log("afternext");
-        }
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && barrierCam.isActiveAndEnabled)
+        //    }
+        //    //Debug.Log("afternext");
+        //}
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
         {
-            barrierCam.gameObject.SetActive(true);
+            barrierCam.gameObject.SetActive(false);
         }
         else
         {
-            barrierCam.gameObject.SetActive(false);
+            if (barrierCam.isActiveAndEnabled)
+            {
+                barrierCam.gameObject.SetActive(false);
+            }
         }
 
             if (view.IsMine)
@@ -362,8 +365,7 @@ public class Ball : MonoBehaviour
                                
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                                 //barrierCam.gameObject.SetActive(true);
-                                nextPlayerTurn = true;
-                                //PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                                 
                             }
                             timer = 20f;
@@ -734,8 +736,8 @@ public class Ball : MonoBehaviour
         //barrierCam.gameObject.SetActive(true);
         timer = 20f;
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        nextPlayerTurn = true;
-
+        //nextPlayerTurn = true;
+        PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
 
     }
     
