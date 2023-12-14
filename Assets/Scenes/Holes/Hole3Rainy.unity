@@ -915,9 +915,10 @@ GameObject:
   - component: {fileID: 235240761}
   - component: {fileID: 235240760}
   - component: {fileID: 235240759}
+  - component: {fileID: 235240762}
   m_Layer: 0
   m_Name: Terrain_(-100.00, 0.00, 0.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -982,6 +983,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &235240762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235240758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1 &238101637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,9 +3282,10 @@ GameObject:
   - component: {fileID: 572406078}
   - component: {fileID: 572406077}
   - component: {fileID: 572406076}
+  - component: {fileID: 572406079}
   m_Layer: 0
   m_Name: Terrain_(100.00, 0.00, -133.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -3330,6 +3350,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &572406079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572406075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1001 &579057475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10414,9 +10452,10 @@ GameObject:
   - component: {fileID: 920045707}
   - component: {fileID: 920045706}
   - component: {fileID: 920045705}
+  - component: {fileID: 920045708}
   m_Layer: 0
   m_Name: Terrain_(-100.00, 0.00, 133.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -10481,6 +10520,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &920045708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920045704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1 &934714019
 GameObject:
   m_ObjectHideFlags: 0
@@ -11101,9 +11158,10 @@ GameObject:
   - component: {fileID: 1040887145}
   - component: {fileID: 1040887144}
   - component: {fileID: 1040887143}
+  - component: {fileID: 1040887146}
   m_Layer: 0
   m_Name: Terrain_(100.00, 0.00, 0.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -11168,6 +11226,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1040887146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040887142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1001 &1077953472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12093,9 +12169,10 @@ GameObject:
   - component: {fileID: 1170396343}
   - component: {fileID: 1170396342}
   - component: {fileID: 1170396341}
+  - component: {fileID: 1170396344}
   m_Layer: 0
   m_Name: Terrain_(0.00, 0.00, 133.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -12160,6 +12237,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1170396344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170396340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1001 &1178685190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12857,7 +12952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 18
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1277783136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15963,9 +16058,10 @@ GameObject:
   - component: {fileID: 1899507948}
   - component: {fileID: 1899507947}
   - component: {fileID: 1899507946}
+  - component: {fileID: 1899507949}
   m_Layer: 0
   m_Name: Terrain_(-100.00, 0.00, -133.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -16030,6 +16126,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1899507949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899507945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1 &1906975950
 GameObject:
   m_ObjectHideFlags: 0
@@ -16041,9 +16155,10 @@ GameObject:
   - component: {fileID: 1906975953}
   - component: {fileID: 1906975952}
   - component: {fileID: 1906975951}
+  - component: {fileID: 1906975954}
   m_Layer: 0
   m_Name: Terrain_(0.00, 0.00, -133.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -16108,6 +16223,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1906975954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906975950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1 &1926359518
 GameObject:
   m_ObjectHideFlags: 0
@@ -17371,9 +17504,10 @@ GameObject:
   - component: {fileID: 2110535833}
   - component: {fileID: 2110535832}
   - component: {fileID: 2110535831}
+  - component: {fileID: 2110535834}
   m_Layer: 0
   m_Name: Terrain_(100.00, 0.00, 133.00)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -17438,6 +17572,24 @@ Transform:
   m_Father: {fileID: 2072262541}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110535834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110535830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651debdce266dbc49be78ac41898cb7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballRigidbody: {fileID: 0}
+  teleportDistance: 2
+  teleportLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  teleportDestination: {fileID: 0}
 --- !u!1 &2117934354
 GameObject:
   m_ObjectHideFlags: 0
