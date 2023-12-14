@@ -297,15 +297,7 @@ public class Ball : MonoBehaviour
         //}
 
         #endregion
-        Debug.Log("nextPlayerTurn" + (nextPlayerTurn));
-        if ((rb.velocity.magnitude < stopVelocity))
-        {
-            Debug.Log("stop");
-        }
-        else
-        {
-            Debug.Log("move");
-        }
+        
 
         
         #region BarrierCam
@@ -339,7 +331,6 @@ public class Ball : MonoBehaviour
                         
                         if (timer > 0)
                         {
-                            //barrierCam.gameObject.SetActive(false);
                             ProcessAim();
 
                         }
@@ -349,17 +340,7 @@ public class Ball : MonoBehaviour
                             shooted = false;
                             shootCloser = true;
                             Zoom.changeFovBool = false;
-                            //lineRenderer.enabled = false;
-                            //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                            //{
-
-                            //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                            //    //barrierCam.gameObject.SetActive(true);
-                            //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-
-                            //}
                             GetTurn();
-                            //timer = 20f;
                         }
                     }
                 }
@@ -623,7 +604,6 @@ public class Ball : MonoBehaviour
         {
             Physics.gravity = new Vector3(0,-12,0);
         }
-        //Debug.Log("MoveAroundObject.deneme: " + MoveAroundObject.deneme);
     }
     private void OnMouseDown()
     {
@@ -709,19 +689,6 @@ public class Ball : MonoBehaviour
         shootCloser = true;
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
-        //alttaki k�s�m sadece vururken futbolcu g�r�ns�n diye
-        //view.RPC("HideOurFootballer", RpcTarget.All, TrivelaFootballer.GetComponent<PhotonView>().ViewID.ToString());
-        //view.RPC("HideOurFootballer", RpcTarget.All, OurFootballer.GetComponent<PhotonView>().ViewID.ToString());
-        //barrierCam.gameObject.SetActive(true);
-        //timer = 20f;
-        //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        //{
-
-        //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-
-        //}
-        //GetTurn();
         StartCoroutine(ShootedBool());
     }
     private void GetTurn()
@@ -871,24 +838,6 @@ public class Ball : MonoBehaviour
     }
     private Vector3? CastMouseClickRay()
     {
-        //if (!MoveAroundObject.deneme)
-        //{
-        //    MoveAroundObject.deneme = true;
-        //    return null;
-        //}
-        //if (shooted)
-        //{
-        //    Debug.Log("returnoncesi");
-        //    return null;
-        //}
-        //else
-        //{
-
-        //}
-        //if (Input.GetMouseButton(0))
-        //{
-
-        //}
         screenMousePosFar = new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
