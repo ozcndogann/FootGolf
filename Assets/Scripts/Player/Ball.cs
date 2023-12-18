@@ -55,13 +55,14 @@ public class Ball : MonoBehaviour
     Ray rayTri;
     bool nextPlayerTurn;
     bool shotClicked;
+    public static bool challangeCheck;
     #endregion
 
 
     private void Start()
     {
         #region DefiningAtStart
-        
+        challangeCheck = false;
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
         OurTurn = true;
@@ -905,13 +906,22 @@ public class Ball : MonoBehaviour
 
             if (view.IsMine)
             {
-                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
-                //cam.enabled = (false);
-                //cam.GetComponent<Zoom>().enabled = false;
-                //cam.GetComponent<AudioListener>().enabled = false;
-                //cam2.GetComponent<AudioListener>().enabled = true;
-                //cam2.enabled = (true);
-                CheckAllPlayers();
+                if (Challenges.isChallenge)
+                {
+                    Debug.Log("burası challange");
+                    challangeCheck = true;
+                }
+                else
+                {
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
+                    //cam.enabled = (false);
+                    //cam.GetComponent<Zoom>().enabled = false;
+                    //cam.GetComponent<AudioListener>().enabled = false;
+                    //cam2.GetComponent<AudioListener>().enabled = true;
+                    //cam2.enabled = (true);
+                    CheckAllPlayers();
+                }
+                
             }
         }
     }

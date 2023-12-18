@@ -168,6 +168,8 @@ public class UI_InGame : MonoBehaviour
     public void MainMenu()
     {
         ShotCounter.ShotCount = 0;
+        ChallengeType.cha1 = false;
+        ChallengeType.cha2 = false;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }

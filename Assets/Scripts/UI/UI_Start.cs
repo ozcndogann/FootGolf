@@ -23,7 +23,7 @@ public class UI_Start : MonoBehaviour
     private IEnumerator DelayCheck2(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("UIRandomGameSelect");
+        SceneManager.LoadScene("Challanges");
     }
     public void ProfileScene()
     {
