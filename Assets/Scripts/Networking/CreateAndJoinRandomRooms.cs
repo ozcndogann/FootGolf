@@ -34,14 +34,17 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         if (IGotIt == true && Switch.index == 0)
         {
             MoneyPopupTR.SetActive(false);
+            Debug.Log("TR");
         }
         else if (IGotIt == true && Switch.index == 1)
         {
             MoneyPopupENG.SetActive(false);
+            Debug.Log("Eng");
         }
         else if (IGotIt == true && Switch.index == 2)
         {
             MoneyPopupNL.SetActive(false);
+            Debug.Log("NL");
         }
     }
     public void Start()

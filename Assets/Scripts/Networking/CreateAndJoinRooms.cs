@@ -15,7 +15,9 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public static string randomCreate;
     public static RoomOptions roomOptions = new RoomOptions();
     public GameObject panel;
-    public GameObject MoneyPopup;
+    public GameObject MoneyPopupTR;
+    public GameObject MoneyPopupENG;
+    public GameObject MoneyPopupNL;
     public Button IGotIt;
 
     //public int turkeyfee, englandfee, hollandfee;
@@ -70,7 +72,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
 
-        
         if (Switch.index == 0 && coins >= FeesAndUI.turkeyfee)
         {
             if (practice || versus || Tournament)
@@ -81,6 +82,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
                 PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.turkeyfee);
+
+                
             }
             else
             {
@@ -122,10 +125,20 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             }
             //coins -= hollandfee;
         }
-        else
+        else if (Switch.index == 0 && coins < FeesAndUI.turkeyfee)
         {
-            Debug.Log("paran yetersiz");
-            MoneyPopup.SetActive(true);
+            Debug.Log("tÃ¼rkiyeye paran yetersiz");
+            MoneyPopupTR.SetActive(true);
+        }
+        else if (Switch.index == 1 && coins < FeesAndUI.englandfee)
+        {
+            Debug.Log("ingiltereye paran yetersiz");
+            MoneyPopupENG.SetActive(true);
+        }
+        else if (Switch.index == 2 && coins < FeesAndUI.hollandfee)
+        {
+            Debug.Log("hollandaya paran yetersiz");
+            MoneyPopupNL.SetActive(true);
         }
 
     }
@@ -142,7 +155,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("biþi yaz uyarýsý ui gelmelijoin");
+            Debug.Log("biï¿½i yaz uyarï¿½sï¿½ ui gelmelijoin");
         }
     }
     public override void OnJoinedRoom()

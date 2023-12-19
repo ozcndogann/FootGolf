@@ -18,7 +18,7 @@ public class UI_Start : MonoBehaviour
     private IEnumerator DelayCheck(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("LobbyOrQuick");
+        SceneManager.LoadScene("UIGameSelect");
     }
     private IEnumerator DelayCheck2(float delay)
     {
