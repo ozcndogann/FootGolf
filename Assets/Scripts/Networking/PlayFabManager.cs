@@ -21,6 +21,7 @@ public class PlayFabManager : MonoBehaviour
     public GameObject firstAward;
     public GameObject secondAward;
     public GameObject thirdAward;
+    public Texture2D[] rankImages;
     string loggedInPlayedId;
     public static bool nameAccepter, playerFound;
     public GameObject Long, Short, Taken,Empty;
