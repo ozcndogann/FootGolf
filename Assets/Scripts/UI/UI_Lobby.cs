@@ -18,6 +18,7 @@ public class UI_Lobby : MonoBehaviour
     private void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
+        CreateAndJoinRooms.friendlyMatch = false;
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("roomCode", out object roomCodeValue))
         {
             codeText.text = roomCodeValue.ToString();

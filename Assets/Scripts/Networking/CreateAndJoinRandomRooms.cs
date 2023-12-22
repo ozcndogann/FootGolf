@@ -243,7 +243,14 @@ public class CreateAndJoinRandomRooms : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", 0 } });
         }
-        PhotonNetwork.LoadLevel("RandomLobby");
+        if (!CreateAndJoinRooms.friendlyMatch)
+        {
+            PhotonNetwork.LoadLevel("RandomLobby");
+        }
+        else
+        {
+
+        }
     }
     
 }

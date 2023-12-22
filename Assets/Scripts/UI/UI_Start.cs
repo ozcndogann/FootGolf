@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class UI_Start : MonoBehaviour
 {
+    private void Start()
+    {
+        AudioManager.Instance.PlayMusic("Theme");
+    }
     public void PlayGame()
     {
         //SceneManager.LoadScene("LobbyOrQuick");

@@ -19,7 +19,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public GameObject MoneyPopupENG;
     public GameObject MoneyPopupNL;
     public Button IGotIt;
-
+    public static bool friendlyMatch;
     //public int turkeyfee, englandfee, hollandfee;
     private int coins;
 
@@ -82,8 +82,9 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
                 PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.turkeyfee);
+                friendlyMatch = true;
 
-                
+
             }
             else
             {
@@ -100,7 +101,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "roomCode", randomCreate } };
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
-                PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.englandfee);
+                PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.englandfee); 
+                friendlyMatch = true;
             }
             else
             {
@@ -118,6 +120,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
                 roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
                 PhotonNetwork.CreateRoom(randomCreate, roomOptions);
                 PlayerPrefs.SetInt("Coins", coins -= FeesAndUI.hollandfee);
+                friendlyMatch = true;
             }
             else
             {
@@ -164,6 +167,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", 0 } });
         }
-        PhotonNetwork.LoadLevel("Lobby");
+        if (friendlyMatch)
+        {
+            PhotonNetwork.LoadLevel("Lobby");
+            friendlyMatch = false;
+        }
+        
+        
     }
 }

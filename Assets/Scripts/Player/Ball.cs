@@ -89,6 +89,14 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        if (SceneManager.GetActiveScene().buildIndex == 8|| SceneManager.GetActiveScene().buildIndex == 9|| SceneManager.GetActiveScene().buildIndex == 12)
+        {
+            AudioManager.Instance.PlayMusic("GameBG");
+        }
+        else
+        {
+            AudioManager.Instance.PlayMusic("Rain");
+        }
 
         #endregion
 
@@ -690,6 +698,7 @@ public class Ball : MonoBehaviour
         shootCloser = true;
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
+        AudioManager.Instance.PlaySFX("Shoot");
         StartCoroutine(ShootedBool());
     }
     private void GetTurn()

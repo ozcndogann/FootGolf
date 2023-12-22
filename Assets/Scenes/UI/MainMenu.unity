@@ -1249,8 +1249,16 @@ MonoBehaviour:
   SFXSource: {fileID: 1192212331}
   MusicSounds:
   - name: Theme
-    clip: {fileID: 8300000, guid: de01faa0597bf8c4a8604877280f7eab, type: 3}
-  SFXSounds: []
+    clip: {fileID: 8300000, guid: 220082f5a63d1d247a1c61601d03bd31, type: 3}
+  - name: GameBG
+    clip: {fileID: 8300000, guid: ada60774185b97942ac08aa2a2cd5406, type: 3}
+  - name: Rain
+    clip: {fileID: 8300000, guid: a7118aa5ebb2fa1449a45e1d1c93ae23, type: 3}
+  SFXSounds:
+  - name: Shoot
+    clip: {fileID: 8300000, guid: 6da1bb202d5da5a419ea73423f4b0542, type: 3}
+  - name: Walk
+    clip: {fileID: 8300000, guid: 5d59c963b1089a14bafa7c4e745e2ad0, type: 3}
 --- !u!4 &227973136
 Transform:
   m_ObjectHideFlags: 0
@@ -5474,7 +5482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1060682052
 RectTransform:
   m_ObjectHideFlags: 0
