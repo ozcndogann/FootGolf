@@ -24,10 +24,10 @@ public class RainyDynamic : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            rb.mass = 1;
+            rb.mass = 1.1f;
             rb.angularDrag = 0.05f;
             rb.drag = 0.075f;
-            rbphy.bounciness = 0.55f;
+            rbphy.bounciness = 0.4f;
         }
     }
 }

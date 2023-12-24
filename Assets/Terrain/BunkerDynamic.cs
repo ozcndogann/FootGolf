@@ -15,6 +15,7 @@ public class BunkerDynamic : MonoBehaviour
     public BoxCollider box;
     private bool inBunker = false;
     public float sandHeightThreshold;
+    private float lastHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -22,20 +23,37 @@ public class BunkerDynamic : MonoBehaviour
         rb = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
         rbphy = GameObject.FindGameObjectWithTag("Ball").GetComponent<SphereCollider>().material;
 
+        lastHeight = rb.transform.position.y;
         box = gameObject.GetComponent<BoxCollider>();
     }
 
     private void Update()
     {
-        if (rb.transform.position.y < sandHeightThreshold)
+        float currentHeight = rb.transform.position.y;
+
+        // Check if the ball is currently below the sand height threshold and was not in the bunker before
+        if (currentHeight < sandHeightThreshold && !inBunker)
         {
-            inBunker = true;
-            ApplyBunkerPhysics();
+            EnterBunker();
         }
-        else
+        // If the ball's height is increasing and it's above the threshold, consider it leaving the bunker
+        else if (currentHeight >= sandHeightThreshold && inBunker && lastHeight < currentHeight)
         {
-            inBunker = false;
+            ExitBunker();
         }
+
+        // Update the lastHeight for the next frame
+        lastHeight = currentHeight;
+
+        //if (rb.transform.position.y < sandHeightThreshold)
+        //{
+        //    inBunker = true;
+        //    ApplyBunkerPhysics();
+        //}
+        //else
+        //{
+        //    inBunker = false;
+        //}
 
         //if (rb.velocity.magnitude == 0)
         //{
@@ -61,12 +79,24 @@ public class BunkerDynamic : MonoBehaviour
 
     }
 
+    private void EnterBunker()
+    {
+        inBunker = true;
+        ApplyBunkerPhysics();
+    }
+
+    private void ExitBunker()
+    {
+        inBunker = false;
+        // Apply regular physics or do whatever is needed when exiting the bunker
+    }
+
     void ApplyBunkerPhysics()
     {
-        rb.mass = 1.15f;
-        rb.angularDrag = 0.05f;
-        rb.drag = 0.075f;
-        rbphy.bounciness = 0.15f;
+        rb.mass = 1.8f;
+        rb.angularDrag = 0.03f;
+        rb.drag = 0.05f;
+        rbphy.bounciness = 0.1f;
     }
 
 
