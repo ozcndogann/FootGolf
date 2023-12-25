@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ChallengeType : MonoBehaviour
 {
-    public static bool cha1, cha2;
+    public static bool cha1, cha2;//UI_InGame scriptinde false'lamayý unutma
     void Start()
     {
         PlayerPrefs.GetInt("Cha1", 0);
