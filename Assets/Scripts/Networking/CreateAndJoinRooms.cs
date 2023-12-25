@@ -152,6 +152,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     }
     public void JoinRoom()
     {
+        friendlyMatch = true;
         if (joinInput.text != "")
         {
             PhotonNetwork.JoinRoom(joinInput.text);
