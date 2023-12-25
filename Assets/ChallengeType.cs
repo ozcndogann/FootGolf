@@ -4,21 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ChallengeType : MonoBehaviour
 {
-    public static bool cha1, cha2;
+    public static bool cha1, cha2;//UI_InGame scriptinde false'lamayý unutma
     void Start()
     {
         PlayerPrefs.GetInt("Cha1", 0);
+        PlayerPrefs.GetInt("Cha2", 0);
     }
 
     void Update()
     {
         if (cha1 && Ball.challangeCheck)
         {
-            //hole1 ve 3 vuruþta geçmeli
-            if (ShotCounter.ShotCount <=3)
+            //hole1 ve 4 vuruþta geçmeli
+            if (ShotCounter.ShotCount <=4)
             {
                 PlayerPrefs.SetInt("Cha1", 1);
-                Debug.Log("basari" + PlayerPrefs.GetInt("Cha1"));
+            }
+            else
+            {
+                Debug.Log("basarisiz");
+            }
+        }
+        if (cha2 && Ball.challangeCheck)
+        {
+            //hole1 ve 3 vuruþta geçmeli
+            if (ShotCounter.ShotCount <= 3)
+            {
+                PlayerPrefs.SetInt("Cha2", 1);
             }
             else
             {

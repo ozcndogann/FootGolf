@@ -10,10 +10,10 @@ public class Challenges : MonoBehaviourPunCallbacks
     public static string randomCreate;
     public static bool isChallenge;
     ChallengeType chatype;
+
     void Start()
     {
         isChallenge = true;
-        chatype = gameObject.GetComponent<ChallengeType>();
     }
     void Update()
     {
@@ -45,15 +45,14 @@ public class Challenges : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", 0 } });
         }
-        //PhotonNetwork.LoadLevel("Hole1");
-        //burada ifleyip hangi hole'e katýlacaðýný seçeceðiz
         if (ChallengeType.cha1)
         {
             PhotonNetwork.LoadLevel("Hole1");
         }
         else if (ChallengeType.cha2)
         {
-            PhotonNetwork.LoadLevel("Hole2");
+            PhotonNetwork.LoadLevel("Hole1");
         }
     }
+
 }
