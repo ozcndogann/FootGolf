@@ -69,7 +69,7 @@ public class UI_Lobby : MonoBehaviour
             }
             else if (Switch.index == 2)
             {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
+                PhotonNetwork.LoadLevel("Hole6");
             }
             
 
@@ -87,7 +87,7 @@ public class UI_Lobby : MonoBehaviour
             }
             else if (Switch.index == 2)
             {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
+                PhotonNetwork.LoadLevel("Hole6");
             }
            
         }
@@ -106,7 +106,7 @@ public class UI_Lobby : MonoBehaviour
             }
             else if (Switch.index == 2)
             {
-                PhotonNetwork.LoadLevel("Hole2Rainy");
+                PhotonNetwork.LoadLevel("Hole6");
             }
            
         }

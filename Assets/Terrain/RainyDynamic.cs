@@ -23,11 +23,14 @@ public class RainyDynamic : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Ball")
-        {
-            rb.mass = 1.1f;
-            rb.angularDrag = 0.05f;
-            rb.drag = 0.075f;
-            rbphy.bounciness = 0.4f;
+        {  
+            if(rb.velocity == Vector3.zero)
+            {
+                rb.mass = 1.1f;
+                rb.angularDrag = 0.05f;
+                rb.drag = 0.075f;
+                rbphy.bounciness = 0.4f;
+            }
         }
     }
 }
