@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-        PlayMusic("Theme");
+        //PlayMusic("Theme");
     }
 
     public void PlayMusic(string name)
@@ -41,9 +42,7 @@ public class AudioManager : MonoBehaviour
             MusicSource.clip = s.clip;
             MusicSource.Play();
         }
-
     }
-
     public void PlaySFX (string name)
     {
         Sound s = Array.Find(SFXSounds, x => x.name == name);
@@ -60,43 +59,4 @@ public class AudioManager : MonoBehaviour
         }
 
     }
-
-    //public void ToggleSFXOff()
-    //{
-    //    SFXOn.SetActive(false);
-    //    SFXOff.SetActive(true);
-    //    SFXSource.Pause();
-    //}
-    //public void ToggleSFXOn()
-    //{
-    //    SFXOn.SetActive(true);
-    //    SFXOff.SetActive(false);
-    //    SFXSource.Play();
-    //}
-
-    //public void ToggleMusicOff()
-    //{
-    //    MusicOn.SetActive(false);
-    //    MusicOff.SetActive(true);
-    //    MusicSource.Pause();
-    //}
-    //public void ToggleMusicOn()
-    //{
-    //    MusicOn.SetActive(true);
-    //    MusicOff.SetActive(false);
-    //    MusicSource.Play();
-    //}
-
-
-
-
-
-    //public void MusicVolume(float volume)
-    //{
-    //    MusicSource.volume = volume;
-    //}
-    //public void SFXVolume(float volume)
-    //{
-    //    SFXSource.volume = volume;
-    //}
 }

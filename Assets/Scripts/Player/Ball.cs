@@ -88,14 +88,7 @@ public class Ball : MonoBehaviour
         cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        if (SceneManager.GetActiveScene().buildIndex == 8|| SceneManager.GetActiveScene().buildIndex == 9|| SceneManager.GetActiveScene().buildIndex == 12)
-        {
-            AudioManager.Instance.PlayMusic("GameBG");
-        }
-        else
-        {
-            AudioManager.Instance.PlayMusic("Rain");
-        }
+        
 
         #endregion
 

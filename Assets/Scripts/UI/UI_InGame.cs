@@ -24,6 +24,15 @@ public class UI_InGame : MonoBehaviour
     private GameObject ball;
     public void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 8 || SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 12)
+        {
+            AudioManager.Instance.PlayMusic("GameBG");
+        }
+        else
+        {
+            AudioManager.Instance.PlayMusic("Rain");
+        }
+
         coins = PlayerPrefs.GetInt("Coins");
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("roomCode", out object roomCodeValue))
         {
