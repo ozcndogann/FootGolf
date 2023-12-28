@@ -33,7 +33,6 @@ public class Ball : MonoBehaviour
     public Vector3 mousePos, upForce;
     public float curveValue, forceValue;
     public float lineX;
-    Camera cam2;
     Camera barrierCam;
     public PhotonView view;
     private GameObject hole;
@@ -83,9 +82,7 @@ public class Ball : MonoBehaviour
         zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
         cam.GetComponent<AudioListener>().enabled = true;
-        cam2.GetComponent<AudioListener>().enabled = false;
         cam.enabled = (true);
-        cam2.enabled = (false);
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
         PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
         
@@ -302,21 +299,21 @@ public class Ball : MonoBehaviour
 
 
         #region BarrierCam
-        //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        //{
-        //    if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        //    {
-        //        barrierCam.gameObject.SetActive(false);
-        //    }
-        //    else
-        //    {
-        //        if (!barrierCam.gameObject.activeSelf)
-        //        {
-        //            barrierCam.gameObject.SetActive(true);
-        //        }
-        //    }
-        //}
-        
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        {
+            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            {
+                barrierCam.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (!barrierCam.gameObject.activeSelf)
+                {
+                    barrierCam.gameObject.SetActive(true);
+                }
+            }
+        }
+
         #endregion
 
         if (view.IsMine)
