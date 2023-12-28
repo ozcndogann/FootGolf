@@ -16,7 +16,7 @@ public class UI_InGame : MonoBehaviour
     public Image OldImage1,OldImage2,OldImage3,OldImage4;
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
     public GameObject CodeSprite;
-    
+    private int coins;
     
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
@@ -24,6 +24,7 @@ public class UI_InGame : MonoBehaviour
     private GameObject ball;
     public void Start()
     {
+        coins = PlayerPrefs.GetInt("Coins");
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("roomCode", out object roomCodeValue))
         {
             codeText.text = roomCodeValue.ToString();
@@ -187,6 +188,99 @@ public class UI_InGame : MonoBehaviour
         ChallengeType.cha16 = false;
         ChallengeType.cha17 = false;
         ChallengeType.cha18 = false;
+        #endregion
+
+        #region Collects
+        if (PlayerPrefs.GetInt("Cha1") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 5);
+            PlayerPrefs.SetInt("Cha1", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha2") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 10);
+            PlayerPrefs.SetInt("Cha2", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha3") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 15);
+            PlayerPrefs.SetInt("Cha3", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha4") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 5);
+            PlayerPrefs.SetInt("Cha4", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha5") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 10);
+            PlayerPrefs.SetInt("Cha5", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha6") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 15);
+            PlayerPrefs.SetInt("Cha6", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha7") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 5);
+            PlayerPrefs.SetInt("Cha7", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha8") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 10);
+            PlayerPrefs.SetInt("Cha8", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha9") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 15);
+            PlayerPrefs.SetInt("Cha9", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha10") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 5);
+            PlayerPrefs.SetInt("Cha10", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha11") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 10);
+            PlayerPrefs.SetInt("Cha11", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha12") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 15);
+            PlayerPrefs.SetInt("Cha12", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha13") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 5);
+            PlayerPrefs.SetInt("Cha13", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha14") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 10);
+            PlayerPrefs.SetInt("Cha14", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha15") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 15);
+            PlayerPrefs.SetInt("Cha15", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha16") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 5);
+            PlayerPrefs.SetInt("Cha16", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha17") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 10);
+            PlayerPrefs.SetInt("Cha17", 2);
+        }
+        if (PlayerPrefs.GetInt("Cha18") == 1)
+        {
+            PlayerPrefs.SetInt("Coins", coins += 15);
+            PlayerPrefs.SetInt("Cha18", 2);
+        }
         #endregion
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");

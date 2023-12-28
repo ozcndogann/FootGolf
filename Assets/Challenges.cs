@@ -23,6 +23,13 @@ public class Challenges : MonoBehaviourPunCallbacks
     {
         StartCoroutine(DelayCreateAndJoinRoom(.1f));
     }
+    public void RetryCreateAndJoinRoom()
+    {
+        Ball.challangeCheck = false;
+        ShotCounter.ShotCount = 0;
+        PhotonNetwork.LeaveRoom();
+        StartCoroutine(DelayCreateAndJoinRoom(.5f));
+    }
     private string GenerateRandomSixDigitNumber()
     {
         int randomNumber = Random.Range(100000, 1000000);

@@ -8,76 +8,76 @@ public class ChallengeUI : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("Cha1") == 1)
+        if (PlayerPrefs.GetInt("Cha1") == 2)
         {
             tryme1.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha2") == 1)
+        if (PlayerPrefs.GetInt("Cha2") == 2)
         {
             tryme2.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha3") == 1)
+        if (PlayerPrefs.GetInt("Cha3") == 2)
         {
             tryme3.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha4") == 1)
+        if (PlayerPrefs.GetInt("Cha4") == 2)
         {
             tryme4.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha5") == 1)
+        if (PlayerPrefs.GetInt("Cha5") == 2)
         {
             tryme5.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha6") == 1)
+        if (PlayerPrefs.GetInt("Cha6") == 2)
         {
             tryme6.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha7") == 1)
+        if (PlayerPrefs.GetInt("Cha7") == 2)
         {
             tryme7.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha8") == 1)
+        if (PlayerPrefs.GetInt("Cha8") == 2)
         {
             tryme8.SetActive(false);
 
         }
-        if (PlayerPrefs.GetInt("Cha9") == 1)
+        if (PlayerPrefs.GetInt("Cha9") == 2)
         {
             tryme9.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha10") == 1)
+        if (PlayerPrefs.GetInt("Cha10") == 2)
         {
             tryme10.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha11") == 1)
+        if (PlayerPrefs.GetInt("Cha11") == 2)
         {
             tryme11.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha12") == 1)
+        if (PlayerPrefs.GetInt("Cha12") == 2)
         {
             tryme12.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha13") == 1)
+        if (PlayerPrefs.GetInt("Cha13") == 2)
         {
             tryme13.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha14") == 1)
+        if (PlayerPrefs.GetInt("Cha14") == 2)
         {
             tryme14.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha15") == 1)
+        if (PlayerPrefs.GetInt("Cha15") == 2)
         {
             tryme15.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha16") == 1)
+        if (PlayerPrefs.GetInt("Cha16") == 2)
         {
             tryme16.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha17") == 1)
+        if (PlayerPrefs.GetInt("Cha17") == 2)
         {
             tryme17.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Cha18") == 1)
+        if (PlayerPrefs.GetInt("Cha18") == 2)
         {
             tryme18.SetActive(false);
         }
