@@ -26,7 +26,7 @@ public class RainyDynamic : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        rb.mass = 1.05f;
+        rb.mass = 1.035f;
         rb.angularDrag = 0.05f;
         rb.drag = 0.075f;
         rbphy.bounciness = 0.5f;
