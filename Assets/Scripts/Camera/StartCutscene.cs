@@ -8,7 +8,8 @@ public class StartCutscene : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Transform hole;
     [SerializeField] private Transform target;
-    [SerializeField] private float moveSpeed = 45f;
+    [SerializeField] private float moveSpeed =50f;
+    [SerializeField] private float rotationSpeed = 90f;
     [SerializeField] private float waitDuration = 5f;
 
     // Start is called before the first frame update
@@ -19,7 +20,36 @@ public class StartCutscene : MonoBehaviour
 
         cam.transform.position = hole.position + new Vector3(0, 5, 0);
 
-        StartCoroutine(MoveCameraCoroutine());
+        StartCoroutine(SequenceCoroutine());
+    }
+
+    private IEnumerator SequenceCoroutine()
+    {
+        yield return StartCoroutine(ShowCameraCoroutine());
+
+        yield return StartCoroutine(MoveCameraCoroutine());
+    }
+
+
+    private IEnumerator ShowCameraCoroutine()
+    {
+        float journeyLength = Vector3.Distance(hole.position, target.position);
+        float startTime = Time.time;
+
+        while (Time.time - startTime < journeyLength / moveSpeed)
+        {
+            float distanceCovered = (Time.time - startTime) * moveSpeed;
+            float journeyFraction = distanceCovered / journeyLength;
+
+            cam.transform.position = Vector3.Lerp(hole.position + new Vector3(0, 5, 0), hole.position + new Vector3(60, 30, 60), journeyFraction);
+
+            cam.transform.LookAt(hole.position);
+
+            yield return null;
+        }
+
+
+        cam.transform.position = hole.position + new Vector3(50, 30, 50);
     }
 
     private IEnumerator MoveCameraCoroutine()
@@ -34,11 +64,15 @@ public class StartCutscene : MonoBehaviour
             float distanceCovered = (Time.time - startTime) * moveSpeed;
             float journeyFraction = distanceCovered / journeyLength;
 
-            cam.transform.position = Vector3.Lerp(hole.position + new Vector3(0, 5, 0), target.position + new Vector3(0, 1, 0), journeyFraction);
+            cam.transform.position = Vector3.Lerp(hole.position + new Vector3(60, 30, 60), target.position + new Vector3(0, 1, 0), journeyFraction);
+
+            cam.transform.LookAt(hole.position);
+
+
             yield return null;
         }
 
-
+        cam.transform.LookAt(hole.position);
         cam.transform.position = target.position;
     }
 }
