@@ -168,8 +168,26 @@ public class UI_InGame : MonoBehaviour
     public void MainMenu()
     {
         ShotCounter.ShotCount = 0;
+        #region chaBools
         ChallengeType.cha1 = false;
         ChallengeType.cha2 = false;
+        ChallengeType.cha3 = false;
+        ChallengeType.cha4 = false;
+        ChallengeType.cha5 = false;
+        ChallengeType.cha6 = false;
+        ChallengeType.cha7 = false;
+        ChallengeType.cha8 = false;
+        ChallengeType.cha9 = false;
+        ChallengeType.cha10 = false;
+        ChallengeType.cha11 = false;
+        ChallengeType.cha12 = false;
+        ChallengeType.cha13 = false;
+        ChallengeType.cha14 = false;
+        ChallengeType.cha15 = false;
+        ChallengeType.cha16 = false;
+        ChallengeType.cha17 = false;
+        ChallengeType.cha18 = false;
+        #endregion
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("MainMenu");
     }
