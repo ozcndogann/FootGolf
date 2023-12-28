@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StartCutscene : MonoBehaviour
@@ -11,12 +12,15 @@ public class StartCutscene : MonoBehaviour
     [SerializeField] private float moveSpeed =50f;
     [SerializeField] private float rotationSpeed = 90f;
     [SerializeField] private float waitDuration = 5f;
+    [SerializeField] private float yVal;
+
 
     // Start is called before the first frame update
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Ball").transform;
         hole = GameObject.FindGameObjectWithTag("Hole").transform;
+
 
         cam.transform.position = hole.position + new Vector3(0, 5, 0);
 
@@ -72,7 +76,7 @@ public class StartCutscene : MonoBehaviour
             yield return null;
         }
 
-        cam.transform.LookAt(hole.position);
-        cam.transform.position = target.position;
+        cam.transform.rotation = Quaternion.Euler(5.76f,yVal , 0);
+        //cam.transform.position = target.position;
     }
 }

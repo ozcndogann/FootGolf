@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38852307, g: 0.7275632, b: 0.7333122, a: 1}
+  m_IndirectSpecularColor: {r: 0.38867193, g: 0.728084, b: 0.7325924, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11350,14 +11350,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952980451}
-  m_LocalRotation: {x: -0.0044049094, y: 0.99492157, z: -0.050348327, w: -0.087044396}
+  m_LocalRotation: {x: -0.004379084, y: 0.99493647, z: -0.05005313, w: -0.0870457}
   m_LocalPosition: {x: 0.646, y: 5.07, z: -1.158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 5.794, y: 190, z: 0}
+  m_LocalEulerAnglesHint: {x: 5.76, y: 190, z: 0}
 --- !u!114 &952980457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11406,9 +11406,10 @@ MonoBehaviour:
   cam: {fileID: 952980455}
   hole: {fileID: 1596013880}
   target: {fileID: 0}
-  moveSpeed: 50
+  moveSpeed: 40
   rotationSpeed: 90
   waitDuration: 0.6
+  yVal: 190
 --- !u!1 &954367417
 GameObject:
   m_ObjectHideFlags: 0
@@ -20932,7 +20933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1824783473
 MonoBehaviour:
   m_ObjectHideFlags: 0
