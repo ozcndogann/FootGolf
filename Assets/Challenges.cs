@@ -45,6 +45,7 @@ public class Challenges : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "Score", 0 } });
         }
+        #region LoadHoles
         if (ChallengeType.cha1)
         {
             PhotonNetwork.LoadLevel("Hole1");
@@ -53,6 +54,71 @@ public class Challenges : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("Hole1");
         }
+        else if (ChallengeType.cha3)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
+        else if (ChallengeType.cha4)
+        {
+            PhotonNetwork.LoadLevel("Hole2");
+        }
+        else if (ChallengeType.cha5)
+        {
+            PhotonNetwork.LoadLevel("Hole2");
+        }
+        else if (ChallengeType.cha6)
+        {
+            PhotonNetwork.LoadLevel("Hole2");
+        }
+        else if (ChallengeType.cha7)
+        {
+            PhotonNetwork.LoadLevel("Hole3Rainy");
+        }
+        else if (ChallengeType.cha8)
+        {
+            PhotonNetwork.LoadLevel("Hole3Rainy");
+        }
+        else if (ChallengeType.cha9)
+        {
+            PhotonNetwork.LoadLevel("Hole3Rainy");
+        }
+        else if (ChallengeType.cha10)
+        {
+            PhotonNetwork.LoadLevel("Hole5Rainy");
+        }
+        else if (ChallengeType.cha11)
+        {
+            PhotonNetwork.LoadLevel("Hole5Rainy");
+        }
+        else if (ChallengeType.cha12)
+        {
+            PhotonNetwork.LoadLevel("Hole5Rainy");
+        }
+        else if (ChallengeType.cha13)
+        {
+            PhotonNetwork.LoadLevel("Hole6");
+        }
+        else if (ChallengeType.cha14)
+        {
+            PhotonNetwork.LoadLevel("Hole6");
+        }
+        else if (ChallengeType.cha15)
+        {
+            PhotonNetwork.LoadLevel("Hole6");
+        }
+        else if (ChallengeType.cha16)
+        {
+            PhotonNetwork.LoadLevel("Hole7Rainy");
+        }
+        else if (ChallengeType.cha17)
+        {
+            PhotonNetwork.LoadLevel("Hole7Rainy");
+        }
+        else if (ChallengeType.cha18)
+        {
+            PhotonNetwork.LoadLevel("Hole7Rainy");
+        }
+        #endregion
     }
 
 }
