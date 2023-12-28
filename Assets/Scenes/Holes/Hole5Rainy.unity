@@ -4609,6 +4609,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 364fad3dd6a2cac45ab50f7586b17104, type: 3}
+--- !u!1 &768966696 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2076301281771329811, guid: 364fad3dd6a2cac45ab50f7586b17104,
+    type: 3}
+  m_PrefabInstance: {fileID: 768966695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &778815104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5218,6 +5224,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a34a36c5b9e0641b4f835c90a464de, type: 3}
+--- !u!1 &875427954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3607397976547909632, guid: 42a34a36c5b9e0641b4f835c90a464de,
+    type: 3}
+  m_PrefabInstance: {fileID: 875427953}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &887309901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10560,8 +10572,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc0209487a796f47a95176cc1c2063e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaWin: {fileID: 0}
-  ChaLose: {fileID: 0}
+  ChaWin: {fileID: 875427954}
+  ChaLose: {fileID: 768966696}
 --- !u!4 &988571871
 Transform:
   m_ObjectHideFlags: 0

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 public class ChallengeType : MonoBehaviour
 {
     public static bool cha1, cha2, cha3, cha4, cha5, cha6, cha7, cha8, cha9, cha10, cha11, cha12, cha13, cha14, cha15, cha16, cha17, cha18;//UI_InGame scriptinde false'lamayý unutma
     public GameObject ChaWin, ChaLose;
+    Camera barrierCam;
     void Start()
     {
         #region PlayerPrefs
@@ -28,6 +30,12 @@ public class ChallengeType : MonoBehaviour
         PlayerPrefs.GetInt("Cha17", 0);
         PlayerPrefs.GetInt("Cha18", 0);
         #endregion
+        barrierCam = GameObject.FindGameObjectWithTag("BarrierCam").GetComponent<Camera>() as Camera;
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            barrierCam.gameObject.SetActive(false);
+        }
+        
     }
 
     void Update()
@@ -43,21 +51,25 @@ public class ChallengeType : MonoBehaviour
                     if (cha4)
                     {
                         PlayerPrefs.SetInt("Cha4", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha7)
                     {
                         PlayerPrefs.SetInt("Cha7", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha10)
                     {
                         PlayerPrefs.SetInt("Cha10", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha13)
                     {
                         PlayerPrefs.SetInt("Cha13", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                 }
@@ -66,6 +78,7 @@ public class ChallengeType : MonoBehaviour
             else
             {
                 Debug.Log("basarisiz");
+                barrierCam.gameObject.SetActive(true);
                 ChaLose.SetActive(true);
             }
         }
@@ -80,30 +93,38 @@ public class ChallengeType : MonoBehaviour
                     if (cha1)
                     {
                         PlayerPrefs.SetInt("Cha1", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha5)
                     {
                         PlayerPrefs.SetInt("Cha5", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha8)
                     {
                         PlayerPrefs.SetInt("Cha8", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha11)
                     {
                         PlayerPrefs.SetInt("Cha11", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha14)
                     {
                         PlayerPrefs.SetInt("Cha14", 1);
+                        barrierCam.gameObject.SetActive(true);
+                        ChaWin.SetActive(true);
                     }
                     else if (cha16)
                     {
                         PlayerPrefs.SetInt("Cha16", 1);
+                        barrierCam.gameObject.SetActive(true);
+                        ChaWin.SetActive(true);
                     }
                 }
                 
@@ -111,6 +132,7 @@ public class ChallengeType : MonoBehaviour
             else
             {
                 Debug.Log("basarisiz");
+                barrierCam.gameObject.SetActive(true);
                 ChaLose.SetActive(true);
             }
         }
@@ -124,31 +146,37 @@ public class ChallengeType : MonoBehaviour
                     if (cha2)
                     {
                         PlayerPrefs.SetInt("Cha2", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha6)
                     {
                         PlayerPrefs.SetInt("Cha6", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha9)
                     {
                         PlayerPrefs.SetInt("Cha9", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha12)
                     {
                         PlayerPrefs.SetInt("Cha12", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha15)
                     {
                         PlayerPrefs.SetInt("Cha15", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha17)
                     {
                         PlayerPrefs.SetInt("Cha17", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                 }
@@ -157,6 +185,7 @@ public class ChallengeType : MonoBehaviour
             else
             {
                 Debug.Log("basarisiz");
+                barrierCam.gameObject.SetActive(true);
                 ChaLose.SetActive(true);
             }
         }
@@ -170,11 +199,13 @@ public class ChallengeType : MonoBehaviour
                     if (cha3)
                     {
                         PlayerPrefs.SetInt("Cha3", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                     else if (cha18)
                     {
                         PlayerPrefs.SetInt("Cha18", 1);
+                        barrierCam.gameObject.SetActive(true);
                         ChaWin.SetActive(true);
                     }
                 }
@@ -183,6 +214,7 @@ public class ChallengeType : MonoBehaviour
             else
             {
                 Debug.Log("basarisiz");
+                barrierCam.gameObject.SetActive(true);
                 ChaLose.SetActive(true);
             }
         }

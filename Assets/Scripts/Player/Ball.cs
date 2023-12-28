@@ -306,21 +306,25 @@ public class Ball : MonoBehaviour
         //}
 
         #endregion
-        
 
-        
+
+
         #region BarrierCam
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        {
-            barrierCam.gameObject.SetActive(false);
-        }
-        else
-        {
-            if (!barrierCam.gameObject.activeSelf)
-            {
-                barrierCam.gameObject.SetActive(true);
-            }
-        }
+        //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        //{
+        //    if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        //    {
+        //        barrierCam.gameObject.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        if (!barrierCam.gameObject.activeSelf)
+        //        {
+        //            barrierCam.gameObject.SetActive(true);
+        //        }
+        //    }
+        //}
+        
         #endregion
 
         if (view.IsMine)
