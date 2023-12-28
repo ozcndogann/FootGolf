@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 2004154329386670004}
   - component: {fileID: 7388132369153271746}
   - component: {fileID: 6322115269193227132}
+  - component: {fileID: -8374484761333972416}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Ball
@@ -315,7 +316,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
+  - {fileID: 2100000, guid: bde2f9013dd10b74695761fb1a0e1bf5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -366,8 +367,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.5882353}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key0: {r: 0.9433962, g: 0.124692746, b: 0, a: 1}
+      key1: {r: 0.745283, g: 0, b: 0.072571516, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -402,6 +403,31 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &-8374484761333972416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859352307074843106}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15dfb9ce31b890345978ebde7a934c34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: 0}
+  cam1W: {fileID: 0}
+  cam2W: {fileID: 0}
+  cam3W: {fileID: 0}
+  cam4W: {fileID: 0}
+  cam5W: {fileID: 0}
+  Cameras: []
+  CasualCam: {fileID: 2332360823814469279, guid: dd700a213ed16db4db9cec181ed10769,
+    type: 3}
+  MainCam: {fileID: 0}
+  randomerBool: 0
+  cameraChanger: 0
+  target: {fileID: 0}
 --- !u!1 &4708520600899969498
 GameObject:
   m_ObjectHideFlags: 0
