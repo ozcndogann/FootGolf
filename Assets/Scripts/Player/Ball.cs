@@ -144,6 +144,21 @@ public class Ball : MonoBehaviour
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        {
+            barrierCam.gameObject.SetActive(false);
+            //if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            //{
+            //    barrierCam.gameObject.SetActive(false);
+            //}
+            //else
+            //{
+            //    if (!barrierCam.gameObject.activeSelf)
+            //    {
+            //        barrierCam.gameObject.SetActive(true);
+            //    }
+            //}
+        }
     }
 
     #region CommentedOldAnimations
@@ -301,17 +316,18 @@ public class Ball : MonoBehaviour
         #region BarrierCam
         //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
         //{
-        //    if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-        //    {
-        //        barrierCam.gameObject.SetActive(false);
-        //    }
-        //    else
-        //    {
-        //        if (!barrierCam.gameObject.activeSelf)
-        //        {
-        //            barrierCam.gameObject.SetActive(true);
-        //        }
-        //    }
+            //barrierCam.gameObject.SetActive(false);
+            //if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+            //{
+            //    barrierCam.gameObject.SetActive(false);
+            //}
+            //else
+            //{
+            //    if (!barrierCam.gameObject.activeSelf)
+            //    {
+            //        barrierCam.gameObject.SetActive(true);
+            //    }
+            //}
         //}
 
         #endregion
@@ -331,7 +347,7 @@ public class Ball : MonoBehaviour
                     {
                         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
                         {
-                            if ((bool)player.CustomProperties["holeC"])
+                            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
                             {
                                 GetTurn();
                             }
