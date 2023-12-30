@@ -186,6 +186,14 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            
+            if ((bool)player.GetNext().CustomProperties["holeC"])
+            {
+                Debug.Log(player.NickName);
+            }
+        }
 
         #region CommentedOldAnimations
         ////sol art� sa� eksi
