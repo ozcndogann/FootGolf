@@ -299,20 +299,20 @@ public class Ball : MonoBehaviour
 
 
         #region BarrierCam
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        {
-            if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                barrierCam.gameObject.SetActive(false);
-            }
-            else
-            {
-                if (!barrierCam.gameObject.activeSelf)
-                {
-                    barrierCam.gameObject.SetActive(true);
-                }
-            }
-        }
+        //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        //{
+        //    if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+        //    {
+        //        barrierCam.gameObject.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        if (!barrierCam.gameObject.activeSelf)
+        //        {
+        //            barrierCam.gameObject.SetActive(true);
+        //        }
+        //    }
+        //}
 
         #endregion
 
@@ -329,21 +329,32 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        timer -= Time.deltaTime;
-                        
-                        if (timer > 0)
+                        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
                         {
-                            ProcessAim();
-
+                            if ((bool)player.CustomProperties["holeC"])
+                            {
+                                GetTurn();
+                            }
                         }
                         else
                         {
-                            AnimationFootballer.lineRendererController = false;
-                            shooted = false;
-                            shootCloser = true;
-                            Zoom.changeFovBool = false;
-                            GetTurn();
+                            timer -= Time.deltaTime;
+
+                            if (timer > 0)
+                            {
+                                ProcessAim();
+
+                            }
+                            else
+                            {
+                                AnimationFootballer.lineRendererController = false;
+                                shooted = false;
+                                shootCloser = true;
+                                Zoom.changeFovBool = false;
+                                GetTurn();
+                            }
                         }
+                        
                     }
                 }
 
@@ -439,13 +450,7 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
-        if (player.CustomProperties["holeC"] != null && player.CustomProperties["turn"] != null)
-        {
-            if ((bool)player.CustomProperties["holeC"] )
-            {
-                GetTurn();
-            }
-        }
+        
         //if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         //{
         //    foreach (Player player in PhotonNetwork.PlayerList)
