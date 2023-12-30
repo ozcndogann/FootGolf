@@ -350,14 +350,14 @@ public class Ball : MonoBehaviour
                         }
 
                     }
-                    else
-                    {
-                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                        {
-                            barrierCam.gameObject.SetActive(true);
-                            spectatorCanvas.SetActive(true);
-                        }
-                    }
+                    //else
+                    //{
+                    //    if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                    //    {
+                    //        barrierCam.gameObject.SetActive(true);
+                    //        spectatorCanvas.SetActive(true);
+                    //    }
+                    //}
                 }
 
             }
@@ -707,6 +707,8 @@ public class Ball : MonoBehaviour
                     {
                         if ((bool)player.CustomProperties["turn"])
                         {
+                            barrierCam.gameObject.SetActive(true);
+                            spectatorCanvas.SetActive(true);
                             player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                             player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                         }
@@ -982,6 +984,7 @@ public class Ball : MonoBehaviour
         if (allPlayersReady)
         {
             view.RPC("NotifyConditionMet", RpcTarget.All);//herkes ayn� holeC bool statete
+            spectatorCanvas.SetActive(true);
             //cam.GetComponent<MoveAroundObject>().enabled = false;
         }
         Debug.Log(allPlayersReady);
