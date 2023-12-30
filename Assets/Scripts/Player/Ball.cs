@@ -145,21 +145,6 @@ public class Ball : MonoBehaviour
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        {
-            barrierCam.gameObject.SetActive(false);
-            //if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            //{
-            //    barrierCam.gameObject.SetActive(false);
-            //}
-            //else
-            //{
-            //    if (!barrierCam.gameObject.activeSelf)
-            //    {
-            //        barrierCam.gameObject.SetActive(true);
-            //    }
-            //}
-        }
     }
 
     #region CommentedOldAnimations
