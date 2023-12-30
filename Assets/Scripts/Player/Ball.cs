@@ -56,6 +56,7 @@ public class Ball : MonoBehaviour
     bool shotClicked;
     bool barrier;
     public static bool challangeCheck;
+    GameObject spectatorCanvas;
     #endregion
 
 
@@ -79,6 +80,7 @@ public class Ball : MonoBehaviour
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         barrierCam = GameObject.FindGameObjectWithTag("BarrierCam").GetComponent<Camera>() as Camera;
+        spectatorCanvas = GameObject.FindGameObjectWithTag("SpectatorCanvas");
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
@@ -298,6 +300,11 @@ public class Ball : MonoBehaviour
 
         #endregion
 
+
+        if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        }
         if (view.IsMine)
             {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
@@ -307,15 +314,24 @@ public class Ball : MonoBehaviour
                 {
                     GetTurn();
                 }
-                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+                if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                 {
-                    GetTurn();
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+                    {
+                        GetTurn();
+                    }
                 }
+                
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        barrierCam.gameObject.SetActive(false);
+                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                        {
+                            barrierCam.gameObject.SetActive(false);
+                            spectatorCanvas.SetActive(false);
+                        }
+                        
                         timer -= Time.deltaTime;
                         
                         if (timer > 0)
@@ -335,8 +351,11 @@ public class Ball : MonoBehaviour
                     }
                     else
                     {
-                        barrierCam.gameObject.SetActive(true);
-
+                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                        {
+                            barrierCam.gameObject.SetActive(true);
+                            spectatorCanvas.SetActive(true);
+                        }
                     }
                 }
 
@@ -414,10 +433,10 @@ public class Ball : MonoBehaviour
 
         #region TurnLogic
 
-        if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
-        {
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        }
+        //if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
+        //{
+        //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        //}
 
         //if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         //{

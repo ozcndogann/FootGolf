@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class ChallengeUI : MonoBehaviour
 {
     [SerializeField] private GameObject tryme1, tryme2, tryme3, tryme4, tryme5, tryme6, tryme7, tryme8, tryme9, tryme10, tryme11, tryme12, tryme13, tryme14, tryme15, tryme16, tryme17, tryme18;
@@ -81,5 +81,9 @@ public class ChallengeUI : MonoBehaviour
         {
             tryme18.SetActive(false);
         }
+    }
+    public void GoMain()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }

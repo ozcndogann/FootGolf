@@ -10,12 +10,14 @@ public class Challenges : MonoBehaviourPunCallbacks
     public static string randomCreate;
     public static bool isChallenge;
     ChallengeType chatype;
-
+    GameObject spectatorCanvas;
     void Start()
     {
+        spectatorCanvas = GameObject.FindGameObjectWithTag("SpectatorCanvas");
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             isChallenge = true;
+            spectatorCanvas.SetActive(false);
         }
         else
         {
