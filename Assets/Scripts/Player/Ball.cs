@@ -694,7 +694,7 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-                
+                barrierCam.gameObject.SetActive(true);
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 shotClicked = false;
@@ -705,11 +705,15 @@ public class Ball : MonoBehaviour
     private void BarrierCamOff()
     {
         barrier = true;
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        if (barrier == true)
         {
-            barrierCam.gameObject.SetActive(false);
-            barrier = false;
+            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            {
+                barrierCam.gameObject.SetActive(false);
+                barrier = false;
+            }
         }
+        
     }
 
 
