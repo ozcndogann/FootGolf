@@ -300,18 +300,11 @@ public class Ball : MonoBehaviour
 
         #endregion
 
-
         if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
-            {
-                GetTurn();
-            }
-        }
+        
         if (view.IsMine)
             {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
@@ -322,12 +315,18 @@ public class Ball : MonoBehaviour
                     GetTurn();
                 }
                 
-                
+
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        
+                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+                        {
+                            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+                            {
+                                GetTurn();
+                            }
+                        }
                         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                         {
                             barrierCam.gameObject.SetActive(false);
