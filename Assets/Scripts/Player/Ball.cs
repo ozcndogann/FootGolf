@@ -341,14 +341,14 @@ public class Ball : MonoBehaviour
                 {
                     GetTurn();
                 }
+                if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+                {
+                    GetTurn();
+                }
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
-                        {
-                            GetTurn();
-                        }
                         timer -= Time.deltaTime;
                         
                         if (timer > 0)
