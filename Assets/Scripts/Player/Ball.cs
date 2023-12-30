@@ -345,8 +345,12 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
+                        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+                        {
+                            GetTurn();
+                        }
                         timer -= Time.deltaTime;
-
+                        
                         if (timer > 0)
                         {
                             ProcessAim();
@@ -456,7 +460,7 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
-        
+
         //if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         //{
         //    foreach (Player player in PhotonNetwork.PlayerList)
