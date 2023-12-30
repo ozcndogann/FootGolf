@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour
     public Vector3 mousePos, upForce;
     public float curveValue, forceValue;
     public float lineX;
-    GameObject barrierCam;
+    Camera barrierCam;
     public PhotonView view;
     private GameObject hole;
     [SerializeField] public static float timer;
@@ -78,7 +78,7 @@ public class Ball : MonoBehaviour
         //waitForShootTriTimer = 0;
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
-        barrierCam = GameObject.FindGameObjectWithTag("BarrierCam");
+        barrierCam = GameObject.FindGameObjectWithTag("BarrierCam").GetComponent<Camera>() as Camera;
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
@@ -694,7 +694,7 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-                barrierCam.SetActive(true);
+                barrierCam.gameObject.SetActive(true);
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 shotClicked = false;
@@ -704,20 +704,23 @@ public class Ball : MonoBehaviour
     }
     private void BarrierCamOff()
     {
-        barrier = true;
-        if (barrier)
+        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
         {
-            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
             {
-                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+                barrier = true;
+                if (barrier)
                 {
-                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                    if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                     {
-                        barrierCam.SetActive(false);
+                        barrierCam.gameObject.SetActive(false);
                         barrier = false;
                     }
                 }
-                        
+            }
+            else
+            {
+                barrier = false;
             }
         }
         
