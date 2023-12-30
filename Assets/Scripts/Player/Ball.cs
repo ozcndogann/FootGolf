@@ -305,6 +305,13 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+            {
+                GetTurn();
+            }
+        }
         if (view.IsMine)
             {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
@@ -320,13 +327,7 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                        {
-                            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
-                            {
-                                GetTurn();
-                            }
-                        }
+                        
                         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                         {
                             barrierCam.gameObject.SetActive(false);
