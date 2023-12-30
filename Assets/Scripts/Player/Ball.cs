@@ -702,16 +702,25 @@ public class Ball : MonoBehaviour
                         {
                             player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                             Debug.Log("0");
-                            if ((bool)player.GetNext().CustomProperties["holeC"])
+                            if ((bool)player.CustomProperties["holeC"])
                             {
                                 Debug.Log("01");
-                                player.GetNext().GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                             }
                             else
                             {
-                                Debug.Log("04");
-                                player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                if ((bool)player.GetNext().CustomProperties["holeC"])
+                                {
+                                    Debug.Log("01");
+                                    player.GetNext().GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                }
+                                else
+                                {
+                                    Debug.Log("04");
+                                    player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                }
                             }
+                            
                             //else if ((bool)player.GetNext().GetNext().CustomProperties["holeC"])
                             //{
                             //    Debug.Log("02");
