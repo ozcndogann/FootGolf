@@ -188,10 +188,9 @@ public class Ball : MonoBehaviour
     {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            
-            if ((bool)player.GetNext().CustomProperties["holeC"])
+            if ((bool)player.CustomProperties["holeC"] && (bool)player.CustomProperties["turn"])
             {
-                Debug.Log(player.NickName);
+                GetTurn();
             }
         }
 
@@ -712,14 +711,11 @@ public class Ball : MonoBehaviour
                             player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                         }
                     }
-                    if (!(bool)player.GetNext().CustomProperties["holeC"])
-                    {
-                        shotClicked = false;
-                        nextPlayerTurn = false;
-                    }
+                    
                 }
-                
-                
+                shotClicked = false;
+                nextPlayerTurn = false;
+
             }
         }
         
