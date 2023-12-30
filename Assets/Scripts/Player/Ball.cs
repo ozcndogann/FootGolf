@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour
     public Vector3 mousePos, upForce;
     public float curveValue, forceValue;
     public float lineX;
-    Camera barrierCam;
+    GameObject barrierCam;
     public PhotonView view;
     private GameObject hole;
     [SerializeField] public static float timer;
@@ -78,7 +78,7 @@ public class Ball : MonoBehaviour
         //waitForShootTriTimer = 0;
         view = GetComponent<PhotonView>();
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
-        barrierCam = GameObject.FindGameObjectWithTag("BarrierCam").GetComponent<Camera>() as Camera;
+        barrierCam = GameObject.FindGameObjectWithTag("BarrierCam");
         moveAroundObject = cam.GetComponent<MoveAroundObject>();
         zoom = cam.GetComponent<Zoom>();
         hole = GameObject.FindGameObjectWithTag("Hole");
@@ -694,7 +694,7 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-                barrierCam.gameObject.SetActive(true);
+                barrierCam.SetActive(true);
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 shotClicked = false;
@@ -713,7 +713,7 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        barrierCam.gameObject.SetActive(false);
+                        barrierCam.SetActive(false);
                         barrier = false;
                     }
                 }
