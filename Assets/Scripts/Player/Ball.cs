@@ -54,6 +54,7 @@ public class Ball : MonoBehaviour
     Ray rayTri;
     bool nextPlayerTurn;
     bool shotClicked;
+    bool barrier;
     public static bool challangeCheck;
     #endregion
 
@@ -313,24 +314,7 @@ public class Ball : MonoBehaviour
 
 
 
-        #region BarrierCam
-        //if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-        //{
-            //barrierCam.gameObject.SetActive(false);
-            //if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("turn") && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            //{
-            //    barrierCam.gameObject.SetActive(false);
-            //}
-            //else
-            //{
-            //    if (!barrierCam.gameObject.activeSelf)
-            //    {
-            //        barrierCam.gameObject.SetActive(true);
-            //    }
-            //}
-        //}
-
-        #endregion
+        
 
         if (view.IsMine)
             {
@@ -349,6 +333,7 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
+                        BarrierCamOff();
                         timer -= Time.deltaTime;
                         
                         if (timer > 0)
@@ -723,6 +708,7 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
+                barrierCam.gameObject.SetActive(true);
                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 shotClicked = false;
@@ -730,7 +716,16 @@ public class Ball : MonoBehaviour
             }
         }
     }
-    
+    private void BarrierCamOff()
+    {
+        barrier = true;
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
+        {
+            barrierCam.gameObject.SetActive(false);
+            barrier = false;
+        }
+    }
+
     IEnumerator ShootedBool()
     {
         yield return new WaitForSeconds(0.25f);
