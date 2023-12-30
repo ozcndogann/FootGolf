@@ -318,7 +318,7 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        BarrierCamOff();
+                        
                         timer -= Time.deltaTime;
                         
                         if (timer > 0)
@@ -705,7 +705,7 @@ public class Ball : MonoBehaviour
     private void BarrierCamOff()
     {
         barrier = true;
-        if (barrier == true)
+        if (barrier)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
