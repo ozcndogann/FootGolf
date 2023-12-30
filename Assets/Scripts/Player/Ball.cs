@@ -145,7 +145,7 @@ public class Ball : MonoBehaviour
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
-        barrierCam.gameObject.SetActive(false);
+        
     }
 
     #region CommentedOldAnimations
@@ -319,7 +319,7 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        
+                        barrierCam.gameObject.SetActive(false);
                         timer -= Time.deltaTime;
                         
                         if (timer > 0)
@@ -335,6 +335,11 @@ public class Ball : MonoBehaviour
                             Zoom.changeFovBool = false;
                             GetTurn();
                         }
+
+                    }
+                    else
+                    {
+                        barrierCam.gameObject.SetActive(true);
 
                     }
                 }
@@ -688,7 +693,7 @@ public class Ball : MonoBehaviour
     }
     private void GetTurn()
     {
-        barrierCam.gameObject.SetActive(true);
+        //barrierCam.gameObject.SetActive(true);
         nextPlayerTurn = true;
         timer = 20f;
         if (nextPlayerTurn)
