@@ -145,6 +145,7 @@ public class Ball : MonoBehaviour
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
             }
         }
+        barrierCam.gameObject.SetActive(false);
     }
 
     #region CommentedOldAnimations
@@ -300,7 +301,7 @@ public class Ball : MonoBehaviour
 
 
 
-        BarrierCamOff();
+        //BarrierCamOff();
         if (view.IsMine)
             {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
