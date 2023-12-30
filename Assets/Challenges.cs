@@ -13,7 +13,14 @@ public class Challenges : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        isChallenge = true;
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            isChallenge = true;
+        }
+        else
+        {
+            isChallenge = false;
+        }
     }
     void Update()
     {
