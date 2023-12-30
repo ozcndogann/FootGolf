@@ -298,10 +298,6 @@ public class Ball : MonoBehaviour
 
         #endregion
 
-
-
-
-        //BarrierCamOff();
         if (view.IsMine)
             {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
@@ -415,20 +411,6 @@ public class Ball : MonoBehaviour
             #endregion
         }
 
-        #region OldTurnAfterHole
-        //foreach (Player player in PhotonNetwork.PlayerList)
-        //{
-        //    if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
-        //    {
-        //        if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]/* && PhotonNetwork.CurrentRoom.PlayerCount != 1*/)
-        //        {
-        //            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        //            PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        //        }
-        //    }
-        //}
-
-        #endregion
 
         #region TurnLogic
 
@@ -693,7 +675,6 @@ public class Ball : MonoBehaviour
     }
     private void GetTurn()
     {
-        //barrierCam.gameObject.SetActive(true);
         nextPlayerTurn = true;
         timer = 20f;
         if (nextPlayerTurn)
@@ -708,31 +689,6 @@ public class Ball : MonoBehaviour
             }
         }
     }
-    private void BarrierCamOff()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
-        {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
-            {
-                barrier = true;
-                if (barrier)
-                {
-                    if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
-                    {
-                        barrierCam.gameObject.SetActive(false);
-                        barrier = false;
-                    }
-                }
-            }
-            else
-            {
-                barrier = false;
-            }
-        }
-        
-    }
-
-
     IEnumerator ShootedBool()
     {
         yield return new WaitForSeconds(0.25f);
