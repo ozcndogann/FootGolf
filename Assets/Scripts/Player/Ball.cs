@@ -345,32 +345,22 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
-                        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+                        timer -= Time.deltaTime;
+
+                        if (timer > 0)
                         {
-                            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
-                            {
-                                GetTurn();
-                            }
+                            ProcessAim();
+
                         }
                         else
                         {
-                            timer -= Time.deltaTime;
-
-                            if (timer > 0)
-                            {
-                                ProcessAim();
-
-                            }
-                            else
-                            {
-                                AnimationFootballer.lineRendererController = false;
-                                shooted = false;
-                                shootCloser = true;
-                                Zoom.changeFovBool = false;
-                                GetTurn();
-                            }
+                            AnimationFootballer.lineRendererController = false;
+                            shooted = false;
+                            shootCloser = true;
+                            Zoom.changeFovBool = false;
+                            GetTurn();
                         }
-                        
+
                     }
                 }
 
