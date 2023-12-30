@@ -299,8 +299,8 @@ public class Ball : MonoBehaviour
 
 
 
-        
 
+        BarrierCamOff();
         if (view.IsMine)
             {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
@@ -709,8 +709,15 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-                barrierCam.gameObject.SetActive(false);
-                barrier = false;
+                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+                {
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
+                    {
+                        barrierCam.gameObject.SetActive(false);
+                        barrier = false;
+                    }
+                }
+                        
             }
         }
         
