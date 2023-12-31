@@ -13,6 +13,7 @@ public class StartCutscene : MonoBehaviour
     [SerializeField] private float rotationSpeed = 90f;
     [SerializeField] private float waitDuration = 5f;
     [SerializeField] private float yVal;
+    public static bool TimeS;
 
 
     // Start is called before the first frame update
@@ -21,9 +22,9 @@ public class StartCutscene : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Ball").transform;
         hole = GameObject.FindGameObjectWithTag("Hole").transform;
 
-
         cam.transform.position = hole.position + new Vector3(0, 5, 0);
 
+        //TimeS = false;
         StartCoroutine(SequenceCoroutine());
     }
 
@@ -77,6 +78,7 @@ public class StartCutscene : MonoBehaviour
         }
 
         cam.transform.rotation = Quaternion.Euler(5.76f,yVal , 0);
+        //TimeS = true;
         //cam.transform.position = target.position;
     }
 }
