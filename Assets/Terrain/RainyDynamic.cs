@@ -19,16 +19,10 @@ public class RainyDynamic : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
-            StartCoroutine(WFSR());
+            rb.mass = 1.035f;
+            rb.angularDrag = 0.05f;
+            rb.drag = 0.075f;
+            rbphy.bounciness = 0.5f;
         }
-    }
-    IEnumerator WFSR()
-    {
-        yield return new WaitForSeconds(1f);
-
-        rb.mass = 1.035f;
-        rb.angularDrag = 0.05f;
-        rb.drag = 0.075f;
-        rbphy.bounciness = 0.5f;
     }
 }
