@@ -21,7 +21,8 @@ public class PlayFabManager : MonoBehaviour
     public GameObject firstAward;
     public GameObject secondAward;
     public GameObject thirdAward;
-    public Texture2D[] rankImages;
+    public Sprite[] rankImages;
+    public Sprite[] numberImages;
     string loggedInPlayedId;
     public static bool nameAccepter, playerFound;
     public GameObject Long, Short, Taken,Empty;
@@ -217,6 +218,9 @@ public class PlayFabManager : MonoBehaviour
                 texts[0].text = (LeaguePosition).ToString();
                 texts[1].text = item.DisplayName;
                 texts[2].text = item.StatValue.ToString();
+                Image[] rankStatus = newGo.GetComponentsInChildren<Image>();
+                rankStatus[2].GetComponent<Image>().sprite = numberImages[LeaguePosition - 1];
+                rankStatus[1].GetComponent<Image>().sprite = rankImages[item.StatValue/10];
                 Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
                 if (item.PlayFabId == loggedInPlayedId)
                 {
@@ -296,6 +300,9 @@ public class PlayFabManager : MonoBehaviour
                 texts[0].text = (LeaguePosition).ToString();
                 texts[1].text = item.DisplayName;
                 texts[2].text = item.StatValue.ToString();
+                Image[] rankStatus = newGo.GetComponentsInChildren<Image>();
+                rankStatus[2].GetComponent<Image>().sprite = numberImages[LeaguePosition - 1];
+                rankStatus[1].GetComponent<Image>().sprite = rankImages[item.StatValue/10];
                 Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
                 if (item.PlayFabId == loggedInPlayedId)
                 {
@@ -346,6 +353,9 @@ public class PlayFabManager : MonoBehaviour
                 texts[0].text = (item.Position + 1).ToString();
                 texts[1].text = item.DisplayName;
                 texts[2].text = item.StatValue.ToString();
+                Image[] rankStatus = newGo.GetComponentsInChildren<Image>();
+                rankStatus[2].GetComponent<Image>().sprite = numberImages[item.Position];
+                rankStatus[1].GetComponent<Image>().sprite = rankImages[item.StatValue/10];
                 Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
                 if (item.PlayFabId == loggedInPlayedId)
                 {
@@ -393,6 +403,9 @@ public class PlayFabManager : MonoBehaviour
             texts[0].text = (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
             texts[2].text = item.StatValue.ToString();
+            Image[] rankStatus = newGo.GetComponentsInChildren<Image>();
+            rankStatus[2].GetComponent<Image>().sprite = numberImages[item.Position];
+            rankStatus[1].GetComponent<Image>().sprite = rankImages[item.StatValue/10];
             if (item.PlayFabId == loggedInPlayedId)
             {
                 texts[0].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
