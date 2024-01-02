@@ -195,6 +195,8 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["holeC"] && (bool)player.CustomProperties["turn"] && !allPlayersReady)
                 {
+                    barrierCam.gameObject.SetActive(true);
+                    spectatorCanvas.SetActive(true);
                     GetTurn();
                 }
             }
