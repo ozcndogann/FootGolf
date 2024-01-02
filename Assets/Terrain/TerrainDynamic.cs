@@ -18,9 +18,9 @@ public class TerrainDynamic : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (view.IsMine)
+        if (other.gameObject.tag == "Ball")
         {
-            if (other.gameObject.tag == "Ball")
+            if (view.IsMine)
             {
                 rb.mass = 1f;
                 rb.angularDrag = 0.05f;

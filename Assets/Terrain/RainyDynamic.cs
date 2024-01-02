@@ -19,9 +19,9 @@ public class RainyDynamic : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (view.IsMine)
+        if (other.gameObject.tag == "Ball")
         {
-            if (other.gameObject.tag == "Ball")
+            if (view.IsMine)
             {
                 rb.mass = 1.035f;
                 rb.angularDrag = 0.05f;
