@@ -57,6 +57,7 @@ public class Ball : MonoBehaviour
     bool barrier;
     public static bool challangeCheck;
     GameObject spectatorCanvas;
+    bool allPlayersReady;
     #endregion
 
 
@@ -188,10 +189,14 @@ public class Ball : MonoBehaviour
     {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if ((bool)player.CustomProperties["holeC"] && (bool)player.CustomProperties["turn"])
+            if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-                GetTurn();
+                if ((bool)player.CustomProperties["holeC"] && (bool)player.CustomProperties["turn"] && !allPlayersReady)
+                {
+                    GetTurn();
+                }
             }
+            
         }
 
         #region CommentedOldAnimations
@@ -970,7 +975,7 @@ public class Ball : MonoBehaviour
     private IEnumerator DelayCheck(float delay)
     {
         yield return new WaitForSeconds(delay);
-        bool allPlayersReady = true;
+        allPlayersReady = true;
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (!(bool)player.CustomProperties["holeC"])// holeC false mu check
