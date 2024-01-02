@@ -1,5 +1,7 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.ParticleSystem;
@@ -15,10 +17,12 @@ public class BunkerDynamic : MonoBehaviour
     //public BoxCollider box;
     //private bool inBunker = false;
     //public float sandHeightThreshold;
+    private PhotonView view;
 
     // Start is called before the first frame update
     void Start()
     {
+        view = GameObject.FindGameObjectWithTag("Ball").GetComponent<PhotonView>();
         rb = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
         rbphy = GameObject.FindGameObjectWithTag("Ball").GetComponent<SphereCollider>().material;
         //box = gameObject.GetComponent<BoxCollider>();
@@ -26,12 +30,15 @@ public class BunkerDynamic : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Ball")
+        if (view.IsMine)
         {
-            rb.mass = 1.75f;
-            rb.angularDrag = 0.05f;
-            rb.drag = 0.075f;
-            rbphy.bounciness = 0.21f;
+            if (other.gameObject.tag == "Ball")
+            {
+                rb.mass = 1.75f;
+                rb.angularDrag = 0.05f;
+                rb.drag = 0.075f;
+                rbphy.bounciness = 0.21f;
+            }
         }
     }
 
