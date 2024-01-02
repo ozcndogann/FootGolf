@@ -87,8 +87,8 @@ public class Ball : MonoBehaviour
         hole = GameObject.FindGameObjectWithTag("Hole");
         cam.GetComponent<AudioListener>().enabled = true;
         cam.enabled = (true);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
-        PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+        
+        //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
         
 
         #endregion
@@ -141,11 +141,13 @@ public class Ball : MonoBehaviour
             if (player.IsMasterClient)
             {
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
 
             }
             else
             {
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
             }
         }
         
