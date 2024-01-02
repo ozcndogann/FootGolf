@@ -23,10 +23,14 @@ public class RainyDynamic : MonoBehaviour
         {
             if (view.IsMine)
             {
-                rb.mass = 1.035f;
-                rb.angularDrag = 0.05f;
-                rb.drag = 0.075f;
-                rbphy.bounciness = 0.5f;
+                other.gameObject.GetComponent<Rigidbody>().mass = 1.035f;
+                other.gameObject.GetComponent<Rigidbody>().angularDrag = 0.05f;
+                other.gameObject.GetComponent<Rigidbody>().drag = 0.075f;
+                other.gameObject.GetComponent<SphereCollider>().material.bounciness = 0.5f;
+                //rb.mass = 1.035f;
+                //rb.angularDrag = 0.05f;
+                //rb.drag = 0.075f;
+                //rbphy.bounciness = 0.5f;
             }
         }
     }

@@ -23,7 +23,7 @@ public class BunkerDynamic : MonoBehaviour
     void Start()
     {
         view = GameObject.FindGameObjectWithTag("Ball").GetComponent<PhotonView>();
-        rb = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
+        //rb = GameObject.FindGameObjectWithTag("Ball").GetComponent<Rigidbody>();
         rbphy = GameObject.FindGameObjectWithTag("Ball").GetComponent<SphereCollider>().material;
         //box = gameObject.GetComponent<BoxCollider>();
     }
@@ -34,10 +34,14 @@ public class BunkerDynamic : MonoBehaviour
         {
             if (view.IsMine)
             {
-                rb.mass = 1.75f;
-                rb.angularDrag = 0.05f;
-                rb.drag = 0.075f;
-                rbphy.bounciness = 0.21f;
+                other.gameObject.GetComponent<Rigidbody>().mass = 1.75f;
+                other.gameObject.GetComponent<Rigidbody>().angularDrag = 0.05f;
+                other.gameObject.GetComponent<Rigidbody>().drag = 0.075f;
+                other.gameObject.GetComponent<SphereCollider>().material.bounciness = 0.21f;
+                //rb.mass = 1.75f;
+                //rb.angularDrag = 0.05f;
+                //rb.drag = 0.075f;
+                //rbphy.bounciness = 0.21f;
             }
         }
     }
