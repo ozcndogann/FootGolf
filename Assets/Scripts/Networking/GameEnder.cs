@@ -100,6 +100,7 @@ public class GameEnder : MonoBehaviour
     public void MainMenu()
     {
         int totalCoins = PlayerPrefs.GetInt("Coins", 0);
+        spectCanvasClose = false;
         if (CreateAndJoinRandomRooms.Tournament && CreateAndJoinRooms.Tournament)
         {
             if (lastRank == 1)
