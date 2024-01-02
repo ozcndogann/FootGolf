@@ -44,7 +44,6 @@ public class Ball : MonoBehaviour
     //public float waitForShootTimer,waitForShootTriTimer,whichAnim;
     //public static bool footballerTeleport;
     public static bool gameEnder;
-    Photon.Realtime.Player player;
     //public static bool lineRendererOn;
     //public static bool lineRendererController;
     public static bool Player1,Player2,Player3,Player4;
@@ -710,18 +709,20 @@ public class Ball : MonoBehaviour
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
             {
-                foreach (Player player in PhotonNetwork.PlayerList)
-                {
-                    if (player.CustomProperties["turn"] != null)
-                    {
-                        if ((bool)player.CustomProperties["turn"])
-                        {
-                            player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                            player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                        }
-                    }
-                    
-                }
+                //foreach (Player player in PhotonNetwork.PlayerList)
+                //{
+                //    if (player.CustomProperties["turn"] != null)
+                //    {
+                //        if ((bool)player.CustomProperties["turn"])
+                //        {
+                //            player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                //            player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                //        }
+                //    }
+
+                //}
+                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
                 shotClicked = false;
                 nextPlayerTurn = false;
 
