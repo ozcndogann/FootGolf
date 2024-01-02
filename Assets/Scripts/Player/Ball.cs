@@ -193,7 +193,14 @@ public class Ball : MonoBehaviour
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         }
-
+        if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+        {
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+            {
+                barrierCam.gameObject.SetActive(true);
+                spectatorCanvas.SetActive(true);
+            }
+        }
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
