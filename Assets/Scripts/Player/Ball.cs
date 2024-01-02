@@ -333,7 +333,7 @@ public class Ball : MonoBehaviour
 
                 if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null && PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
                 {
-                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !(bool)player.CustomProperties["holeC"])
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
                     {
                         
                         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
