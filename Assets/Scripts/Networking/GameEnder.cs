@@ -157,7 +157,7 @@ public class GameEnder : MonoBehaviour
                 Debug.Log("prize2");
             }
         }
-        spectCanvasClose = false;
+        
 
         ShotCounter.ShotCount = 0;
         PhotonNetwork.LeaveRoom();
