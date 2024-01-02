@@ -331,7 +331,7 @@ public class Ball : MonoBehaviour
                     GetTurn();
                 }
 
-                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null)
+                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null && PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !(bool)player.CustomProperties["holeC"])
                     {
