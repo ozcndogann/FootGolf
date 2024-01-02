@@ -189,6 +189,11 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
+        {
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+        }
+
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
@@ -317,10 +322,7 @@ public class Ball : MonoBehaviour
 
         #endregion
 
-        if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
-        {
-            PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-        }
+        
         
         if (view.IsMine)
             {
@@ -332,9 +334,9 @@ public class Ball : MonoBehaviour
                     GetTurn();
                 }
 
-                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null && PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
+                if (PhotonNetwork.LocalPlayer.CustomProperties["turn"] != null /*&& PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null*/)
                 {
-                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"])
+                    if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"]/* && !(bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"]*/)
                     {
                         
                         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
