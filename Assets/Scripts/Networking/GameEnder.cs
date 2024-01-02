@@ -24,7 +24,7 @@ public class GameEnder : MonoBehaviour
     [SerializeField] private GameObject playerScorePrefab;
     private int lastRank;
     [SerializeField] private int tprize1, tprize2, tprize3, tprize4, vsprize1, vsprize2;
-    public static bool spectCanvasClose;
+    
     private void Start()
     {
         i = 1;
@@ -41,7 +41,7 @@ public class GameEnder : MonoBehaviour
         if (Ball.gameEnder)
         {
             Panel.SetActive(true);
-            spectCanvasClose = true;
+            
             CalculateScore();
             UpdateScoreDisplay();
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
@@ -100,7 +100,6 @@ public class GameEnder : MonoBehaviour
     public void MainMenu()
     {
         int totalCoins = PlayerPrefs.GetInt("Coins", 0);
-        spectCanvasClose = false;
         if (CreateAndJoinRandomRooms.Tournament && CreateAndJoinRooms.Tournament)
         {
             if (lastRank == 1)

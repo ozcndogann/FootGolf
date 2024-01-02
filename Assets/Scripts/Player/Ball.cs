@@ -58,6 +58,7 @@ public class Ball : MonoBehaviour
     public static bool challangeCheck;
     GameObject spectatorCanvas;
     bool allPlayersReady;
+    private bool spectCanvasClose;
     #endregion
 
 
@@ -87,9 +88,9 @@ public class Ball : MonoBehaviour
         hole = GameObject.FindGameObjectWithTag("Hole");
         cam.GetComponent<AudioListener>().enabled = true;
         cam.enabled = (true);
-        
+        spectCanvasClose = false;
         //PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-        
+
 
         #endregion
 
@@ -195,7 +196,7 @@ public class Ball : MonoBehaviour
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && !GameEnder.spectCanvasClose)
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && spectCanvasClose)
             {
                 barrierCam.gameObject.SetActive(true);
                 spectatorCanvas.SetActive(true);
@@ -371,7 +372,7 @@ public class Ball : MonoBehaviour
                     }
                     else
                     {
-                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && !GameEnder.spectCanvasClose)
+                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && spectCanvasClose)
                         {
                             barrierCam.gameObject.SetActive(true);
                             spectatorCanvas.SetActive(true);
@@ -967,6 +968,7 @@ public class Ball : MonoBehaviour
         if (/*GameEnder.EndGame*/ SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 11 || SceneManager.GetActiveScene().buildIndex == 13)
         {
             gameEnder = true;
+            spectCanvasClose = true;
         }
         else
         {
