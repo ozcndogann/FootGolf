@@ -18,9 +18,6 @@ public class PlayFabManager : MonoBehaviour
     public GameObject LeaderBoardPanel;
     public GameObject rowPrefab;
     public Transform rowsParent;
-    public GameObject firstAward;
-    public GameObject secondAward;
-    public GameObject thirdAward;
     public Sprite[] rankImages;
     public Sprite[] numberImages;
     string loggedInPlayedId;
@@ -229,17 +226,9 @@ public class PlayFabManager : MonoBehaviour
                     texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                     texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                 }
-                if (LeaguePosition == 1)
+                if (LeaguePosition == 1 || LeaguePosition == 2 || LeaguePosition == 5)
                 {
-                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
-                }
-                if (LeaguePosition == 2)
-                {
-                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
-                }
-                if (LeaguePosition == 3)
-                {
-                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
+                    rankStatus[2].rectTransform.sizeDelta = new Vector2(105f, 68.212f);
                 }
             }
             else if (50 < item.StatValue && item.StatValue < 100 && 50 < PlayerPrefs.GetInt("Score") && PlayerPrefs.GetInt("Score") < 100)
@@ -257,18 +246,6 @@ public class PlayFabManager : MonoBehaviour
                     texts[0].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                     texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                     texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
-                }
-                if (LeaguePosition == 1)
-                {
-                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
-                }
-                if (LeaguePosition == 2)
-                {
-                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
-                }
-                if (LeaguePosition == 3)
-                {
-                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
                 }
             }
             else
@@ -311,17 +288,9 @@ public class PlayFabManager : MonoBehaviour
                     texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                     texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                 }
-                if (LeaguePosition == 1)
+                if (LeaguePosition == 1 || LeaguePosition == 2 || LeaguePosition == 5)
                 {
-                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
-                }
-                if (LeaguePosition == 2)
-                {
-                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
-                }
-                if (LeaguePosition == 3)
-                {
-                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
+                    rankStatus[2].rectTransform.sizeDelta = new Vector2(105f, 68.212f);
                 }
             }
             else
@@ -364,17 +333,9 @@ public class PlayFabManager : MonoBehaviour
                     texts[1].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                     texts[2].color = new Color(161 / 255f, 236 / 255f, 240 / 255f);
                 }
-                if (item.Position == 0) 
+                if (LeaguePosition == 1 || LeaguePosition == 2 || LeaguePosition == 5)
                 {
-                    GameObject newAward = Instantiate(firstAward, texts[0].transform);
-                }
-                if (item.Position == 1) 
-                {
-                    GameObject newAward = Instantiate(secondAward, texts[0].transform);
-                }
-                if (item.Position == 2) 
-                {
-                    GameObject newAward = Instantiate(thirdAward, texts[0].transform);
+                    rankStatus[2].rectTransform.sizeDelta = new Vector2(105f, 68.212f);
                 }
             }
             else
