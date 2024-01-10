@@ -12,7 +12,14 @@ public class UI_MiniButton : MonoBehaviour
     public Button Settings;
     public Button Shop;
     public Button Player;
+    public GameObject SinglePlayer;
+    public GameObject MultiPlayer;
     // Start is called before the first frame update
+    public void Awake() 
+    {
+        SinglePlayer.SetActive(true);
+        MultiPlayer.SetActive(true);
+    }
     public void PushHome()
     {
         SceneManager.LoadScene("MainMenu");
@@ -30,6 +37,16 @@ public class UI_MiniButton : MonoBehaviour
     {
         //MusicPanel.SetActive(true);
         SceneManager.LoadScene("Settings");
+    }
+    public void MultiPlayerButton()
+    {
+        MultiPlayer.SetActive(false);
+        SinglePlayer.SetActive(true);
+    }
+    public void SinglePlayerButton()
+    {
+        SinglePlayer.SetActive(false);
+        MultiPlayer.SetActive(true);
     }
     public void PushLeaderboard() 
     {
