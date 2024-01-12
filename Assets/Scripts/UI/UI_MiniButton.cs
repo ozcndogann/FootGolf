@@ -14,11 +14,15 @@ public class UI_MiniButton : MonoBehaviour
     public Button Player;
     public GameObject SinglePlayer;
     public GameObject MultiPlayer;
+    public GameObject SingleOptions;
+    public GameObject MultiOptions;
     // Start is called before the first frame update
     public void Awake() 
     {
         SinglePlayer.SetActive(true);
         MultiPlayer.SetActive(true);
+        SingleOptions.SetActive(false);
+        MultiOptions.SetActive(false);
     }
     public void PushHome()
     {
@@ -40,14 +44,19 @@ public class UI_MiniButton : MonoBehaviour
     }
     public void MultiPlayerButton()
     {
+        MultiOptions.SetActive(true);
+        SingleOptions.SetActive(false);
         MultiPlayer.SetActive(false);
-        SinglePlayer.SetActive(true);
+        SinglePlayer.SetActive(false);
     }
     public void SinglePlayerButton()
     {
+        SingleOptions.SetActive(true);
+        MultiOptions.SetActive(false);
+        MultiPlayer.SetActive(false);
         SinglePlayer.SetActive(false);
-        MultiPlayer.SetActive(true);
     }
+
     public void PushLeaderboard() 
     {
         SceneManager.LoadScene("MainMenu");
