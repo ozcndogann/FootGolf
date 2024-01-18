@@ -17,13 +17,15 @@ public class UI_InGame : MonoBehaviour
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
     public GameObject CodeSprite;
     private int coins;
-    
+    [SerializeField] GameObject movingCursor;
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
 
     private GameObject ball;
     public void Start()
     {
+        movingCursor.SetActive(false);
+
         if (SceneManager.GetActiveScene().buildIndex == 8 || SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 12)
         {
             AudioManager.Instance.PlayMusic("GameBG");
@@ -63,8 +65,15 @@ public class UI_InGame : MonoBehaviour
     }
     private void Update()
     {
-        
-        
+        if (Zoom.changeFovBool)
+        {
+            movingCursor.SetActive(true);
+        }
+        else
+        {
+            movingCursor.SetActive(false);
+        }
+
         timeText.text = ((int)Ball.timer).ToString();
         pingText.text = PhotonNetwork.GetPing().ToString() + " ms";
         if (PhotonNetwork.GetPing() > 1000 || PhotonNetwork.IsConnected==false)

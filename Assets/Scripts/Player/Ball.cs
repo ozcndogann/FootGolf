@@ -53,7 +53,7 @@ public class Ball : MonoBehaviour
     Ray rayNorm;
     Ray rayTri;
     bool nextPlayerTurn;
-    bool shotClicked;
+    public bool shotClicked;
     bool barrier;
     public static bool challangeCheck;
     GameObject spectatorCanvas;
@@ -190,6 +190,8 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(shotClicked);
+
         if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
@@ -708,6 +710,7 @@ public class Ball : MonoBehaviour
         }
         AnimationFootballer.lineRendererController = false;
         shootCloser = true;
+        
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
         AudioManager.Instance.PlaySFX("Shoot");
