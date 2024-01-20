@@ -53,7 +53,8 @@ public class Ball : MonoBehaviour
     Ray rayNorm;
     Ray rayTri;
     bool nextPlayerTurn;
-    public bool shotClicked;
+    bool shotClicked;
+    public bool shootedNow;
     bool barrier;
     public static bool challangeCheck;
     GameObject spectatorCanvas;
@@ -645,6 +646,7 @@ public class Ball : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && shootCloser == false)
                     {
                         mousePos = Input.mousePosition;
+                        shootedNow = true;
                         #region CommentedOldAnimations
                         //if (mousePos.x > Screen.width / 2)
                         //{
@@ -682,29 +684,29 @@ public class Ball : MonoBehaviour
     {
         if (mousePos.x > Screen.width / 2)
         {
-            curveValue = (mousePos.x - Screen.width / 2) * 0.15f;
+            curveValue = (mousePos.x - Screen.width / 2) * 0.15f / CursorController.cursorValue;
             if (mousePos.y > Screen.height / 2)
             {
-                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f / CursorController.cursorValue;
                 Shoot(worldPoint.Value, CurveDirection.LeftDown); // shoot
             }
             if (mousePos.y < Screen.height / 2)
             {
-                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f / CursorController.cursorValue;
                 Shoot(worldPoint.Value, CurveDirection.LeftUp); // shoot
             }
         }
         if (mousePos.x < Screen.width / 2)
         {
-            curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f;
+            curveValue = (Screen.width / 2 - (mousePos.x)) * 0.15f / CursorController.cursorValue;
             if (mousePos.y > Screen.height / 2)
             {
-                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f;
+                forceValue = (mousePos.y + 300 - Screen.height / 2) * 0.0015f / CursorController.cursorValue;
                 Shoot(worldPoint.Value, CurveDirection.RightDown); // shoot
             }
             if (mousePos.y < Screen.height / 2)
             {
-                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f;
+                forceValue = (Screen.height / 2 + (300) - (mousePos.y)) * 0.002f / CursorController.cursorValue;
                 Shoot(worldPoint.Value, CurveDirection.RightUp); // shoot
             }
         }
@@ -714,6 +716,7 @@ public class Ball : MonoBehaviour
         Zoom.changeFovBool = false;
         ShotCounter.ShotCount += 1;
         AudioManager.Instance.PlaySFX("Shoot");
+        
         StartCoroutine(ShootedBool());
     }
     private void GetTurn()
@@ -737,6 +740,7 @@ public class Ball : MonoBehaviour
                     
                 }
                 shotClicked = false;
+                shootedNow = false;
                 nextPlayerTurn = false;
 
             }
@@ -779,6 +783,11 @@ public class Ball : MonoBehaviour
             AnimationFootballer.lineRendererOn = false;
             shooted = true;
             Zoom.changeFovBool = true;
+
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+            {
+                shootedNow = false;
+            }
         }
 
         #region a�a��daki ifleri topa iyice yak�n oldu�u zaman b�rakabilmesi i�in kullanabiliriz

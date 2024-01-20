@@ -17,14 +17,14 @@ public class UI_InGame : MonoBehaviour
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
     public GameObject CodeSprite;
     private int coins;
-    [SerializeField] GameObject movingCursor;
+    [SerializeField] Image movingCursor;
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
 
     private GameObject ball;
     public void Start()
     {
-        movingCursor.SetActive(false);
+        movingCursor.enabled = false;
 
         if (SceneManager.GetActiveScene().buildIndex == 8 || SceneManager.GetActiveScene().buildIndex == 9 || SceneManager.GetActiveScene().buildIndex == 12)
         {
@@ -67,11 +67,11 @@ public class UI_InGame : MonoBehaviour
     {
         if (Zoom.changeFovBool)
         {
-            movingCursor.SetActive(true);
+            movingCursor.enabled = true;
         }
         else
         {
-            movingCursor.SetActive(false);
+            movingCursor.enabled = false;
         }
 
         timeText.text = ((int)Ball.timer).ToString();
