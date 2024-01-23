@@ -476,7 +476,7 @@ public class Ball : MonoBehaviour
             }
             Vector3[] positions = { transform.position, worldPoint };
             lineRenderer.SetPositions(positions);
-
+            positions[1] = new Vector3((positions[1].x - positions[0].x) * 1.25f + positions[1].x, (positions[1].y - positions[0].y) * 1.25f + positions[1].y, (positions[1].z - positions[0].z) * 1.25f + positions[1].z);
             for (int i = 0; i < positions.Length; i++) // yukar�da ald���m�z positionlar� looplama
             {
                 positions[i].y = gameObject.transform.position.y + .02f; // line�n y axisi fixleme
