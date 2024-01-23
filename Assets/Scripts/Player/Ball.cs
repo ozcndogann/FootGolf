@@ -143,7 +143,7 @@ public class Ball : MonoBehaviour
                             timer -= Time.deltaTime;
                             barrierCam.gameObject.SetActive(false);
                             spectatorCanvas.SetActive(false);
-                            if ((bool)player.CustomProperties["holeC"] && (bool)player.CustomProperties["turn"] && !allPlayersReady)
+                            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !allPlayersReady)
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
                                 PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
