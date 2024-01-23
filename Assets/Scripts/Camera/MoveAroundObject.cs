@@ -25,7 +25,7 @@ public class MoveAroundObject : MonoBehaviour
     {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"])
+            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"] && !(bool)player.CustomProperties["holeC"])
             {
                 GameObject playerGameObject = FindPlayerGameObject(player);
                 if (playerGameObject != null)
