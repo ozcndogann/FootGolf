@@ -199,7 +199,7 @@ public class Ball : MonoBehaviour
         }
         if (PhotonNetwork.LocalPlayer.CustomProperties["holeC"] != null)
         {
-            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && spectCanvasClose)
+            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] /*&& spectCanvasClose*/)
             {
                 barrierCam.gameObject.SetActive(true);
                 spectatorCanvas.SetActive(true);
@@ -375,7 +375,7 @@ public class Ball : MonoBehaviour
                     }
                     else
                     {
-                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && spectCanvasClose)
+                        if (PhotonNetwork.CurrentRoom.PlayerCount != 1/* && spectCanvasClose*/)
                         {
                             barrierCam.gameObject.SetActive(true);
                             spectatorCanvas.SetActive(true);
