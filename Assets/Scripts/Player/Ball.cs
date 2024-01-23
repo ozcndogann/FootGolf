@@ -195,18 +195,6 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
-                    {
-                        if (player.ActorNumber == 1)
-                        {
-
-                            Player1 = true;
-                            Player2 = false;
-                            Player3 = false;
-                            Player4 = false;
-
-                        }
-                    }
                     if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
                     {
                         if (player.ActorNumber == 1)
