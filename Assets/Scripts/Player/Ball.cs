@@ -68,6 +68,7 @@ public class Ball : MonoBehaviour
         spectCanvasClose = false;
         #endregion
 
+        #region Selecting Starter
         foreach (Player player in PhotonNetwork.PlayerList)
         {
 
@@ -83,7 +84,7 @@ public class Ball : MonoBehaviour
                 player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", false } });
             }
         }
-        
+        #endregion
     }
     private void Awake()
     {
@@ -109,6 +110,7 @@ public class Ball : MonoBehaviour
                 spectatorCanvas.SetActive(true);
             }
         }
+        #region CommentedTurnForeach
         //foreach (Player player in PhotonNetwork.PlayerList)
         //{
         //    if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
@@ -121,11 +123,13 @@ public class Ball : MonoBehaviour
         //            player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
         //        }
         //    }
-            
-        //}
 
+        //}
+        #endregion
+
+        #region View.IsMıne
         if (view.IsMine)
-            {
+        {
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
             {
                 Stop();
@@ -185,7 +189,7 @@ public class Ball : MonoBehaviour
                 AnimationFootballer.AcceptShoot = false;
             }
         }
-
+        #endregion
 
         #region TurnLogicUI
         //commentleri sildim txt'de duruyor
@@ -195,18 +199,6 @@ public class Ball : MonoBehaviour
             {
                 if ((bool)player.CustomProperties["turn"])
                 {
-                    if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
-                    {
-                        if (player.ActorNumber == 1)
-                        {
-
-                            Player1 = true;
-                            Player2 = false;
-                            Player3 = false;
-                            Player4 = false;
-
-                        }
-                    }
                     if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
                     {
                         if (player.ActorNumber == 1)
