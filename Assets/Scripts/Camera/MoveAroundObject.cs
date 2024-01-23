@@ -25,7 +25,7 @@ public class MoveAroundObject : MonoBehaviour
     {
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"] && !(bool)player.CustomProperties["holeC"])
+            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"]/* && player.CustomProperties.ContainsKey("holeC") && !(bool)player.CustomProperties["holeC"]*/)
             {
                 GameObject playerGameObject = FindPlayerGameObject(player);
                 if (playerGameObject != null)
@@ -187,7 +187,7 @@ public class MoveAroundObject : MonoBehaviour
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             //Debug.Log(player.NickName + "'s turn value(outside2): " + (bool)player.CustomProperties["turn"]);
-            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"] && !(bool)player.CustomProperties["holeC"])
+            if (player.CustomProperties.ContainsKey("turn") && (bool)player.CustomProperties["turn"] /*&& player.CustomProperties.ContainsKey("holeC") && !(bool)player.CustomProperties["holeC"]*/)
             {
                 //Debug.Log(player.NickName + "'s turn value(inside): " + (bool)player.CustomProperties["turn"]);
                 GameObject playerGameObject = FindPlayerGameObject(player);
