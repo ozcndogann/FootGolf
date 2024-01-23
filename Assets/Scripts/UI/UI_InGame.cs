@@ -17,7 +17,7 @@ public class UI_InGame : MonoBehaviour
     public Sprite NewImage1, NewImage2, NewImage3, NewImage4;
     public GameObject CodeSprite;
     private int coins;
-    [SerializeField] Image movingCursor;
+    [SerializeField] Image cursorBar, movingCursor;
    
     public Sprite OldSprite1, OldSprite2, oldsprite3, oldsprite4;
 
@@ -67,10 +67,12 @@ public class UI_InGame : MonoBehaviour
     {
         if (Zoom.changeFovBool)
         {
+            cursorBar.enabled = true;
             movingCursor.enabled = true;
         }
         else
         {
+            cursorBar.enabled = false;
             movingCursor.enabled = false;
         }
 

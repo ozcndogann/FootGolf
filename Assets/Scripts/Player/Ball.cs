@@ -191,8 +191,6 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(shotClicked);
-
         if (/*PhotonNetwork.CurrentRoom.PlayerCount == 1*/CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
