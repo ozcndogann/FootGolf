@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     Vector3 screenMousePosNear;
     Vector3 worldMousePosFar;
     Vector3 worldMousePosNear;
-    [SerializeField] private LineRenderer lineRenderer; // aim i�in line
+    [SerializeField] private LineRenderer lineRenderer,traillinerenderer; // aim i�in line
     public static bool isIdle; // top duruyor mu hareketli mi boolu
     public static bool isAiming; // oyuncu aim halinde mi boolu
     bool OurTurn;
@@ -24,7 +24,7 @@ public class Ball : MonoBehaviour
     public Camera cam;
     public bool isShooting; // shoot hali boolu
     public static bool shooted;
-    public GameObject LineRenderer;
+    public GameObject LineRenderer,TrailLineRenderer,TouchRenderer;
     public static bool shootCloser;
     Vector3? worldPoint;
     public Vector3 mousePos, upForce;
@@ -32,7 +32,7 @@ public class Ball : MonoBehaviour
     public float lineX;
     Camera barrierCam;
     public PhotonView view;
-    private GameObject hole;
+    private GameObject hole,Toucher;
     [SerializeField] public static float timer;
     public static bool gameEnder;
     Photon.Realtime.Player player;
@@ -53,6 +53,10 @@ public class Ball : MonoBehaviour
     {
         #region DefiningAtStart
         challangeCheck = false;
+        traillinerenderer = TrailLineRenderer.GetComponent<LineRenderer>();
+        Toucher=Instantiate(TouchRenderer,new Vector3(0,0,0),Quaternion.identity);
+        Toucher.transform.Rotate(-90, 0, 0, Space.World);
+        Toucher.SetActive(false);
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
         OurTurn = true;
@@ -481,14 +485,36 @@ public class Ball : MonoBehaviour
             {
                 positions[i].y = gameObject.transform.position.y + .02f; // line�n y axisi fixleme
             }
-
             lineRenderer.SetPositions(positions); // update positions
             lineRenderer.enabled = true; // line visible
-            shootCloser = false;
+            traillinerenderer.enabled = true;
+            //traillinerenderer.SetPosition(0, new Vector3(lineRenderer.GetPosition(0).x, lineRenderer.GetPosition(0).y, lineRenderer.GetPosition(0).z));
+            //traillinerenderer.SetPosition(1, new Vector3(lineRenderer.GetPosition(1).x * -1, lineRenderer.GetPosition(1).y * -1, lineRenderer.GetPosition(1).z) * -1);
+            // Get the current set of points
+            Toucher.SetActive(true);
+            Vector3[] points = new Vector3[lineRenderer.positionCount];
+            lineRenderer.GetPositions(points);
+
+            // Mirror the points
+            for (int i = 0; i < points.Length; i++)
+            {
+                Vector3 relativePoint = points[i] - transform.position;
+                relativePoint.x = -relativePoint.x; // Mirror along X-axis
+                relativePoint.y = -relativePoint.y;
+                relativePoint.z = -relativePoint.z;
+                points[i] = relativePoint + transform.position;
+            }
+
+            // Set the updated points back to the LineRenderer
+            traillinerenderer.SetPositions(points);
+            Toucher.transform.position = traillinerenderer.GetPosition(1);
+
         }
         else
         {
             lineRenderer.enabled = false; // line visible
+            traillinerenderer.enabled = false;
+            Toucher.SetActive(false);
         }
 
     }
