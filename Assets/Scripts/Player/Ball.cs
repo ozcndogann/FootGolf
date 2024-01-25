@@ -46,6 +46,7 @@ public class Ball : MonoBehaviour
     GameObject spectatorCanvas;
     bool allPlayersReady;
     private bool spectCanvasClose;
+    public float lineLength;
     #endregion
 
 
@@ -101,7 +102,12 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        
+        if (Input.GetMouseButton(0))
+        {
+            Vector3 mouseposdeneme = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, traillinerenderer.GetPosition(1).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z);
+            traillinerenderer.SetPosition(1, mouseposdeneme);
+            Toucher.transform.position =traillinerenderer.GetPosition(1);
+        }
         if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
@@ -470,8 +476,8 @@ public class Ball : MonoBehaviour
         if (!shooted)
         {
             Vector3 direction = worldPoint - transform.position; // line�n direction�
-            float lineLength = direction.magnitude; // line�n uzunlu�unun hesaplanmas�
-            float maxLength = 1.25f; // max line length
+            lineLength = direction.magnitude; // line�n uzunlu�unun hesaplanmas�
+            float maxLength = 1f; // max line length
             
             if (lineLength > maxLength) // maxla current length k�yas�
             {
@@ -487,6 +493,7 @@ public class Ball : MonoBehaviour
             }
             lineRenderer.SetPositions(positions); // update positions
             lineRenderer.enabled = true; // line visible
+            shootCloser = false;
             traillinerenderer.enabled = true;
             //traillinerenderer.SetPosition(0, new Vector3(lineRenderer.GetPosition(0).x, lineRenderer.GetPosition(0).y, lineRenderer.GetPosition(0).z));
             //traillinerenderer.SetPosition(1, new Vector3(lineRenderer.GetPosition(1).x * -1, lineRenderer.GetPosition(1).y * -1, lineRenderer.GetPosition(1).z) * -1);
@@ -507,7 +514,7 @@ public class Ball : MonoBehaviour
 
             // Set the updated points back to the LineRenderer
             traillinerenderer.SetPositions(points);
-            Toucher.transform.position = traillinerenderer.GetPosition(1);
+            //Toucher.transform.position = new Vector3(((traillinerenderer.GetPosition(1).x- traillinerenderer.GetPosition(0).x) * 0.8f) + traillinerenderer.GetPosition(0).x, traillinerenderer.GetPosition(1).y, ((traillinerenderer.GetPosition(1).z - traillinerenderer.GetPosition(0).z) * 0.8f) + traillinerenderer.GetPosition(0).z);
 
         }
         else

@@ -30,7 +30,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public void Start()
     {
         coins = PlayerPrefs.GetInt("Coins");
-
+        friendlyMatch = false;
     }
     public void IsPractice()
 
@@ -171,7 +171,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         if (friendlyMatch)
         {
             PhotonNetwork.LoadLevel("Lobby");
-            friendlyMatch = false;
+            //friendlyMatch = false;
         }
         
         

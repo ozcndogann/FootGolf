@@ -145,10 +145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: a1cb555b27a66494caa441d6e705979c, type: 3}
-  - {fileID: 2800000, guid: a1cb555b27a66494caa441d6e705979c, type: 3}
-  - {fileID: 2800000, guid: a1cb555b27a66494caa441d6e705979c, type: 3}
-  - {fileID: 2800000, guid: a1cb555b27a66494caa441d6e705979c, type: 3}
+  - {fileID: 2800000, guid: f22da915b06d3ec489a50c18dafc6b53, type: 3}
+  - {fileID: 2800000, guid: f22da915b06d3ec489a50c18dafc6b53, type: 3}
+  - {fileID: 2800000, guid: f22da915b06d3ec489a50c18dafc6b53, type: 3}
+  - {fileID: 2800000, guid: f22da915b06d3ec489a50c18dafc6b53, type: 3}
   fps: 3
 --- !u!1 &3859352307074843106
 GameObject:
@@ -307,6 +307,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   shootedNow: 0
+  lineLength: 0
 --- !u!114 &7399152375808374893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +396,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3859352307074843106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ed9528b03a18ec4aa3a1feb88902ad3, type: 3}
   m_Name: 
@@ -582,7 +583,7 @@ Transform:
   m_GameObject: {fileID: 9219378405429931175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4523017918165261144}
@@ -682,7 +683,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 1
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -700,8 +701,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textures:
-  - {fileID: 2800000, guid: 6f8d531558364104a9b96e084810d801, type: 3}
-  - {fileID: 2800000, guid: 6f8d531558364104a9b96e084810d801, type: 3}
-  - {fileID: 2800000, guid: efef6672dbd0b954cada340a6fed14be, type: 3}
-  - {fileID: 2800000, guid: efef6672dbd0b954cada340a6fed14be, type: 3}
+  - {fileID: 2800000, guid: 85c7f67032dd279408b84d5cdcbab622, type: 3}
+  - {fileID: 2800000, guid: 01df4a93f1797e54195329452ee6792f, type: 3}
+  - {fileID: 2800000, guid: f9d04687e50eafb4aa5fec45f2f2617b, type: 3}
+  - {fileID: 2800000, guid: d25c50ab54bbde4458bfe7243012c751, type: 3}
   fps: 3
