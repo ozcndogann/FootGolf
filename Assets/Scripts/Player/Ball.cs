@@ -58,7 +58,7 @@ public class Ball : MonoBehaviour
         traillinerenderer = TrailLineRenderer.GetComponent<LineRenderer>();
         Toucher=Instantiate(TouchRenderer,new Vector3(0,0,0),Quaternion.identity);
         Toucher.transform.Rotate(-90, 0, 0, Space.World);
-        //Toucher.SetActive(false);
+        Toucher.SetActive(false);
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
         OurTurn = true;
@@ -529,7 +529,7 @@ public class Ball : MonoBehaviour
 
             // Set the updated points back to the LineRenderer
             traillinerenderer.SetPositions(points);
-            traillinerenderer.SetPosition(1, Toucher.transform.position);
+            traillinerenderer.SetPosition(1, new Vector3(traillinerenderer.GetPosition(0).x +((Toucher.transform.position.x-traillinerenderer.GetPosition(0).x)*0.8f),Toucher.transform.position.y, traillinerenderer.GetPosition(0).z+((Toucher.transform.position.z - traillinerenderer.GetPosition(0).z) * 0.8f)));
             //Toucher.transform.position = traillinerenderer.GetPosition(1);
             //Toucher.transform.position = new Vector3(((traillinerenderer.GetPosition(1).x- traillinerenderer.GetPosition(0).x) * 0.8f) + traillinerenderer.GetPosition(0).x, traillinerenderer.GetPosition(1).y, ((traillinerenderer.GetPosition(1).z - traillinerenderer.GetPosition(0).z) * 0.8f) + traillinerenderer.GetPosition(0).z);
 
