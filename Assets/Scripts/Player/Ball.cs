@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     Vector3 screenMousePosNear;
     Vector3 worldMousePosFar;
     Vector3 worldMousePosNear;
+    Vector3 maxX,maxZ;
     [SerializeField] private LineRenderer lineRenderer,traillinerenderer; // aim i�in line
     public static bool isIdle; // top duruyor mu hareketli mi boolu
     public static bool isAiming; // oyuncu aim halinde mi boolu
@@ -57,7 +58,7 @@ public class Ball : MonoBehaviour
         traillinerenderer = TrailLineRenderer.GetComponent<LineRenderer>();
         Toucher=Instantiate(TouchRenderer,new Vector3(0,0,0),Quaternion.identity);
         Toucher.transform.Rotate(-90, 0, 0, Space.World);
-        Toucher.SetActive(false);
+        //Toucher.SetActive(false);
         PlayerPrefs.GetInt("FootballerChooser", 0);
         OurFootballerCloser = false;
         OurTurn = true;
@@ -102,12 +103,26 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        //if (Input.GetMouseButton(0))
+        //{
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray,out RaycastHit raycastHit))
         {
-            Vector3 mouseposdeneme = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, traillinerenderer.GetPosition(1).y, Camera.main.ScreenToWorldPoint(Input.mousePosition).z);
-            traillinerenderer.SetPosition(1, mouseposdeneme);
-            Toucher.transform.position =traillinerenderer.GetPosition(1);
+            Vector3 ToucherPoint = raycastHit.point;
+            ToucherPoint.y = transform.position.y + 0.1f;
+            if(Mathf.Abs(ToucherPoint.x-transform.position.x) < 3)
+            {
+                maxX.x = ToucherPoint.x;
+            }
+            if(Mathf.Abs(ToucherPoint.z - transform.position.z) < 3)
+            {
+                maxZ.z = ToucherPoint.z;
+            }
+            Toucher.transform.position = new Vector3(maxX.x, ToucherPoint.y, maxZ.z);
+            
         }
+        //}
+
         if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
         {
             PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
@@ -514,6 +529,8 @@ public class Ball : MonoBehaviour
 
             // Set the updated points back to the LineRenderer
             traillinerenderer.SetPositions(points);
+            traillinerenderer.SetPosition(1, Toucher.transform.position);
+            //Toucher.transform.position = traillinerenderer.GetPosition(1);
             //Toucher.transform.position = new Vector3(((traillinerenderer.GetPosition(1).x- traillinerenderer.GetPosition(0).x) * 0.8f) + traillinerenderer.GetPosition(0).x, traillinerenderer.GetPosition(1).y, ((traillinerenderer.GetPosition(1).z - traillinerenderer.GetPosition(0).z) * 0.8f) + traillinerenderer.GetPosition(0).z);
 
         }
