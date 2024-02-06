@@ -27,14 +27,14 @@ public class CursorController : MonoBehaviour
     {
         currentCursorValue = cursorRectTransform.anchoredPosition.x;
         Debug.Log(cursorRectTransform.anchoredPosition.x);
-        if (Mathf.Abs(currentCursorValue) > 120)
-        {
-            moveSpeed = 400;
-        }
-        else
-        {
-            moveSpeed = 800;
-        }
+        //if (Mathf.Abs(currentCursorValue) > 120)
+        //{
+        //    moveSpeed = 400;
+        //}
+        //else
+        //{
+        //    moveSpeed = 800;
+        //}
         if (!ball.shootedNow && Zoom.changeFovBool)
         {
             // Move the cursor
