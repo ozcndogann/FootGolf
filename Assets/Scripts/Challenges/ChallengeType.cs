@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 public class ChallengeType : MonoBehaviour
 {
-    public static bool cha1, cha2, cha3, cha4, cha5, cha6, cha7, cha8, cha9, cha10, cha11, cha12, cha13, cha14, cha15, cha16, cha17, cha18;//UI_InGame scriptinde false'lamayý unutma
+    public static bool cha1, cha2, cha3, cha4, cha5, cha6, cha7, cha8, cha9, cha10, cha11, cha12, cha13, cha14, cha15, cha16, cha17, cha18,practice;//UI_InGame scriptinde false'lamayý unutma
     public GameObject ChaWin, ChaLose;
     Camera barrierCam;
     void Start()
@@ -82,7 +82,14 @@ public class ChallengeType : MonoBehaviour
                 ChaLose.SetActive(true);
             }
         }
-
+        if (Ball.challangeCheck)
+        {
+            if (practice)
+            {
+                barrierCam.gameObject.SetActive(true);
+                ChaLose.SetActive(true);
+            }
+        }
         if ((cha1 || cha5 || cha8 || cha11 || cha14 || cha16))
         {
             //4 vuruþta geçmeli
@@ -219,6 +226,10 @@ public class ChallengeType : MonoBehaviour
             }
         }
         #endregion
+    }
+    public void Practice()
+    {
+        practice = true;
     }
     #region ChallangeTypes
     public void Challange1()

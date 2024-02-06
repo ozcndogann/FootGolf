@@ -66,10 +66,15 @@ public class Challenges : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("Hole1");
         }
+        else if (ChallengeType.practice)
+        {
+            PhotonNetwork.LoadLevel("Hole1");
+        }
         else if (ChallengeType.cha2)
         {
             PhotonNetwork.LoadLevel("Hole1");
         }
+        
         else if (ChallengeType.cha3)
         {
             PhotonNetwork.LoadLevel("Hole1");
