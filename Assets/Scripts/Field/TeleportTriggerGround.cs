@@ -8,6 +8,8 @@ public class TeleportTriggerGround : MonoBehaviour
     public float teleportDistance = 2.0f; // teleport noktasýnýn duvardan uzaklýðýný belirliyoruz (hala iþe yaramasýný saðlayamadým) 
     public LayerMask teleportLayerMask; // teleport noktasý için zemin layerini seçmek
     public GameObject teleportDestination; // teleport destination diye bir empty gameobjectimiz var
+    public static bool ifoob = false;
+    public OOB oobScript;
 
     private void Start()
     {
@@ -20,6 +22,8 @@ public class TeleportTriggerGround : MonoBehaviour
     {
         if (other.gameObject.tag == "Ball")
         {
+            oobScript.OOBFunc();
+
             // teleport destinasyon objesinin collider boundlarý
             Bounds destinationBounds = teleportDestination.GetComponent<Collider>().bounds;
 
