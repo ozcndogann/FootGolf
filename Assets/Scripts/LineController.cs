@@ -33,7 +33,7 @@ public class LineController : MonoBehaviour
         //    lineRenderer.material.SetTexture("_MainTex", textures[animationStep]);
         //    fpsCounter = 0f;
         //}
-        if (ball.lineLength > 0.75f)
+        if (ball.lineLength > 0.68f)
         {
             lineRenderer.material.SetTexture("_MainTex", textures[3]);
         }
