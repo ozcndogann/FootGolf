@@ -30,6 +30,7 @@ public class MoveAroundObject : MonoBehaviour
                 GameObject playerGameObject = FindPlayerGameObject(player);
                 if (playerGameObject != null)
                 {
+                    //target = Vector3.SmoothDamp(transform.position, playerGameObject.transform, ref _currentVelocity, smoothTime);
                     target = playerGameObject.transform;
                 }
             }
