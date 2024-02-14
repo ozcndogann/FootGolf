@@ -32,5 +32,6 @@ public class UI_Start : MonoBehaviour
     public void ProfileScene()
     {
         SceneManager.LoadScene("Profile");
+        LevelLoader.LoaderInstance.FadeToLevel("Profile");
     }
 }
