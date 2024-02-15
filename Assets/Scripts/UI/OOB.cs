@@ -20,6 +20,8 @@ public class OOB : MonoBehaviour
         IEnumerator OOB()
         {
             yield return new WaitForSeconds(1.3f);
+
+            image.preserveAspect = true;
             animator.SetBool("oob", false);
             image.enabled = false;
         }
