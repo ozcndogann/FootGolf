@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
+using Dreamteck.Splines;
 using UnityEngine;
 
 public class StartCutscene : MonoBehaviour
@@ -9,6 +10,8 @@ public class StartCutscene : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Transform hole;
     [SerializeField] private Transform target;
+    [SerializeField] private SplineFollower camSpline;
+    [SerializeField] private float cutsceneDuration = 8f;
     [SerializeField] private float moveSpeed =50f;
     [SerializeField] private float rotationSpeed = 90f;
     [SerializeField] private float waitDuration = 5f;
@@ -21,9 +24,8 @@ public class StartCutscene : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Ball").transform;
         hole = GameObject.FindGameObjectWithTag("Hole").transform;
-
         cam.transform.position = hole.position + new Vector3(0, 5, 0);
-
+        camSpline.follow = true;
         //TimeS = false;
         StartCoroutine(SequenceCoroutine());
     }
@@ -32,12 +34,13 @@ public class StartCutscene : MonoBehaviour
     {
         yield return StartCoroutine(ShowCameraCoroutine());
 
-        yield return StartCoroutine(MoveCameraCoroutine());
+        //yield return StartCoroutine(MoveCameraCoroutine());
     }
 
 
     private IEnumerator ShowCameraCoroutine()
     {
+        /*
         float journeyLength = Vector3.Distance(hole.position, target.position);
         float startTime = Time.time;
 
@@ -52,9 +55,13 @@ public class StartCutscene : MonoBehaviour
 
             yield return null;
         }
-
+        */
+        camSpline.follow = true;
+        yield return new WaitForSeconds(cutsceneDuration);
+        camSpline.follow = false;
 
         cam.transform.position = hole.position + new Vector3(50, 30, 50);
+        cam.transform.rotation = Quaternion.Euler(5.76f,yVal , 0);
     }
 
     private IEnumerator MoveCameraCoroutine()
@@ -78,6 +85,16 @@ public class StartCutscene : MonoBehaviour
         }
 
         cam.transform.rotation = Quaternion.Euler(5.76f,yVal , 0);
+        //TimeS = true;
+        //cam.transform.position = target.position;
+    }
+    private IEnumerator MoveCameraWithSpline()
+    {
+        //yield return new WaitForSeconds(0.5f);
+
+        camSpline.follow = true;
+        yield return new WaitForSeconds(40f);
+        //camSpline.enabled = false;
         //TimeS = true;
         //cam.transform.position = target.position;
     }
