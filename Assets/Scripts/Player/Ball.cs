@@ -168,15 +168,28 @@ public class Ball : MonoBehaviour
                 {
                     if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"])
                     {
+                        
                         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                         {
                             timer -= Time.deltaTime;
-                            if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !allPlayersReady)
+                            //if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !allPlayersReady)
+                            //{
+                            //    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                            //    PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                            //    Debug.Log("turnhole");
+                            //    //GetTurn();
+                            //}
+                            foreach (Player player in PhotonNetwork.PlayerList)
                             {
-                                PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
-                                PhotonNetwork.LocalPlayer.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
-                                Debug.Log("turnhole");
-                                //GetTurn();
+                                if (player.CustomProperties["holeC"] != null)
+                                {
+                                    if ((bool)player.CustomProperties["holeC"])
+                                    {
+                                        player.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
+                                        player.GetNext().SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", true } });
+                                    }
+                                }
+
                             }
                             barrierCam.gameObject.SetActive(false);
                             spectatorCanvas.SetActive(false);
