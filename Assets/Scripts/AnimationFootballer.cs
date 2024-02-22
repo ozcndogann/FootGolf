@@ -41,7 +41,6 @@ public class AnimationFootballer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cam =GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         PlayerPrefs.GetInt("FootballerChooser", 0);
-        PlayerPrefs.SetInt("FootballerChooser", 4);
         waitForShoot = false;
         waitForShootTri = false;
         footballerTeleport = false;
