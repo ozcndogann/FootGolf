@@ -16836,6 +16836,8 @@ MonoBehaviour:
   cam: {fileID: 952980455}
   hole: {fileID: 1596013880}
   target: {fileID: 0}
+  camSpline: {fileID: 0}
+  cutsceneDuration: 8
   moveSpeed: 40
   rotationSpeed: 90
   waitDuration: 0.6
@@ -23451,6 +23453,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6be54cd4e82f30489414042a0ae6f58, type: 3}
+--- !u!114 &1381708161 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7971521927554922989, guid: d6be54cd4e82f30489414042a0ae6f58,
+    type: 3}
+  m_PrefabInstance: {fileID: 1381708160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4527188d4d028944b29e4ddfa8c9d66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1391950299
 GameObject:
   m_ObjectHideFlags: 0
@@ -35930,7 +35944,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   teleportDestination: {fileID: 209410258}
-  oobScript: {fileID: 0}
+  oobScript: {fileID: 1381708161}
 --- !u!4 &6610607454957685157
 Transform:
   m_ObjectHideFlags: 0
