@@ -15,7 +15,6 @@ public class BackgroundScroller : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(Karo.transform.position.y);
         if (Karo.transform.position.y <= lowerBound/*-894.1125f*/)
         {
             up = true;
@@ -26,12 +25,10 @@ public class BackgroundScroller : MonoBehaviour
         }
         if (up)
         {
-            Debug.Log("yukari");
             Karo.transform.position += new Vector3(0, scrollSpeed * Time.deltaTime, 0);
         }
         else
         {
-            Debug.Log("asagi");
             Karo.transform.position -= new Vector3(0, scrollSpeed * Time.deltaTime, 0);
         }
     }
