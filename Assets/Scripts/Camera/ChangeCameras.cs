@@ -21,32 +21,37 @@ public class ChangeCameras : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainCam = Camera.main;
-        target = GameObject.FindGameObjectWithTag("Ball");
-        ball = target.GetComponent<Ball>();
-        cam1 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x - 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
-        //cam1W = cam1.GetComponent<PhotonView>();
-        disCam1 = target.transform.position - cam1.transform.position;
-        cam2 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
-        //cam2W = cam2.GetComponent<PhotonView>();
-        disCam2 = target.transform.position - cam2.transform.position;
-        cam3 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
-        //cam3W = cam3.GetComponent<PhotonView>();
-        disCam3 = target.transform.position - cam3.transform.position;
-        cam4 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z + 4), Quaternion.identity);
-        //cam4W = cam4.GetComponent<PhotonView>();
-        disCam4 = target.transform.position - cam4.transform.position;
-        cam5 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
-        //cam5W = cam5.GetComponent<PhotonView>();
-        disCam5 = target.transform.position - cam5.transform.position;
-        Cameras.Add(cam1.GetComponent<Camera>());
-        Cameras.Add(cam2.GetComponent<Camera>());
-        Cameras.Add(cam3.GetComponent<Camera>());
-        Cameras.Add(cam4.GetComponent<Camera>());
-        Cameras.Add(cam5.GetComponent<Camera>());
-        randomerBool = false;
-        cameraChanger = false;
-        rb = GetComponent<Rigidbody>();
+        if (view.IsMine)
+        {
+            MainCam = Camera.main;
+            target = GameObject.FindGameObjectWithTag("Ball");
+            ball = target.GetComponent<Ball>();
+            cam1 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x - 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
+            //cam1W = cam1.GetComponent<PhotonView>();
+            disCam1 = target.transform.position - cam1.transform.position;
+            cam2 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
+            //cam2W = cam2.GetComponent<PhotonView>();
+            disCam2 = target.transform.position - cam2.transform.position;
+            cam3 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
+            //cam3W = cam3.GetComponent<PhotonView>();
+            disCam3 = target.transform.position - cam3.transform.position;
+            cam4 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z + 4), Quaternion.identity);
+            //cam4W = cam4.GetComponent<PhotonView>();
+            disCam4 = target.transform.position - cam4.transform.position;
+            cam5 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
+            //cam5W = cam5.GetComponent<PhotonView>();
+            disCam5 = target.transform.position - cam5.transform.position;
+            Cameras.Add(cam1.GetComponent<Camera>());
+            Cameras.Add(cam2.GetComponent<Camera>());
+            Cameras.Add(cam3.GetComponent<Camera>());
+            Cameras.Add(cam4.GetComponent<Camera>());
+            Cameras.Add(cam5.GetComponent<Camera>());
+            randomerBool = false;
+            cameraChanger = false;
+            rb = GetComponent<Rigidbody>();
+        }
+
+        
     }
 
     // Update is called once per frame
@@ -156,7 +161,6 @@ public class ChangeCameras : MonoBehaviour
                 cameraChanger = false;
             }
         }
-    }
-
         
+    }
 }
