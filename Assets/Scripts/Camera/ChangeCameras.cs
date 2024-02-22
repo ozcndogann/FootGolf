@@ -60,7 +60,6 @@ public class ChangeCameras : MonoBehaviour
     {
         if (view.IsMine)
         {
-            Debug.Log(MainCam.transform.rotation.eulerAngles.y);
             //cam1.transform.position = new Vector3(transform.position.x - 4, transform.position.y + 1.4f, transform.position.z);// -90 main cameradan
             cam1.transform.rotation = Quaternion.Euler(0, MainCam.transform.rotation.eulerAngles.y - 90, 0);
             //cam2.transform.position = new Vector3(transform.position.x + 4, transform.position.y + 1.4f, transform.position.z);// -270 main cameradan
