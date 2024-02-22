@@ -27,19 +27,19 @@ public class ChangeCameras : MonoBehaviour
         {
             MainCam = Camera.main;
             ball = target.GetComponent<Ball>();
-            cam1 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x - 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
+            cam1 = Instantiate(CasualCam, new Vector3(target.transform.position.x - 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
             //cam1W = cam1.GetComponent<PhotonView>();
             disCam1 = target.transform.position - cam1.transform.position;
-            cam2 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
+            cam2 = Instantiate(CasualCam, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
             //cam2W = cam2.GetComponent<PhotonView>();
             disCam2 = target.transform.position - cam2.transform.position;
-            cam3 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
+            cam3 = Instantiate(CasualCam, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
             //cam3W = cam3.GetComponent<PhotonView>();
             disCam3 = target.transform.position - cam3.transform.position;
-            cam4 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z + 4), Quaternion.identity);
+            cam4 = Instantiate(CasualCam, new Vector3(target.transform.position.x, target.transform.position.y + 1.4f, target.transform.position.z + 4), Quaternion.identity);
             //cam4W = cam4.GetComponent<PhotonView>();
             disCam4 = target.transform.position - cam4.transform.position;
-            cam5 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
+            cam5 = Instantiate(CasualCam, new Vector3(target.transform.position.x + 4, target.transform.position.y + 1.4f, target.transform.position.z - 4), Quaternion.identity);
             //cam5W = cam5.GetComponent<PhotonView>();
             disCam5 = target.transform.position - cam5.transform.position;
             Cameras.Add(cam1.GetComponent<Camera>());
