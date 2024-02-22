@@ -171,8 +171,6 @@ public class Ball : MonoBehaviour
                         if (PhotonNetwork.CurrentRoom.PlayerCount != 1)
                         {
                             timer -= Time.deltaTime;
-                            barrierCam.gameObject.SetActive(false);
-                            spectatorCanvas.SetActive(false);
                             if ((bool)PhotonNetwork.LocalPlayer.CustomProperties["holeC"] && (bool)PhotonNetwork.LocalPlayer.CustomProperties["turn"] && !allPlayersReady)
                             {
                                 PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "turn", false } });
@@ -180,6 +178,9 @@ public class Ball : MonoBehaviour
                                 Debug.Log("turnhole");
                                 //GetTurn();
                             }
+                            barrierCam.gameObject.SetActive(false);
+                            spectatorCanvas.SetActive(false);
+                            
                         }
                         
                         if (timer > 0)
