@@ -7,7 +7,7 @@ using Photon.Pun.UtilityScripts;
 
 public class ChangeCameras : MonoBehaviour
 {
-    public PhotonView view,cam1W,cam2W,cam3W,cam4W,cam5W;
+    PhotonView view;
     public List<Camera> Cameras;
     public GameObject CasualCam;
     GameObject cam1, cam2, cam3, cam4, cam5;
@@ -21,10 +21,11 @@ public class ChangeCameras : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        target = gameObject;
+        view = target.GetComponent<PhotonView>();
         if (view.IsMine)
         {
             MainCam = Camera.main;
-            target = GameObject.FindGameObjectWithTag("Ball");
             ball = target.GetComponent<Ball>();
             cam1 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x - 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
             //cam1W = cam1.GetComponent<PhotonView>();
