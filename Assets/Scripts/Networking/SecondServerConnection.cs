@@ -12,10 +12,11 @@ public class SecondServerConnection : MonoBehaviourPunCallbacks
     
     private void Start()
     {
-        if (!PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.ConnectUsingSettings();
-        }
+        PhotonNetwork.ConnectUsingSettings();
+        //if (!PhotonNetwork.IsConnected)
+        //{
+        //    PhotonNetwork.ConnectUsingSettings();
+        //}
     }
     //public override void OnConnectedToMaster()
     //{
