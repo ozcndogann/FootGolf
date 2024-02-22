@@ -17,7 +17,7 @@ public class AnimationFootballer : MonoBehaviour
     Camera cam;
     PhotonView view;
     Ball ballScript;
-    public GameObject Ronaldinho, Messi,Alexia,Esmer,FFF;
+    public GameObject Ronaldinho, Messi,Alexia,Esmer,hanımKız;
     Animator footballerAnimator, trivelaAnimator;
     GameObject OurFootballer, TrivelaFootballer;
     public float waitForShootTimer, waitForShootTriTimer, whichAnim;
@@ -39,8 +39,9 @@ public class AnimationFootballer : MonoBehaviour
         ObjectMirrorReverse = false;
         AcceptShoot = false;
         rb = GetComponent<Rigidbody>();
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
+        cam =GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
         PlayerPrefs.GetInt("FootballerChooser", 0);
+        PlayerPrefs.SetInt("FootballerChooser", 4);
         waitForShoot = false;
         waitForShootTri = false;
         footballerTeleport = false;
@@ -116,8 +117,8 @@ public class AnimationFootballer : MonoBehaviour
             }
             else if (PlayerPrefs.GetInt("FootballerChooser") == 4)
             {
-                OurFootballer = PhotonNetwork.Instantiate(FFF.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
-                TrivelaFootballer = PhotonNetwork.Instantiate(FFF.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
+                OurFootballer = PhotonNetwork.Instantiate(hanımKız.name, new Vector3(transform.position.x + 2.6f, transform.position.y - 0.3f, transform.position.z + 1.6f), Quaternion.identity);
+                TrivelaFootballer = PhotonNetwork.Instantiate(hanımKız.name, new Vector3(transform.position.x + 1.5f, transform.position.y - 0.3f, transform.position.z + 1.7f), Quaternion.identity);
                 distanceP = transform.position - OurFootballer.transform.position;
                 distanceT = transform.position - TrivelaFootballer.transform.position;
                 OurFootballer.transform.rotation = Quaternion.Euler(0, cam.transform.rotation.eulerAngles.y - 320, 0);
