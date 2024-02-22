@@ -21,6 +21,7 @@ public class ChangeCameras : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MainCam = Camera.main;
         target = GameObject.FindGameObjectWithTag("Ball");
         ball = target.GetComponent<Ball>();
         cam1 = PhotonNetwork.Instantiate(CasualCam.name, new Vector3(target.transform.position.x - 4, target.transform.position.y + 1.4f, target.transform.position.z), Quaternion.identity);
