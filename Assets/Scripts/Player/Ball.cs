@@ -106,7 +106,22 @@ public class Ball : MonoBehaviour
         Debug.Log("shotClicked" + shotClicked);
         Debug.Log("shotClicked" + shootedNow);
         Debug.Log("nextPlayerTurn" + nextPlayerTurn);
-        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Physics.Raycast(ray,out RaycastHit raycastHit))
+        {
+            Vector3 ToucherPoint = raycastHit.point;
+            ToucherPoint.y = transform.position.y + 0.1f;
+            if(Mathf.Abs(ToucherPoint.x-transform.position.x) < 3)
+            {
+                maxX.x = ToucherPoint.x;
+            }
+            if(Mathf.Abs(ToucherPoint.z - transform.position.z) < 3)
+            {
+                maxZ.z = ToucherPoint.z;
+            }
+            Toucher.transform.position = new Vector3(maxX.x, ToucherPoint.y, maxZ.z);
+            
+        }
         //}
 
         if (CreateAndJoinRandomRooms.practice || CreateAndJoinRooms.practice)
@@ -141,22 +156,6 @@ public class Ball : MonoBehaviour
         #region View.IsMıne
         if (view.IsMine)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit))
-            {
-                Vector3 ToucherPoint = raycastHit.point;
-                ToucherPoint.y = transform.position.y + 0.1f;
-                if (Mathf.Abs(ToucherPoint.x - transform.position.x) < 3)
-                {
-                    maxX.x = ToucherPoint.x;
-                }
-                if (Mathf.Abs(ToucherPoint.z - transform.position.z) < 3)
-                {
-                    maxZ.z = ToucherPoint.z;
-                }
-                Toucher.transform.position = new Vector3(maxX.x, ToucherPoint.y, maxZ.z);
-
-            }
             if (rb.velocity.magnitude < stopVelocity) // topun durmas� i�in h�z kontrol�
             {
                 Stop();
