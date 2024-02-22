@@ -103,21 +103,24 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray,out RaycastHit raycastHit))
+        if(Input.mousePosition != null)
         {
-            Vector3 ToucherPoint = raycastHit.point;
-            ToucherPoint.y = transform.position.y + 0.1f;
-            if(Mathf.Abs(ToucherPoint.x-transform.position.x) < 3)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit))
             {
-                maxX.x = ToucherPoint.x;
+                Vector3 ToucherPoint = raycastHit.point;
+                ToucherPoint.y = transform.position.y + 0.1f;
+                if (Mathf.Abs(ToucherPoint.x - transform.position.x) < 3)
+                {
+                    maxX.x = ToucherPoint.x;
+                }
+                if (Mathf.Abs(ToucherPoint.z - transform.position.z) < 3)
+                {
+                    maxZ.z = ToucherPoint.z;
+                }
+                Toucher.transform.position = new Vector3(maxX.x, ToucherPoint.y, maxZ.z);
+
             }
-            if(Mathf.Abs(ToucherPoint.z - transform.position.z) < 3)
-            {
-                maxZ.z = ToucherPoint.z;
-            }
-            Toucher.transform.position = new Vector3(maxX.x, ToucherPoint.y, maxZ.z);
-            
         }
         //}
 

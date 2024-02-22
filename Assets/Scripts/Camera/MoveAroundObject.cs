@@ -241,26 +241,30 @@ public class MoveAroundObject : MonoBehaviour
             }
 
         }
-        if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
+        if(target != null)
         {
-            for (int i = 0; i < passHit.Count; i++)
+            if (/*Ball.shooted == true || */target.gameObject.GetComponent<Rigidbody>().velocity != Vector3.zero)
             {
-                if (passHit[i].transform.gameObject.tag == "Undeletable")
+                for (int i = 0; i < passHit.Count; i++)
                 {
-                    //view.RPC("ShowOurFootballer", RpcTarget.All, passHit[i].transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
-                }
-                else
-                {
-                    passHit[i].SetActive(true);
+                    if (passHit[i].transform.gameObject.tag == "Undeletable")
+                    {
+                        //view.RPC("ShowOurFootballer", RpcTarget.All, passHit[i].transform.gameObject.GetComponent<PhotonView>().ViewID.ToString());
+                    }
+                    else
+                    {
+                        passHit[i].SetActive(true);
+                    }
                 }
             }
+            else
+            {
+
+                //Debug.Log("Did not Hit");
+
+            }
         }
-        else
-        {
-            
-            //Debug.Log("Did not Hit");
-            
-        }
+        
         
     }
     void OnDrawGizmos()
