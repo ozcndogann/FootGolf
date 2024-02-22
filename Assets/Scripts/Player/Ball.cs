@@ -103,8 +103,9 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButton(0))
-        //{
+        Debug.Log("shotClicked" + shotClicked);
+        Debug.Log("shotClicked" + shootedNow);
+        Debug.Log("nextPlayerTurn" + nextPlayerTurn);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray,out RaycastHit raycastHit))
         {
@@ -601,7 +602,6 @@ public class Ball : MonoBehaviour
         rb.velocity = Vector3.zero; // topun velocitysini 0a e�itle
         rb.angularVelocity = Vector3.zero; // topun angular velocitysini 0a e�itle
         isIdle = true;
-        
     }
     #endregion
 

@@ -78,10 +78,10 @@ public class UI_InGame : MonoBehaviour
 
         timeText.text = ((int)Ball.timer).ToString();
         pingText.text = PhotonNetwork.GetPing().ToString() + " ms";
-        if (PhotonNetwork.GetPing() > 1000 || PhotonNetwork.IsConnected==false)
-        {
-            PingPanel.SetActive(true);
-        }
+        //if (PhotonNetwork.GetPing() > 1000 || PhotonNetwork.IsConnected==false)
+        //{
+        //    PingPanel.SetActive(true);
+        //}
         if (CreateAndJoinRandomRooms.versus || CreateAndJoinRooms.versus)
         {
             //IsVersus.gameObject.SetActive(true);

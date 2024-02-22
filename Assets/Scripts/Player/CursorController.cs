@@ -26,7 +26,6 @@ public class CursorController : MonoBehaviour
     void Update()
     {
         currentCursorValue = cursorRectTransform.anchoredPosition.x;
-        Debug.Log(cursorRectTransform.anchoredPosition.x);
         //if (Mathf.Abs(currentCursorValue) > 120)
         //{
         //    moveSpeed = 400;
@@ -57,7 +56,6 @@ public class CursorController : MonoBehaviour
             {
                 // Calculate and output the float value
                 cursorValue = CalculateValue(cursorRectTransform.anchoredPosition.x);
-                Debug.Log("Value: " + cursorValue);
                 getValue = false;
             }
             // Reset cursor position to the middle of the bar at the start of movement
