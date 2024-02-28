@@ -2826,6 +2826,8 @@ GameObject:
   - component: {fileID: 3389436989087097542}
   - component: {fileID: 1494293097184010154}
   - component: {fileID: 4357702059974556506}
+  - component: {fileID: 6028847112554612454}
+  - component: {fileID: -3920915392049852933}
   m_Layer: 0
   m_Name: Messi
   m_TagString: Undeletable
@@ -2996,6 +2998,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nicknameText: {fileID: 7439355416681038731}
+--- !u!114 &6028847112554612454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6639123544252919850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949297cd8c7ec8e4e9733d62f011c84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hair: {fileID: 2554347728267624688}
+  clotheUp: {fileID: -3553183048385574807}
+  clotheBottom: {fileID: 1001626796426535868}
+  shoe: {fileID: -4763320893496761517}
+  hairMaterials:
+  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
+  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
+  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
+  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
+  clotheUpMaterials:
+  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
+  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
+  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
+  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
+  clotheBottomMaterials:
+  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
+  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
+  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
+  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
+  shoeMaterials:
+  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
+  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
+  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
+  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
+--- !u!114 &-3920915392049852933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6639123544252919850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a52b1004b02e04183971b854e254e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hair: 
+  clotheup: 
+  clothebottom: 
+  shoe: 
 --- !u!1 &6800821201919638797
 GameObject:
   m_ObjectHideFlags: 0
