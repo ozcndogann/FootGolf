@@ -1,59 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO; // Include the System.IO namespace
+using System.IO;
+using System;
+
+[Serializable]
+public class CharacterAttribute
+{
+    public string trait_type;
+    public string value;
+}
+
+[Serializable]
+public class CharacterData
+{
+    public int token_id;
+    //public string image;
+    //public string name;
+    //public string description;
+    public CharacterAttribute[] attributes;
+}
 
 public class AttributeGetter : MonoBehaviour
 {
-    public string hair, clotheup, clothebottom, shoe;
+    public string skin, hair, shirt;
+
     void Start()
     {
-        // Call the function to load attributes from the file
-        Dictionary<string, string> attributes = LoadAttributes("Assets/TextureChange/Attributes.txt");
+        // Load character data from JSON file
+        CharacterData characterData = LoadCharacterData("Assets/TextureChange/K16.json");
 
-        // Example usage: print all attributes
-        foreach (var attribute in attributes)
-        {
-            //Debug.Log($"{attribute.Key}: {attribute.Value}");
-            //Debug.Log(attributes["hair"]);
-        }
-        hair = attributes["hair"];
-        clotheup = attributes["clotheup"];
-        clothebottom = attributes["clothebottom"];
-        shoe = attributes["shoe"];
-        //Debug.Log(attributes["hair"]);
-        //Debug.Log(attributes["clotheup"]);
-        //Debug.Log(attributes["clothebottom"]);
-        //Debug.Log(attributes["shoe"]);
+        skin = GetAttributeValue(characterData.attributes, "skins");
+        hair = GetAttributeValue(characterData.attributes, "hairs");
+        shirt = GetAttributeValue(characterData.attributes, "shirts");
     }
 
-    Dictionary<string, string> LoadAttributes(string filePath)
+    CharacterData LoadCharacterData(string filePath)
     {
-        Dictionary<string, string> attributes = new Dictionary<string, string>();
-
         // Ensure the file exists
         if (File.Exists(filePath))
         {
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    // Split each line into attribute name and value
-                    string[] parts = line.Split(new string[] { ": " }, System.StringSplitOptions.None);
-                    if (parts.Length == 2)
-                    {
-                        // Add the attribute and its value to the dictionary
-                        attributes[parts[0]] = parts[1];
-                    }
-                }
-            }
+            string dataAsJson = File.ReadAllText(filePath);
+            return JsonUtility.FromJson<CharacterData>(dataAsJson);
         }
         else
         {
             Debug.LogError($"File not found: {filePath}");
+            return null; // Return null if file does not exist
         }
-       
-        return attributes;
+    }
+
+    string GetAttributeValue(CharacterAttribute[] attributes, string traitType)
+    {
+        foreach (var attribute in attributes)
+        {
+            if (attribute.trait_type == traitType)
+            {
+                return attribute.value;
+            }
+        }
+        return "";
     }
 }
