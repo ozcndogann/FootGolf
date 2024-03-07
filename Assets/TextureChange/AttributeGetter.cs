@@ -28,7 +28,7 @@ public class AttributeGetter : MonoBehaviour
     void Start()
     {
         // Load character data from JSON file
-        CharacterData characterData = LoadCharacterData("Assets/TextureChange/K21.json");
+        CharacterData characterData = LoadCharacterData("Assets/TextureChange/E33.json");
 
         skin = GetAttributeValue(characterData.attributes, "skins");
         head = GetAttributeValue(characterData.attributes, "skins");

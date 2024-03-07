@@ -6,10 +6,10 @@ using UnityEngine;
 public class ChangeTextureDemo : MonoBehaviour
 {
     [SerializeField] SkinnedMeshRenderer hair, shirt, skin, head, eye1, eye2; //, clotheBottom, shoe;
-    string[] hairColors = new string[] { "grayhair", "redlonghair", "blacklonghair", "longdarkhair" };
-    string[] shirtColors = new string[] { "redshirt", "designershirt", "greenshirt" };
+    string[] hairColors = new string[] { "grayhair", "redlonghair", "blacklonghair", "mixedhair" };
+    string[] shirtColors = new string[] { "redshirt", "designershirt", "greenshirt", "stripeshirt" };
     string[] skinColors = new string[] { "mixedskin", "blackskin", "whiteskin" };
-    string[] eyeColors = new string[] {"greeneyes", "blueeyes"};
+    string[] eyeColors = new string[] {"greeneyes", "blueeyes", "browneyes"};
     //string[] lipColors = new string[] { };
     public Material[] hairMaterials;
     public Material[] shirtMaterials;
