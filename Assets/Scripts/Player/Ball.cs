@@ -44,6 +44,7 @@ public class Ball : MonoBehaviour
     bool shotClicked;
     public bool shootedNow;
     public static bool challangeCheck;
+    public static bool firstfinishCheck;
     GameObject spectatorCanvas;
     bool allPlayersReady;
     private bool spectCanvasClose;
@@ -54,6 +55,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         #region DefiningAtStart
+        firstfinishCheck = false;
         challangeCheck = false;
         traillinerenderer = TrailLineRenderer.GetComponent<LineRenderer>();
         Toucher=Instantiate(TouchRenderer,new Vector3(0,0,0),Quaternion.identity);
@@ -625,7 +627,8 @@ public class Ball : MonoBehaviour
     {
         if (other.CompareTag("Hole"))
         {
-
+            firstfinishCheck = true;
+            Debug.Log(firstfinishCheck);
             if (view.IsMine)
             {
                 if (Challenges.isChallenge)
@@ -635,7 +638,7 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "holeC", true } });    
                     CheckAllPlayers();
                 }
                 
