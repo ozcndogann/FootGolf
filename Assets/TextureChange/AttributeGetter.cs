@@ -23,16 +23,33 @@ public class CharacterData
 
 public class AttributeGetter : MonoBehaviour
 {
-    public string skin, hair, shirt;
+    public string skin, head, hair, shirt, eye, lip, glass, earring;
 
     void Start()
     {
         // Load character data from JSON file
-        CharacterData characterData = LoadCharacterData("Assets/TextureChange/K16.json");
+        CharacterData characterData = LoadCharacterData("Assets/TextureChange/K21.json");
 
         skin = GetAttributeValue(characterData.attributes, "skins");
+        head = GetAttributeValue(characterData.attributes, "skins");
         hair = GetAttributeValue(characterData.attributes, "hairs");
         shirt = GetAttributeValue(characterData.attributes, "shirts");
+        eye = GetAttributeValue(characterData.attributes, "eyes");
+        //foreach (var attribute in characterData.attributes)
+        //{
+        //    if (attribute.trait_type == "earrings")
+        //    {
+        //        Debug.Log("erkek");
+        //        earring = GetAttributeValue(characterData.attributes, "earrings");
+        //        PlayerPrefs.SetInt("FootballerChooser", 5);
+        //    }
+        //    else if (attribute.trait_type == "lips")
+        //    {
+        //        Debug.Log("kadýn");
+        //        lip = GetAttributeValue(characterData.attributes, "lips");
+        //        PlayerPrefs.SetInt("FootballerChooser", 4);
+        //    }
+        //}
     }
 
     CharacterData LoadCharacterData(string filePath)

@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class ChangeTextureDemo : MonoBehaviour
 {
-    [SerializeField] SkinnedMeshRenderer hair, shirt, skin; //, clotheBottom, shoe;
-    string[] hairColors = new string[] { "grayhair", "redlonghair", "longblondehair", "longdarkhair" };
-    string[] shirtColors = new string[] { "redshirt", "designershirt", "greenshirt"};
+    [SerializeField] SkinnedMeshRenderer hair, shirt, skin, head, eye1, eye2; //, clotheBottom, shoe;
+    string[] hairColors = new string[] { "grayhair", "redlonghair", "blacklonghair", "longdarkhair" };
+    string[] shirtColors = new string[] { "redshirt", "designershirt", "greenshirt" };
     string[] skinColors = new string[] { "mixedskin", "blackskin", "whiteskin" };
+    string[] eyeColors = new string[] {"greeneyes", "blueeyes"};
+    //string[] lipColors = new string[] { };
     public Material[] hairMaterials;
     public Material[] shirtMaterials;
     public Material[] skinMaterials;
-    //public Material[] clotheBottomMaterials;
-    //public Material[] shoeMaterials;
+    public Material[] eyeMaterials;
+    //public Material[] lipMaterials;
     AttributeGetter attributeGetter;
 
     void Start()
@@ -44,6 +46,12 @@ public class ChangeTextureDemo : MonoBehaviour
             if (attributeGetter.skin == skinColors[i])
             {
                 skin.material = skinMaterials[i];
+                head.material = skinMaterials[i];
+            }
+            if (attributeGetter.eye == eyeColors[i])
+            {
+                eye1.material = eyeMaterials[i];
+                eye2.material = eyeMaterials[i];
             }
             //if (attributeGetter.clothebottom == colors[i])
             //{

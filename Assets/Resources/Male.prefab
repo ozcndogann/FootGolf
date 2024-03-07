@@ -237,10 +237,13 @@ MonoBehaviour:
   hair: {fileID: 7123437258062591573}
   shirt: {fileID: 4923142767029121229}
   skin: {fileID: 4064394198187470864}
+  head: {fileID: 4135902442327972645}
+  eye1: {fileID: 5035498346882159248}
+  eye2: {fileID: 3455193541652687145}
   hairMaterials:
   - {fileID: -3661639628750336703, guid: 1eeca96b335dd4f4396490730ca4123f, type: 3}
   - {fileID: 239378781582670930, guid: a3e3b36bc5d5f4466adff6d31d14d19e, type: 3}
-  - {fileID: 239378781582670930, guid: dde199297a2ec614898426a81407a5b9, type: 3}
+  - {fileID: 239378781582670930, guid: c90adc67b12ba40f19ab9a7acfddf17d, type: 3}
   - {fileID: 5629084884208175553, guid: ac06b6d9e5f7c4b9c9ce124c49cd219e, type: 3}
   shirtMaterials:
   - {fileID: -333415491942882640, guid: 5335fb8861a370349b34076edc1f6695, type: 3}
@@ -249,7 +252,10 @@ MonoBehaviour:
   skinMaterials:
   - {fileID: 5629084884208175553, guid: dde199297a2ec614898426a81407a5b9, type: 3}
   - {fileID: 5629084884208175553, guid: 0ee12e2826a522246b0a7121b7b50a76, type: 3}
-  - {fileID: 5629084884208175553, guid: ece6e08b06c6aab47b7b11fadd0b329c, type: 3}
+  - {fileID: 2100000, guid: 5698fffe9f49cb74d8131bac58bc5367, type: 2}
+  eyeMaterials:
+  - {fileID: -3661639628750336703, guid: fc0e3bbf33e4f38449003178695743f2, type: 3}
+  - {fileID: -1381909053062557729, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
 --- !u!114 &-5373429571722980446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,9 +268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a52b1004b02e04183971b854e254e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skin: lightbrown
-  hair: longdarkhair
-  shirt: redshirt
+  skin: 
+  head: 
+  hair: 
+  shirt: 
+  eye: 
+  lip: 
+  glass: 
+  earring: 
 --- !u!1 &647718929663097570
 GameObject:
   m_ObjectHideFlags: 0

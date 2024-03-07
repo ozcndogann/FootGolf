@@ -348,6 +348,8 @@ GameObject:
   - component: {fileID: 1243651217103630312}
   - component: {fileID: 7213192196351589168}
   - component: {fileID: 1809951564641695580}
+  - component: {fileID: 6789380128040365525}
+  - component: {fileID: 2057037334639081750}
   m_Layer: 0
   m_Name: "han\u0131mK\u0131z"
   m_TagString: Untagged
@@ -490,6 +492,61 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6789380128040365525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721194638115123543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949297cd8c7ec8e4e9733d62f011c84a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hair: {fileID: 7054390536216670349}
+  shirt: {fileID: 5220751370675569775}
+  skin: {fileID: 3766963172059301042}
+  head: {fileID: 3838470604502904711}
+  eye1: {fileID: 4620509879214491907}
+  eye2: {fileID: 8187834979580377097}
+  hairMaterials:
+  - {fileID: -3661639628750336703, guid: 1eeca96b335dd4f4396490730ca4123f, type: 3}
+  - {fileID: 239378781582670930, guid: a3e3b36bc5d5f4466adff6d31d14d19e, type: 3}
+  - {fileID: 239378781582670930, guid: dde199297a2ec614898426a81407a5b9, type: 3}
+  - {fileID: 5629084884208175553, guid: ac06b6d9e5f7c4b9c9ce124c49cd219e, type: 3}
+  shirtMaterials:
+  - {fileID: -333415491942882640, guid: 5335fb8861a370349b34076edc1f6695, type: 3}
+  - {fileID: 2100000, guid: 2642c47b7fbe34e49a221be624c07d04, type: 2}
+  - {fileID: -333415491942882640, guid: 0649ffbc7a4287f43b9c3e19ef7c7ddd, type: 3}
+  skinMaterials:
+  - {fileID: 5629084884208175553, guid: dde199297a2ec614898426a81407a5b9, type: 3}
+  - {fileID: 5629084884208175553, guid: 0ee12e2826a522246b0a7121b7b50a76, type: 3}
+  - {fileID: 5629084884208175553, guid: ece6e08b06c6aab47b7b11fadd0b329c, type: 3}
+  eyeMaterials:
+  - {fileID: -3661639628750336703, guid: 7aa753d3834a8984188dcdd9cd45360f, type: 3}
+  - {fileID: -4970814376478923169, guid: fc0e3bbf33e4f38449003178695743f2, type: 3}
+  - {fileID: -1381909053062557729, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
+--- !u!114 &2057037334639081750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721194638115123543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a52b1004b02e04183971b854e254e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin: 
+  head: 
+  hair: 
+  shirt: 
+  eye: 
+  lip: 
+  glass: 
+  earring: 
 --- !u!1 &1225866993991711885
 GameObject:
   m_ObjectHideFlags: 0
