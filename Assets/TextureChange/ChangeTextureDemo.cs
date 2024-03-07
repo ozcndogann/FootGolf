@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class ChangeTextureDemo : MonoBehaviour
 {
-    [SerializeField] SkinnedMeshRenderer hair, clotheUp, clotheBottom, shoe;
-    string[] colors = new string[] {"lightBrown", "green", "red", "white"};
+    [SerializeField] SkinnedMeshRenderer hair, shirt, skin; //, clotheBottom, shoe;
+    string[] hairColors = new string[] { "grayhair", "redlonghair", "longblondehair", "longdarkhair" };
+    string[] shirtColors = new string[] { "redshirt", "designershirt", "greenshirt"};
+    string[] skinColors = new string[] { "mixedskin", "blackskin", "whiteskin" };
     public Material[] hairMaterials;
-    public Material[] clotheUpMaterials;
-    public Material[] clotheBottomMaterials;
-    public Material[] shoeMaterials;
+    public Material[] shirtMaterials;
+    public Material[] skinMaterials;
+    //public Material[] clotheBottomMaterials;
+    //public Material[] shoeMaterials;
     AttributeGetter attributeGetter;
 
     void Start()
@@ -24,28 +27,32 @@ public class ChangeTextureDemo : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         Debug.Log(attributeGetter.hair);
-        Debug.Log(attributeGetter.clotheup);
-        Debug.Log(attributeGetter.clothebottom);
-        Debug.Log(attributeGetter.shoe);
+        Debug.Log(attributeGetter.shirt);
+        //Debug.Log(attributeGetter.clothebottom);
+        //Debug.Log(attributeGetter.shoe);
         for (int i = 0; i < 4; i++)
         {
-            if (attributeGetter.hair == colors[i])
+            if (attributeGetter.hair == hairColors[i])
             {
                 Debug.Log("offf");
                 hair.material = hairMaterials[i];
             }
-            if (attributeGetter.clotheup == colors[i])
+            if (attributeGetter.shirt == shirtColors[i])
             {
-                clotheUp.material = clotheUpMaterials[i];
+                shirt.material = shirtMaterials[i];
             }
-            if (attributeGetter.clothebottom == colors[i])
+            if (attributeGetter.skin == skinColors[i])
             {
-                clotheBottom.material = clotheBottomMaterials[i];
+                skin.material = skinMaterials[i];
             }
-            if (attributeGetter.shoe == colors[i])
-            {
-                shoe.material = shoeMaterials[i];
-            }
+            //if (attributeGetter.clothebottom == colors[i])
+            //{
+            //    clotheBottom.material = clotheBottomMaterials[i];
+            //}
+            //if (attributeGetter.shoe == colors[i])
+            //{
+            //    shoe.material = shoeMaterials[i];
+            //}
         }
     }
 }

@@ -235,29 +235,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hair: {fileID: 7123437258062591573}
-  clotheUp: {fileID: 4923142767029121229}
-  clotheBottom: {fileID: 505657526461668120}
-  shoe: {fileID: 3965211073705532407}
+  shirt: {fileID: 4923142767029121229}
+  skin: {fileID: 4064394198187470864}
   hairMaterials:
-  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
-  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
-  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
-  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
-  clotheUpMaterials:
-  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
-  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
-  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
-  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
-  clotheBottomMaterials:
-  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
-  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
-  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
-  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
-  shoeMaterials:
-  - {fileID: 239378781582670930, guid: 250e467ba195cf64e853ec45edb078f1, type: 3}
-  - {fileID: 239378781582670930, guid: 2c4ffdb79b3181740b523d91b31ece64, type: 3}
-  - {fileID: 239378781582670930, guid: 2894919b73d81437faf6a972f5cec23a, type: 3}
-  - {fileID: 2100000, guid: 0ba634fe0de73ac41af6e64d35199902, type: 2}
+  - {fileID: -3661639628750336703, guid: 1eeca96b335dd4f4396490730ca4123f, type: 3}
+  - {fileID: 239378781582670930, guid: a3e3b36bc5d5f4466adff6d31d14d19e, type: 3}
+  - {fileID: 239378781582670930, guid: dde199297a2ec614898426a81407a5b9, type: 3}
+  - {fileID: 5629084884208175553, guid: ac06b6d9e5f7c4b9c9ce124c49cd219e, type: 3}
+  shirtMaterials:
+  - {fileID: -333415491942882640, guid: 5335fb8861a370349b34076edc1f6695, type: 3}
+  - {fileID: 2100000, guid: 2642c47b7fbe34e49a221be624c07d04, type: 2}
+  - {fileID: -333415491942882640, guid: 0649ffbc7a4287f43b9c3e19ef7c7ddd, type: 3}
+  skinMaterials:
+  - {fileID: 5629084884208175553, guid: dde199297a2ec614898426a81407a5b9, type: 3}
+  - {fileID: 5629084884208175553, guid: 0ee12e2826a522246b0a7121b7b50a76, type: 3}
+  - {fileID: 5629084884208175553, guid: ece6e08b06c6aab47b7b11fadd0b329c, type: 3}
 --- !u!114 &-5373429571722980446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,10 +262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a52b1004b02e04183971b854e254e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hair: 
-  clotheup: 
-  clothebottom: 
-  shoe: 
+  skin: lightbrown
+  hair: longdarkhair
+  shirt: redshirt
 --- !u!1 &647718929663097570
 GameObject:
   m_ObjectHideFlags: 0
