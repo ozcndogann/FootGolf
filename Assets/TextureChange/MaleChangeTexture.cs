@@ -3,19 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeTextureDemo : MonoBehaviour
+public class MaleChangeTexture : MonoBehaviour
 {
     [SerializeField] SkinnedMeshRenderer hair, shirt, skin, head, eyeL, eyeR; //, clotheBottom, shoe;
-    string[] hairColors = new string[] { "redlonghair", "blacklonghair" };
-    string[] shirtColors = new string[] { "redshirt", "designershirt" };
-    string[] skinColors = new string[] { "blackskin", "whiteskin" };
-    string[] eyeColors = new string[] {"greeneyes", "blueeyes"};
+    string[] hairColors = new string[] { "grayhair", "mixedhair" };
+    string[] shirtColors = new string[] { "greenshirt", "stripeshirt" };
+    string[] skinColors = new string[] { "mixedskin", "whiteskin" };
+    string[] eyeColors = new string[] { "greeneyes", "browneyes" };
+    string[] headColors = new string[] { "greeneyes", "browneyes" };
     //string[] lipColors = new string[] { };
     public Material[] hairMaterials;
     public Material[] shirtMaterials;
     public Material[] skinMaterials;
-    public Material[] eyeLeftMaterials;
-    public Material[] eyeRightMaterials;
+    public Material[] headMaterials;
+    public Material[] eyeMaterials;
     //public Material[] lipMaterials;
     AttributeGetter attributeGetter;
 
@@ -47,12 +48,15 @@ public class ChangeTextureDemo : MonoBehaviour
             if (attributeGetter.skin == skinColors[i])
             {
                 skin.material = skinMaterials[i];
-                head.material = skinMaterials[i];
+            }
+            if (attributeGetter.skin == headColors[i])
+            {
+                head.material = headMaterials[i];
             }
             if (attributeGetter.eye == eyeColors[i])
             {
-                eyeL.material = eyeLeftMaterials[i];
-                eyeR.material = eyeRightMaterials[i];
+                eyeL.material = eyeMaterials[i];
+                eyeR.material = eyeMaterials[i];
             }
             //if (attributeGetter.clothebottom == colors[i])
             //{
