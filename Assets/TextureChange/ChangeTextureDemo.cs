@@ -10,12 +10,14 @@ public class ChangeTextureDemo : MonoBehaviour
     string[] shirtColors = new string[] { "redshirt", "designershirt" };
     string[] skinColors = new string[] { "blackskin", "whiteskin" };
     string[] eyeColors = new string[] {"greeneyes", "blueeyes"};
+    string[] headColors = new string[] { "blackskin", "whiteskin" };
     //string[] lipColors = new string[] { };
     public Material[] hairMaterials;
     public Material[] shirtMaterials;
     public Material[] skinMaterials;
     public Material[] eyeLeftMaterials;
     public Material[] eyeRightMaterials;
+    public Material[] headMaterials;
     //public Material[] lipMaterials;
     AttributeGetter attributeGetter;
 
@@ -47,7 +49,10 @@ public class ChangeTextureDemo : MonoBehaviour
             if (attributeGetter.skin == skinColors[i])
             {
                 skin.material = skinMaterials[i];
-                head.material = skinMaterials[i];
+            }
+            if (attributeGetter.skin == headColors[i])
+            {
+                head.material = headMaterials[i];
             }
             if (attributeGetter.eye == eyeColors[i])
             {

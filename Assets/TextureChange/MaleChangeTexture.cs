@@ -10,7 +10,7 @@ public class MaleChangeTexture : MonoBehaviour
     string[] shirtColors = new string[] { "greenshirt", "stripeshirt" };
     string[] skinColors = new string[] { "mixedskin", "whiteskin" };
     string[] eyeColors = new string[] { "greeneyes", "browneyes" };
-    string[] headColors = new string[] { "greeneyes", "browneyes" };
+    string[] headColors = new string[] { "mixedskin", "whiteskin" };
     //string[] lipColors = new string[] { };
     public Material[] hairMaterials;
     public Material[] shirtMaterials;
